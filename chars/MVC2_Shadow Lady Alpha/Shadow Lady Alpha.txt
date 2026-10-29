@@ -1,0 +1,48 @@
+============================================================================================
+================================______________________________==============================
+================================|                            |==============================
+================================| STREET FIGHTER - CROSSOVER |==============================
+================================|                            |==============================
+================================|     SHADOW LADY ALPHA      |==============================
+================================|____________________________|==============================
+============================================================================================
+============================================================================================
+
+background:
+
+Esta terrivel criatura possui um passado obscuro, alguns dissem que é fruto da técnologia
+da Shadaloo, um clone de Chun li, impregnado pelo Psycho Power, outros dizem que é a própria,
+vitima de um tragico destino ao combater M. Bison. 
+Chun li segue Charlie até uma estalação da Shdaloo na China, onde presencia a morte do soldado
+nas mão de M. Bison, porem na tentativa de salva-lo acaba derrotada, então é submetida a 
+experimentos com o Psycho Driver de Bison, afim de criar mais um dos super soldado da Shadaloo, 
+e acaba sucumbindo a energia maligna, sendo descartada para a morte. 
+Dada como morta, Chun li recebe um outro destino, um ainda pior, sendo utlilizado como cobaia 
+de um outro projeto, orquestrado por uma outra entidade maligna, Miss Bison, que a transforma 
+em um hibrido, unindo as capacidades concedidas pelo Psycho Power e os cyberwares de ampliação 
+de combate e cotrole mental da Shadaloo.
+Nascendo Shadow Lady, uma versão feminina de Shadow, porem muito mais rapida e mais ciborgue
+do que Shadow. Esta aberração negra tornou-se uma perigosa oponente dos que se opoem a 
+Shadaloo. Atualmente Shadow Lady espreita nas sombras, vigiando Shadow apos sua falha em matar
+Guile, uma suspeita de que este programa tambem pode ter tido algumas falhas. Vitima de um
+terrivel destino ao tentar salva-lo, agora esta fadada a destruir o possvel traidor.
+-----------------------------------------------------------------------
+
+command list:
+
+Special attacks:
+
+"Infinity Leg" 	    	- K 		(press rapidly)
+"Miracle Drill"	    	- D, DF, F + P
+"Rainbow Missle"    	- D, DF, F + K
+"Plasma Barrier"    	- F, D, DF + P
+"Sky Counter Crash" 	- F, D, B + K
+"Push Block"		- PP		(in block)
+"Throw Escape"		- PP		(close)
+"Counter Attack"	- HP+HK		(in block)
+
+Hyperattacks:
+
+"Big Bang Laser" 	- D, DF, F + PP	(possible in air)
+"Galaxy Missle"	 	- D, DF, F + KK
+"Final Mission"	 	- B, F, B, F + KK

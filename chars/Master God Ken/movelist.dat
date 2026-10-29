@@ -1,0 +1,36 @@
+<#f0f000>THROWS</>
+
+Punch Throw					_CLOSE^A_+^X
+Kick Throw					_CLOSE^X_+^Y
+
+<#f0f000>SPECIAL MOVES</>
+
+Hadouken					_D_DF_F^P
+Air Hadouken					_AIR_D_DF_F^P
+Air Hadouken Back				_AIR_D_DB_B^P
+Shoryuken					_F_D_DF^P
+Shadow Shoryuken				_F_D_DF^2P/^2K
+Shakunetsu Hadouken				_F_D_B^P
+Tatsumaki Senpuu Kyaku			_D_DB_B^K
+Mukai Geri					_B_D_DB^K
+Air Kick					_AIR_D_DF_F^K
+Energy Shield					_B_B^LK
+Shadow Hits					^LP_+^HP
+
+<#f0f000>SUPER / HYPER MOVES</>
+
+Shinryuken <#bebebe>(1000-3000)</>		_D_DF_F_D_DF_F^K
+Shoryureppa <#bebebe>(1000-3000)</>		_D_DF_F_D_DF_F^P
+Shoryureppa Tatsu <#bebebe>(3000)</>		_D_DB_B_D_DB_B^MK_+^HK
+Shippu Jinrai Kyaku <#bebebe>(1000-3000)</>	_D_DB_B_D_DB_B^K
+Shinkuu Hadouken <#bebebe>(1000-3000)</>	_D_DB_B_D_DB_B^P
+Shun Goku Satsu <#bebebe>(3000)</>		^LP_^LP_F_^LK_^HP
+Kami Gouken <#bebebe>(3000)</>			^LK_^LK_B_^LP_^HK
+
+<#f0f000>SYSTEM</>
+
+Power Charge					^MP_+^MK
+Forward Dash / Back Dash			_F_F / _B_B
+High Jump					_TAP_D,_U
+Taunt						^S
+

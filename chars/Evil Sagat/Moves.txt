@@ -1,0 +1,44 @@
+Evil Sagat's Moves
+
+
+Special------------------------------------------
+
+Tiger Shot: D,DF,F, punch
+
+Low Tiger Shot: D,DF,F, kick
+
+Air Tiger Shot: D,DF,F, punch (in air)
+
+Freeze Tiger Shot: D,DB,B, punch
+
+Tiger Uppercut: F,D,F, punch
+
+Tiger Knee: F,D,F, kick
+
+
+Super------------------------------------------
+
+Tiger Cannon: D,DF,F,D,DF,F, punch
+
+Low Tiger Cannon: D,DB,B,D,DB,B, punch
+
+Air Tiger Cannon: D,DF,F,D,DF,F, punch (in air)
+
+Tiger Genocide: D,DF,F,D,DF,F, kick
+
+Tiger Kicks: D,DB,B,D,DB,B, kick
+
+Freeze Tiger Cannon: D,DF,F, kick x2
+
+Super Tiger Uppercut: F,D,F, punch x2
+
+Shield: D,D,D, punch x3
+
+Raging Attack: X,X,F,A,Z
+
+Etc-------------------------------------------
+
+Quick Teleport: F,F (also in air and/or during combo)
+
+Power Charge: Hold Z+C
+

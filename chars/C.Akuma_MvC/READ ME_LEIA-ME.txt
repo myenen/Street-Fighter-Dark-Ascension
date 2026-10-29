@@ -1,0 +1,52 @@
+Cyber Akuma MvC HI-RES by Scar & RAMON GARCIA & Yolomate
+
+C.Akuma_MvC HI-RES
+
+author = "Scar"
+;HI-RES edit by RAMON GARCIA = filtered sprites, popularly known as HI-RES
+;New pallets by Yolomate, thank you so much man :) 
+
+Some people will like others not.
+But as I do not like to keep anything private I come here to share.
+
+What did I do:
+I upgraded and filtered the sprites of char and some efects in XBR 4x [NoBlend]
+I removed the group of images: 8500, 8510 & 2223
+And I changed some of the sounds of the char in the group of sounds number: 0,12, 0,24, 230,11, & 8000
+I thought were not matching
+
+Small mistake that I found after I filtered the sprites and converted:
+Wrong positions of some sparks.
+
+If they find any bug, etc. leave your comment.
+Any comment is welcome.
+Hope you like it.
+
+And all credits to the authors / editors of this char if it were not for him we would never have the privilege of playing with this great char.
+
+============================================================
+Cyber Akuma MvC HI-RES by Scar & RAMON GARCIA & Yolomate
+
+C.Akuma_MvC HI-RES
+
+author = "Scar"
+;HI-RES edit by RAMON GARCIA = sprites filtrados, popularmente conhecido como HI-RES
+;Novas paletas por Yolomate, muito obrigado cara :) 
+
+Algumas pessoas vão gostar outras não.
+Mas como eu não gosto de guardar nada em privado venho aqui compartilhar.
+
+O que eu fiz:
+Aumentei e filtrei os sprites do char e alguns efeitos em XBR 4x [NoBlend]
+Retirei o grupo de imagens: 8500, 8510 & 2223
+E mudei alguns sons do char no grupo de soms numero: 0,12, 0,24, 230,11, & 8000
+Achei que não estavam combinando
+
+Pequeno erro que achei depois que filtrei os sprites e converti:
+Posições de alguns sparks no lugar errado.
+
+Se encontrarem algum erro bug etc deixem seu comentário.
+Qualquer comentário é bem vindo.
+Espero que gostem.
+
+E todos os créditos aos autores/editores desse char se não fosse por ele nunca teríamos o privilegio de jogar com esse ótimo char.

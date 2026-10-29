@@ -1,0 +1,26 @@
+<#f0f000>THROW</>
+
+Cyber Throw					_CLOSE[_B/_F]_+^HP
+
+<#f0f000>SPECIAL MOVES</>
+
+Hadouken					_D_DF_F^P
+Air Hadouken					_AIR_D_DF_F^P
+Cyber Uppercut					_F_D_DF^P
+Cyber Dash Kick					_D_DB_B^K
+Air Cyber Dash Kick				_AIR_D_DB_B^K
+
+<#f0f000>SUPER / HYPER MOVES</>
+
+Hyper Beam					_D_DF_F_D_DF_F^P
+Beam Orb					_D_DF_F_D_DF_F^K
+Super Cyber Kick				_D_DB_B_D_DB_B^K
+Super Air Hadouken				_AIR_D_DF_F_D_DF_F^P
+Cyber Death					_F_D_F^A_+^B
+
+<#f0f000>SYSTEM</>
+
+Forward Run					_F_F
+Back Dash					_B_B
+Taunt						^S
+

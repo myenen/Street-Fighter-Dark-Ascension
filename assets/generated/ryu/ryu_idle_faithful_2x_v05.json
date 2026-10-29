@@ -1,0 +1,10 @@
+{
+  "method": "Scale2x once (2x), palette-edge preserving",
+  "generated_content": false,
+  "pose_changes": false,
+  "source_palette_preserved": true,
+  "frame_count": 4,
+  "ticks_per_frame": 6,
+  "cycle_ticks": 24,
+  "character_scale": 0.65
+}

@@ -1,0 +1,60 @@
+<#f0f000>:Death Ogre - Command List:</>
+
+<#f0f000>:System / Defense:</>
+High Jump	_U / _UF
+Forward Dash	_F_F
+Back Dash	_B_B
+Blocking (High) <#bebebe>(at impact)</>	_F
+Blocking (Low) <#bebebe>(at impact)</>	_D
+Zero Counter (Punch) <#bebebe>(while guarding)</>	_B_DB_D_+^P
+Zero Counter (Kick) <#bebebe>(while guarding)</>	_B_DB_D_+^K
+Ground Kick	_D_+^K
+Down + Start	_D_+^S
+
+<#f0f000>:Special Moves:</>
+Gou Hadouken	_D_DF_F_+^P
+Zankuu Hadouken <#bebebe>(Air)</>	_D_DF_F_+^P
+Gou Shoryuken	_F_D_DF_+^P
+Tatsumaki Zankuu Kyaku	_D_DB_B_+^K
+Air Tatsumaki Zankuu Kyaku <#bebebe>(Air)</>	_D_DB_B_+^K
+Tenma Kuujin Kyaku <#bebebe>(Air)</>	_D_DF_F_+^K
+Hyakki Shuu	_D_DF_F_UF_+^P
+Ryuusei Raku	_D_DF_F_+^K
+Hellion	_D_DB_B_+^P
+Somersault Shell	_B_D_DB_+^K
+Blackout	_F_DF_D_DB_B_+^K
+Bakudan Pachiki	_B_DB_D_DF_F_+^P
+Vanishing Rush <#bebebe>(final hit pierces guard)</>	_F_DF_D_DB_B_+^P / _F_+^3P
+Messhou Hissetsu <#bebebe>(Air)</>	_D_+^K
+
+<#f0f000>:Ashura Senkuu / Teleport:</>
+Forward Short	_F_D_DF_+^3K
+Forward Long	_F_D_DF_+^3P / _F_D_DF_+^S
+Back Short	_B_D_DB_+^3K
+Back Long	_B_D_DB_+^3P / _B_D_DB_+^S
+
+<#f0f000>:Super / Hyper Moves:</>
+Messatsu Gou Hadou <#bebebe>(1000)</>	_D_DB_B_D_DB_B_+^P
+Tenma Gou Zankuu <#bebebe>(1000 / Air)</>	_D_DF_F_D_DF_F_+^P
+Messatsu Gou Shoryuu <#bebebe>(1000)</>	_D_DF_F_D_DF_F_+^P
+Premium Sign <#bebebe>(1000)</>	_D_DF_F_D_DF_F_+^S
+Howling Bull <#bebebe>(1000)</>	_F_B_DB_D_DF_F_+^P
+Majin Hatendan <#bebebe>(1000)</>	_D_DF_F_D_DF_F_+^K
+Guillotine <#bebebe>(1000)</>	_D_DB_B_DB_D_DF_F_+^K
+Drill <#bebebe>(1000 / then mash P)</>	_F_DF_D_DB_B_F_DF_D_DB_B_+^P
+Desperate Overdrive <#bebebe>(2000)</>	_D_DF_F_DF_D_DB_B_+^P
+End of Eden <#bebebe>(2000)</>	_D_DB_B_DB_D_DF_F_+^P / _D_D_D_+^3K
+Raging Demon <#bebebe>(3000 / 1200 damage)</>	^LP_^LP_F_^LK_^HP
+
+<#f0f000>:Custom Supers:</>
+Ogre Apocalypse <#bebebe>(3000 / 700 damage)</>	_D_D_D_+^3P
+Reverse Demon <#bebebe>(3000 / 1500 damage)</>	^LP_^LP_B_^LK_^HP
+
+<#f0f000>:Secret / Crazy Moves:</>
+Bousou	^3P+^3K
+Saika	_D_DF_F_D_DF_F_D_DF_F_D_DF_F_+^3P
+Saika (Shortcut)	^S
+
+_!P = Any Punch   K = Any Kick   3P = All 3 Punches   3K = All 3 Kicks
+_!S = Start button (P1 keyboard: Enter)
+_!Some moves require sufficient Power, guarding, ground/air state, or specific timing.

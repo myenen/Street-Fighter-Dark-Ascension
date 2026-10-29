@@ -1,0 +1,36 @@
+;===========================================================================
+;Marvel vs. Capcom Template 
+;by REDHOT, Acey & eSkRo
+;===========================================================================
+
+[Info]
+name="Cyber_Ken"
+displayname="Cyber Ken"
+versiondate=05.01.2008
+mugenversion=04.14.2001
+author="Scar"
+pal.defaults=1,2,3,4,5,6
+
+[Files]
+cmd=Cyber_Ken.cmd
+movelist=movelist.dat
+cns=Cyber_Ken.cns
+stcommon=common1.cns
+st=Cyber_Ken.cns
+sprite=Cyber_Ken.sff
+anim=Cyber_Ken.air
+sound=Cyber_Ken.snd
+pal1=Act/1.act
+pal2=Act/2.act
+pal3=Act/3.act
+pal4=Act/4.act
+pal5=Act/5.act
+pal6=Act/6.act
+pal7=Act/7.act
+pal8=Act/8.act
+pal9=Act/9.act
+pal10=Act/10.act
+
+[Arcade]
+intro.storyboard=Cyber_Ken_Intro.def
+ending.storyboard=

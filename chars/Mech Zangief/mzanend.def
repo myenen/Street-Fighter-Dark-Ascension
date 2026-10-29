@@ -1,0 +1,135 @@
+;Zangief's Ending by Thor
+;----------------------------
+[SceneDef]
+spr = mzanend.sff
+startscene = 0
+;----------------------------
+[Scene 0]
+fadein.time = 60    
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+clearcolor = 0,0,0
+layerall.pos = 0,0
+layer0.anim =  0  
+layer0.offset = 150,8
+layer0.starttime = 0
+layer1.anim =  12
+layer1.offset = 150,31
+layer1.starttime = 0
+layer2.anim =  1
+layer2.offset = 150,31
+layer2.starttime = 0
+layer3.anim =  2
+layer3.offset = 160,170
+layer3.starttime = 0
+bgm = sound/
+bgm.loop = 0
+end.time = 1900
+;------------------------------------
+[Scene 1]
+fadein.time = 60
+fadein.col = 0,0,0
+fadeout.time = 60
+fadeout.col = 0,0,0
+layer0.anim =  3
+layer0.offset = 50,20
+layer0.starttime = 0
+layer1.anim =  4
+layer1.offset = 309,20
+layer1.starttime = 0
+layer2.anim =  5
+layer2.offset = 50,232
+layer2.starttime = 0
+layer3.anim =  6
+layer3.offset = 309,232
+layer3.starttime = 0
+layer4.anim =  8
+layer4.offset = 0,25
+layer4.starttime = 0
+layer5.anim =  7
+layer5.offset = 133,30
+layer5.starttime = 0
+layer6.anim =  9
+layer6.offset = 117,209
+layer6.starttime = 0
+end.time = 420
+;------------------------------------
+[Scene 2]
+fadein.time = 40
+fadein.col = 0,0,0
+fadeout.time = 60
+fadeout.col = 0,0,0
+layer0.anim =  10
+layer0.offset = 100,76
+layer0.starttime = 0
+layer1.anim =  11
+layer1.offset = 57,120
+layer1.starttime = 0
+end.time = 280
+;------------------------------------
+
+;Marvel vs. SF ending background
+[Begin Action 0]
+0,0, 0,0, -1
+
+; Zangief and his family
+[Begin Action 1]
+2,0, 0,0, -1
+
+;bg
+[Begin Action 12]
+2,1, 0,0, 3
+2,2, 0,0, 3
+2,3, 0,0, 3
+2,4, 0,0, 3
+2,5, 0,0, 3
+2,6, 0,0, 3
+2,7, 0,0, 3
+2,8, 0,0, 3
+2,9, 0,0, 3
+
+;Ending Text
+[Begin Action 2]
+1,0, 0,0, 320
+1,1, 0,0, 300
+1,2, 0,0, 300
+1,3, 0,0, 300
+1,4, 0,0, 300
+1,5, 0,0, -1
+
+; Congratulations (Background)
+[Begin Action 3]
+3,0, 0,0, -1
+
+; Congratulations (Background) Mirror
+[Begin Action 4]
+3,0, 0,0, -1, H
+
+; Congratulations (Background) Flip
+[Begin Action 5]
+3,0, 0,0, -1, V
+
+; Congratulations (Background) Flip & Mirror
+[Begin Action 6]
+3,0, 0,0, -1, VH
+
+; zangief
+[Begin Action 7]
+3,1, 0,0, -1
+
+; Congratulations
+[Begin Action 8]
+3,2, 0,0, -1
+
+; thanks
+[Begin Action 9]
+3,3, 0,0, -1
+
+; End by thor
+[Begin Action 10]
+4,0, 0,0, -1
+
+; Site
+[Begin Action 11]
+4,1, 0,0, -1

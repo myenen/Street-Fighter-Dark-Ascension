@@ -1,0 +1,40 @@
+; Definition file for Bison
+; Contains all the filenames needed for the character
+;Thanks to supermystery
+
+; Player information
+[Info]
+name = "M.Bison"        ;Name of character
+displayname = "Dictator" ;Name of character to display
+versiondate = 19,01,2009    ;Version date of character (MM-DD-YYYY)
+mugenversion = 04,14,2002   ;Version of M.U.G.E.N character works on
+author = "Dictador"         ;Character author name
+pal.defaults = 6,3,4,2      ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = Dictator.cmd   ;Command set
+cns     = Dictator.cns   ;Constants
+st      = Dictator.cns   ;States
+st2     = Dictatorcommon.cns
+st3     = bisonmisc.cns
+st4     = supers.cns
+st5     = AI.cns
+stcommon = common1.cns   ;Common states
+sprite  = Dictator.sff   ;Sprite
+anim    = Dictator.air   ;Animation
+sound   = Dictator.snd   ;Sound
+movelist = movelist.dat  ;IKEMEN command list
+pal1     =Dictator.act   ;Palettes (can have up to 12)
+pal2    = LK.act
+pal3    = XmenVSSF.act
+pal4    = SSF2.act
+pal5    = HP.act
+pal6    = sfa3B.act
+pal7    = specialops.act
+pal8    = sfa3A.act
+;ai	= Dictator.ai    ;Only useful for when the custom AI isnt active
+
+[Arcade]
+;intro.storyboard = arcade/intro.def
+ending.storyboard = arcade/bison_ending.def

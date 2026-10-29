@@ -1,0 +1,33 @@
+<#f0f000>THROWS</>
+
+Scorpion Death Lock				_CLOSE[_B/_F]_+^HP
+Scorpion Death Throw				_CLOSE[_B/_F]_+^HK
+
+<#f0f000>SPECIAL MOVES</>
+
+Reppuken					_D_DF_F^P
+God Press					_D_DF_D_DB_B^P
+Kaiser Wave					_B_D_DB_B^P
+Genocide Cutter					_F_D_DF_F^K
+Smash Terrestre					_F_D_DF_F^P
+Dark Barrier					_B_DB_D_DF_F^K
+Rugal Execution					_D_DF_D_DB_B^K
+Teleport Forward				_F_DF_F[^2P/^2K]
+Teleport Backward				_B_DB_B[^2P/^2K]
+
+<#f0f000>SUPER / HYPER MOVES</>
+
+Gigantic Pressure <#bebebe>(1000+)</>		_D_DF_F_DF_D_DB_B^P
+Genocide Haven <#bebebe>(1000+)</>		_D_DF_F_D_DF_F^K
+Metsu Kaiser <#bebebe>(1000+)</>		_D_DB_B_D_DB_B^P
+Death Stinger <#bebebe>(2000)</>		_D_D_D^P
+Shun Goku Satsu <#bebebe>(3000)</>		^LP_^LP_F_^LK_^HP
+God End @ndroide <#bebebe>(3000)</>		_D_DF_F_D_DF^HP_+^HK
+
+<#f0f000>SYSTEM</>
+
+Forward Dash					_F_F
+Back Dash					_B_B
+High Jump					_TAP_D,_U
+Taunt						^S
+

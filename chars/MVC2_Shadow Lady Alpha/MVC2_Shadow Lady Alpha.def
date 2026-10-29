@@ -1,0 +1,35 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name 		="Shadow Lady Alpha"
+displayname 	="Shadow Lady Alpha"
+versiondate 	= 
+mugenversion 	=06,14,2003
+author 		="WhiteMagic2002 - Sprites By Ehnyd (Edited By SUPERFERNANDOXT)"
+pal.defaults 	=1,2,3,4,5,6,7,8,9,10,11,12
+
+[Files]
+sprite 		=SLA.sff
+anim 		=SLA.air
+sound 		=SLA.snd
+cmd 		=SLA.cmd
+movelist 	=movelist.dat
+cns 		=SLA.cns
+stcommon 	=common1.cns
+st 		=SLA.cns
+pal1=pal1.act
+pal2=pal2.act
+pal3=pal3.act
+pal4=pal4.act
+pal5=pal5.act
+pal6=pal6.act
+st1=SLA2.cns
+st2=SLA3.cns
+st3=SLA4.cns
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard= 

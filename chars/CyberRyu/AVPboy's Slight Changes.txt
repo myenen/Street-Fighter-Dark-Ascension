@@ -1,0 +1,12 @@
+SLIGHT Changes i did:
+
+- Created two new palettes, the one i used for Cyber Ryu's sprite in the Theme Song video and Evil Ryu's USF2 palette too.
+  They can be chosen by pressing Start + Light Kick and Start + Medium Kick. They are added in that order.
+- Adjusted the 9000,1 portrait to be correctly positioned in the Portrait coordinates in any Screenpack.
+- Added portraits compatible to the Versus Series lifebar.
+- Added portraits with the USF2 Alternate Palette.
+- Added four quotes for better experience.
+
+It's not much, but it's something, have fun guys and thanks for letting me promote and help with this wonderful character, a Big Hug.
+
+   -. Juan Carlos Llamosa Garcia Garcia

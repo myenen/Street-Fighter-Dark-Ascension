@@ -1,0 +1,1314 @@
+
+;==============================================================================
+; 入力キーの設定パート
+;==============================================================================
+;------------------------------------------------------------------------------
+;-| ボタン配置 |-----------------------------------------------------
+;各ボタンの配置を簡単に変更できます。
+;このキャラクターのボタン配置を変えたいときなどに使います。
+;x = x を x = a に変えれば、xがaに変わります。
+
+[Remap]
+x = x
+y = y
+z = z
+a = a
+b = b
+c = c
+s = s
+
+;-| 標準化 |-------------------------------------------------------
+[Defaults]
+; timeを記述しなかった場合、以下の値が参照されます。最小値は1です。
+command.time = 15
+
+; buffer.timeの値です。1～30まで設定できます。
+; 普通は1です。
+command.buffer.time = 1
+
+;-| CPUアルゴリズム用コマンド |------------------------------
+[Command]
+name = "AI0"
+command = a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a
+time = 0
+[Command]
+name = "AI1"
+command = b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b
+time = 0
+[Command]
+name = "AI2"
+command = c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c
+time = 0
+[Command]
+name = "AI3"
+command = x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x
+time = 0
+[Command]
+name = "AI4"
+command = y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y
+time = 0
+[Command]
+name = "AI5"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI6"
+command = s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s
+time = 0
+[Command]
+name = "AI7"
+command = F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F
+time = 0
+[Command]
+name = "AI8"
+command = D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D
+time = 0
+[Command]
+name = "AI9"
+command = B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B
+time = 0
+[Command]
+name = "AI10"
+command = U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U
+time = 0
+[Command]
+name = "AI11"
+command = a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a
+time = 0
+[Command]
+name = "AI12"
+command = c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c
+time = 0
+[Command]
+name = "AI13"
+command = x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x
+time = 0
+[Command]
+name = "AI14"
+command = y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y
+time = 0
+[Command]
+name = "AI15"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI16"
+command = s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s
+time = 0
+[Command]
+name = "AI17"
+command = a,B,c,x,y,z,s,B,D,F,U,a,b,c,x,y,z,s,s
+time = 0
+[Command]
+name = "AI18"
+command = a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a
+time = 0
+[Command]
+name = "AI19"
+command = b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b
+time = 0
+[Command]
+name = "AI20"
+command = c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c
+time = 0
+[Command]
+name = "AI21"
+command = x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x
+time = 0
+[Command]
+name = "AI22"
+command = y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y
+time = 0
+[Command]
+name = "AI23"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI24"
+command = s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s
+time = 0
+[Command]
+name = "AI25"
+command = F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F
+time = 0
+[Command]
+name = "AI26"
+command = D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D
+time = 0
+[Command]
+name = "AI27"
+command = B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B
+time = 0
+[Command]
+name = "AI28"
+command = U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U
+time = 0
+[Command]
+name = "AI29"
+command = a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a
+time = 0
+[Command]
+name = "AI30"
+command = c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c
+time = 0
+[Command]
+name = "AI31"
+command = x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x
+time = 0
+[Command]
+name = "AI32"
+command = y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y
+time = 0
+[Command]
+name = "AI33"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI34"
+command = s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s
+time = 0
+[Command]
+name = "AI35"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI36"
+command = z,z,z,z,z,z,a,a,a,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI37"
+command = z,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,z,z,z
+time = 0
+[Command]
+name = "AI38"
+command = z,z,z,z,z,a,a,a,z,z,z,z,z,a,a,a,z,z,z
+time = 0
+[Command]
+name = "AI39"
+command = z,z,z,z,z,a,a,a,z,z,z,z,z,z,a,a,z,z,z
+time = 0
+[Command]
+name = "AI40"
+command = z,z,z,z,a,a,a,z,z,z,z,a,z,z,a,a,z,z,z
+time = 0
+[Command]
+name = "AI41"
+command = z,z,z,a,z,z,z,z,z,z,z,z,z,a,a,z,z,z,z
+time = 0
+[Command]
+name = "AI42"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI43"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,a,a,z
+time = 0
+[Command]
+name = "AI44"
+command = z,z,a,a,a,a,z,z,z,z,z,z,z,z,z,a,a,a,z
+time = 0
+[Command]
+name = "AI45"
+command = z,z,z,z,z,z,a,a,z,z,z,z,z,a,a,a,a,z,z
+time = 0
+[Command]
+name = "AI46"
+command = z,z,z,z,z,z,z,z,a,a,a,a,a,a,z,z,z,z,z
+time = 0
+[Command]
+name = "AI47"
+command = z,z,z,a,a,a,a,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI48"
+command = z,z,z,z,z,a,a,a,z,z,z,a,a,a,z,z,a,z,a
+time = 0
+[Command]
+name = "AI49"
+command = z,z,z,z,a,a,a,z,z,z,z,z,a,a,a,z,z,z,z
+time = 0
+[Command]
+name = "AI50"
+command = z,z,z,a,a,z,z,z,z,z,z,z,z,z,a,a,z,z,z
+time = 0
+
+;------------------------------------------------------------------------------
+;-| 超必殺技 |-----------------------------------------------------------------
+
+[Command]
+name = "トロピカルハザード1"    
+command = ~D, DF, F, D, DF, a
+time = 40
+
+
+[Command]
+name = "トロピカルハザード2"    
+command = ~D, DF, F, D, DF, b
+time = 40
+
+
+[Command]
+name = "トロピカルハザード3"    
+command = ~D, DF, F, D, DF, c
+time = 40
+
+
+[Command]
+name = "シャウトオブアース(対空)1"    
+command = ~D, DF, F, D, DF, x
+time = 40
+
+
+[Command]
+name = "シャウトオブアース(対空)2"    
+command = ~D, DF, F, D, DF, y
+time = 40
+
+
+[Command]
+name = "シャウトオブアース(対空)3"    
+command = ~D, DF, F, D, DF, z
+time = 40
+
+
+
+[Command]
+name = "トロピカルハザード1"    
+command = ~D, DB, B, D, DB, a
+time = 40
+
+
+[Command]
+name = "トロピカルハザード2"    
+command = ~D, DB, B, D, DB, b
+time = 40
+
+
+[Command]
+name = "トロピカルハザード3"    
+command = ~D, DB, B, D, DB, c
+time = 40
+
+
+[Command]
+name = "シャウトオブアース(対空)1"    
+command = ~D, DB, B, D, DB, x
+time = 40
+
+
+[Command]
+name = "シャウトオブアース(対空)2"    
+command = ~D, DB, B, D, DB, y
+time = 40
+
+
+[Command]
+name = "シャウトオブアース(対空)3"    
+command = ~D, DB, B, D, DB, z
+time = 40
+
+
+[Command]
+name = "シャウトオブアース(対地)1"    
+command = ~D, D, D, a
+time = 40
+
+
+[Command]
+name = "シャウトオブアース(対地)2"    
+command = ~D, D, D, b
+time = 40
+
+
+[Command]
+name = "シャウトオブアース(対地)3"    
+command = ~D, D, D, c
+time = 40
+
+
+[Command]
+name = "グランドシェイブローリング"    
+command = ~D, D, D, x
+time = 40
+
+
+[Command]
+name = "ダイレクトライトニング"    
+command = ~D, D, D, y
+time = 40
+
+
+[Command]
+name = "ライトニングキャノンボール"    
+command = ~D, D, D, z
+time = 40
+
+
+;------------------------------------------------------------------------------
+;-| 必殺技 |-------------------------------------------------------------------
+
+[Command]
+name = "バーチカルローリング"    
+command = ~D, DB, B, a
+
+
+[Command]
+name = "バーチカルローリング"    
+command = ~D, DB, B, b
+
+
+[Command]
+name = "バーチカルローリング"    
+command = ~D, DB, B, c
+
+
+[Command]
+name = "バーチカルローリング"    
+command = ~D, DB, B, b+c
+
+
+[Command]
+name = "バックステップローリング"    
+command = ~D, DF, F, a
+
+
+[Command]
+name = "バックステップローリング"   
+command = ~D, DF, F, b
+
+
+[Command]
+name = "バックステップローリング"    
+command = ~D, DF, F, c
+
+
+[Command]
+name = "バックステップローリング"    
+command = ~D, DF, F, b+c
+
+
+[Command]
+name = "ローリングアタック"    
+command = ~D, DF, F, x
+
+
+[Command]
+name = "ローリングアタック"    
+command = ~D, DF, F, y
+
+
+[Command]
+name = "ローリングアタック"    
+command = ~D, DF, F, z
+
+
+[Command]
+name = "ローリングアタック"    
+command = ~D, DF, F, y+z
+
+
+
+[Command]
+name = "サプライズフォワード"    
+command = /$F, a+b
+
+
+[Command]
+name = "サプライズフォワード"    
+command = /$F, a+c
+
+
+[Command]
+name = "サプライズフォワード"    
+command = /$F, b+c
+
+
+[Command]
+name = "サプライズフォワード"    
+command = /$F, a+b+c
+
+
+[Command]
+name = "サプライズバック"    
+command = /$B, a+b
+
+
+[Command]
+name = "サプライズバック"    
+command = /$B, a+c
+
+
+[Command]
+name = "サプライズバック"    
+command = /$B, b+c
+
+
+[Command]
+name = "サプライズバック"    
+command = /$B, a+b+c
+
+
+[Command]
+name = "フィアーダウン"    
+command = /$D, x+y
+
+
+[Command]
+name = "フィアーダウン"    
+command = /$D, x+z
+
+
+[Command]
+name = "フィアーダウン"    
+command = /$D, y+z
+
+
+[Command]
+name = "フィアーダウン"    
+command = /$D, x+y+z
+
+
+[Command]
+name = "ロッククラッシュ"
+command = /$B, y
+
+
+[Command]
+name = "ロッククラッシュ"
+command = /$F, y
+
+
+[Command]
+name = "アマゾンリバーラン"
+command = /$DF, z
+
+
+
+[Command]
+name = "エレクトリックサンダー"
+command = x, x, x, x, x
+
+time = 50
+
+[Command]
+name = "エレクトリックサンダー"
+command = y, y, y, y, y
+time = 50
+
+
+[Command]
+name = "エレクトリックサンダー"
+command = z, z, z, z, z
+time = 50
+
+
+[Command]
+name = "エレクトリックサンダー"
+command = x, y, x, y, x
+time = 50
+
+
+[Command]
+name = "エレクトリックサンダー"
+command = y, x, y, x, y
+time = 50
+
+
+[Command]
+name = "エレクトリックサンダー"
+command = x, z, x, z, x
+time = 50
+
+
+[Command]
+name = "エレクトリックサンダー"
+command = y, z, y, z, y
+time = 50
+
+
+[Command]
+name = "エレクトリックサンダー"
+command = z, y, z, y, z
+time = 50
+
+
+[Command]
+name = "エレクトリックサンダー"
+command = y, x, z, x, y
+time = 50
+
+
+[Command]
+name = "エレクトリックサンダー"
+command = z, x, y, x, z
+time = 50
+
+
+[Command]
+name = "同時押しキャンセル"
+command = a+z
+time = 1
+
+[Command]
+name = "jump"    
+command = ~$D,$U
+time = 8
+
+;------------------------------------------------------------------------------
+;-| キー２回連続入力 |---------------------------------------------------------
+[Command]
+name = "FF"     ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = F, F
+time = 10
+
+[Command]
+name = "BB"     ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = B, B
+time = 10
+
+;------------------------------------------------------------------------------
+;-| 同時押し |-----------------------------------------------------------------
+[Command]
+name = "recovery"   ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = x+y
+time = 1
+
+[Command]
+name = "recovery"   ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = a+b
+time = 1
+
+;------------------------------------------------------------------------------
+;-| 方向キー＋ボタン |---------------------------------------------------------
+[Command]
+name = "down_a"
+command = /$D,a
+time = 1
+
+[Command]
+name = "down_b"
+command = /$D,b
+time = 1
+
+;------------------------------------------------------------------------------
+;-| ボタン単発 |---------------------------------------------------------------
+[Command]
+name = "a"
+command = a
+time = 1
+
+[Command]
+name = "b"
+command = b
+time = 1
+
+[Command]
+name = "c"
+command = c
+time = 1
+
+[Command]
+name = "x"
+command = x
+time = 1
+
+[Command]
+name = "y"
+command = y
+time = 1
+
+[Command]
+name = "z"
+command = z
+time = 1
+
+[Command]
+name = "start"
+command = s
+time = 1
+
+[command]
+name="fwd"
+command=F
+time=1
+
+[command]
+name="back"
+command=B
+time=1
+
+[command]
+name="up"
+command=U
+time=1
+
+[command]
+name="down"
+command=D
+time=1
+;---------------------------
+;(パワー溜めステート用にコマンドを追加しています)
+[Command]
+name = "hold_c"
+command = /c
+
+;------------------------------------------------------------------------------
+;-| 方向キー押しっぱなし |-----------------------------------------------------
+[Command]
+name = "holdfwd"   ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = /$F
+time = 1
+
+[Command]
+name = "holdback"  ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = /$B
+time = 1
+
+[Command]
+name = "holdup"    ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = /$U
+time = 1
+
+[Command]
+name = "holddown"  ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = /$D
+time = 1
+
+[Command]
+name = "holda"
+command = /$a
+time = 1
+
+[Command]
+name = "holdb"
+command = /$b
+time = 1
+
+[Command]
+name = "holdc"
+command = /$c
+time = 1
+
+[Command]
+name = "holdx"
+command = /$x
+time = 1
+
+[Command]
+name = "holdy"
+command = /$y
+time = 1
+
+[Command]
+name = "holdz"
+command = /$z
+time = 1
+;------------------------------------------------------------------------------
+;==============================================================================
+; 技を実行するための条件の設定（ステートエントリーパート）
+;==============================================================================
+;------------------------------------------------------------------------------
+
+[Statedef -1];←この行は絶対に消さないでください。必須の項目です。
+
+;==============================================================================
+
+;==============================================================================
+
+;------------------------------------------------------------------------------
+[State -1, トロピカルハザード]
+type = ChangeState
+value = 2200
+triggerall = !var(59)
+triggerall = command = "トロピカルハザード3"
+triggerall = statetype != A
+triggerall = power >= 3000
+trigger1 = ctrl||((anim = 40)&&Pos Y >= 0)||((anim = 52)&&Pos Y >= 0)||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, トロピカルハザード]
+type = ChangeState
+value = 2200
+triggerall = !var(59)
+triggerall = command = "トロピカルハザード2"
+triggerall = statetype != A
+triggerall = power >= 2000
+trigger1 = ctrl||((anim = 40)&&Pos Y >= 0)||((anim = 52)&&Pos Y >= 0)||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, トロピカルハザード]
+type = ChangeState
+value = 2200
+triggerall = !var(59)
+triggerall = command = "トロピカルハザード1"
+triggerall = statetype != A
+triggerall = power >= 1000
+trigger1 = ctrl||((anim = 40)&&Pos Y >= 0)||((anim = 52)&&Pos Y >= 0)||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+
+;------------------------------------------------------------------------------
+
+[State -1, シャウトオブアース(対地)]
+type = ChangeState
+value = 2105
+triggerall = !var(59)
+triggerall = command = "シャウトオブアース(対地)3"
+triggerall = statetype != A
+triggerall = power >= 3000
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, シャウトオブアース(対地)]
+type = ChangeState
+value = 2105
+triggerall = !var(59)
+triggerall = command = "シャウトオブアース(対地)2"
+triggerall = statetype != A
+triggerall = power >= 2000
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+
+[State -1, シャウトオブアース(対地)]
+type = ChangeState
+value = 2105
+triggerall = !var(59)
+triggerall = command = "シャウトオブアース(対地)1"  
+triggerall = statetype != A
+triggerall = power >= 1000
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, シャウトオブアース(対空)]
+type = ChangeState
+value = 2100
+triggerall = !var(59)
+triggerall = command = "シャウトオブアース(対空)3"
+triggerall = statetype != A
+triggerall = power >= 3000
+trigger1 = ctrl||((anim = 40)&&Pos Y >= 0)||((anim = 52)&&Pos Y >= 0)||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, シャウトオブアース(対空)]
+type = ChangeState
+value = 2100
+triggerall = !var(59)
+triggerall = command = "シャウトオブアース(対空)2"
+triggerall = statetype != A
+triggerall = power >= 2000
+trigger1 = ctrl||((anim = 40)&&Pos Y >= 0)||((anim = 52)&&Pos Y >= 0)||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+
+[State -1, シャウトオブアース(対空)]
+type = ChangeState
+value = 2100
+triggerall = !var(59)
+triggerall = command = "シャウトオブアース(対空)1"  
+triggerall = statetype != A
+triggerall = power >= 1000
+trigger1 = ctrl||((anim = 40)&&Pos Y >= 0)||((anim = 52)&&Pos Y >= 0)||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, ライトニングキャノンボール]
+type = ChangeState
+value = 2000
+triggerall = !var(59)
+triggerall = command = "ライトニングキャノンボール"
+triggerall = statetype != A
+triggerall = power >= 3000
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, ダイレクトライトニング]
+type = ChangeState
+value = 2000
+triggerall = !var(59)
+triggerall = command = "ダイレクトライトニング"
+triggerall = statetype != A
+triggerall = power >= 2000
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+
+[State -1, グランドシェイブローリング]
+type = ChangeState
+value = 2000
+triggerall = !var(59)
+triggerall = command = "グランドシェイブローリング"  
+triggerall = statetype != A
+triggerall = power >= 1000
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, バーチカルローリング]
+type = ChangeState
+value = 1300
+triggerall = !var(59)
+triggerall = command = "バーチカルローリング"
+triggerall = statetype != A
+trigger1 = ctrl||((anim = 40)&&Pos Y >= 0)||((anim = 52)&&Pos Y >= 0)||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, バックステップローリング]
+type = ChangeState
+value = 1200
+triggerall = !var(59)
+triggerall = command = "バックステップローリング"
+triggerall = statetype != A
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, ローリングアタック]
+type = ChangeState
+value = 1100
+triggerall = !var(59)
+triggerall = command = "ローリングアタック"
+triggerall = statetype != A
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+[State -1, エレクトリックサンダー]
+type = ChangeState
+value = 1000
+triggerall = !var(59)
+triggerall = command = "エレクトリックサンダー"
+triggerall = statetype != A
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+
+[State -1, ガードキャンセル2]
+type = ChangeState
+value = 781
+triggerall = !var(59)
+triggerall = power >=500
+triggerall = (StateNo = [150,153])
+triggerall = !(HitShakeOver)
+triggerall = (InGuardDist)
+triggerall = statetype != A
+trigger1 = command = "holdfwd"&&command = "c"
+;------------------------------------------------------------------------------
+[State -1, ガードキャンセル1]
+type = ChangeState
+value = 780
+triggerall = !var(59)
+triggerall = power >=500
+triggerall = (StateNo = [150,153])
+triggerall = !(HitShakeOver)
+triggerall = (InGuardDist)
+triggerall = statetype != A
+trigger1 = command = "holdfwd"&&command = "z"
+;------------------------------------------------------------------------------
+
+[State -1, セービングアタック（もどき）]
+type = ChangeState
+value = 730
+triggerall = !var(59)
+triggerall = !var(18)
+triggerall = command="holdb"&&command="holdy"
+triggerall = statetype != A
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)&&power >= 500
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)&&power >= 500
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)&&power >= 500
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)&&power >= 500
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)&&power >= 500
+trigger7 = (anim = 710)&&(movecontact)&&power >= 500
+;------------------------------------------------------------------------------
+
+[State -1, フィアーダウン]
+type = ChangeState
+value = 725
+triggerall = !var(59)
+triggerall = command = "フィアーダウン"
+triggerall = statetype != A
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+;------------------------------------------------------------------------------
+[State -1, サプライズバック]
+type = ChangeState
+value = 721
+triggerall = !var(59)
+triggerall = command = "サプライズバック"
+triggerall = statetype != A
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+;------------------------------------------------------------------------------
+
+[State -1, サプライズフォワード]
+type = ChangeState
+value = 720
+triggerall = !var(59)
+triggerall = command = "サプライズフォワード"
+triggerall = statetype != A
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+trigger2 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger3 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger5 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+trigger6 = (anim = 440)&&(Animelem = 2,>= 2||movecontact)
+trigger7 = (anim = 710)&&(movecontact)
+;------------------------------------------------------------------------------
+
+[State -1, ロッククラッシュ]
+type = ChangeState
+value = 710
+triggerall = !var(59)
+triggerall = command = "ロッククラッシュ"
+triggerall = statetype != A
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+;------------------------------------------------------------------------------
+
+[State -1, アマゾンリバーラン]
+type = ChangeState
+value = 700
+triggerall = !var(59)
+triggerall = command = "アマゾンリバーラン"
+triggerall = statetype != A
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+;------------------------------------------------------------------------------
+;ダッシュ
+[State -1, Dash]
+type = ChangeState
+value = 100
+triggerall = !var(59)
+triggerall = command = "FF"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = Stateno = 730&&time = [2,60]
+trigger3 = (Stateno = [731,733])&&movecontact
+
+;バックステップ
+[State -1, Back Step]
+type = ChangeState
+value = 105
+triggerall = !var(59)
+triggerall = command = "BB"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = Stateno = 730&&time = [2,60]
+trigger3 = (Stateno = [731,733])&&movecontact
+
+;同時押しキャンセル
+
+[State -1, 同時押しキャンセル]
+type = ChangeState
+value = 220
+triggerall = !var(59)
+triggerall = statetype != A
+triggerall = command = "同時押しキャンセル"
+triggerall = command != "holddown"
+trigger1 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger2 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger3 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+
+[State -1, 同時押しキャンセル]
+type = ChangeState
+value = 420
+triggerall = !var(59)
+triggerall = statetype != A
+triggerall = command = "同時押しキャンセル"
+triggerall = command = "holddown"
+trigger1 = (anim = 200)&&(Animelem = 2,>= 2||movecontact)
+trigger2 = (anim = 231)&&(Animelem = 3,>= 2||movecontact)
+trigger3 = (anim = 400)&&(Animelem = 3,>= 2||movecontact)
+trigger4 = (anim = 430)&&(Animelem = 2,>= 2||movecontact)
+
+;着地キャンセル
+
+[State -1, 着キャン立ち]
+type = ChangeState
+value = 0
+triggerall = !var(59)
+triggerall = command = "down"
+trigger1 = Stateno = 52||Stateno = 101||Stateno = 106
+trigger1 = time = [0,1]
+ctrl = 1
+
+[State -1, 着キャンしゃがみ]
+type = ChangeState
+value = 11
+triggerall = !var(59)
+triggerall = command = "holddown"
+trigger1 = Stateno = 52||Stateno = 101||Stateno = 106
+trigger1 = time = [1,2]
+ctrl = 1
+
+;------------------------------------------------------------------------------
+[State -1, 投げ]
+type = ChangeState
+value = 800
+triggerall = !var(59)
+triggerall = command = "a"&&command = "x"
+triggerall = statetype != A
+triggerall = stateno != 100
+trigger1 = ctrl||((Stateno = [200,599])&&time <= 3&&statetype != A)
+
+[State -1, 立ち弱パンチ]
+type = ChangeState
+value = 200
+triggerall = !var(59)
+triggerall = command = "x"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+
+[State -1, 立ち中パンチ]
+type = ChangeState
+value = 210
+triggerall = !var(59)
+triggerall = command = "y"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+
+[State -1, 立ち強パンチ]
+type = ChangeState
+value = 220
+triggerall = !var(59)
+triggerall = command = "z"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+
+;------------------------------------------------------------------------------
+[State -1, 立ち弱キック]
+type = ChangeState
+value = 230
+triggerall = !var(59)
+triggerall = command = "a"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+
+[State -1, 立ち中キック]
+type = ChangeState
+value = 240
+triggerall = !var(59)
+triggerall = command = "b"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+
+[State -1, 立ち強キック]
+type = ChangeState
+value = 250
+triggerall = !var(59)
+triggerall = command = "c"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+
+;------------------------------------------------------------------------------
+[State -1, 挑発]
+type = ChangeState
+value = 195
+triggerall = !var(59)
+triggerall = command = "start"
+trigger1 = statetype != A
+trigger1 = ctrl
+
+;------------------------------------------------------------------------------
+
+[State -1, しゃがみ弱パンチ]
+type = ChangeState
+value = 400
+triggerall = !var(59)
+triggerall = command = "x"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+
+[State -1, しゃがみ中パンチ]
+type = ChangeState
+value = 410
+triggerall = !var(59)
+triggerall = command = "y"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = (anim = 400)&&(Animelem = 2,>= 2||movecontact)
+
+[State -1, しゃがみ強パンチ]
+type = ChangeState
+value = 420
+triggerall = !var(59)
+triggerall = command = "z"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+
+[State -1, しゃがみ弱キック]
+type = ChangeState
+value = 430
+triggerall = !var(59)
+triggerall = command = "a"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+
+[State -1, しゃがみ中キック]
+type = ChangeState
+value = 440
+triggerall = !var(59)
+triggerall = command = "b"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+
+[State -1, しゃがみ強キック]
+type = ChangeState
+value = 450
+triggerall = !var(59)
+triggerall = command = "c"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+;------------------------------------------------------------------------------
+[State -1, 空中弱パンチ]
+type = ChangeState
+value = 600
+triggerall = !var(59)
+triggerall = command = "x"
+triggerall = stateno != 105
+triggerall = statetype = A
+trigger1 = ctrl
+
+[State -1, 空中中パンチ]
+type = ChangeState
+value = 610
+triggerall = !var(59)
+triggerall = command = "y"
+triggerall = stateno != 105
+triggerall = statetype = A
+trigger1 = ctrl
+
+[State -1, 空中強パンチ]
+type = ChangeState
+value = 620
+triggerall = !var(59)
+triggerall = command = "z"
+triggerall = stateno != 105
+triggerall = statetype = A
+trigger1 = ctrl
+
+[State -1, 空中弱キック]
+type = ChangeState
+value = 630
+triggerall = !var(59)
+triggerall = command = "a"
+triggerall = stateno != 105
+triggerall = statetype = A
+trigger1 = ctrl
+
+[State -1, 空中中キック]
+type = ChangeState
+value = 640
+triggerall = !var(59)
+triggerall = command = "b"
+triggerall = stateno != 105
+triggerall = statetype = A
+trigger1 = ctrl
+
+[State -1, 空中強キック]
+type = ChangeState
+value = 650
+triggerall = !var(59)
+triggerall = command = "c"
+triggerall = stateno != 105
+triggerall = statetype = A
+trigger1 = ctrl
+
+[State -1, 移動起き前]
+type = ChangeState
+triggerall = !var(59)
+triggerall = command = "holdfwd"
+trigger1 = stateno = 5120
+value = 5125
+
+[State -1, 移動起き後]
+type = ChangeState
+triggerall = !var(59)
+triggerall = command = "holdback"
+trigger1 = stateno = 5120
+value = 5126

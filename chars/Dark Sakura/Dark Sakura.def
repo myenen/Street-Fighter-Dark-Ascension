@@ -1,0 +1,37 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = "Dark Sakura"
+displayname = "Dark Sakura"
+versiondate = 05,02,2012
+mugenversion = 1.0
+author = "varo_hades"
+pal.defaults = 11,12
+
+[Files]
+sprite = DarkSprite.sff
+anim = Anim.air
+sound = Sound.snd
+movelist = movelist.dat
+cmd = Command.cmd
+cns = Constants.cns
+stcommon = common1.cns
+st = States\System.st
+st1 = States\Normal.st
+st2 = States\Special.st
+st3 = States\Super.st
+st4 = States\Helpers.st
+st5 = States\DarkSakura.st
+pal1 = D_Sakura_HR01.act
+pal2 = D_Sakura_HR02.act
+pal3 = D_Sakura_HR03.act
+pal4 = D_Sakura_HR04.act
+pal5 = D_Sakura_HR05.act
+pal6 = D_Sakura_HR06.act
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 

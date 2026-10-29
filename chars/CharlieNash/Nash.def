@@ -1,0 +1,56 @@
+; _______________________________________________
+;| Charlie Nash by Trololo						 |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name        = "Charlie Nash"
+displayName = "Nash"
+versionDate = 14,09,2016
+mugenVersion= 1.0
+author      = "Trololo"
+pal.defaults= 4,5,6,1,2,3,10,11,12,7,8,9
+localCoord  = 320,240
+
+[Files]
+cmd     = Command.cmd
+cns     = Constants.cns
+st      = States/System.st
+st1     = States/Normal.st
+st2     = States/Special.st
+st3     = States/Super.st
+st4     = States/Helpers.st
+st5     = States/Nash.st
+stCommon= common1.cns
+sprite  = Sprite.sff
+anim    = Anim.air
+sound   = SoundJPN.snd
+pal1	= Palettes/NashSFVPal4.act
+pal2	= Palettes/NashSFVPal5.act
+pal3	= Palettes/NashSFVPal6.act
+pal4	= Palettes/NashDefault.act
+pal5	= Palettes/NashSFVPal2.act
+pal6	= Palettes/NashSFVPal3.act
+pal7	= Palettes/NashSFVPal10.act
+pal8	= Palettes/ComixShadow.act
+pal9	= Palettes/Shadow.act
+pal10	= Palettes/NashSFVPal7.act
+pal11	= Palettes/NashSFVPal8.act
+pal12	= Palettes/NashSFVPal9.act
+	
+[Palette Keymap]
+a = 1
+b = 2
+c = 3
+x = 4
+y = 5
+z = 6
+a2 = 7
+b2 = 8
+c2 = 9
+x2 = 10
+y2 = 11
+z2 = 12
+
+;[Arcade]
+;intro.storyBoard = intro.def
+;ending.storyBoard = ending.def

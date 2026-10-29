@@ -1,0 +1,67 @@
+====================================================================
+=								   =
+=		    MECH ZANGIEF'S NEW STUFF	                   =
+=								   =
+=								   =
+====================================================================
+
+*What's New (UPDATED) BY One Winged Angel 
+===================================================
+**As of May 23, 2005**
+-----------------------
+- Final Atomic Buster Start Change to Walking like MVC
+- Ultra Final Atomic Buster added
+- Lariat Super added
+- Aerial Lariat Super added
+- Fixed bugs (not all)
+- Made a better armor but not perfect
+- Walking tweaked a little
+- Supers got a little stronger
+- Pile Driver got stronger
+- Walking Sound
+- Russian Slam added as a special move
+- Added some palletes that was from KoYotae's original Zangief
+- Added Ending by Thor
+
+*NEW COMMAND
+=================================================
+Special Moves
+------------------
+Russian Slam
+B, D, DB, any kick
+
+Super Moves
+------------------
+Ultra Final Atomic Buster
+D, DB, B, any two kick
+
+Aerial Lariat
+D, DB, B, any two punch
+
+Standing Lariat
+Two weak attack
+or Two medium attack
+or Two fierce attack 
+
+
+*Thanks To.........
+===================================================
+- KoYotae for letting me update his character
+- KFM for hosting the character in the first place and some help and coding
+- DG for letting me use some of his Ryu sprites(Mainly it was the Hyper Bg)
+- BlackJack for helping me the most when I needed the help
+- Thor for the ending for Zanigef (not Mech Zangief)
+- Mugen Fighter Guild Forum for some helpful tips
+- All the other people that help me out.
+
+
+
+
+
+CONTACT: zyxwvu1000@yahoo.com
+WEB: www.freewebs.com/owamugen
+	www.geocities.com/zyxwvu1000
+
+
+
+

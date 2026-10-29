@@ -1,0 +1,120 @@
+Cyber Akuma 
+Date:
+By:Scar
+Email: fightredblack@yahoo.com
+www.freewebs.com/infinityscar
+========================
+Basics
+========================
+
+x= Low Punch
+Y= Medium Punch
+Z= Hard Punch
+
+A= Low Kick
+B= Medium Kick
+C= Hard Kick
+
+Down, Up = Super Jump
+
+========================
+Throws
+========================
+
+[Overhead Throw]
+-Foward, x+y
+
+[Kick Throw]
+-Foward, a+b
+
+========================
+Specials
+========================
+
+[Shining Circuit Shoryuken]
+-F,DF,F, Punch
+
+[Bolt Hadouken]
+-D,DF,F, Punch
+
+[Zankuu Bolt Hadouken]:In Air
+-D,DF,F, Punch
+
+[Thunder Shock Zankukyakyu]
+-D,DB,B, Kick
+
+[Diving Rocket kujinkyaku]:In Air
+-D,DF,F, Kick 
+
+[Lightning Senku]
+-B,D,B, x+a
+-F,D,F, x+a 
+
+========================
+Lvl 1 Hypers
+========================
+
+[High Mega Gou Beam]
+-D,DB,B, pp 
+
+[Thunder Gou Shower]:In Air
+-D,DF,F, pp
+
+[Scramble Gou Punch]
+-D,DF,F, pp
+
+[Messastu Gou Zankukyakyu]
+-D,DB,B, kk 
+
+========================
+Lvl 3 Hypers
+========================
+
+[Shining Gou Shock]
+LP, LP, Foward, LK, HP
+
+========================
+Thanks to:
+========================
+INFINITY MUGEN TEAM
+
+Acey
+Apocalypse
+Batzarro
+B.Easy
+Chaotic
+Darkcipherlucius
+Darktalbain
+Dead-X
+Eskro
+Excursion
+Fallen Angel
+G Lux
+GameGirl
+Goenitz
+Kong
+Kpt
+Laspacho
+Leon
+Maran-Sama
+Mugen D. Luffy
+Redhot
+Sabaki
+Sosa
+Spidermew
+The Great Matsutzu
+The King of the Ironfist
+Trasgoseven
+Vyn
+Warner
+Xerxes 
+
+Portrait by Warner, Thanks bro..
+
+Mr.Infinite, thanks for helping with the hitsparks.
+
+Thanks to all those members at the Infinity forum for all their encouragement.
+
+Lastly:
+Elecbyte- for making mugen of course.
+Capcom- for making those kickass 2d fighter games that we all love and enjoy.

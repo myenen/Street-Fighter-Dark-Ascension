@@ -1,0 +1,18 @@
+{
+  "source": "ryu_idle_001_hd_concept_v04.png",
+  "output": "ryu_idle_001_hd_cutout_v02.png",
+  "size": [
+    1158,
+    1358
+  ],
+  "mode": "RGBA",
+  "transparent_pixels": 1219565,
+  "opaque_pixels": 352999,
+  "bbox": [
+    342,
+    120,
+    896,
+    1269
+  ],
+  "status": "Background cleanup candidate; pose is not yet matched for game import."
+}

@@ -1,0 +1,237 @@
+
+;---------------------- Integer variable list ----------------------
+;var(0):= Hyper Finish Text Selector
+;var(3):= Jump
+;var(4):= Normal Cancel
+;var(5):= Special Cancel
+;var(6):= Super Cancel
+;var(7):= Max Cancel
+;var(8):= Helper Contact Target
+;var(9):= Counter Flag
+;var(10):= Move Var
+;var(11):= Helper Var
+;var(12):= Enemy Hit Var
+;var(13):= Hit count
+;var(15):= Juggle Points
+;var(16):= Juggle Flag
+;var(17):= Unguardable
+;var(18):= Helper Projcontact
+;var(19):= Throw Escape
+;var(20):= Custom Combo Time
+;var(21):= Super Cancel Flag
+;var(22):= Hyper Cancel Flag
+;var(23):= Super Finish Type
+;var(25):= Ticks to Apply EX FX
+;var(26):= Palette Select
+;var(27):= Palette Selector (on/off)
+;var(29):= Palette Selector Timer
+;var(30):= Hit Detection
+;var(33):= Hit SparkNo
+;var(34):= Guard SparkNo
+;var(35):= Spark X Axis
+;var(36):= Spark Y Axis
+;var(38):= Throws (0 = Allowed/1 = Not Allowed)
+;var(43):= Hit Sparks Selector
+;var(44):= Hit Sounds Selector
+;var(55):= Combo Style Selector
+
+;---------------------- Float variable list ----------------------
+;fvar(5):= Corner Push
+;fvar(8):= Down Juggle Points
+;fvar(9):= Ctrl Flag
+;fvar(10):= Damage Scale (Dampener)
+;fvar(11):= Damage Scale Backup
+;fvar(12):= Enemy In Hit State
+;fvar(13):= Attack Level
+;fvar(17):= Hitspark Helper Var
+;fvar(18):= Hitspark Helper Var
+;---------------------- Sound Channel list ----------------------
+;Channel=0 := Voice
+;Channel=1 := Dust Sound FX's
+;Channel=5 := Movement Sound FX's
+;Channel=22 := Wall Hit Sound FX
+
+;======================================================================================
+;Constants
+;======================================================================================
+[Data]
+life = 1000
+power = 3000			
+attack = 100		
+defence = 100		
+fall.defence_up = 50	
+liedown.time = 50		
+airjuggle = 0		
+sparkno = s8010			
+guard.sparkno = s8000	
+KO.echo = 0			
+volumescale = 90			
+IntPersistIndex = 0	
+FloatPersistIndex = 0 
+
+[Size]
+xscale = .9
+yscale = .97
+ground.back = 18
+ground.front = 22
+air.back = 14
+air.front = 14
+height = 90
+attack.dist = 160
+proj.attack.dist = 90
+proj.doscale = 0
+head.pos = 6, -94
+mid.pos = 0, -65
+shadowoffset = 0
+draw.offset = 0, 0
+
+[Velocity]
+walk.fwd  = 2.1575
+walk.back = -1.97575
+run.fwd  = 6.125, 0   
+run.back = -5.125,-3.725 
+jump.neu = 0,-9.4375 
+jump.back = -3.35925   
+jump.fwd = 3.35925       
+runjump.back = -5.0390625,-10.4275
+runjump.fwd = 5.0390625,-10.4235
+
+[Movement]
+airJump.num = 0
+airJump.height = 0
+yaccel = 0.51275
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundLevel = 25
+air.gethit.groundRecover.ground.threshold = -20
+air.gethit.groundRecover.groundLevel = 10
+air.gethit.airRecover.threshold = -1
+air.gethit.airRecover.yAccel = 0.35
+air.gethit.trip.groundLevel = 15
+down.bounce.offset = 0, 20
+down.bounce.yAccel = 0.4
+down.bounce.groundLevel = 12
+down.friction.threshold = 0.5
+
+[Quotes]
+victory0 = "Your attacks are simple to read. You cannot hope to defeat me."
+victory1 = "I have no use for a loser like you. Get down on your hands and knees and beg for forgiveness."
+victory2 = "Get out of my face. The very sight of you makes me sick."
+victory3 = "This battle is over. I have no more time to spend on you."
+victory4 = "If you dare stand up, I will make sure to put you down permanently."
+victory5 = "Do not show your face around me again, unless you want to face certain death."
+victory6 = "That was almost too easy."
+victory7 = "I have no reason to kill you here. If you don't want to die, I suggest you disappear, quickly."
+victory8 = "You're satisfied now, aren't you? Stay down for a while unless you want another taste of defeat."
+;M.Bison (Dictator)
+victory9 = "So this is all the power that Shadaloo can muster... What a waste of my time."
+;Vega (Claw)
+victory10 = "There are nothing but monsters in this world. That includes you and I."
+;Balrog (Boxer)
+victory11 = "You're a top member of Shadaloo? Don't make me laugh..."
+;Sagat
+victory12 = "It was your own fault, old king. You shouldn't have taken me lightly."
+;Zangief
+victory13 = "For your motherland? How stupid. No wonder you lost to me."
+;Yoshimitsu
+victory14 = "The demonic sword...If this is all the power it has, I have no use for it."
+;Xiaoyu
+victory15 = "Xiaoyu... Stop following me, or else."
+;Sakura
+victory16 = "Purity alone won't protect a single thing."
+;Ryu
+victory17 = "So you too have struggled with a dark power within... Perhaps you can be of some use in my research."
+;Rolento
+victory18 = "I will do anything to achieve my goal, but unlike you, I am not a clueless despot."
+;Poison
+victory19 = "Did you think you would be shown mercy because you're a woman? You don't know me very well, do you?"
+;Ken Masters
+victory20 = "You cannot defeat me with your flame. Disappear."
+;Kazuya Mishima
+victory21 = "Father... You will die by my hand!"
+;Juri Han
+victory22 = "The Feng Shui engine... I thought this would be of use to me, but I suppose not."
+;Jin Kazama
+victory23 = "Pathetic clone... Get lost!"
+;Ibuki
+victory24 = "Go home. This is no place for a simple child."
+;Hugo
+victory25 = "You are mistaken, giant. Victory is not obtained through muscle alone."
+;Heihachi Mishima
+victory26 = "Heihachi Mishima, do not think I disappear so easily!."
+;Guy/Kim Kaphwan
+victory27 = "Absolute power controls this world. There is no such thing as justice or evil."
+;Guile
+victory28 = "If you are a skilled warrior, promise to serve me, and I will have use for you."
+;Elena
+victory29 = "Do not think badly of me, girl. I only take out those who get in my way."
+;Dudley
+victory30 = "That was an elegant battle, thank you."
+;Dhalsim
+victory31 = "I listen only to myself."
+;Benimaru Nikaido
+victory32 = "A man who uses electricity…? I may have to bring you back for some testing."
+;Cody Travers
+victory33 = "What do you know about me? Do you have a death wish?"
+;Chun Li
+victory34 = "An Interpol dog...Don't get in my way again, woman."
+;Cammy
+victory35 = "Opposing me can only end in despair for you."
+;Alisa
+victory36 = "Alisa, stand down. It's me."
+;Akuma
+victory37 = "The legendary Satsui no Hado... Now that you lay defeated, your power is mine."
+victory38 = "The Satsui No Hado is a art of murder. Murder is your fate."
+;Gouken
+victory39 = "You may be his master, but you aren't infallible...but you do have much I can take from you. The Power of Nothingness, for instance."
+;Kain
+victory40 = "I have nothing to fear from a fake king."
+;Krauser
+victory41 = "As head of the Mishima Zaibatsu, my duty here is accomplished."
+;Sephiroth
+victory42 = "Mako...so that is your strength? I shall carve the secrets of it from your remains if I have to."
+;Doom
+victory43 = "Power is everything but you are nothing."
+;Cable
+victory44 = "Perhaps your future is indeed not set in stone."
+;Setsuna
+victory45 = "Even a sword cursed and brimming with dark power is but a mere hunk of metal."
+;Deadpool
+victory46 = "Please...just shut up. Forever."
+;Jotaro
+victory47 = "That pressure...what on earth was that? Matters not."
+;Billy Kain
+victory48 = "So you'd rather be a puppet? Than the one who pulls the strings"
+;Magneto
+victory49 = "The X-Gene is something I shall make better use of"
+;Andy Bogard
+victory50 = "I've more experience with ninjas than you think."
+;Shingo
+victory51 = "You lack power. Power is everything."
+;Dormammu/Scarecrow
+victory52 = "The devil uses fear to control. I fear nothing."
+;Nests Officer
+victory53 = "Power is everything. Your corporation didn't heed that warning....."
+;Chuchoryu's
+victory54 = "You are nothing but a defect..."
+;KOF Nest Saga
+victory55 = "An outcast of a failed corporation."
+;Sub-Zero
+victory56 = "Lin Kuei or not, you stood no chance."
+;Green Lanterns (Hal Jordan & Jon Stewart)
+victory57 = "The power of will cannot compare to mine"
+;Giygas
+victory58 = "Not even an abomination as yourself could ever hope to match my power."
+;Orochi
+victory59 = "All the universe's power at your disposal, and yet it wasn't enough. Pathetic."
+;Batsu
+victory60 = "We both fight for justice, but our methods differ."
+;Cloud
+victory61 = "Your swordplay was no match for me."
+;Sol
+victory62 = "Your power is immense. But compared to mine, it comes up short."
+;Homer
+victory63 = "I'll never lose to a slob like you."
+

@@ -1,0 +1,1952 @@
+;====================================================================================
+[Statedef 9999]
+anim = 9999
+ctrl = 0
+
+[State 9999, 1]
+type = Turn
+trigger1 = facing != parent, facing
+
+[State 9999, 2]
+type = ParentVarSet
+triggerall = var(21) = 0
+triggerall = parent, RoundState = 2
+trigger1 = parent, command = "x"
+trigger2 = parent, command = "y"
+trigger3 = parent, command = "z"
+trigger4 = parent, command = "a"
+trigger5 = parent, command = "s"
+trigger6 = parent, command = "holdfwd"
+trigger7 = parent, command = "holdback"
+trigger8 = parent, command = "holdup"
+trigger9 = parent, command = "holddown"
+var(20) = 1
+
+[State 9999, 3]
+type = ParentVarSet
+triggerall = parent, var(20) = 1
+triggerall = parent, RoundState = 2
+trigger1 = (command = "x" && parent, command = "x")
+trigger2 = (command = "y" && parent, command = "y")
+trigger3 = (command = "z" && parent, command = "z")
+trigger4 = (command = "a" && parent, command = "a")
+trigger5 = (command = "s" && parent, command = "s")
+trigger6 = (command = "holdfwd" && parent, command = "holdfwd")
+trigger7 = (command = "holdback" && parent, command = "holdback")
+trigger8 = (command = "holdup" && parent, command = "holdup")
+trigger9 = (command = "holddown" && parent, command = "holddown")
+var(20) = 0
+
+[State 9999, 4]
+type = VarSet
+trigger1 = var(21) = 1
+var(21) = 0
+
+[State 9999, 5]
+type = VarSet
+triggerall = var(21) = 0
+triggerall = parent, RoundState = 2
+trigger1 = parent, command = "x"
+trigger2 = parent, command = "y"
+trigger3 = parent, command = "z"
+trigger4 = parent, command = "a"
+trigger5 = parent, command = "s"
+trigger6 = parent, command = "holdfwd"
+trigger7 = parent, command = "holdback"
+trigger8 = parent, command = "holdup"
+trigger9 = parent, command = "holddown"
+var(21) = 1
+
+[State 9999, 6]
+type = Destroyself
+trigger1 = parent, ctrl = 1
+trigger1 = time >= 50
+
+[Statedef -3]
+[State -3]
+type = Helper
+trigger1 = NumHelper(9999) = 0
+trigger1 = anim = 0
+trigger1 = movetype != H
+trigger1 = ctrl = 0
+trigger1 = RoundState = 2
+name = "AI Trigger"
+id = 9999
+pos = 1000, 1000
+stateno = 9999
+helpertype = normal
+keyctrl = 1
+
+[State 1,1]
+type = VarSet
+triggerall = var(20) != 1
+triggerall = RoundState != 3
+trigger1 = command = "AI_1"
+trigger2 = command = "AI_2"
+trigger3 = command = "AI_3"
+trigger4 = command = "AI_4"
+trigger5 = command = "AI_5"
+trigger6 = command = "AI_6"
+trigger7 = command = "AI_7"
+trigger8 = command = "AI_8"
+trigger9 = command = "AI_9"
+trigger10 = command = "AI_10"
+trigger11 = command = "AI_11"
+trigger12 = command = "AI_12"
+trigger13 = command = "AI_13"
+trigger14 = command = "AI_14"
+trigger15 = command = "AI_15"
+trigger16 = command = "AI_16"
+trigger17 = command = "AI_17"
+trigger18 = command = "AI_18"
+trigger19 = command = "AI_19"
+trigger20 = command = "AI_20"
+trigger21 = command = "AI_21"
+trigger22 = command = "AI_22"
+trigger23 = command = "AI_23"
+trigger24 = command = "AI_24"
+trigger25 = command = "AI_25"
+trigger26 = command = "AI_26"
+trigger27 = command = "AI_27"
+trigger28 = command = "AI_28"
+trigger29 = command = "AI_29"
+trigger30 = command = "AI_30"
+trigger31 = command = "AI_31"
+trigger32 = command = "AI_32"
+trigger33 = command = "AI_33"
+trigger34 = command = "AI_34"
+trigger35 = command = "AI_35"
+trigger36 = command = "AI_36"
+trigger37 = command = "AI_37"
+trigger38 = command = "AI_38"
+trigger39 = command = "AI_39"
+trigger40 = command = "AI_40"
+trigger41 = command = "AI_41"
+trigger42 = command = "AI_42"
+var(20) = 1
+
+[State -3, 1.83]
+type = Varset
+trigger1 = var(20) = 1
+trigger1 = RoundState = 3
+var(20) = 0
+
+[State -3]
+type = VarRandom
+trigger1 = Time = 0
+v = 29
+range = 0,99
+;====================================================================================
+;空中ガード
+[State -3]
+type = ChangeState
+value = 132
+triggerall = p2movetype = A
+triggerall = P2bodydist X <= 60
+triggerall = P2Life > 0
+triggerall = statetype = A
+triggerall = var(20) = 1
+triggerall = ctrl
+triggerall = stateno != 191
+trigger1 = p2statetype = A
+;--------------------------
+;立ちガード(相手立ち)
+[State -3]
+type = ChangeState
+value = 130
+triggerall = p2movetype = A
+triggerall = P2bodydist X <= 60
+triggerall = P2Life > 0
+triggerall = statetype != A
+triggerall = var(20) = 1
+triggerall = ctrl
+triggerall = stateno != 191
+trigger1 = p2statetype = S
+;立ちガード(相手空中)
+[State -3]
+type = ChangeState
+value = 130
+triggerall = p2movetype = A
+triggerall = P2bodydist X <= 60
+triggerall = P2Life > 0
+triggerall = statetype != A
+triggerall = var(20) = 1
+triggerall = ctrl
+triggerall = stateno != 191
+trigger1 = p2statetype = A
+;--------------------------
+;しゃがみガード
+[State -3]
+type = ChangeState
+value = 131
+triggerall = p2movetype = A
+triggerall = P2bodydist X <= 60
+triggerall = P2Life > 0
+triggerall = statetype != A
+triggerall = var(20) = 1
+triggerall = ctrl
+triggerall = stateno != 191
+trigger1 = p2statetype = C
+;--------------------------
+;ゼロカウンター
+;[State -3]
+;type = ChangeState
+;triggerall = var(20) = 1
+;triggerall = P2Life > 0
+;triggerall = StateType != A
+;triggerall = P2bodydist X < 80
+;triggerall = stateno >= 150
+;triggerall = stateno <= 153
+;trigger1 = stateno != 191
+;value = 920
+
+;ブロッキング上段
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = stateno >= 150
+triggerall = stateno <= 151
+trigger1 = stateno != 191
+value = 18100
+
+;ブロッキング下段
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = stateno >= 152
+triggerall = stateno <= 153
+trigger1 = stateno != 191
+value = 18300
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = random <= 800
+triggerall = stateno = 2054
+trigger1 = stateno != 191
+value = 1250
+;--------------------------
+;ハウリングブル
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = prevstateno != 1711
+triggerall = power >= 1000 
+triggerall = Random <= 200
+triggerall = StateType != A
+triggerall = P2bodydist X < 150
+triggerall = ctrl = 1
+triggerall = stateno != 191
+trigger1 = p2stateno = 5101
+trigger2 = p2stateno = 5110
+value = 1070
+;--------------------------
+;デスペレイト・オーバードライブ
+[State -1]
+type = ChangeState
+value = 2013
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = prevstateno != 1711
+triggerall = random <= 400
+triggerall = statetype != A
+triggerall = power >= 2000
+triggerall = ctrl
+trigger1 = p2statetype = A
+trigger1 = p2bodydist x < 30
+trigger1 = p2bodydist y < 1
+trigger1 = p2bodydist y > -9
+;--------------------------
+;しゃがみ弱パンチ
+[State -3]
+type = ChangeState
+triggerall = P2Life > 0
+triggerall = var(20) = 1
+triggerall = StateType != A
+triggerall = stateno != 191
+triggerall = p2bodydist x < 8
+trigger1 = stateno = 0
+trigger1 = p2StateType = A
+trigger1 = p2moveType = H
+trigger1 = prevstateno = 1711
+;trigger1 = p2bodydist y > -5
+trigger1 = ctrl = 1
+value = 400
+;--------------------------
+; エンドオブエデン
+[State -3]
+type = ChangeState
+value = 4020
+triggerall = var(20) = 1
+triggerall = prevstateno != 1711
+triggerall = power >= 2000 
+triggerall = P2BodyDist X = [-10,15]
+trigger1 = statetype = S
+trigger1 = ctrl = 1
+trigger2 = statetype = C
+trigger2 = ctrl = 1
+trigger3 = stateno = 201
+trigger4 = stateno = 202
+trigger5 = stateno = 203
+trigger6 = stateno = 204
+trigger7 = stateno = 205
+trigger8 = stateno = 206
+trigger9 = stateno = 400
+trigger10 = stateno = 401
+trigger11 = stateno = 402
+trigger12 = stateno = 403
+trigger13 = stateno = 404
+trigger14 = stateno = 405
+trigger15 = stateno = 406
+trigger16 = stateno = 301
+trigger17 = stateno = 302
+trigger18 = stateno = 304
+trigger19 = stateno = 305
+trigger20 = stateno = 100
+trigger21 = statetype = C
+trigger21 = ctrl = 1
+trigger22 = stateno = 306
+trigger23 = stateno = 500
+trigger24 = stateno = 550
+trigger25 = stateno = 1100
+trigger26 = stateno = 1110
+trigger27 = stateno = 1120
+trigger28 = stateno = 1050
+trigger29 = stateno = 1060
+trigger30 = stateno = 1070
+trigger31 = stateno = 3000
+trigger32 = stateno = 3010
+trigger33 = stateno = 3020
+trigger34 = stateno = 1000
+trigger35 = stateno = 1001
+trigger36 = stateno = 1002
+trigger37 = stateno = 900
+trigger38 = stateno = 910
+trigger39 = stateno = 920
+trigger40 = stateno = 945
+trigger41 = stateno = 950
+trigger42 = stateno = 951
+trigger43 = stateno = 952
+trigger44 = stateno = 200
+;--------------------------
+;ドリル
+[State -1]
+type = ChangeState
+value = 8000
+triggerall = power >= 1000
+triggerall = p2stateno != 1302
+triggerall = var(20) = 1
+triggerall = statetype != A
+triggerall = p2statetype != A
+triggerall = p2statetype != L
+triggerall = p2stateno != 5120
+triggerall = P2bodydist X <= 25
+triggerall = p2stateno != 130
+triggerall = p2stateno != 131
+triggerall = p2stateno != 1601
+triggerall = p2stateno != 1611
+trigger1 = p2movetype != H 
+trigger1 = ctrl
+;------------------------------------------------------------
+;ギロチン
+[State -1,kadkad]
+type = ChangeState
+value = 4050
+triggerall = var(20) = 1
+triggerall = power >= 1000
+triggerall = statetype != A
+triggerall = p2statetype = A
+triggerall = p2stateno != 5120
+triggerall = P2bodydist Y >= -100
+triggerall = P2bodydist X <= 30
+triggerall = P2bodydist X >= 10
+triggerall = P2bodydist Y <= -10
+triggerall = p2stateno != 130
+triggerall = p2stateno != 131
+trigger1 = ctrl = 1
+;--------------------------
+;サマーソルトシェル
+[State -3]
+type = ChangeState
+value = 1220
+triggerall = var(20) = 1
+triggerall = prevstateno != 1711
+triggerall = random <= 500
+triggerall = StateType != A
+triggerall = P2StateType = A
+triggerall = P2life > 0
+triggerall = StateNo != 191
+trigger1 = P2BodyDist x <= 100
+trigger1 = P2BodyDist y <= -50
+trigger1 = Ctrl = 1
+trigger1 = FrontEdgeBodyDist >= 100
+;--------------------------
+;瞬獄殺
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = StateType != A
+triggerall = p2StateType != A
+triggerall = power >= 3000
+trigger1 = stateno = 961
+trigger1 = stateno != 191
+trigger1 = p2stateno != 5110
+trigger1 = P2bodydist X < 20
+value = 4950
+;--------------------------
+;挑発
+;[State -3]
+;type = ChangeState
+;triggerall = var(20) = 1
+;triggerall = P2Life > 0
+;triggerall = StateType != A
+;triggerall = ctrl = 1
+;triggerall = stateno != 191
+;trigger1 = p2stateno = 5110
+;value = 2222
+
+;[State -3]
+;type = ChangeState
+;triggerall = var(20) = 1
+;triggerall = P2Life > 0
+;triggerall = StateType != A
+;triggerall = stateno >= 2222
+;triggerall = stateno <= 2227
+;triggerall = stateno != 191
+;trigger1 = p2stateno != 5110
+;value = 0
+;ctrl = 1
+;====================================================================================
+;コンボ開始
+;====================================================================================
+;弱パンチ
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [0,16]
+triggerall = StateType != A
+triggerall = p2statetype != C
+triggerall = P2bodydist X <= 40
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 200
+
+;しゃがみ弱キック
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [0,16]
+triggerall = StateType != A
+triggerall = p2statetype != C
+triggerall = P2bodydist X <= 40
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 200
+
+;弱キック(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [17,33]
+triggerall = StateType != A
+triggerall = p2statetype != C
+triggerall = P2bodydist X <= 40
+triggerall = P2bodydist X > 30
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 204
+
+;弱キック(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [17,33]
+triggerall = StateType != A
+triggerall = p2statetype != C
+triggerall = P2bodydist X <= 30
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 304
+
+;中パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [34,50]
+triggerall = StateType != A
+triggerall = p2statetype != C
+triggerall = P2bodydist X <= 40
+triggerall = P2bodydist X > 30
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 201
+
+;中パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [34,50]
+triggerall = StateType != A
+triggerall = p2statetype != C
+triggerall = P2bodydist X <= 30
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 301
+
+;中キック
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [51,68]
+triggerall = StateType != A
+triggerall = p2statetype != C
+triggerall = P2bodydist X <= 40
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 205
+
+;強パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [69,84]
+triggerall = StateType != A
+triggerall = p2statetype != C
+triggerall = P2bodydist X <= 40
+triggerall = P2bodydist X > 10
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 202
+
+;強パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [69,84]
+triggerall = p2statetype != C
+triggerall = StateType != A
+triggerall = P2bodydist X <= 10
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 302
+
+;強キック(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [85,99]
+triggerall = StateType != A
+triggerall = p2statetype != C
+triggerall = P2bodydist X <= 40
+triggerall = P2bodydist X > 20
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 206
+
+;強キック(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [85,99]
+triggerall = p2statetype != C
+triggerall = StateType != A
+triggerall = P2bodydist X <= 20
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 306
+
+;バニシングラッシュ
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [0,49]
+triggerall = StateType != A
+triggerall = P2bodydist X > 40
+triggerall = P2bodydist X <= 70
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 1800
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [0,24]
+triggerall = StateType != A
+triggerall = P2bodydist X > 70
+triggerall = P2bodydist X <= 150
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 1800
+
+;前ジャンプ
+[State -3]
+type = ChangeState
+value = 41
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = statetype != A
+triggerall = ctrl = 1
+trigger1 = P2bodydist X > 70
+trigger1 = P2bodydist X <= 150
+trigger1 = var(29) = [25,49]
+trigger2 = P2bodydist X > 150
+trigger2 = P2bodydist X <= 220
+trigger2 = var(29) = [25,49]
+
+;滅焼飛刹
+[State -3]
+type = ChangeState
+value = 1250
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+trigger1 = statetype = A
+trigger1 = var(29) = [0,69]
+trigger1 = Pos Y <= -60
+trigger1 = ctrl = 1
+
+;斬空波動拳
+[State -3]
+type = ChangeState
+value = 1302
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+trigger1 = statetype = A
+trigger1 = var(29) = [70,99]
+trigger1 = Pos Y <= -60
+trigger1 = ctrl = 1
+
+;阿修羅閃空
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [0,24]
+triggerall = StateType != A
+triggerall = P2bodydist X > 150
+triggerall = P2bodydist X <= 220
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 960
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = p2movetype != A
+triggerall = P2Life > 0
+triggerall = var(29) = [0,49]
+triggerall = StateType != A
+triggerall = P2bodydist X > 220
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 960
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = StateType != A
+triggerall = var(29) = [50,99]
+triggerall = P2bodydist X > 40
+triggerall = P2bodydist X < 80
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 1000
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = StateType != A
+triggerall = p2StateType != A
+trigger1 = stateno = 1000
+trigger1 = AnimElem = 4, = 1
+trigger1 = stateno != 191
+value = 1700
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = StateType != A
+triggerall = var(29) = [50,99]
+triggerall = P2bodydist X >= 80
+triggerall = P2bodydist X < 140
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 1001
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = StateType != A
+triggerall = p2StateType != A
+trigger1 = stateno = 1001
+trigger1 = AnimElem = 4, = 1
+trigger1 = stateno != 191
+value = 1705
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = StateType != A
+triggerall = var(29) = [50,99]
+triggerall = P2bodydist X >= 140
+triggerall = P2bodydist X < 200
+triggerall = ctrl = 1
+trigger1 = stateno != 191
+value = 1002
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = StateType != A
+triggerall = p2StateType != A
+trigger1 = stateno = 1002
+trigger1 = AnimElem = 4, = 1
+trigger1 = stateno != 191
+value = 1710
+
+;====================================================================================
+;弱パンチ～<200>
+;====================================================================================
+;～弱キック(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [0,19]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 30
+triggerall = stateno = 200
+trigger1 = stateno != 191
+value = 204
+
+;～弱キック(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [0,19]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 30
+triggerall = stateno = 200
+trigger1 = stateno != 191
+value = 304
+
+;～中パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [20,39]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 30
+triggerall = stateno = 200
+trigger1 = stateno != 191
+value = 201
+
+;～中パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [20,39]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 30
+triggerall = stateno = 200
+trigger1 = stateno != 191
+value = 301
+
+;～中キック
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [40,59]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = stateno = 200
+trigger1 = stateno != 191
+value = 205
+
+;～強パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [60,79]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 10
+triggerall = stateno = 200
+trigger1 = stateno != 191
+value = 202
+
+;～強パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [60,79]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 10
+triggerall = stateno = 200
+trigger1 = stateno != 191
+value = 302
+
+;～強キック(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [80,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 20
+triggerall = stateno = 200
+trigger1 = stateno != 191
+value = 206
+
+;～強キック(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [80,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 20
+triggerall = stateno = 200
+trigger1 = stateno != 191
+value = 306
+;====================================================================================
+;中パンチ(遠距離)～<201>
+;====================================================================================
+;～中キック
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [0,33]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = stateno = 201
+trigger1 = stateno != 191
+value = 205
+
+;～強パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [34,66]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 10
+triggerall = stateno = 201
+trigger1 = stateno != 191
+value = 202
+
+;～強パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [34,66]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 10
+triggerall = stateno = 201
+trigger1 = stateno != 191
+value = 302
+
+;～強キック(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [67,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 20
+triggerall = stateno = 201
+trigger1 = stateno != 191
+value = 206
+
+;～強キック(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [67,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 20
+triggerall = stateno = 201
+trigger1 = stateno != 191
+value = 306
+;====================================================================================
+;中パンチ(近距離)～<301>
+;====================================================================================
+;～中キック
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [0,33]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = stateno = 301
+trigger1 = stateno != 191
+value = 205
+
+;～強パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [34,66]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 10
+triggerall = stateno = 201
+trigger1 = stateno != 191
+value = 202
+
+;～強パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [34,66]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 10
+triggerall = stateno = 301
+trigger1 = stateno != 191
+value = 302
+
+;～強キック(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [67,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 20
+triggerall = stateno = 301
+trigger1 = stateno != 191
+value = 206
+
+;～強キック(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [67,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 20
+triggerall = stateno = 301
+trigger1 = stateno != 191
+value = 306
+;====================================================================================
+;強パンチ(遠距離)～<202>
+;====================================================================================
+;～近距離中豪波動拳
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+;triggerall = var(31) = 0
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 55
+triggerall = stateno = 202
+trigger1 = stateno != 191
+value = 1011
+
+;～豪昇竜拳
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 12
+triggerall = stateno = 202
+trigger1 = stateno != 191
+value = 1120
+
+;～ヘリオン
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 12
+triggerall = P2bodydist X < 25
+triggerall = stateno = 202
+trigger1 = stateno != 191
+value = 1040
+
+;～流星落
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = p2StateType != A
+triggerall = StateType != A
+triggerall = P2bodydist X >= 25
+triggerall = P2bodydist X < 45
+triggerall = stateno = 202
+trigger1 = stateno != 191
+value = 1200
+
+;～竜巻斬空脚
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 45
+triggerall = P2bodydist X < 50
+triggerall = stateno = 202
+trigger1 = stateno != 191
+value = 3010
+
+;～サマーソルトシェル
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 50
+triggerall = P2bodydist X < 70
+triggerall = stateno = 202
+trigger1 = stateno != 191
+value = 1220
+;====================================================================================
+;強パンチ(近距離)～<302>
+;====================================================================================
+;～近距離中豪波動拳
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+;triggerall = var(31) = 0
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 55
+triggerall = stateno = 302
+trigger1 = stateno != 191
+value = 1011
+
+;～豪昇竜拳
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 12
+triggerall = stateno = 302
+trigger1 = stateno != 191
+value = 1120
+
+;～ヘリオン
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 12
+triggerall = P2bodydist X < 25
+triggerall = stateno = 302
+trigger1 = stateno != 191
+value = 1040
+
+;～流星落
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = p2StateType != A
+triggerall = StateType != A
+triggerall = P2bodydist X >= 25
+triggerall = P2bodydist X < 45
+triggerall = stateno = 302
+trigger1 = stateno != 191
+value = 1200
+
+;～竜巻斬空脚
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 45
+triggerall = P2bodydist X < 50
+triggerall = stateno = 302
+trigger1 = stateno != 191
+value = 3010
+
+;～サマーソルトシェル
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 50
+triggerall = P2bodydist X < 70
+triggerall = stateno = 302
+trigger1 = stateno != 191
+value = 1220
+;====================================================================================
+;弱キック(遠距離)～<204>
+;====================================================================================
+;～中パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [0,24]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 30
+triggerall = stateno = 204
+trigger1 = stateno != 191
+value = 201
+
+;～中パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [0,24]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 30
+triggerall = stateno = 204
+trigger1 = stateno != 191
+value = 301
+
+;～中キック
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [25,49]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = stateno = 204
+trigger1 = stateno != 191
+value = 205
+
+;～強パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [50,74]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 10
+triggerall = stateno = 204
+trigger1 = stateno != 191
+value = 202
+
+;～強パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [50,74]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 10
+triggerall = stateno = 204
+trigger1 = stateno != 191
+value = 302
+
+;～強キック(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [75,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 20
+triggerall = stateno = 204
+trigger1 = stateno != 191
+value = 206
+
+;～強キック(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [75,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 20
+triggerall = stateno = 204
+trigger1 = stateno != 191
+value = 306
+;====================================================================================
+;弱キック(近距離)～<304>
+;====================================================================================
+;～中パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [0,24]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 30
+triggerall = stateno = 304
+trigger1 = stateno != 191
+value = 201
+
+;～中パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [0,24]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 30
+triggerall = stateno = 304
+trigger1 = stateno != 191
+value = 301
+
+;～中キック
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [25,49]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = stateno = 304
+trigger1 = stateno != 191
+value = 205
+
+;～強パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [50,74]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 10
+triggerall = stateno = 304
+trigger1 = stateno != 191
+value = 202
+
+;～強パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [50,74]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 10
+triggerall = stateno = 304
+trigger1 = stateno != 191
+value = 302
+
+;～強キック(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [75,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 20
+triggerall = stateno = 304
+trigger1 = stateno != 191
+value = 206
+
+;～強キック(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [75,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 20
+triggerall = stateno = 304
+trigger1 = stateno != 191
+value = 306
+;====================================================================================
+;中キック～<205>
+;====================================================================================
+;～強パンチ(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [0,49]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 10
+triggerall = stateno = 205
+trigger1 = stateno != 191
+value = 202
+
+;～強パンチ(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [0,49]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 10
+triggerall = stateno = 205
+trigger1 = stateno != 191
+value = 302
+
+;～強キック(遠距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [50,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X >= 20
+triggerall = stateno = 205
+trigger1 = stateno != 191
+value = 206
+
+;～強キック(近距離)
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [50,99]
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 80
+triggerall = P2bodydist X <= 20
+triggerall = stateno = 205
+trigger1 = stateno != 191
+value = 306
+;====================================================================================
+;強キック(遠距離)～<206>
+;====================================================================================
+;～近距離中豪波動拳
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = var(31) = 0
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 55
+triggerall = stateno = 206
+trigger1 = stateno != 191
+value = 1011
+
+;～豪昇竜拳
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 12
+triggerall = stateno = 206
+trigger1 = stateno != 191
+value = 1120
+
+;～ヘリオン
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 12
+triggerall = P2bodydist X < 25
+triggerall = stateno = 206
+trigger1 = stateno != 191
+value = 1040
+
+;～流星落
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = p2StateType != A
+triggerall = StateType != A
+triggerall = P2bodydist X >= 25
+triggerall = P2bodydist X < 45
+triggerall = stateno = 206
+trigger1 = stateno != 191
+value = 1200
+
+;～竜巻斬空脚
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 45
+triggerall = P2bodydist X < 50
+triggerall = stateno = 206
+trigger1 = stateno != 191
+value = 3010
+
+;～サマーソルトシェル
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 50
+triggerall = P2bodydist X < 70
+triggerall = stateno = 206
+trigger1 = stateno != 191
+value = 1220
+;====================================================================================
+;強キック(近距離)～<306>
+;====================================================================================
+;～近距離中豪波動拳
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = var(31) = 0
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 55
+triggerall = stateno = 306
+trigger1 = stateno != 191
+value = 1011
+
+;～豪昇竜拳
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X < 12
+triggerall = stateno = 306
+trigger1 = stateno != 191
+value = 1120
+
+;～ヘリオン
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 12
+triggerall = P2bodydist X < 25
+triggerall = stateno = 306
+trigger1 = stateno != 191
+value = 1040
+
+;～流星落
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = p2StateType != A
+triggerall = StateType != A
+triggerall = P2bodydist X >= 25
+triggerall = P2bodydist X < 45
+triggerall = stateno = 306
+trigger1 = stateno != 191
+value = 1200
+
+;～竜巻斬空脚
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 45
+triggerall = P2bodydist X < 50
+triggerall = stateno = 306
+trigger1 = stateno != 191
+value = 3010
+
+;～サマーソルトシェル
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = StateType != A
+triggerall = P2bodydist X >= 50
+triggerall = P2bodydist X < 70
+triggerall = stateno = 306
+trigger1 = stateno != 191
+value = 1220
+;====================================================================================
+;豪昇竜拳～:<1120>
+;====================================================================================
+;～滅焼飛刹
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = var(29) = [0,49]
+triggerall = Pos Y < -50
+triggerall = stateno = 1122
+trigger1 = stateno != 191
+value = 1250
+
+;～空中竜巻斬空脚
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = var(29) = [50,99]
+triggerall = Pos Y < -50
+triggerall = stateno = 1121
+trigger1 = stateno != 191
+value = 3050
+;====================================================================================
+;流星落～:<1200>
+;====================================================================================
+;～豪昇竜拳
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = var(29) = [0,33]
+triggerall = stateno = 1210
+triggerall = Pos Y = 0
+triggerall = Vel Y = 0
+trigger1 = stateno != 191
+value = 1120
+
+;～ヘリオン
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [34,66]
+triggerall = MoveHit
+triggerall = stateno = 1210
+triggerall = Pos Y = 0
+triggerall = Vel Y = 0
+trigger1 = stateno != 191
+value = 1040
+
+;～サマーソルトシェル
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = var(29) = [67,99]
+triggerall = MoveHit
+triggerall = stateno = 1210
+triggerall = Pos Y = 0
+triggerall = Vel Y = 0
+trigger1 = stateno != 191
+value = 1220
+;====================================================================================
+;ヘリオン～:<1040>
+;====================================================================================
+;～デスペレイト・オーバードライブ
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 1040
+triggerall = p2statetype = A 
+triggerall = power >= 2000
+triggerall = Random <= 500
+trigger1 = time = 22
+trigger1 = stateno != 191
+value = 2013
+
+;～魔神破天弾
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 1040
+triggerall = p2statetype = A 
+triggerall = power >= 1000
+triggerall = Random <= 300
+trigger1 = time = 22
+trigger1 = stateno != 191
+value = 3100
+
+;～サマーソルトシェル
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = var(29) = [0,49]
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 1040
+trigger1 = time = 22
+trigger1 = stateno != 191
+value = 1220
+
+;～エリアルレイヴ
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 1040
+trigger1 = animelem = 13, >= 1
+trigger1 = stateno != 191
+value = 2042
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = stateno = 2042
+triggerall = p2statetype = A 
+triggerall = stateno != 191
+trigger1 = Pos Y <= -70
+value = 2043
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 2043
+triggerall = p2statetype = A 
+trigger1 = stateno != 191
+value = 2045
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 2045
+triggerall = p2statetype = A 
+trigger1 = stateno != 191
+value = 2044
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 2044
+triggerall = p2statetype = A 
+trigger1 = stateno != 191
+value = 2046
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 2046
+triggerall = p2statetype = A 
+triggerall = power >= 1000
+triggerall = Random <= 300
+trigger1 = stateno != 191
+value = 2700
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 2046
+triggerall = var(29) = [0,49]
+triggerall = p2statetype = A 
+trigger1 = stateno != 191
+value = 1250
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 2046
+triggerall = var(29) = [50,74]
+triggerall = p2statetype = A 
+trigger1 = stateno != 191
+value = 602
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 2046
+triggerall = var(29) = [75,99]
+triggerall = p2statetype = A 
+trigger1 = stateno != 191
+value = 606
+
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = p2statetype = A 
+triggerall = stateno != 191
+trigger1 = stateno = 602
+trigger2 = stateno = 606
+value = 1302
+;====================================================================================
+;空中竜巻斬空脚～:<3050>
+;====================================================================================
+;天魔豪斬空
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = MoveHit
+triggerall = stateno = 3052
+triggerall = p2statetype = A 
+triggerall = time = 13
+triggerall = power >= 1000
+triggerall = Random <= 200
+trigger1 = stateno != 191
+value = 2700
+;====================================================================================
+;豪波動拳～:<1000～1002>
+;====================================================================================
+;～デスペレイト・オーバードライブ
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = time = 20
+triggerall = power >= 2000
+triggerall = P2bodydist X < 180
+triggerall = P2statetype != A
+triggerall = Random <= 200
+triggerall = stateno != 191
+trigger1 = stateno = 1002
+value = 2013
+
+;～滅殺豪波動
+[State -3]
+type = ChangeState
+triggerall = var(20) = 1
+triggerall = P2Life > 0
+triggerall = time = 20
+triggerall = power >= 1000
+triggerall = Random <= 100
+triggerall = stateno != 191
+trigger1 = stateno = 1000
+trigger2 = stateno = 1001
+trigger3 = stateno = 1002
+value = 2020
+;====================================================================================
+;近距離中豪波動拳～:<1011>
+;====================================================================================
+;～ブラックアウト
+[State -3]
+type = ChangeState
+triggerall = P2Life > 0
+triggerall = var(20) = 1
+triggerall = StateType != A
+triggerall = stateno != 191
+trigger1 = stateno = 1011
+trigger1 = projhit = 1
+value = 1711
+
+;しゃがみ弱パンチ～しゃがみ中パンチ
+[State -3]
+type = ChangeState
+triggerall = P2Life > 0
+triggerall = var(20) = 1
+triggerall = StateType != A
+triggerall = stateno != 191
+trigger1 = stateno = 400
+trigger1 = MoveHit
+value = 401
+
+;しゃがみ中パンチ～しゃがみ強パンチ
+[State -3]
+type = ChangeState
+triggerall = P2Life > 0
+triggerall = var(20) = 1
+triggerall = StateType != A
+triggerall = stateno != 191
+trigger1 = stateno = 401
+trigger1 = MoveHit
+value = 402
+
+;しゃがみ強パンチ～百鬼襲
+[State -3]
+type = ChangeState
+triggerall = P2Life > 0
+triggerall = var(20) = 1
+triggerall = StateType != A
+triggerall = stateno != 191
+trigger1 = stateno = 402
+trigger1 = MoveHit
+value = 3502
+
+[State -3]
+type = ChangeState
+triggerall = P2Life > 0
+triggerall = var(20) = 1
+triggerall = stateno != 191
+triggerall = var(29) = [0,32]
+trigger1 = stateno = 3502
+trigger1 = time >= 12
+trigger1 = p2bodydist x < 8
+value = 3540
+
+[State -3]
+type = ChangeState
+triggerall = P2Life > 0
+triggerall = var(20) = 1
+triggerall = stateno != 191
+triggerall = var(29) = [33,65]
+trigger1 = stateno = 3502
+trigger1 = time >= 12
+trigger1 = p2bodydist x < 8
+value = 3550
+
+[State -3]
+type = ChangeState
+triggerall = P2Life > 0
+triggerall = var(20) = 1
+triggerall = stateno != 191
+triggerall = var(29) = [66,99]
+trigger1 = stateno = 3502
+trigger1 = time >= 12
+trigger1 = p2bodydist x < 8
+value = 3555
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

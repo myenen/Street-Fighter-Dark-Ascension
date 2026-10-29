@@ -1,0 +1,2285 @@
+;===============================================================================
+;Jump Medium Kick
+[Statedef 640]
+type=A
+movetype=A
+physics=A
+juggle=7
+poweradd=70
+ctrl=0
+anim=640
+sprpriority=2
+
+[State 640,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,8
+
+[State 640]
+type=HitDef
+trigger1=Time=0
+attr=A,NA
+damage=30,9
+guardflag=M
+hitflag=MAFD
+priority=4
+pausetime=3,3
+sparkno=S8063+(Random%4)
+sparkxy=-10,-40
+hitsound=S2,20
+guardsound=s3,16
+guard.sparkno=S8075
+animtype=Med
+ground.type=High
+ground.slidetime=30
+ground.hittime=30
+ground.velocity=-2
+air.velocity=-3,-4
+p2stateno=19000
+
+[State 640,ChangeAnim]
+type=ChangeAnim
+trigger1=AnimElem=8
+value=44
+
+;===============================================================================
+;Patada Air
+;===============================================================================
+[Statedef 1881]
+type=A
+movetype=A
+physics=A
+juggle=15
+anim=1881
+Ctrl=0
+velset=0,0
+
+[State 1881,Velset]
+type=Velset
+trigger1=AnimElem=2
+x=4
+y=10.2
+
+[State 1881,VelSet]
+type=VelSet
+trigger1=Pos Y>=0&&Vel Y>0
+x=0
+
+[State 1881,PosFreeze]
+type=PosFreeze
+trigger1=Time<8
+
+[State 1881,AfterImage]
+type=AfterImage
+trigger1=AnimElem=2
+time=12
+timegap=1
+framegap=9
+length=18
+paladd=0,0,0
+palmul=.80,.80,.50
+palcontrast=110,110,110
+palbright=0,0,0
+trans=add
+persistent=0
+
+[State 1881,Voz]
+type=PlaySnd
+trigger1=AnimElem=1
+value=s0,24
+
+[State 1881,Effect]
+type=PlaySnd
+trigger1=AnimElem=2
+value=s1,10
+
+[State 1881]
+type=HitDef
+trigger1=AnimElem=2||Animelem=3||Animelem=4
+attr=A,SA
+damage=20,14
+animtype=Low
+guardflag=M
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,4
+sparkno=s8067+(Random%4)
+sparkxy=-10,-50
+hitsound=s4,4
+guard.sparkno=S8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=30
+ground.hittime =20
+ground.velocity=-2,1
+airguard.velocity=-1,-4
+air.velocity=-1,-4
+air.type=High
+air.hittime=12
+envshake.time=20
+fall=0
+air.fall=0
+fall.recover=0
+p2stateno=19000
+
+[State 1881,ChangeState]
+type=ChangeState
+trigger1=Pos Y>=0&&Vel Y>0
+value=52
+
+;===============================================================================
+;Stand Light Punch
+[Statedef 200]
+type=S
+movetype=A
+physics=S
+juggle=0
+ctrl=0
+anim=ifelse(random>500,200,205)
+velset=0,0
+poweradd=200
+sprpriority=0
+
+[State 200,Effect]
+type=PlaySnd
+trigger1=animelem=2
+value=1,7
+
+[State 200,voz]
+type=PlaySnd
+trigger1=animelem=2&&random>=500
+value=0,23
+
+[State 200]
+type=HitDef
+trigger1=time=0
+attr=S,NA
+damage=45,30
+animtype=Light
+guardflag=MA
+hitflag=MAF
+priority=3,Hit
+pausetime=1,1
+sparkno=S8063+(Random%4)
+sparkxy=-23,-86
+hitsound=s1,11
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=10
+ground.hittime=10
+ground.velocity=-2
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=10
+
+[State 200,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+;Close Low Punch
+[Statedef 205]
+type=S
+movetype=A
+physics=S
+juggle=0
+velset=0,0
+ctrl=0
+anim=ifelse(random>500,210,215)
+poweradd=200
+sprpriority=2
+
+[State 200,Effect]
+type=PlaySnd
+trigger1=animelem=3
+value=1,7
+
+[State 200,voz]
+type=PlaySnd
+trigger1=animelem=2&&random>=500
+value=0,24
+
+[State 205]
+type=HitDef
+trigger1=time=0
+attr=S,NA
+damage=40,20
+animtype=Light
+guardflag=MA
+hitflag=MAF
+priority=3,Hit
+pausetime=1, 1
+sparkno=S8063+(Random%4)
+sparkxy=-23,-86
+hitsound=s1,11
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=10
+ground.hittime=10
+ground.velocity=-2
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=10
+
+[State 205,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+;Standing Medium punch
+[Statedef 210]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=300
+ctrl=0
+velset=0,0
+anim=210
+sprpriority=2
+
+[State 210,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,8
+
+[State 210]
+type=HitDef
+trigger1=AnimElem=3
+attr=S,NA
+animtype=Medium
+damage=69,50
+guardflag=MA
+hitflag=MAF
+pausetime=2,2
+sparkno=S8063+(Random%4)
+sparkxy=-16,-80
+hitsound=S1,12
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=10
+ground.hittime=10
+ground.velocity=-1
+air.velocity=-2.5,-4
+air.hittime=10
+Envshake.time=5
+
+[State 210,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+;Close Standing Medium Punch
+[Statedef 215]
+type=S
+movetype=A
+physics=S
+juggle =0
+poweradd=200
+ctrl=0
+velset=0,0
+anim=215
+sprpriority=2
+
+[State 215,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,8
+
+[State 215]
+type=HitDef
+trigger1=AnimElem=3
+attr=S,NA
+animtype=Medium
+damage=69,50
+guardflag=MA
+hitflag=MAF
+pausetime=2,2
+sparkno=S8063+(Random%4)
+sparkxy=-16,-80
+hitsound=S1,12
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-2
+air.velocity =-2.5,-4
+Envshake.time=5
+
+[State 215,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+;Close Standing High Punch/Puño Fuerte Pegado Parado
+[Statedef 220]
+type=S
+movetype=A
+physics=S
+juggle=0
+velset=0,0
+poweradd=200
+ctrl=0
+anim=220
+sprpriority=2
+
+[State 220,Width]
+type=Width
+trigger1=(AnimElemTime(4)>=0)&&(AnimElemTime(9)<0)
+value=15,0
+
+[State 220,Effect]
+type=PlaySnd
+trigger1=Time=1
+value=3,1
+
+[State 220]
+type=HitDef
+trigger1=AnimElem=3
+attr=S,NA
+damage=80,60
+animtype=Hard
+guardflag=MA
+hitflag=MAF
+priority=3,Hit
+pausetime=3,3
+sparkno=S8063+(Random%4)
+sparkxy=-10,-77
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=Low
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-7
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=12
+Envshake.time=10
+p2stateno=19000
+
+[State 220,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+;Standing High Punch/Puño fuerte Parado
+[Statedef 225]
+type=S
+movetype=A
+physics=S
+juggle=0
+velset=0,0
+poweradd=200
+ctrl=0
+anim=225
+sprpriority=2
+
+[State 225,Width]
+type=Width
+trigger1=(AnimElemTime(3)>=0)&&(AnimElemTime(9)<0)
+value=15,0
+
+[State 225]
+type=HitDef
+trigger1=AnimElem=4
+attr=S,NA
+damage=70,50
+animtype=Hard
+guardflag=MA
+hitflag=MAF
+priority=3,Hit
+pausetime=3,3
+sparkno=S8063+(Random%4)
+sparkxy=-10,-86
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=5
+ground.hittime =50
+ground.velocity=-6.9
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=12
+Envshake.time=10
+p2stateno=19000
+
+[State 225,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+;Standing light kick
+[Statedef 230]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=200
+ctrl=0
+velset=0,0
+anim=230
+sprpriority=2
+
+[State 230,Width]
+type=Width
+trigger1=(AnimElemTime(2)>=0)&&(AnimElemTime(7)<0)
+value=15,0
+
+[State 230,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,7
+
+[State 230]
+type=HitDef
+trigger1=Time=0
+attr=S,NA
+animtype=Medium
+damage=35,20
+guardflag=MA
+hitflag=MAFD
+pausetime=1,1
+sparkno=S8063+(Random%4)
+sparkxy=-33,-37
+hitsound=s1,14
+guardsound=s3, 6
+guard.sparkno=S8075
+ground.type=Low
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-2
+air.velocity=-2.5,-3.5
+p2stateno=19000
+
+[State 230,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+;Standing medium kick/Patada Mediana Parado
+[Statedef 240]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=300
+ctrl=0
+velset=0,0
+anim=240
+sprpriority=2
+
+[State 240,Width]
+type=Width
+trigger1=(AnimElemTime(3)>=0)&&(AnimElemTime(4)<0)
+value=15,0
+
+[State 240,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,7
+
+[State 240]
+type=HitDef
+trigger1=Time=0
+attr=S,NA
+animtype=Hard
+damage=60,40
+hitflag=MAF
+guardflag=MA
+pausetime=3,3
+sparkno=S8063+(Random%4)
+sparkxy=-10,-98
+hitsound=s2,20
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-1
+ground.velocity=-6.8
+air.velocity=-2.2,-3.2
+p2stateno=19000
+
+[State 240,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+;Standing medium kick(Close)
+[Statedef 255]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=200
+ctrl=0
+velset=0,0
+anim=255
+sprpriority=2
+
+[State 255,Width]
+type=Width
+trigger1=(AnimElemTime(3)>=0)&&(AnimElemTime(7)<0)
+value=0,15
+
+[State 255,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,9
+
+[State 255]
+type=HitDef
+trigger1=!Time
+attr=S,NA
+animtype=Hard
+damage=60,40
+hitflag=MAF
+guardflag=MA
+pausetime=1,1
+sparkno=S8063+(Random%4)
+sparkxy=-10,-60
+hitsound=S2,20
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=Low
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-1
+air.velocity=-2.2,-3.2
+Envshake.time=5
+p2stateno=19000
+
+[State 255,PosAdd]
+type=PosAdd
+trigger1=AnimElem=7
+x=8
+
+[State 255,ChangeState]
+type=ChangeState
+trigger1=AnimElem=7
+value=0
+ctrl=1
+
+;===============================================================================
+;Standing Strong kick
+[Statedef 250]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=200
+ctrl=0
+velset=0,0
+anim=250
+sprpriority=2
+
+[State 250,Width]
+type=Width
+trigger1=(AnimElemTime(3)>=0)&&(AnimElemTime(8)<0)
+value=0,15
+
+[State 250,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,10
+
+[State 250]
+type=HitDef
+trigger1=Time=0
+attr=S,NA
+animtype=Hard
+damage=80,60
+hitflag=MAF
+guardflag=MA
+pausetime=3,3
+sparkno=S8063+(Random%4)
+sparkxy=-10,-60
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=Low
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-5
+air.velocity=-2.2,-3.2
+EnvShake.time=10
+p2stateno=19000
+
+[State 250,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+; Anti-Air Standing Strong Kick
+[Statedef 264]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=200
+ctrl=0
+velset=0,0
+anim=264
+sprpriority=2
+
+[State 264,Width]
+type=Width
+trigger1=(AnimElemTime(4)>=0)&&(AnimElemTime(9)<0)
+value=0,15
+
+[State 264,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,9
+
+[State 264]
+type=HitDef
+trigger1=AnimElem=4
+attr=S,NA
+animtype=Hard
+damage=80,60
+hitflag=MAF
+guardflag=MA
+pausetime=3,3
+sparkno=S8063+(Random%4)
+sparkxy=-10,-60
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=Low
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-4
+air.velocity=-14
+EnvShake.time=10
+fall=1
+fall.recover=0
+p2stateno=19000
+
+[State 264,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+;Standing Strong kick(Close)
+[Statedef 265]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=200
+ctrl=0
+velset=0,0
+anim=265
+sprpriority=2
+
+[State 225,Width]
+type=Width
+trigger1=(AnimElemTime(3)>=0)&&(AnimElemTime(10)<0)
+value=0,15
+
+[State 265,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,9
+
+[State 265]
+type=HitDef
+trigger1=AnimElem=3||AnimElem=5
+attr=S,NA
+animtype=Hard
+damage=65,40
+guardflag=IfElse((AnimElem=5),MA,LMA)
+pausetime=6,3
+sparkno=S8063+(Random%4)
+sparkxy=-17,Ifelse((AnimElem=5),-93,-78)
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=35
+ground.hittime =35
+ground.velocity=-1.2,-2.0
+air.velocity=-7.2,7.2
+fall=1
+fall.recover=0
+Envshake.time=10
+hidefpersist=1
+p2stateno=19000
+
+[State 265,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;===============================================================================
+;Crouching light punch
+[Statedef 400]
+type=C
+movetype=A
+physics=C
+juggle=0
+poweradd=200
+ctrl=0
+anim=400
+sprpriority=2
+
+[State 400,Effect]
+type=PlaySnd
+trigger1=Time=1
+value=1,7
+
+[State 400]
+type=HitDef
+trigger1=Time=0
+attr=C,NA
+damage=55,40
+priority=3
+animtype=Light
+hitflag=MAF
+guardflag=MA
+pausetime=2,2
+sparkno=S8063+(Random%4)
+sparkxy=-10,-42
+hitsound=s1,11
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=Low
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-1
+air.velocity=-1.5,-3
+p2stateno=19000
+
+[State 400,CtrlSet]
+type=CtrlSet
+trigger1=AnimElem=2
+value=1
+
+[State 400,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=11
+
+;===============================================================================
+;Crouching Medium punch
+[Statedef 410]
+type=C
+movetype=A
+physics=C
+juggle=0
+poweradd=200
+ctrl=0
+anim=410
+sprpriority=2
+
+[State 410,Effect]
+type=PlaySnd
+trigger1=Time=1
+value=1,8
+
+[State 410]
+type=HitDef
+trigger1=AnimElem=3
+attr=C,NA
+damage=60,40
+animtype=Medium
+hitflag=MAF
+guardflag=MA
+pausetime=2,2
+sparkno=S8063+(Random%4)
+sparkxy=-10,-55
+hitsound=S1,12
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=Low
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-2.1
+air.velocity=-3,-4
+envshake.time=7
+p2stateno=19000
+
+[State 410,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=11
+ctrl=1
+
+;===============================================================================
+;Crouching High Punch
+[Statedef 420]
+type=C
+movetype=A
+physics=C
+juggle=0
+poweradd=200
+ctrl=0
+anim=420
+sprpriority=2
+
+[State 420,Effect]
+type=PlaySnd
+trigger1=Time=1
+value=1,9
+
+[State 420]
+type=HitDef
+trigger1=AnimElemTime(2)>=0&&!MoveContact
+attr=A,SA
+animtype =Hard
+damage=95,75
+priority=3
+hitflag=MAF
+guardflag=MA
+pausetime=4,4
+sparkno=S8063+(Random%4)
+sparkxy=-10,-70
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=Low
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-5
+guard.velocity=-7
+air.velocity=-3.5
+envshake.time=10
+p2stateno=19000
+
+[State 420,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=11
+ctrl=1
+
+;===============================================================================
+;Crouching light kick
+[Statedef 430]
+type=C
+movetype=A
+physics=C
+juggle=0
+poweradd= 200
+ctrl=0
+anim=430
+sprpriority=2
+
+[State 430,Effect]
+type=PlaySnd
+trigger1=Time=1
+value=1,7
+
+[State 430]
+type=HitDef
+trigger1=AnimElem=2
+attr=C,NA
+damage=35,20
+animtype=Light
+hitflag=MAFD
+guardflag=L
+pausetime=1,1
+sparkno=S8063+(Random%4)
+sparkxy=-10,-8
+hitsound=s1,14
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=Low
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-2
+air.velocity=-2,-3
+down.velocity=-5,0
+down.hittime=20
+p2stateno=19000
+
+[State 430,CtrlSet]
+type=CtrlSet
+trigger1=AnimElemTime(3)<=3
+value=1
+
+[State 430,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=11
+ctrl=1
+
+;===============================================================================
+;Crouching Medium Kick
+[Statedef 440]
+type=C
+movetype=A
+physics=C
+juggle=0
+poweradd=200
+ctrl=0
+anim=440
+sprpriority=2
+
+[State 430,Effect]
+type=PlaySnd
+trigger1=Time=1
+value=1,7
+
+[State 440]
+type=HitDef
+trigger1=AnimElem=3
+attr=C,NA
+damage=60,40
+animtype=Medium
+hitflag=MAFD
+guardflag=L
+pausetime=2,2
+sparkno=S8063+(Random%4)
+sparkxy=-10,-8
+hitsound=S2,20
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=Low
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-2.1
+air.velocity=-2,-3
+down.velocity=-5,0
+down.hittime=20
+p2stateno=19000
+
+[State 430,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=11
+ctrl=1
+
+;===============================================================================
+;Crouch Strong Kick
+[Statedef 450]
+type=C
+movetype=A
+physics=C
+juggle=0
+poweradd=200
+anim=450
+sprpriority=2
+ctrl=0
+
+[State 450,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=s1,7
+
+[State 450]
+type=HitDef
+trigger1=Time=0
+attr=C,NA
+damage=90,70
+hitflag=MAFD
+guardflag=L
+pausetime=3,3
+sparkno=S8063+(Random%4)
+sparkxy =-5,-10
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=Trip
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-1,-5
+air.velocity=-1,-6
+guard.velocity=-5
+fall=1
+p2stateno=19000
+
+[State 450,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=11
+ctrl=1
+
+;===============================================================================
+;Jump Light Punch
+[Statedef 600]
+type=A
+movetype=A
+physics=A
+juggle=0
+poweradd=190
+ctrl=0
+anim=600
+sprpriority=2
+
+[State 600,Effect]
+type=PlaySnd
+trigger1=Time=1
+value=1,7
+
+[State 600]
+type=HitDef
+trigger1=Time=0
+attr=A,NA
+damage=55,35
+hitflag=MAF
+guardflag=HA
+priority=3
+pausetime=1,1
+sparkno=S8063+(Random%4)
+sparkxy=-10,-58
+hitsound=s1,11
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-1
+air.velocity=-1.3,-3
+p2stateno=19000
+
+[State 600,ChangeState]
+type=ChangeState
+trigger1=AnimTime=24
+value=0
+ctrl=1
+
+;===============================================================================
+;Jump Medium Punch
+[Statedef 610]
+type=A
+movetype=A
+physics=A
+juggle=0
+poweradd=250
+ctrl=0
+anim=601
+sprpriority=2
+
+[State 610,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,8
+
+[State 610]
+type=HitDef
+trigger1=Time=0
+attr=A,NA
+damage=65,45
+hitflag=MAF
+guardflag=HA
+priority=4
+pausetime=2,2
+sparkno=S8063+(Random%4)
+sparkxy=-10,-55
+hitsound=S1,12
+guardsound=s3,16
+guard.sparkno=S8075
+animtype=Med
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-1
+air.velocity=-3,-4
+p2stateno=19000
+
+[State 610,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+
+;===============================================================================
+;Jump High Punch
+[Statedef 620]
+type=A
+movetype=A
+physics=A
+juggle=0
+poweradd=240
+ctrl=0
+anim=602
+sprpriority=2
+
+[State 610,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,8
+
+[State 620]
+type=HitDef
+trigger1=Time=0
+attr=A,NA
+damage=80,60
+hitflag=MAF
+guardflag=HA
+priority=4
+pausetime=2,2
+sparkno=S8063+(Random%4)
+sparkxy=-10,-55
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8075
+animtype=Hard
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-2
+air.velocity=-3,-4
+p2stateno=19000
+
+[State 620,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+
+;===============================================================================
+;Jump Light Kick(Neutral Jump)/Patada Liviana Aerea(Brinco neutral)
+[Statedef 630]
+type=A
+movetype=A
+physics=A
+juggle=0
+poweradd=200
+ctrl=0
+anim=630
+sprpriority=2
+
+[State 630,Effect]
+type=PlaySnd
+trigger1=Time=1
+value=1,7
+
+[State 630]
+type=HitDef
+trigger1=Time=0
+attr=A,NA
+damage=35,20
+hitflag=MAF
+guardflag=HA
+priority=3
+pausetime=1,1
+sparkno=S8063+(Random%4)
+sparkxy=-5,-35
+hitsound=S1,14
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity = -2
+air.velocity=-2,-3
+p2stateno=19000
+
+[State 635,ChangeState]
+type=ChangeState
+trigger1=Pos Y>0&&Vel Y>0
+value=0
+
+;===============================================================================
+;Jump Light Kick(Not Neutral)
+[Statedef 635]
+type=A
+movetype=A
+physics=A
+juggle=0
+poweradd=260
+ctrl=0
+anim=635
+sprpriority=2
+
+[State 635,Effect]
+type=PlaySnd
+trigger1=Time=1
+value=1,7
+
+[State 635]
+type=HitDef
+trigger1=Time=0
+attr=A,NA
+damage=50,35
+hitflag=MAF
+guardflag=HA
+priority=3
+pausetime=1,1
+sparkno=S8063+(Random%4)
+sparkxy=-5,-35
+hitsound=S1,14
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-1
+air.velocity=-2,-3
+p2stateno=19000
+
+[State 635,ChangeState]
+type=ChangeState
+trigger1=Pos Y>0&&Vel X>0
+value=0
+
+;===============================================================================
+;Jump Medium Kick(Neutral Jump)
+[Statedef 645]
+type=A
+movetype=A
+physics=A
+juggle=0
+poweradd=200
+ctrl=0
+anim=645
+sprpriority=2
+
+[State 645,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,8
+
+[State 645]
+type=HitDef
+trigger1=Time=0
+attr=A,NA
+damage=80,60
+hitflag=MAF
+guardflag=HA
+priority=3
+pausetime=3,3
+sparkno=S8063+(Random%4)
+sparkxy=-10,-40
+hitsound=S2,20
+guardsound=s3,16
+guard.sparkno=S8075
+animtype=Med
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-2
+air.velocity=-3,-4
+p2stateno=19000
+
+[State 645,ChangeAnim]
+type=ChangeAnim
+trigger1=Pos Y>0&&Vel Y>0
+value=44
+
+;===============================================================================
+;Air Strong Kick(Not Neutral)
+[Statedef 650]
+type=A
+movetype=A
+physics=A
+juggle=0
+poweradd=200
+ctrl=0
+anim=650
+sprpriority=2
+
+[State 650,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,8
+
+[State 650]
+type=HitDef
+trigger1=AnimElem=3
+attr=A,NA
+damage=80,60
+guardflag=HA
+priority=7
+pausetime=2,2
+sparkno=S8063+(Random%4)
+sparkxy=-10,-40
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8075
+animtype=Med
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-2
+air.velocity=-3,-4
+p2stateno=19000
+
+[State 650,ChangeAnim]
+type=ChangeAnim
+trigger1=Pos Y>0&&Vel Y>0
+value=0
+ctrl=1
+
+;===============================================================================
+;Air Strong Kick(Neutral)
+[Statedef 655]
+type=A
+movetype=A
+physics=A
+juggle=0
+poweradd=200
+ctrl=0
+anim=655
+sprpriority=2
+
+[State 650,Effect]
+type=PlaySnd
+trigger1=Time=2
+value=1,8
+
+[State 655]
+type=HitDef
+trigger1=AnimElem=3
+attr=A,NA
+damage=80,50
+guardflag=HA
+priority=7
+pausetime=3,3
+sparkno=S8063+(Random%4)
+sparkxy=-10,-40
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8075
+animtype=Med
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-1
+air.velocity=-3,-4
+p2stateno=19000
+
+[State 655,ChangeAnim]
+type=ChangeAnim
+trigger1=Pos Y>0&&Vel Y>0
+value=0
+ctrl=1
+
+;=======================================================================================\
+;Special Normals
+;=======================================================================================/
+;SF 3S UOH
+[Statedef 690]
+type=A
+movetype=A
+physics=N
+juggle=0
+poweradd=200
+ctrl=0
+velset = 1,-2
+anim=690
+sprpriority=2
+
+[State 690,Width]
+type=Width
+trigger1=(AnimElemTime(3)>=0)&&(AnimElemTime(6)<0)
+value=15,0
+
+[State 690,Effect]
+type = PlaySnd
+trigger1 = Time = 2
+value = 1, 7
+
+[State 690,StateTypeSet]
+type=StateTypeSet
+trigger1=AnimElemTime(1)=6
+physics=A
+
+[State 690]
+type=HitDef
+trigger1=Time=0
+attr=A,NA
+animtype=Hard
+damage=75,50
+hitflag=MAFD
+guardflag=MA
+pausetime=2,3
+sparkno=S8063+(Random%4)
+sparkxy=-10,-60
+hitsound=s1,12
+guardsound=s3,16
+guard.sparkno=S8075
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-1
+air.velocity=-2.2,-3.2
+p2stateno=19000
+
+[State 690,ChangeState]
+type=ChangeState
+trigger1=Pos Y>=0&&Vel Y>0
+value=0
+ctrl=1
+
+;==============================================================================================\
+;Punch Throw/Agarre con Puño
+[Statedef 800]
+type=S
+movetype =A
+physics=S
+juggle=0
+velset=0,0
+anim=800
+ctr=0
+sprpriority=2
+
+[State 800]
+type=HitDef
+trigger1=AnimElem=4
+attr=S,NT
+hitflag=MAFD
+priority=3,Miss
+sparkno=-1
+p1facing=1
+p2facing=1
+p1stateno=801
+p2stateno=802
+guard.dist=0
+getpower=100
+givepower=50
+
+[State 800,ChangeState]
+type=ChangeState
+Trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;======================
+;p1stateno Punch Throw
+[Statedef 801]
+type=S
+movetype=A
+physics=N
+anim=801
+poweradd=200
+
+[State 801,Width]
+type=Width
+trigger1=AnimElemTime(4)>=0&&AnimElemTime(5)>0
+edge=32,32
+
+[State 801,Width2]
+type=Width
+trigger1=AnimElemTime(5)>=0&&AnimElemTime(6)>0
+edge=33,33
+
+[State 801,Width3]
+type=Width
+trigger1=AnimElemTime(7)>=0&&AnimElemTime(8)>0
+edge=34,34
+
+[State 801,Width4]
+type=Width
+trigger1=AnimElemTime(8)>=0&&AnimElemTime(9)>0
+edge=35,35
+
+[State 801,Effect]
+type=PlaySnd
+trigger1=Time=0
+value=1,17
+channel=1
+
+[State 801,Effect2]
+type=PlaySnd
+trigger1=AnimElem=4
+value=1,10
+channel=1
+
+[State 801,Voz]
+type=PlaySnd
+trigger1=AnimElem=4
+value=0,25
+channel=0
+
+[State 801,TargetBind]
+type=TargetBind
+trigger1=AnimElemTime(2)<0
+pos=-37,-3
+
+[State 801,TargetBind2]
+type=TargetBind
+trigger1=AnimElemTime(2)>=0&&AnimElemTime(3)<0
+pos=-28,-71
+
+[State 801,TargetBind3]
+type=TargetBind
+trigger1=AnimElemTime(3)>=0&&AnimElemTime(4)<0
+pos=33,-94
+
+[State 801,TargetBind4]
+type=TargetBind
+trigger1=AnimElemTime(4)>=0&&AnimElemTime(5)<0
+pos=39,-87
+
+[State 801,TargetBind5]
+type=TargetBind
+trigger1=AnimElemTime(5)=0
+pos=66,-62
+
+[State 801,Width]
+type=Width
+trigger1=AnimElemTime(3)<0
+edge=0,50
+
+[State 801,Width2]
+type=Width
+trigger1=AnimElemTime(3)>=0&&AnimElemTime(5)<0
+edge=50,0
+
+[State 801,TargetLifeAdd]
+type=TargetLifeAdd
+trigger1=AnimElem=5
+value=-95
+
+[State 801,TargetState]
+type=TargetState
+trigger1=AnimElemTime(5)=1
+value=804
+
+[State 801,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;======================
+;p2stateno
+[Statedef 802]
+type=A
+movetype=H
+physics =N
+velset=0,0
+poweradd=200
+
+[State 802,ChangeAnim2]
+type=ChangeAnim2
+Trigger1=Time=0
+value=802
+
+;======================
+[Statedef 804]
+type=A
+movetype =H
+physics =N
+velset=-1,7
+
+[State 803,Turn]
+type=Turn
+trigger1=Time=0
+
+[State 804,PosAdd]
+type=PosAdd
+trigger1=Time=0
+x=15
+y=40
+
+[State 804,Gravity]
+type=Gravity
+trigger1=1
+
+[State 804,ChangeAnim]
+type=ChangeAnim
+trigger1=Time=0
+value=5160
+
+[State 804,EnvShake]
+type=EnvShake
+trigger1=Vel Y>0
+trigger1=Pos Y>=0
+time=27
+
+[State 804,SelfState]
+type=SelfState
+trigger1=Vel Y>0
+trigger1=Pos Y>=0
+value=5100
+
+;===============================================================================
+;Kick Throw/Agarre + Vueltas
+[Statedef 803]
+type=S
+movetype=A
+physics=N
+juggle=0
+velset=0,0
+anim=800
+ctrl=0
+sprpriority=2
+
+[State 803]
+type=HitDef
+trigger1=AnimElem=4
+attr=S,SA
+hitflag=MAFD
+priority=3,Miss
+sparkno=-1
+p1facing=1
+p2facing=1
+p1stateno=805
+p2stateno=806
+guard.dist=0
+getpower=100
+givepower=150
+
+[State 803,ChangeState]
+type=ChangeState
+Trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;======================
+;Part2
+[Statedef 805]
+type=S
+movetype=A
+physics=N
+Anim=805
+poweradd=60
+
+[State 805,Width]
+type=Width
+trigger1=AnimElemTime(2)>=0&&AnimElemTime(22)<0
+edge=24,24
+
+[State 805,Velset]
+type=VelSet
+trigger1=AnimElemTime(2)>=0
+x=6.3
+
+[State 805,Velset2]
+type=VelSet
+trigger1=AnimElemTime(17)>=0
+x = 0
+
+[State 805,TargetBind]
+type=TargetBind
+trigger1=AnimElemTime(2)<0
+pos=-18,-3
+
+[State 805,TargetBind2]
+type=TargetBind
+trigger1=AnimElemTime(2)>=0&&AnimElemTime(3)<0
+pos=0,-60
+
+[State 805,TargetBind3]
+type=TargetBind
+trigger1=AnimElemTime(3)>=0&&AnimElemTime(4)<0
+pos=33,-43
+
+[State 805,TargetBind4]
+type=TargetBind
+trigger1=AnimElemTime(4)>=0&&AnimElemTime(5)<0
+pos=-3,-11
+
+[State 805,TargetBind5]
+type=TargetBind
+trigger1=AnimElemTime(5)>=0&&AnimElemTime(6)<0
+pos=-26,-29
+
+[State 805,TargetBind6]
+type=TargetBind
+trigger1=AnimElemTime(6)>=0&&AnimElemTime(7)<0
+pos=9,-74
+
+[State 805,TargetBind7]
+type=TargetBind
+trigger1=AnimElemTime(7)>=0&&AnimElemTime(8)<0
+pos=33,-43
+
+[State 805,TargetBind8]
+type=TargetBind
+trigger1=AnimElemTime(8)>=0&&AnimElemTime(9)<0
+pos=-3,-11
+
+[State 805,TargetBind9]
+type=TargetBind
+trigger1=AnimElemTime(9)>=0&&AnimElemTime(10)<0
+pos=-26,-29
+
+[State 805,TargetBind10]
+type=TargetBind
+trigger1=AnimElemTime(10)>=0&&AnimElemTime(11)<0
+pos=-3,-69
+
+[State 805,TargetBind11]
+type=TargetBind
+trigger1=AnimElemTime(11)>=0&&AnimElemTime(12)<0
+pos=29,-49
+
+[State 805,TargetBind12]
+type=TargetBind
+trigger1=AnimElemTime(12)>=0&&AnimElemTime(13)<0
+pos=-9,-23
+
+[State 805,TargetBind13]
+type=TargetBind
+trigger1=AnimElemTime(13)>=0&&AnimElemTime(14)<0
+pos=-13,-23
+
+[State 805,TargetBind14]
+type=TargetBind
+trigger1=AnimElemTime(14)>=0&&AnimElemTime(15)<0
+pos=-3,-69
+
+[State 805,TargetBind15]
+type=TargetBind
+trigger1=AnimElemTime(15)>=0&&AnimElemTime(16)<0
+pos=3,-82
+
+[State 805,TargetBind16]
+type=TargetBind
+trigger1=AnimElemTime(16)>=0&&AnimElemTime(17)<0
+pos=22,-72
+
+[State 805,TargetBind17]
+type=TargetBind
+trigger1=AnimElemTime(17)=0
+pos=9,-74
+
+[State 805,Effect]
+type=PlaySnd
+trigger1=AnimElemTime(1)=0
+value=S1,17
+
+[State 805,Voz]
+type=PlaySnd
+trigger1=AnimElemTime(2)=4
+value=S0,25
+
+[State 805,Voz2]
+type=PlaySnd
+trigger1=AnimElemTime(17)=0
+value=S0,23
+
+[State 805,Effect2]
+type=PlaySnd
+trigger1=AnimElem=3||AnimElem=9||AnimElem=13
+value=S1,10
+
+[State 805,TargetLifeAdd]
+type=TargetLifeAdd
+trigger1=AnimElem=5||AnimElem=9||AnimElem=13
+value=-35
+kill=0
+
+[State 805,TargetLifeAdd2]
+type=TargetLifeAdd
+trigger1=AnimElem=17
+value=-115
+
+[State 805,TargetState]
+type=TargetState
+trigger1=AnimElemTime(17)=1
+value=807
+
+[State 805,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;======================
+;p2stateno
+[Statedef 806]
+type=A
+movetype=H
+physics =A
+velset=0,0
+poweradd=200
+
+[State 806,ChangeAnim2]
+type=ChangeAnim2
+Trigger1=Time=0
+value=806
+
+;======================
+;Throw
+[Statedef 807]
+type=A
+movetype=H
+physics=N
+velset=-6,-2
+
+[State 807,Turn]
+type=Turn
+trigger1=Time=0
+
+[State 807,PosAdd]
+type=PosAdd
+trigger1=Time=0
+x=7
+y=-7
+
+[State 807,Gravity]
+type=Gravity
+trigger1=1
+
+[State 807,ChangeAnim]
+type=ChangeAnim
+trigger1=Time=0
+value=5160
+
+[State 807,EnvShake]
+type=EnvShake
+trigger1=Vel Y>0
+trigger1=Pos Y>=0
+time=27
+
+[State 807,SelfState]
+type=SelfState
+trigger1=Vel Y>0
+trigger1=Pos Y>=0
+value=5100
+
+;===============================================================================
+;Tenma Kuujin Kyaku(Medium)
+[Statedef 1882]
+type=A
+movetype=A
+physics=A
+juggle=15
+anim=1881
+Ctrl=0
+velset=0,0
+
+[State 1882,Velset]
+type=Velset
+trigger1=AnimElem=4
+x=8
+y=11.2
+
+[State 1882,VelSet2]
+type=VelSet
+trigger1=Pos Y>=0&&Vel Y>0
+x=0
+
+[State 1882,PosFreeze]
+type=PosFreeze
+trigger1=Time<8
+
+[State 1882,AfterImage]
+type=AfterImage
+trigger1=AnimElem=4&&Power<=2999
+time=12
+timegap=1
+framegap=9
+length=18
+paladd=0,0,0
+palmul=.80,.80,.50
+palcontrast=110,110,110
+palbright=-22, -22,-22
+trans=add
+persistent=0
+
+[State 1882,Voz]
+type=PlaySnd
+trigger1=AnimElem=2
+value=s0,24
+
+[State 1882,Effect]
+type=PlaySnd
+trigger1=AnimElem=4
+value=s1,10
+
+[State 1882]
+type=HitDef
+triggerall=!MoveContact
+trigger1=AnimElem=4||Animelem=5||Animelem=6
+attr=A,SA
+damage=60,45
+animtype=Low
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=10,10
+sparkno=s8067+(Random%4)
+sparkxy=-10,-50
+hitsound=s4,4
+guard.sparkno=S8076
+guardsound=s3,16
+ground.type = High           
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-2,1
+airguard.velocity=-1.9,-.8
+air.velocity=-1,1
+air.type=High
+air.hittime=12
+envshake.time=20
+fall=1
+fall.recover=0
+p2stateno=19000
+
+[State 1882,ChangeState]
+type=ChangeState
+trigger1=Pos Y >=0&&Vel Y>0
+value=52
+
+;===============================================================================
+;Tenma Kuujin Kyaku(High)
+[Statedef 1883]
+type=A
+movetype=A
+physics=A
+juggle=15
+anim=1881
+Ctrl=0
+velset=0,0
+
+[State 1883,Velset]
+type=Velset
+trigger1=AnimElem=4
+x=13
+y=11.2
+
+[State 1883,VelSet2]
+type=VelSet
+trigger1=Pos Y>=0&&Vel Y>0
+x=0
+
+[State 1883,PosFreeze]
+type=PosFreeze
+trigger1=Time<8
+
+[State 1883,AfterImage]
+type=AfterImage
+trigger1=AnimElem=4&&Power<=2999
+time=12
+TimeGap=1
+FrameGap=9
+length=18
+PalBright=1,1,1
+PalContrast=99,99,99
+PalAdd=-225,-225,-225
+PalMul=1,1,1
+trans=add1
+
+[State 1883,Voz]
+type=PlaySnd
+trigger1=AnimElem=2
+value=s0,24
+
+[State 1883,Effect]
+type=PlaySnd
+trigger1=AnimElem=4
+value=s1,10
+
+[State 1883]
+type=HitDef
+triggerall=!MoveContact
+trigger1=AnimElem=4||Animelem=5||Animelem=6
+attr=A,SA
+damage=86,55
+animtype=Low
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=5,5
+sparkno=s8067+(Random%4)
+sparkxy=-10,50
+hitsound=s4,4
+guard.sparkno=S8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=35
+ground.hittime=35
+ground.velocity=-2,1
+airguard.velocity=-1.9,-.8
+air.velocity=-1,1
+air.type=High
+air.hittime=35
+envshake.time=20
+fall=1
+fall.recover=0
+p2stateno=19000
+
+[State 1883,ChangeState]
+type=ChangeState
+trigger1=Pos Y>=0&&Vel Y>0
+value=52
+
+;=========================================================================================\
+;God Mutai Geri x3
+;Low
+[Statedef 1891]
+type=A
+movetype=A
+physics=N
+juggle=6
+anim=1040
+Ctrl=0
+velset=0,0
+
+[State 1891,VarSet]
+type=VarSet
+trigger1=Time=0
+var(5)=ifelse(Command="MG1",0,ifelse(Command="MG2",1,2))
+
+[State 1891,VelSet]
+type=VelSet
+trigger1=Time=1
+x=8
+y=-(6+(2*Var(5)))
+
+[State 1891,VelAdd]
+type=VelAdd
+trigger1=Time>1
+y=ifelse(!Var(5),.65,ifelse(Var(5)=1,.66,.67))
+
+[State 1891,VelMul]
+type=VelMul
+trigger1=Vel Y>-2
+y=ifelse(!Var(5),1.01,ifelse(Var(5)=1,1.02,1.03))
+
+[State 1891]
+type=HitDef
+trigger1=Animelem=6
+attr=S,SA
+damage=70,50
+animtype=Low
+guardflag=H
+hitflag=MAFD
+priority=7,Hit
+pausetime=1,1
+sparkno=s8067+(Random%4)
+sparkxy=-10,-50
+hitsound=s4,4
+guard.sparkno=S8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=45
+ground.hittime=45
+ground.velocity=-1,1
+airguard.velocity=-1.9,-.8
+air.velocity=-1,1
+air.type=High
+air.hittime=30
+fall=1
+fall.recover=0
+p2stateno=19000
+envshake.time=20
+
+[State 1891,Voz]
+type=PlaySnd
+trigger1=AnimElem=1
+value=s0,13
+
+[State 1891,ChangeState]
+type=ChangeState
+trigger1=AnimElem=7
+value=1895
+ctrl=0
+
+;===============================================================================
+;Medium
+[Statedef 1892]
+type=A
+movetype=A
+physics=N
+juggle=15
+anim=1041
+Ctrl=0
+velset=0,0
+
+[State 1892,VarSet]
+type=VarSet
+trigger1=Time=0
+var(5)=ifelse(Command="MG1",0,ifelse(Command="MG2",1,2))
+
+[State 1892,VelSet]
+type=VelSet
+trigger1=Time=1
+x=2
+y=-(9+(2*Var(5)))
+
+[State 1892,VelAdd]
+type=VelAdd
+trigger1=Time>1
+y=ifelse(!Var(5),.65,ifelse(Var(5)=1,.66,.67))
+
+[State 1892,VelMul]
+type=VelMul
+trigger1=Vel Y>-2
+y=ifelse(!Var(5),1.01,ifelse(Var(5)=1,1.02,1.03))
+
+[State 1892]
+type=HitDef
+trigger1=Animelem=6
+attr=A,SA
+damage=90,80
+animtype=Low
+guardflag=H
+hitflag=MAFD
+priority=7,Hit
+pausetime=6,6
+sparkno=s8067+(Random%4)
+sparkxy=-10,-50
+hitsound=s4,4
+guard.sparkno=S8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-1,1
+airguard.velocity=-1.9,-.8
+air.velocity=-1,1
+air.type=High
+air.hittime=30
+fall=1
+fall.recover=0
+envshake.time=20
+p2stateno=19000
+
+[State 1892,Voz]
+type=PlaySnd
+trigger1=AnimElem=1
+value=s0,13
+
+[State 1892,ChangeState]
+type=ChangeState
+trigger1=AnimElem=7
+value=1895
+ctrl=0
+
+;===============================================================================
+;High
+[Statedef 1893]
+type=A
+movetype=A
+phycics =N
+juggle=15
+anim =1042
+Ctrl=0
+velset=0,0
+
+[State 1893,VarSet]
+type=VarSet
+trigger1=Time=0
+var(5)=ifelse(Command="MG1",0,ifelse(Command="MG2",1,2))
+
+[State 1893,VelSet]
+type=VelSet
+trigger1=Time=1
+x=2
+y=-(9+(2*Var(5)))
+
+[State 1893,VelAdd]
+type=VelAdd
+trigger1=Time>1
+y=ifelse(!Var(5),.65,ifelse(Var(5)=1,.66,.67))
+
+[State 1893,VelMul]
+type=VelMul
+trigger1=Vel Y>-2
+y=ifelse(!Var(5),1.01,ifelse(Var(5)=1,1.02,1.03))
+
+[State 1893,Superpause]
+type=SuperPause
+trigger1=!Time
+time=15
+movetime=15
+pos=6,-12
+anim=-1
+darken=0
+
+[State 1893,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=Animelem=5||Animelem=6||Animelem=7
+value=500,500,500
+time=1
+under=1
+ignorehitpause=1
+
+[State 1893]
+type=HitDef
+trigger1=Animelem=5||Animelem=6||Animelem=7
+attr=A,SA
+damage=105,90
+animtype=Low
+guardflag=HA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=s8067+(Random%4)
+sparkxy=-10,-50
+hitsound=s4,4
+guard.sparkno=S8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-1,1
+airguard.velocity=-1.9,-.8
+air.velocity=-1,1
+air.type=High
+air.hittime=30
+fall=1
+fall.recover=0
+envshake.time=20
+p2stateno=19000
+
+[State 1893,Voz]
+type=PlaySnd
+trigger1=AnimElem=1
+value=s0,13
+
+[State 1893,ChangeState]
+type=ChangeState
+trigger1=Pos Y>=50&&Vel Y>0
+value=1895
+
+;=======================
+;Landing
+[Statedef 1895]
+type=S
+movetype=A
+physics=N
+ctrl=0
+anim=1043
+velset=0,0
+
+[State 1892,PosSet]
+type=PosSet
+trigger1=Time=0
+y=0
+
+[State 1892,VarSet]
+type=VarSet
+trigger1=Time=0
+var(5)=0
+
+[State 1892,Effect]
+type=PlaySnd
+trigger1=Time=0
+value=s1,6
+channel=1
+
+[State 1892,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+

@@ -1,0 +1,32 @@
+<#f0f000>THROWS</>
+
+Kung Fu Throw                                 _CLOSE[_B/_F]_+^MP / _CLOSE[_B/_F]_+^HP
+Air Kung Fu Throw                             _AIR_CLOSE[_B/_F]_+^MP / _AIR_CLOSE[_B/_F]_+^HP
+
+<#f0f000>SPECIAL MOVES</>
+
+Kung Fu Palm                                  (hold) _B_F^P
+Kung Fu Knee                                  _B_DB_D_DF_F^K
+Fast Kung Fu Knee                             _F_DF_D_DB_B^P
+Head Press                                    (hold) _D_U^K
+Psycho Head Press                             (hold) _D_U^P
+Instantaneous Movement / Warp                 _F_D_DF^P / _F_D_DF^K
+Flight Start / Flight End                     _D_DB_B^LK_+^MK / ^MK_+^HK / ^3K
+
+<#f0f000>SUPER MOVES</>
+
+Triple Kung Fu Palm <#bebebe>(1000)</>         _D_DF_F^LP_+^MP / ^MP_+^HP / ^3P
+Smash Kung Fu Upper <#bebebe>(1000)</>         _D_DF_F^LK_+^MK / ^MK_+^HK / ^3K
+
+<#f0f000>DEFENSE / RECOVERY</>
+
+Alpha Counter <#bebebe>(while guarding, 1000)</>  _D_DB_B^P / _D_DB_B^K
+Guard Push <#bebebe>(while guarding)</>            ^LP_+^MP / ^MP_+^HP
+Recovery Roll <#bebebe>(while being hit)</>        _D_DB_B^P / _D_DB_B^K
+
+<#f0f000>SYSTEM</>
+
+Forward Run / Back Dash                       _F_F / _B_B
+Super Jump                                    _D_U
+Recovery                                      ^LP_+^MP
+Taunt                                         ^S

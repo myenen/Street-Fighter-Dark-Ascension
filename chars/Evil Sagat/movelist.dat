@@ -1,0 +1,30 @@
+<#f0f000>SPECIAL MOVES</>
+
+Tiger Shot                          _D_DF_F^P
+Low Tiger Shot                      _D_DF_F^K
+Air Tiger Shot                      _AIR_D_DF_F^P
+Freeze Tiger Shot                   _D_DB_B^P
+Tiger Uppercut                      _F_D_F^P
+Tiger Knee                          _F_D_F^K
+
+<#f0f000>SUPER MOVES</>
+
+Tiger Cannon <#bebebe>(1000)</>             _D_DF_F_D_DF_F^P
+Low Tiger Cannon <#bebebe>(1000)</>         _D_DB_B_D_DB_B^P
+Air Tiger Cannon <#bebebe>(1000)</>         _AIR_D_DF_F_D_DF_F^P
+Tiger Genocide <#bebebe>(1000)</>           _D_DF_F_D_DF_F^K
+Tiger Kicks <#bebebe>(1000)</>              _D_DB_B_D_DB_B^K
+Freeze Tiger Cannon <#bebebe>(2000)</>      _D_DF_F^2K
+Super Tiger Uppercut <#bebebe>(1000)</>     _F_D_F^2P
+
+<#f0f000>LEVEL 3 / SECRET MOVES</>
+
+Shield <#bebebe>(3000)</>                   _D_D_D^3P
+Raging Attack <#bebebe>(3000)</>            ^LP_LP_F_LK_HP
+
+<#f0f000>SYSTEM</>
+
+Quick Teleport                      _F_F
+Back Teleport                       _B_B
+Power Charge                        (hold) ^HP_+^HK
+Taunt                               ^S

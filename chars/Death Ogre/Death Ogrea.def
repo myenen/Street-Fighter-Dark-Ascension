@@ -1,0 +1,20 @@
+[Info]
+name    = "Death Ogre"
+
+[Files]
+cmd     = OGRE.cmd     
+cns     = OGRE.cns     
+st      = OGRE.cns
+st1      = AI.cns
+st2      = OGRE.st
+st3      = OGRE2.st
+stcommon = OGREcommon.cns   
+sprite  = OGRE.sff     
+anim    = OGRE.air     
+sound   = OGRE.snd     
+pal1    = OGRE1.act    
+pal2    = OGRE2.act    
+pal3    = OGRE3.act    
+pal4    = OGRE4.act    
+pal5    = OGRE5.act    
+pal6    = OGRE6.act    

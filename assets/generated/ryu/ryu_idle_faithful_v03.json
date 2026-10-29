@@ -1,0 +1,16 @@
+{
+  "method": "8x premultiplied-alpha Lanczos upscale with mild sharpening",
+  "generated_content": false,
+  "source_frames": [
+    "0,0",
+    "0,1",
+    "0,2",
+    "0,3"
+  ],
+  "frame_count": 4,
+  "ticks_per_frame": 6,
+  "cycle_ticks": 24,
+  "seconds_at_60_fps": 0.4,
+  "frame_1_equals_frame_3_in_source": true,
+  "pose_and_silhouette": "derived directly from original pixels; unchanged"
+}

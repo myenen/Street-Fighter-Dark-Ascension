@@ -1,0 +1,32 @@
+<#f0f000>THROWS</>
+
+Psycho Throw                                  _CLOSE[_B/_F]_+^2P
+Air Psycho Throw                              _AIR_CLOSE[_B/_F]_+^2P
+
+<#f0f000>SPECIAL MOVES</>
+
+Psycho Shot                                   _D_DF_F^P
+Psycho Field                                  _D_DB_B^P
+Psycho Crusher                                (hold) _B_F^P
+Knee Press                                    (hold) _B_F^K
+Pseudo Head Press                             (hold) _D_U^P
+Psycho Head Press                             (hold) _D_U^K
+Bison Warp Forward                            _F_D_DF^2P / _B_D_DB^2P
+Bison Warp Backward                           _F_D_DF^2K / _B_D_DB^2K
+
+<#f0f000>SUPER MOVES</>
+
+Psycho Crusher / Heartbreak Despair <#bebebe>(1000)</>    _D_DF_F_D_DF_F^P
+Air Psycho Crusher <#bebebe>(1000)</>                      _AIR_D_DF_F_D_DF_F^P
+Knee Press Nightmare / Knee Press Nild <#bebebe>(1000)</>  _D_DF_F_D_DF_F^K
+Psycho Shot Big Ball <#bebebe>(1000-2999)</>               _D_DB_B_D_DB_B^P
+Psycho Field Big Ball <#bebebe>(3000)</>                   _D_DB_B_D_DB_B^P
+Meteor Psycho Crusher <#bebebe>(3000)</>                   (hold) _B_F_B_F^2K
+
+<#f0f000>SYSTEM</>
+
+Alpha Counter <#bebebe>(while guarding, 1000)</>           _D_DB_B^P
+Excel Mode <#bebebe>(1000)</>                              ^LP_+^MK / ^LP_+^HK / ^MP_+^LK / ^MP_+^HK / ^HP_+^LK / ^HP_+^MK
+Forward Run / Back Dash                                    _F_F / _B_B
+Recovery                                                   ^LP_+^MP
+Taunt                                                      ^S

@@ -1,0 +1,9180 @@
+;=====================================================================================\
+;KamiGouKen
+;=====================================================================================/
+[Statedef 3999]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=0
+attr=S,SA
+velset=0,0
+anim=3999
+ctrl=0
+sprpriority=2
+
+[State 3999,EffectDC]
+type=Explod
+trigger1=animelem=1,=1
+anim=8504+10*var(2)
+postype=p1
+ownpal=1
+sprpriority=10
+bindtime=-1
+ignorehitpause=1
+pos=17,-34
+removeongethit=1
+pausemovetime=99
+supermovetime=99
+
+[State 3999,EffectDC2]
+type=Explod
+trigger1=animelem=1,=1
+anim=8505+10*var(2)
+postype=p1
+ownpal=1
+sprpriority=10
+bindtime=-1
+ignorehitpause=1
+pos=17,-34
+removeongethit=1
+pausemoveTime=99
+supermoveTime=99
+
+[State 3999,Varset]
+Type=Varset
+Trigger1=!Time
+var(2)=0
+
+[State 3999,Dcancel1]
+type=Explod
+trigger1=!time
+anim=8506
+pos=0,85
+postype=left
+supermove =1
+supermovetime=9999
+sprpriority=-1
+bindtime=-1
+ownpal=1
+removeongethit=1
+
+[State 3999,Dcancel2]
+type=Explod
+trigger1=!time
+anim=8507
+pos=0,85
+postype=left
+supermove=1
+supermovetime=9999
+sprpriority=-2
+bindtime=-1
+ownpal=1
+removeongethit=1
+
+[State 3999,Dcancel3]
+type=Explod
+trigger1=!time
+anim=8508
+pos=0,85
+postype=left
+supermove=1
+supermovetime=9999
+sprpriority=-3
+bindtime=-1
+ownpal=1
+removeongethit=1
+
+[State 3999,Aire]
+type=Explod
+trigger1=AnimElemTime(2)=0
+anim=8042
+sprpriority=5
+postype=p1
+pos=0,0
+velocity=0,0
+removetime=-2
+ownpal=1
+
+[State 3999,Aire2]
+type=Explod
+trigger1=AnimElemTime(2)=0
+anim=8043
+sprpriority=5
+postype=p1
+pos=0,0
+velocity=0,0
+removetime=-2
+ownpal=1
+
+[State 3999,Width]
+type=Width
+trigger1=(AnimElemTime(3)>=0)&&(AnimElemTime(50)<0)
+value=12,0
+
+[State 3999,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=230,0,0
+mul=230,0,0
+sinadd=-355,-255,-255, 99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3999,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3999,BGPalFx2]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3999,AfterImage]
+type=AfterImage
+trigger1=!Time
+time=IfElse(EnemyNear,StateType=A,80,300)
+TimeGap=1
+FrameGap=1
+length=15
+paladd=0,0,0
+palmul=.80,.80,.50
+palcontrast=110,110,110
+palbright=-255,-255,-255
+trans=add
+persistent=0
+removeongethit=1
+
+[State 3999,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(2)>=1&&Time<IfElse(EnemyNear,StateType=A,80,300)
+time=IfElse(EnemyNear,StateType=A,80,300)
+
+[State 3999,SuperPause]
+type=SuperPause
+trigger1=!Time
+time=45
+pos=21,-49
+anim=-1
+sound=-1
+poweradd=-4000
+darken=0
+movetime=45
+
+[State 3999,OpeningDC]
+type=PlaySnd
+trigger1=!time
+value=s100,17
+
+[State 3999,Velset]
+type=VelSet
+trigger1=AnimElemTime(2)=3
+x=30
+
+[State 3999]
+type=HitDef
+trigger1=AnimElem=1&&!MoveContact
+attr=S,HA
+animtype =Heavy
+air.animtype=up
+damage=30,IfElse(EnemyNear,StateType=A||(Anim=[40,52]),10,0)
+priority=9,Hit
+hitflag=MAFD
+guardflag=H
+pausetime=2,4
+sparkno=S8071+(Random%4)
+guard.sparkno=S8076
+sparkxy=8,-63
+hitsound=S1,13
+guardsound=S3,16
+ground.type = High
+P1Stateno=IfElse(EnemyNear,StateType=A||Pos Y>0&&Vel Y<=-1,3871,3995)
+ground.slidetime=4
+ground.hittime=1
+guard.ctrltime=16
+ground.velocity=IfElse(EnemyNear,StateType=A||(anim=[40,52]),-5,-3),IfElse(EnemyNear,StateType=A,-12,0)
+air.velocity=-3,-5
+air.fall=1
+air.recover=0
+Fall=IfElse(EnemyNear,StateType=A||(Anim=[40,52]),1,0)
+Fall.Recover=0
+envshake.time=20
+kill=IfElse(EnemyNear,StateType=A||(anim=[40,52])||Pos Y>0&&Vel Y>=-1,1,0)
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3999,Effect]
+type=PlaySnd
+trigger1=AnimElemTime(2)=0
+value=1,23
+
+[State 3999,Effect2]
+type=PlaySnd
+trigger1=AnimElemTime(2)=0
+value=1,24
+
+[State 3999,ChangeState]
+type=ChangeState
+trigger1=AnimElemTime(4)=6&&EnemyNear,Alive
+value=0
+ctrl=1
+
+;========================
+[Statedef 3995]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=0
+attr=S,SA
+velset=0,0
+anim=3995
+ctrl=0
+sprpriority=2
+
+[State 3995,Velset]
+type=VelSet
+trigger1=AnimElem=2||AnimElem=6||AnimElem=16||AnimElem=25||AnimElem=32||AnimElem=38||AnimElem=45
+x=5
+
+[State 3995]
+type=Hitdef
+trigger1=AnimElem=2||AnimElem=6||AnimElem=16||AnimElem=25||AnimElem=32||AnimElem=38||AnimElem=45
+attr=S,SA
+damage=5,1
+animtype=High
+hitflag=MAFD
+priority=7,Hit
+pausetime=1,14
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=0,0
+airguard.velocity=0,-7
+air.type=Low
+air.velocity=-1,1
+air.hittime=12
+fall.recover=0
+kill=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3995,ChangeState]
+type=ChangeState
+trigger1=AnimElem=45
+value=3996
+ctrl=1
+
+;========================
+[Statedef 3996]
+type=S
+movetype=A
+physics =S
+juggle=0
+poweradd=0
+attr=S,SA
+velset=0,0
+anim=3996
+ctrl=0
+sprpriority=2
+
+[State 3996,Velset]
+type=VelSet
+trigger1=AnimElem=1||AnimElem=9||AnimElem=15||AnimElem=20||AnimElem=27
+trigger2=AnimElem=37||AnimElem=43||AnimElem=49||AnimElem=50
+x=7
+
+[State 3996]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=9||AnimElem=15||AnimElem=20||AnimElem=27
+trigger2=AnimElem=37||AnimElem=43||AnimElem=49||AnimElem=50
+attr=S,SA
+damage=6,1
+animtype=High
+hitflag=MAFD
+priority=7,Hit
+pausetime=1,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=0,0
+airguard.velocity=0,-7
+air.type=Low
+air.velocity=-1,-1
+air.hittime=12
+fall.recover=0
+kill=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3996,ChangeState]
+type=ChangeState
+trigger1=AnimElem=50
+value=3997
+ctrl=1
+
+;========================
+[Statedef 3997]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=0
+attr=S,SA
+velset=0,0
+anim=3997
+ctrl=0
+sprpriority = 2
+
+[State 3996,Velset]
+type=VelSet
+trigger1=AnimElem=3||AnimElem=11||AnimElem=19||AnimElem=26
+trigger2=AnimElem=27||AnimElem=42||AnimElem=49||AnimElem=51||AnimElem=52
+x=10
+
+[State 3997]
+type=Hitdef
+trigger1=AnimElem=3||AnimElem=11||AnimElem=19||AnimElem=26
+trigger2=AnimElem=27||AnimElem=42||AnimElem=49||AnimElem=51||AnimElem=52
+attr=S,SA
+damage=7,1
+animtype=High
+hitflag=MAFD
+priority=7,Hit
+pausetime=1,15
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=0,0
+airguard.velocity=0,-7
+air.type=Low
+air.velocity=-2,1
+air.hittime=12
+fall.recover=0
+kill=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3997, ChangeState]
+type=ChangeState
+trigger1=AnimElem=56
+value=3998
+ctrl=1
+
+;========================
+[Statedef 3998]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=0
+attr=S,SA
+velset=0,0
+anim=3998
+ctrl=0
+sprpriority=2
+
+[State 3998,Velset]
+type=VelSet
+trigger1=AnimElem=4
+x=2
+y=-8
+
+[State 3998,VelSet2]
+type=VelSet
+trigger1=AnimElem=8
+x=0
+
+[State 3998,StateTypeSet]
+type=StateTypeSet
+trigger1=Animelem=5||Vel Y
+Type=A
+physics=A
+
+[State 3998]
+type=Hitdef
+trigger1=AnimElem=3||AnimElem=4||AnimElem=5
+attr=S,SA
+damage=100,27
+animtype=High
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+p1stateno=3871
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=-2,-10
+airguard.velocity=0,-7
+air.type = Low
+air.velocity=0,-17
+air.hittime=12
+fall.recover=0
+fall=1
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3998,ChangeState]
+type=ChangeState
+trigger1=Pos Y>=0&&Vel Y>0
+value=3871
+
+;========================
+;KamiGouKen(Last Step)
+[Statedef 3871]
+type=A
+movetype=A
+physics=A
+juggle=0
+anim =3871
+Ctrl=0
+velset=0,0
+
+[State 3871,Illusion]
+type=helper
+trigger1=AnimElemTime(1)=0
+helpertype=normal
+stateno=3988
+ID=3988
+name="KamiGouKen"
+pos=0,0
+ownpal=1
+persistent=0
+removetime=-1
+supermovetime=9999
+
+[State 3871,PosAdd]
+type=PosSet
+trigger1=!Time
+x=enemynear,const(size.mid.pos.x)
+y=-210
+
+[State 3871, PosAdd]
+type=PosSet
+trigger1=!Time&&PrevStateno=3999
+x=-30+enemynear,const(size.mid.pos.x)
+y=enemynear,const(size.mid.pos.y)
+
+[State 3871,Velset]
+type=Velset
+trigger1=AnimElem=4
+x=19
+y=11.2
+
+[State 3871,VelSet]
+type=VelSet
+trigger1=Pos Y>=0&&Vel Y>0
+x=0
+
+[State 3871,PosFreeze]
+type=PosFreeze
+trigger1=Time<8
+
+[State 3871]
+type=HitDef
+trigger1=AnimElem=4||Animelem=5||Animelem=5
+attr=A,HA
+damage=250,12
+animtype=Up
+guardflag=MA
+hitflag=MAFD
+priority=10,Hit
+pausetime=10,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-50
+hitsound=s4,4
+guard.sparkno=S8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=30
+ground.hittime=20
+ground.velocity=-2,1
+airguard.velocity=-1.9,-.8
+air.velocity=-1,1
+air.type=High
+air.hittime=12
+envshake.time=20
+fall=1
+fall.recover=0
+envshake.freq=103
+envshake.ampl=5
+
+[State 3871,Voz]
+type=PlaySnd
+trigger1=AnimElem=2
+value=s0,24
+
+[State 3871,Effect]
+type=PlaySnd
+trigger1=AnimElem=4
+value=s1,10
+
+[State 3871,ChangeState]
+type=ChangeState
+trigger1=Pos Y>=0&&Vel Y>0
+value=52
+
+;========================
+;Helpers
+[Statedef 3988]
+physics=N
+anim=3988
+velset=0,0
+sprpriority=3
+
+[State 3988,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=0
+
+[State 3988,Trans]
+type=Trans
+trigger1=time<344
+trans=addalpha
+alpha=256-(time*5),256
+
+[State 3988,BindToRoot]
+type=BindToRoot
+trigger1=Time=1
+time=0
+
+[State 3988,DestroySelf]
+type=DestroySelf
+trigger1=Time=60
+
+;===============================================================================
+;MasterShunkuuHadouken
+;===============================================================================
+[Statedef 1611]
+type=S
+movetype=A
+physics=S
+anim=1611
+velset=0
+ctrl=0
+
+[State 1611,Voz]
+type=PlaySnd
+trigger1=Animelem=4
+value=0,26
+persistent=0
+
+[State 1611,Aura]
+type=Explod
+trigger1=AnimElem=4
+anim=7004
+id=7004
+sprpriority=-3
+postype=p1
+pos=-8,2
+velocity=0,0
+removetime=-1
+removeongethit=1
+supermovetime=185
+bindtime=-1
+ownpal=1
+
+[State 1611,RemoveAura]
+type=RemoveExplod
+trigger1=Time=185
+id=7004
+ignorehitpause=1
+
+[State 1611,EnergyaPiso]
+type=Explod
+trigger1=AnimElem=4
+anim=8048
+ID=8048
+sprpriority=-1
+postype=p1
+pos=11,3
+velocity=0,0
+ignorehitpause=1
+removetime=-1
+supermovetime=185
+ownpal=1
+scale=1.3,1.0
+
+[State 1611,RemoveEnergyaPiso]
+type=RemoveExplod
+trigger1=Time=185
+id=8048
+ignorehitpause=1
+
+[State 1611,Helper]
+type=helper
+trigger1=anim=1611&&!(time%7)&&numhelper(1618)<5
+helpertype=normal
+stateno=1618
+ID=1618
+name="Particulas"
+postype=p1
+pos=ceil(240-random/2.1),-ceil(random/4)
+size.xscale=1.1
+size.yscale=1.1
+supermovetime=185
+ownpal=1
+
+[State 1611,Superpause]
+type=SuperPause
+trigger1=Animelem=4
+time=215
+movetime=215
+pos=21,-29
+anim=-1
+
+[State 1611,ChangeState]
+type=ChangeState
+trigger1=Time=185
+value=1612
+ctrl=1
+
+;========================
+[Statedef 1612]
+type=S
+movetype=A
+physics=S
+anim=1612
+velset=0
+ctrl=0
+
+[State 1612,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8501
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 1612,OpeingEspecial]
+type=PlaySnd
+trigger1=time=1
+value=1,21
+persistent=0
+
+[State 1612,BGSuper]
+type=Explod
+trigger1=Time=1
+Anim=6040
+ID=6040
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=3
+
+[State 1612,ModifyExplod]
+type=ModifyExplod
+trigger1=Time <=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 1612,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 1612,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 1612,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+ID=6042
+
+[State 1612,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 1612,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 1612,ModifyExplod]
+type=ModifyExplod
+trigger1=Time <=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 1612,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 1612,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 1612,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=0,0,0
+mul=0,0,0
+sinadd=-255,-255,-255,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 1612,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 1612,BGPalFx2]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 1612,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 1612,Aire]
+type=explod
+trigger1=Animelem=8
+vel=0,0
+anim=1617
+sprpriority=40
+postype=p1
+pos=65,5
+ownpal=1
+scale=1.2,1.2
+removetime=32
+
+[State 1612,Superpause]
+type=SuperPause
+trigger1=Animelem=7
+time=60
+movetime=60
+poweradd=-4000
+pos=21,-29
+anim=-1
+darken=0
+
+[State 1612,VoZ]
+type=PlaySnd
+trigger1=Animelem=7
+value=0,60
+persistent=0
+
+[State 1612,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=1613
+ctrl=1
+
+;========================
+[Statedef 1613]
+type=S
+movetype=A
+physics=S
+anim=1613
+velset=0
+ctrl=0
+
+[State 1613,VoZ]
+type=PlaySnd
+trigger1=time=20
+value=s0,15
+persistent=0
+channel=2
+
+[State 1613,Effect]
+type=PlaySnd
+trigger1=!time
+value=s100,16
+persistent=0
+
+[State 1613,EnvShake]
+type=EnvShake
+trigger1=(GameTime%3)=1
+time= 20
+ampl=15
+freq=95
+phase=95
+
+[State 1613,Sparks]
+type=Explod
+trigger1=ProjHit1615=1
+anim=1515+(random%4)
+sprpriority=99
+postype=p2
+pos=0,-60
+bindtime=-1
+supermove=1
+ignorehitpause=1
+under=0
+ownpal=1
+
+[State 1613,Envcolor]
+type=Envcolor
+trigger1=projHit1615=1
+ignorehitpause=1
+value=255,255,255
+time=1
+under=5
+supermove=1
+
+[State 1613,EfectoEspecial]
+type=Explod
+trigger1=animelem=1
+anim=1614
+id=1614
+sprpriority=99
+postype=p1
+pos=-20,-20
+removetime=200
+supermove=0
+ignorehitpause=1
+ownpal=1
+scale=1.0,1.0
+
+[State 1613]
+type=Projectile
+triggerall=time<=200
+trigger1=(GameTime%3)=1
+projanim=1615
+projhitanim=-1
+projid=1615
+projpriority=999
+projsprpriority=999
+projremove=1
+projremovetime=5
+postype=p1
+sparkno=-1
+sparkxy=0,0
+offset=-20,-20
+velocity=0
+animtype=diagup
+damage=Ceil(0.017*enemy,Const(data.life))-3,Ceil(0.010*enemy,Const(data.life))
+guardflag=M
+attr=A,HP
+hitflag=MAFD
+pausetime=10,9
+guard.sparkno=-1
+ground.type=low
+ground.slidetime=200
+ground.hittime=200
+guard.ctrltime=1
+ground.velocity=-6,-6.5
+air.velocity=-6,-6.8
+fall=1
+fall.recover=0
+juggle=0
+p2stateno=19000
+
+[State 1613,ChangeState]
+type=ChangeState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+
+;=======================
+;Helper Particulas
+[Statedef 1618]
+physics=N
+anim=1618
+sprpriority=4
+
+[State 1618,assertspecial]
+type=assertspecial
+trigger1=1
+flag=noshadow
+
+[State 1618,velset]
+type=velset
+trigger1=!time
+x=(rootdist x-4)/60
+y=(rootdist y-55)/60
+
+[State 1618,destroyself]
+type=destroyself
+trigger1=time=56
+trigger2=(root,stateno!=1611)||(root,anim!=1611)
+
+;===============================================================================
+;Shipuu-jinrai-kiaku Low
+;===============================================================================
+[Statedef 3446]
+type=S
+movetype =A
+physics =S
+juggle=15
+ctrl=0
+velset=0,0
+anim=3443
+sprpriority=2
+
+[State 3446,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8500
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3446,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=255,255,255
+mul=0,0,0
+sinadd=-255,-255,-355,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3446,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3446,BGPalFx]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3446,Width]
+type = Width
+trigger1 = (AnimElemTime (3)>=0)&&(AnimElemTime(50)<0)
+value = 12,0
+
+[State 3446,SuperPause]
+type=SuperPause
+trigger1=!Time
+time=65
+pos=-12,-12
+anim=-1
+sound = S1,21
+poweradd=-1000
+darken=0
+movetime=65
+
+[State 3446,BGSuper]
+type=Explod
+trigger1=!Time
+Anim=6040
+ID=6040
+sprpriority=3
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime =65
+ignorehitpause=1
+sprpriority=3
+
+[State 3446,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3446,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3446,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3446,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3446,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale = .00102+(Time*.177),.00102+(Time*.177)
+
+[State 3446,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+ID=6043
+
+[State 3446,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3446,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3446,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3446,AssertSpecia]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3446,Voz]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S0,13
+
+[State 3446,Voz2]
+type=PlaySnd
+trigger1=AnimElem=2
+value=S0,22
+
+[State 3446,Aire]
+type=explod
+trigger1=anim=3443&&!animelemtime(2)
+vel=0,0
+anim=1617
+sprpriority=40
+postype=p1
+pos=50,5
+ownpal=1
+scale=.99,.99
+removetime=32
+
+[State 3446,AfterImage]
+type=AfterImage
+trigger1=AnimElem=2
+time=IfElse(StateNo=3443&&MoveHit=1,100,66)
+TimeGap=1
+FrameGap=7
+length=15
+PalBright=7,7,7
+PalContrast=120,120,120
+PalAdd=0,0,0
+PalMul=1,1,1
+trans=add1
+removeongethit=1
+persistent=0
+
+[State 3446,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(20)>=1&&Time<IfElse(StateNo=3446&&MoveHit=1,100,66)
+time=IfElse(StateNo=3446&&MoveHit=1,100,66)
+
+[State 3446,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=3||AnimElem=4||AnimElem=14||AnimElem=26||AnimElem=38||AnimElem=39||AnimElem=46
+value=255,255,255
+time=1
+under=1
+ignorehitpause=1
+
+[State 3446,PosAdd]
+type=PosAdd
+trigger1=AnimElem=2||AnimElem=3||AnimElem=12||AnimElem=13||AnimElem=14||AnimElem=26
+trigger2=AnimElem=27||AnimElem=28||AnimElem=33||AnimElem=34||AnimElem=35
+x=6
+
+[State 3446]
+type=Hitdef
+trigger1=AnimElem=3
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,12
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=-2.8,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3446]
+type=Hitdef
+trigger1=AnimElem=4
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=13, 19
+sparkno=S8071+(Random%4)
+sparkxy=-10,-89
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=-2.8,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4, 0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3446]
+type=Hitdef
+trigger1=AnimElem=14
+attr=S,SA
+damage=20,15
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,12
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4, 0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3446]
+type=Hitdef
+trigger1=AnimElem=15
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=13,19
+sparkno=S8071+(Random%4)
+sparkxy=-10,-33
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3446]
+type=Hitdef
+trigger1=AnimElem=26
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=13, 17
+sparkno=S8071+(Random%4)
+sparkxy=-10,-89
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=5,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3446]
+type=Hitdef
+trigger1=AnimElem=38
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=8,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=Low
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3446]
+type=Hitdef
+trigger1=AnimElem=39
+attr=S,SA
+damage=11,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=8,15
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=-2,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3446]
+type=Hitdef
+trigger1=AnimElem=46
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=13,19
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+p1stateno=3447
+p2statetype=hitdef
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=6,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3446,Effect]
+type=PlaySnd
+trigger1=AnimElem=2||AnimElem=13||AnimElem=25||AnimElem=37||AnimElem=45
+value=1,8
+
+[State 3446,ChangeState]
+type=ChangeState
+trigger1=Time=127
+value=0
+ctrl=1
+
+;=======================
+;p1stateno
+[Statedef 3447]
+type=A
+movetype =A
+physics=N
+juggle=7
+ctrl=0
+velset=0
+anim=3447
+sprpriority=2
+
+[State 3447,BGAire]
+type=Explod
+trigger1=AnimElem=2
+Anim=1617
+ID=1617
+pos=-5,0
+sprpriority=50
+postype=p1
+ownpal=1
+ontop=1
+removetime=30
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3447,BGAire2]
+type=Explod
+trigger1=AnimElem=2
+Anim=16177
+ID=16177
+pos=5,0
+sprpriority=50
+postype=p1
+ownpal=1
+ontop=1
+removetime=30
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3447,playerpush]
+type=playerpush
+trigger1=AnimElemTime(7)>0
+value=0
+
+[State 3447,VelSet]
+type=VelSet
+trigger1=AnimElemTime(1)=5
+x=1.5
+y=-4
+
+[State 3447,VelSet2]
+type=VelSet
+trigger1=AnimElemTime(13)=0
+x=0
+
+[State 3447,StateTypeSet]
+type=StateTypeSet
+trigger1=AnimElemTime(24)=1
+physics=A
+
+[State 3447,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=7||AnimElem=13||AnimElem=19||AnimElem=9||AnimElem=15||AnimElem=21
+value=500,500,500
+time=1
+under=1
+ignorehitpause=1
+
+[State 3447]
+type=Hitdef
+trigger1=AnimElem=1
+attr=A,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=9,Hit
+pausetime=7,7
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=0,-5
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=0,-5
+air.hittime=12
+fall=1
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3447]
+type=Hitdef
+trigger1=AnimElem=7||AnimElem=13||AnimElem=19
+attr=A,SA
+damage=19,15
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=9,Hit
+pausetime=7,1
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=0,-5
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=6,-4.5
+air.hittime=12
+fall=1
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3447]
+type=Hitdef
+trigger1=AnimElem=9||AnimElem=15||AnimElem=21
+attr=A,SA
+damage=18,13
+animtype=High
+guardflag=LMA
+hitflag=MAFD
+priority=9,Hit
+pausetime=7,1
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=0,-5
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=-4,-4.6
+air.hittime=12
+fall=1
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3447,Effect]
+type=PlaySnd
+trigger1=AnimElem=7||AnimElem=9||AnimElem=13||AnimElem=15||AnimElem=19||AnimElem=21
+value=1,8
+
+[State 3447,ChangeState]
+type=ChangeState
+trigger1=Pos Y>=0&&Vel Y>0
+value=0
+ctrl=1
+
+;===============================================================================
+;Shippu-Jinrai-Kiaku Medium
+;===============================================================================
+[Statedef 3448]
+type=S
+movetype=A
+physics=S
+juggle=5
+ctrl=0
+velset=0,0
+anim=3443
+sprpriority =2
+
+[State 3448,Width]
+type=Width
+trigger1=(AnimElemTime(3)>=0)&&(AnimElemTime(50)<0)
+value=12,0
+
+[State 3448,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8500
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3448,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=255,255,255
+mul=0,0,0
+sinadd=-255,-255,-355,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3448,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3448,BGPalFx]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3448,BGSuper]
+type=Explod
+trigger1=!Time
+Anim=6040
+ID=6040
+sprpriority=3
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime =65
+ignorehitpause=1
+sprpriority=3
+
+[State 3448,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3448,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3448,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3448,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3448,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3448,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+ID=6043
+
+[State 3448,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3448,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3448,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3448,AssertSpecia]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3448,SuperPause]
+type=SuperPause
+trigger1=Time=0
+time=65
+pos=-12,-12
+anim=-1
+sound=S1,21
+poweradd=-2000
+darken=0
+movetime=65
+
+[State 3448,Voz]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S0,13
+
+[State 3448,Voz2]
+type=PlaySnd
+trigger1=AnimElem=2
+value=S0,22
+
+[State 3448,Aire]
+type=explod
+trigger1=anim=3443&&!animelemtime(2)
+vel=0,0
+anim=1617
+sprpriority=40
+postype=p1
+pos=50,5
+ownpal=1
+scale=.99,.99
+removetime=32
+
+[State 3448,AfterImage]
+type=AfterImage
+trigger1=AnimElem=2,1
+time=IfElse(StateNo=3443&&MoveHit=1,100,66)
+TimeGap =1
+FrameGap=7
+length=15
+PalBright=7,7,7
+PalContrast=120,120,220
+PalAdd=0,0,0
+PalMul=1,1,1
+trans=add1
+persistent=0
+removeongethit=1
+
+[State 3448,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(2)>=1&&Time<IfElse(StateNo=3448&&MoveHit=1,100,66)
+time=IfElse(StateNo=3448 && MoveHit=1,100,66)
+
+[State 3448,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=3||AnimElem=4||AnimElem=14||AnimElem=15
+trigger2=AnimElem=26||AnimElem=38||AnimElem=39||AnimElem=46
+value=500,500,500
+time=1
+under=1
+ignorehitpause=1
+
+[State 3448,PosAdd]
+type=PosAdd
+trigger1=AnimElem=2||AnimElem=3||AnimElem=12||AnimElem=13||AnimElem=14||AnimElem=26
+trigger2=AnimElem=27||AnimElem=28||AnimElem=33||AnimElem=34||AnimElem=35
+x=6
+
+[State 3448]
+type=Hitdef
+trigger1=AnimElem=3
+attr=S,SA
+damage=9,3
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,12
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=-2.8,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4, 0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3448]
+type=Hitdef
+trigger1=AnimElem=4
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=13,19
+sparkno=S8071+(Random%4)
+sparkxy=-10,-89
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=-2.8,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time =15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3448]
+type=Hitdef
+trigger1=AnimElem=14
+attr=S,SA
+damage=20,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,12
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime =10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+kill=0
+
+[State 3448]
+type=Hitdef
+trigger1=AnimElem=15
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAF
+priority=7,Hit
+pausetime=13,19
+sparkno=S8071+(Random%4)
+sparkxy=-10,-33
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3448]
+type=Hitdef
+trigger1=AnimElem=26
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=13,17
+sparkno=S8071+(Random%4)
+sparkxy=-10,-89
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=5,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4, 0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3448]
+type=Hitdef
+trigger1=AnimElem=38
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=8,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=Low
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3448]
+type=Hitdef
+trigger1=AnimElem=39
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=8,15
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=-2,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3448]
+type=Hitdef
+trigger1=AnimElem=46
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=13,19
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+p1stateno=3449
+p2statetype=hitdef
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=6,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3448,Effect]
+type=PlaySnd
+trigger1=AnimElem=2||AnimElem=13||AnimElem=25||AnimElem=37||AnimElem=45
+value=1,8
+
+[State 3448,ChangeState]
+type=ChangeState
+trigger1=Time=127
+value=0
+ctrl=1
+
+;=======================
+;p1stateno
+[Statedef 3449]
+type=A
+movetype=A
+physics=N
+juggle=25
+ctrl=0
+velset=0
+anim=3449
+sprpriority=2
+
+[State 3349,BGAire]
+type=Explod
+trigger1=AnimElem=2
+Anim=1617
+ID=1617
+pos=-5,0
+sprpriority=50
+postype=p1
+ownpal=1
+ontop=1
+removetime=30
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3349,BGAire2]
+type=Explod
+trigger1=AnimElem=2
+Anim=16177
+ID=16177
+pos=5,0
+sprpriority=50
+postype=p1
+ownpal=1
+ontop=1
+removetime=30
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3449,playerpush]
+type=playerpush
+trigger1=AnimElemTime(7)>0
+value=0
+
+[State 3449,VelSet]
+type=VelSet
+trigger1=AnimElemTime(1)=5
+x=1.5
+y=-4
+
+[State 3449,VelSet]
+type=VelSet
+trigger1=AnimElemTime(13)=1
+x=0
+
+[State 3449,VelSet]
+type=VelSet
+trigger1=AnimElemTime(19)=1
+y=0
+
+[State 3449,StateTypeSet]
+type=StateTypeSet
+trigger1=AnimElemTime(34)=1
+physics=A
+
+[State 3449,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=7||AnimElem=9||AnimElem=13||AnimElem=15||AnimElem=19
+trigger2=AnimElem =22||AnimElem=25||AnimElem=33
+value=500,500,500
+time=1
+under=1
+ignorehitpause=1
+
+[State 3449]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=7||AnimElem=9||AnimElem=13||AnimElem=15||AnimElem=19
+attr=A,HA
+damage=30,25
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=9,Hit
+pausetime=7,7
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=0,-5
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=0,-6
+air.hittime=12
+fall=1
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3449]
+type=Hitdef
+trigger1=AnimElem=22||AnimElem=25
+attr=A,HA
+damage=10,5
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=9,Hit
+pausetime=15, 30
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=0,-5
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=-3,0
+air.hittime=12
+fall=1
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3449]
+type=Hitdef
+trigger1=AnimElem=33
+attr=A,HA
+damage=25,6
+animtype=High
+guardflag=LMA
+hitflag=MAFD
+priority=9,Hit
+pausetime=18,18
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=0,-5
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=-13,13
+air.hittime=12
+fall=1
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3449,Effect]
+type=PlaySnd
+trigger1=AnimElem=7||AnimElem=9||AnimElem=13||AnimElem=15||AnimElem=19||AnimElem=22||AnimElem=25||AnimElem=33
+value=1,8
+
+[State 3449,ChangeState]
+type=ChangeState
+trigger1=Pos Y>=0&&Vel Y>0
+value=0
+ctrl=1
+
+;===============================================================================
+;Shippu-Jinrai-Kiaku High
+;===============================================================================
+[Statedef 3443]
+type=S
+movetype=A
+physics=S
+juggle=15
+ctrl=0
+velset=0,0
+anim=3443
+sprpriority=2
+
+[State 3443,Width]
+type=Width
+trigger1=(AnimElemTime(3)>=0)&&(AnimElemTime(50)<0)
+value=12,0
+
+[State 3443,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8500
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3446,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8501
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3446,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=255,255,255
+mul=0,0,0
+sinadd=-255,-255,-355,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3446,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3446,BGPalFx]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3443,BGSuper]
+type=Explod
+trigger1=!Time
+Anim=6040
+ID=6040
+sprpriority=3
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime =65
+ignorehitpause=1
+sprpriority=3
+
+[State 3443,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3443,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3443,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3443,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3443,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3443,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+ID=6043
+
+[State 3443,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3443,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=-34,-8
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3443,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3443,AssertSpecia]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3443,Aire]
+type=explod
+trigger1=anim=3443&&!animelemtime(2)
+vel=0,0
+anim=1617
+sprpriority=40
+postype=p1
+pos=50,5
+ownpal=1
+scale=.99,.99
+removetime=32
+
+[State 3443,AfterImage]
+type=AfterImage
+trigger1=AnimElem=2
+time=IfElse(StateNo=3443&&MoveHit=1,110,66)
+TimeGap=1
+FrameGap=7
+length=19
+paladd=0,0,0
+palmul=.80,.80,.50
+palcontrast=110,110,110
+palbright=-255,-255,-255
+trans=add
+persistent=1
+removeongethit=1
+
+[State 3443,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(2)>=1&&Time<IfElse(StateNo=3443&&MoveHit=1,110,66)
+time=IfElse(StateNo=3443&&MoveHit=1,110,66)
+
+[State 3443,SuperPause]
+type=SuperPause
+trigger1=Time=0
+time=65
+pos=-12,-12
+anim=-1
+sound=S1,21
+poweradd=-3000
+darken=0
+movetime=65
+
+[State 3443,Voz]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S0,13
+
+[State 3443,Voz2]
+type=PlaySnd
+trigger1=AnimElem=2
+value=S0,22
+
+[State 3443,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=3||AnimElem=4||AnimElem=14||AnimElem=15
+trigger2=AnimElem=26||AnimElem=38||AnimElem=39||AnimElem=46
+value=500,500,500
+time=1
+under=1
+ignorehitpause=1
+
+[State 3443,PosAdd]
+type=PosAdd
+trigger1=AnimElem=2||AnimElem=3||AnimElem=12||AnimElem=13||AnimElem=14||AnimElem=26
+trigger2=AnimElem=27||AnimElem=28||AnimElem=33||AnimElem=34||AnimElem=35
+x=6
+
+[State 3443]
+type=Hitdef
+trigger1=AnimElem=3
+attr=S,HA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=10,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3443]
+type=Hitdef
+trigger1=AnimElem=4
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=10,18
+sparkno=S8071+(Random%4)
+sparkxy=-10,-89
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3443]
+type=Hitdef
+trigger1=AnimElem=14
+attr=S,SA
+damage=20,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=10,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3443]
+type=Hitdef
+trigger1=AnimElem=15
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=10,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-33
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3443]
+type=Hitdef
+trigger1=AnimElem=26
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=7,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-89
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3443]
+type=Hitdef
+trigger1=AnimElem=38
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,11
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=Low
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3443]
+type=Hitdef
+trigger1=AnimElem=39
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=2,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3443]
+type=Hitdef
+trigger1=AnimElem=46
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=10,11
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+p1stateno=3444
+p2statetype=hitdef
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=2,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3443,Effect]
+type=PlaySnd
+trigger1=AnimElem=2||AnimElem=13||AnimElem=25||AnimElem=37||AnimElem=45
+value=1,10
+
+[State 3443,ChangeState]
+type=ChangeState
+trigger1=Time=128
+value=0
+ctrl=1
+
+;=======================
+;p1stateno1/1
+[Statedef 3444]
+type=S
+movetype=A
+physics=S
+juggle=15
+ctrl=0
+velset=7,0
+anim=3444
+sprpriority=9
+
+[State 3444,Width]
+type=Width
+trigger1=(AnimElemTime(3)>=0)&&(AnimElemTime(50)<0)
+value=8,0
+
+[State 3444,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=3||AnimElem=4||AnimElem=13||AnimElem=14||AnimElem=15||AnimElem=26
+trigger2=AnimElem=27||AnimElem=38||AnimElem=39||AnimElem=46||AnimElem=47
+value=500,500,500
+time=1
+under=1
+ignorehitpause=1
+
+[State 3444,PosAdd]
+type=PosAdd
+trigger1=AnimElem=2||AnimElem=3||AnimElem=12||AnimElem=13||AnimElem=14||AnimElem=26
+trigger2=AnimElem=27||AnimElem=28||AnimElem=33||AnimElem=34||AnimElem=35
+x=6
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=3
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=5,10
+sparkno=S8071+(Random%4)
+sparkxy=-10, -76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+env.shake=1
+envshake.time=10
+envshake.ampl=4
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=4
+attr=S,SA
+damage=15,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=5,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-89
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=13
+attr=S,SA
+damage=20,15
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=5,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=14
+attr=S,SA
+damage=18,14
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=5,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=15
+attr=S,SA
+damage=12,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=5,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-33
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=26
+attr=S,SA
+damage=12,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-89
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno = S8076
+ground.type = High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=27
+attr=S,SA
+damage=12,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-89
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=38
+attr=S,SA
+damage=12,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,11
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=Low
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=1.4,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=39
+attr=S,SA
+damage=12,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,10
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=2,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=46
+attr=S,SA
+damage=12,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,11
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=2,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=1.4,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3444]
+type=Hitdef
+trigger1=AnimElem=47
+attr=S,SA
+damage=12,10
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,11
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S4,4
+guardsound=s3,16
+guard.sparkno=S8076
+p1stateno=3445
+p2statetype=Hitdef
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=3,0
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=3,0
+air.hittime=12
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+
+[State 3444,Effect]
+type=PlaySnd
+trigger1=AnimElem=2||AnimElem=13||AnimElem=25||AnimElem=37||AnimElem=45
+value=1,10
+
+[State 3444,ChangeState]
+type=ChangeState
+trigger1=Time=51
+value=0
+ctrl=1
+
+;=======================
+;p1stateno2/1
+[Statedef 3445]
+type=S
+movetype=A
+physics=S
+juggle =10
+ctrl=0
+velset=0,0
+anim=3445
+sprpriority=10
+
+[State 3445,BGAire]
+type=Explod
+trigger1=AnimElem=2
+Anim=1617
+ID=1617
+pos=-5,0
+sprpriority=50
+postype=p1
+ownpal=1
+ontop=1
+removetime=30
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3445,BGAire2]
+type=Explod
+trigger1=AnimElem=2
+Anim=16177
+ID=16177
+pos=5,0
+sprpriority=50
+postype=p1
+ownpal=1
+ontop=1
+removetime=30
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3445,Voz]
+type=Playsnd
+trigger1=Animelem=3
+value=S0,25
+
+[State 3446,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=2||AnimElem=3||AnimElem=4||AnimElem=5||AnimElem=6||AnimElem=7||AnimElem=8
+trigger2=AnimElem=9||AnimElem=10||AnimElem=11||AnimElem=12||AnimElem=13||AnimElem=14
+trigger3=AnimElem=15||AnimElem=16||AnimElem=17||AnimElem=18||AnimElem=19||AnimElem=20
+trigger4=AnimElem=21||AnimElem=22||AnimElem=23||AnimElem=24||AnimElem=25||AnimElem=26
+trigger5=AnimElem=27||AnimElem=28||AnimElem=29
+value=500,500,500
+time=1
+under=1
+ignorehitpause=1
+
+[State 3445]
+type=Hitdef
+trigger1=AnimElem=2||AnimElem=3||AnimElem=4||AnimElem=5||AnimElem=6||AnimElem=7||AnimElem=8
+trigger2=AnimElem=9||AnimElem=10||AnimElem=11||AnimElem=12||AnimElem=13||AnimElem=14
+trigger3=AnimElem=15||AnimElem=16||AnimElem=17||AnimElem=18||AnimElem=19||AnimElem=20
+trigger4=AnimElem=21||AnimElem=22||AnimElem=23||AnimElem=24||AnimElem=25||AnimElem=26
+trigger5=AnimElem=27||AnimElem=28||AnimElem=29
+attr=A,SA
+damage=30,25
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=7,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=5
+ground.hittime=10
+ground.velocity=0,-5
+airguard.velocity=0,-7
+air.type=Low
+air.velocity=1,-5
+air.hittime = 12
+fall=1
+fall.recover=0
+
+[State 3445,PlayerPush]
+type=PlayerPush
+trigger1=AnimElemTime(4)>=0&&AnimElemTime(16)<0
+value=0
+
+[State 3445,VelSet]
+type=VelSet
+trigger1=AnimElem=4
+y=-13
+
+[State 3445,StateTypeSet]
+type=StateTypeSet
+trigger1=AnimElemTime(4)>=4
+Type=A
+physics=A
+
+[State 3445,Effect]
+type=PlaySnd
+trigger1=AnimElem=3||AnimElem=4||AnimElem=5||AnimElem=6||AnimElem=7||AnimElem=8
+trigger2=AnimElem=9||AnimElem=10||AnimElem=11||AnimElem=12||AnimElem=13||AnimElem=14
+trigger3=AnimElem=15||AnimElem=16||AnimElem=17||AnimElem=18||AnimElem=19||AnimElem=20
+trigger4=AnimElem=21||AnimElem=22||AnimElem=23||AnimElem=24||AnimElem=25||AnimElem=26
+trigger5=AnimElem=27||AnimElem=28||AnimElem=29
+value=1,10
+persistent=0
+
+[State 3445,ChangeState]
+type=ChangeState
+trigger1=Time=65
+value=0
+ctrl=1
+
+;===============================================================================
+;Master ShoriuReppaTatsu
+;===============================================================================
+;Starting
+[Statedef 3340]
+type=S
+movetype=I
+physics=S
+juggle=7
+velset=0,0
+ctrl=0
+anim=3330
+sprpriority=2
+poweradd=40
+
+[State 3340,Width]
+type=Width
+trigger1=AnimElem=2,>=1
+value=-20,0
+
+[State 3340,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8501
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3340,BGSuper1]
+type=Explod
+trigger1=!Time
+Anim=6040
+ID=6040
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=3
+
+[State 3340,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3340,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3340,ModifyExplod]
+type=ModifyExplod
+trigger1=Time <=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3340,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3340,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3340,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 3340,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3340,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3340,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3340,SuperPause]
+type=SuperPause
+trigger1=Time
+time=65
+pos=6,-12
+anim=-1
+sound=S1,21
+poweradd=-2000
+darken=0
+movetime=65
+persistent=0
+
+[State 3340,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=0,0,0
+mul=0,0,0
+sinadd=-255,-255,-255,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3340,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3340,BGPalFx]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3340,BG Cleaner]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3340,Voz]
+type=PlaySnd
+trigger1=Time=0
+value=S0,18
+channel=7
+
+[State 3340,ChangeState]
+type=ChangeState
+trigger1=!AnimTime
+value=3341
+
+;=======================
+;Parte2
+[Statedef 3341]
+type=S
+movetype=A
+physics=S
+juggle=7
+velset=7,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=40
+
+[State 3341,Aire]
+type=explod
+trigger1=anim=3341&&!animelemtime(1)
+vel=0,0
+anim=1617
+sprpriority=40
+postype=p1
+pos=50,5
+ownpal=1
+scale=.99,.99
+removetime=32
+
+[State 3341,AfterImage]
+type=AfterImage
+trigger1=AnimElem=2
+time=IfElse(StateNo=3331&&MoveHit=1,110,66)
+TimeGap=1
+FrameGap=7
+length=19
+paladd=0,0,0
+palmul=.80,.80,.50
+palcontrast=110,110,110
+palbright=-255,-255,-255
+trans=add
+persistent=1
+removeongethit=1
+
+[State 3341,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(2)>=1&&Time<IfElse(StateNo=3331&&MoveHit=1,110,66)
+time=IfElse(StateNo=3443&&MoveHit=1,110,66)
+
+[State 3341,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(2)>=1&&Time<77
+time=77
+
+[State 3341,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3341]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=S,HA
+damage=20,15
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,IfElse((AnimElem=1),-44,-76)
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-3
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3341,ChangeState]
+type=ChangeState
+trigger1=Time=8
+value=3342
+
+;=======================
+;Parte3
+[Statedef 3342]
+type=S
+movetype=A
+physics=S
+juggle=7
+ctrl=0
+velset=0,0
+anim=6662
+sprpriority=9
+poweradd=40
+
+[State 3342,Effect]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S1,9
+
+[State 3342,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2||AnimElem=3||AnimElem=4
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3342]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2||AnimElem=3||AnimElem=4
+attr=S,HA
+damage=20,15
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,5
+sparkno=S8071+(Random%4)
+sparkxy=-10,-83
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,1.6
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3342,ChangeState]
+type=ChangeState
+trigger1=Time=14
+value=3343
+
+;=======================
+;Parte4
+[Statedef 3343]
+type=S
+movetype=A
+physics=S
+juggle=8
+velset=10,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=40
+
+[State 3343,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3343]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=S,HA
+damage=15,10
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,IfElse((AnimElem=1),-44,-76)
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-10
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3343,ChangeState]
+type=ChangeState
+trigger1=Time=8
+value=3344
+
+;=======================
+;Parte5
+[Statedef 3344]
+type=S
+movetype=A
+physics=S
+juggle=8
+velset=0,0
+ctrl=0
+anim=3332
+sprpriority=9
+poweradd=40
+
+[State 3044,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3344]
+type=Hitdef
+trigger1=AnimElem=1
+attr=S,HA
+damage=15,10
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime =3,5
+sparkno=S8071+(Random%4)
+sparkxy=-10,-83
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,1.6
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3344,ChangeState]
+type=ChangeState
+trigger1=Time=14
+value=3345
+
+;=======================
+;Parte6
+[Statedef 3345]
+type=S
+movetype=A
+physics=S
+juggle=8
+velset=11,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=50
+
+[State 3345,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3345]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=S,HA
+damage=20,15
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,IfElse((AnimElem=1),-44,-76)
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3345,ChangeState]
+type=ChangeState
+trigger1=!animTime
+value=3346
+
+;=======================
+;Tatsu
+[Statedef 3346]
+type=S
+movetype=A
+physics=S
+juggle=50
+anim=3346
+sprpriority=2
+poweradd=200
+velset=0,0
+ctrl=0
+
+[State 3346,playerpush]
+type=playerpush
+trigger1=AnimElemTime(3)>0
+value=0
+
+[State 3346,BGAire]
+type=Explod
+trigger1=AnimElem=2
+Anim=1617
+ID=1617
+pos=-5,0
+sprpriority=50
+postype=p1
+ownpal=1
+ontop=1
+removetime=30
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3346,BGAire2]
+type=Explod
+trigger1=AnimElem=2
+Anim=16177
+ID=16177
+pos=5,0
+sprpriority=50
+postype=p1
+ownpal=1
+ontop=1
+removetime=30
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3346,BGAire3]
+type=Explod
+trigger1=AnimElem=5
+Anim=8502
+ID=8502
+pos=2,0
+sprpriority=-90
+postype=p1
+ownpal=1
+removetime=-1
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3346,RemoveBGAire3]
+type=RemoveExplod
+trigger1=Animelem=27
+id=8502
+ignorehitpause=1
+
+[State 3346,VelAdd]
+type=VelAdd
+trigger1=AnimElemTime(20)=2
+y=-const(movement.yaccel)*10
+
+[State 3346,StateTypeSet]
+type=StateTypeSet
+trigger1=AnimElemTime(11)=0
+StateType=A
+physics=A
+
+[State 3346,VelSet]
+type=VelSet
+trigger1=Anim!=1303&&AnimElem=11
+y=-(14+Var(4))
+
+[State 3346,VelAdd]
+type=VelAdd
+trigger1=Anim=1303&&Time>86&&Vel Y
+y=ifelse(Var(4)=0,.11,ifelse(Var(4)=1,.12,.1333))
+
+[State 3346,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||Animelem=2||Animelem=3||Animelem=4||Animelem=5||Animelem=6||Animelem=7||Animelem=8
+trigger2=AnimElem=9||Animelem=10||Animelem=11||Animelem=12||Animelem=13||Animelem=14
+trigger3=AnimElem=14||Animelem=16||Animelem=17||Animelem=18||Animelem=19||Animelem=20
+trigger4=AnimElem=21||Animelem=22||Animelem=23||Animelem=24||Animelem=25||Animelem=26||Animelem=27
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3346]
+type=HitDef
+trigger1=AnimElem=1||Animelem=2||Animelem=3||Animelem=4||Animelem=5||Animelem=6||Animelem=7||Animelem=8
+trigger2=AnimElem=9||Animelem=10||Animelem=11||Animelem=12||Animelem=13||Animelem=14
+trigger3=AnimElem=14||Animelem=16||Animelem=17||Animelem=18||Animelem=19||Animelem=20
+trigger4=AnimElem=21||Animelem=22||Animelem=23||Animelem=24||Animelem=25||Animelem=26||Animelem=27
+attr=S,SA
+damage=22,18
+animtype=Up
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=s8071+(Random%4)
+sparkxy=-10,-80
+hitsound=s1,13
+guard.sparkno=s8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=200
+ground.hittime=200
+ground.velocity=4,-7
+airguard.velocity=-1.9,-1
+air.velocity=1,-6
+airguard.velocity=-1.9,-1
+air.hittime=200
+fall=1
+fall.recover=0
+envshake.time=20
+p2stateno=19000
+
+[State 3346,Effect]
+type=PlaySnd
+trigger1=AnimElem=1||Animelem=2||Animelem=3||Animelem=4||Animelem=5||Animelem=6||Animelem=7||Animelem=8
+trigger2=AnimElem=9||Animelem=10||Animelem=11||Animelem=12||Animelem=13||Animelem=14
+trigger3=AnimElem=14||Animelem=16||Animelem=17||Animelem=18||Animelem=19||Animelem=20
+trigger4=AnimElem=21||Animelem=22||Animelem=23||Animelem=24||Animelem=25||Animelem=26||Animelem=27
+value=1,7
+persistent=0
+
+[State 3346,Effect2]
+type=PlaySnd
+trigger1=AnimElem=6
+value=S1,4
+
+[State 3346,Effect3]
+type=PlaySnd
+trigger1=AnimElem=6
+value=S1,10
+
+[State 3346,ChangeAnim]
+type=ChangeAnim
+trigger1=!AnimTime
+value=1303
+persistent=0
+
+;==========================================================================================\
+;ShinRyuKen´s  X3
+;==========================================================================================/
+;ShinRyuKen Low
+[Statedef 3338]
+type=S
+movetype=A
+physics=S
+juggle=50
+anim=3337
+sprpriority=2
+poweradd=200
+velset=0,0
+ctrl=0
+
+[State 3338,playerpush]
+type=playerpush
+trigger1=AnimElemTime(3)>0
+value=0
+
+[State 3338,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8500
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3338,Superpause]
+type=SuperPause
+trigger1=!Time
+time=65
+movetime=65
+sound=S1,21
+pos=6,-12
+anim=-1
+poweradd=-1000
+darken=0
+movetime=65
+
+[State 3338,BGSuper]
+type=Explod
+trigger1=!Time
+Anim=6040
+ID=6040
+pos=10,-27
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=3
+
+[State 3338,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3338,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3338,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3338,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3338,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3338,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 3338,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3338,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3338,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3338,AfterImage]
+type=AfterImage
+trigger1=time=54&&Anim!=3003
+time=20
+TimeGap =1
+FrameGap=9
+length=18
+PalBright=7,7,7
+PalContrast=120,120,120
+PalAdd=0,0,0
+PalMul=1,1,1
+trans=add1
+
+[State 3338,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(5)>=1&&Time<200
+time=2
+
+[State 3338,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=0,0,0
+mul=0,0,0
+sinadd=-255,-255,-255, 99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3338,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3338,BGPalFx2]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3338,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3338,BGAire]
+type=Explod
+trigger1=AnimElem=2
+Anim=1617
+ID=1617
+pos=-5,0
+sprpriority=50
+postype=p1
+ownpal=1
+ontop=1
+removetime=30
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3338,BGAire2]
+type=Explod
+trigger1=AnimElem=2
+Anim=16177
+ID=16177
+pos=5,0
+sprpriority=50
+postype=p1
+ownpal=1
+ontop=1
+removetime=30
+ignorehitpause=1
+persistent=0
+bindtime=1
+
+[State 3338,VarSet]
+type=VarSet
+trigger1=Time=0
+var(4)=ifelse((Command="SRK2"&&Power>=2000),1,ifelse(Command="SRK3"&&Power>=3000,2,0))
+
+[State 3338, StateTypeSet]
+type=StateTypeSet
+trigger1=AnimElemTime(7)=0
+StateType=A
+physics=A
+
+[State 3338,VelSet]
+type=VelSet
+trigger1=Anim!=3003&&AnimElem=7
+y=-(10+Var(4))
+
+[State 3338,VelAdd]
+type=VelAdd
+trigger1=Anim=3003&&Time>74&&Vel Y
+y=ifelse(Var(4)=0,.11,ifelse(Var(4)=1,.12,.1333))
+
+[State 3338,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=2||Animelem=3||Animelem=4||Animelem=5||Animelem=6||Animelem=7
+trigger2=AnimElem=8||Animelem=9||Animelem=10||Animelem=11||Animelem=12||Animelem=13
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3338]
+type=HitDef
+trigger1=AnimElem=2||Animelem=3||Animelem=4||Animelem=5||Animelem=6||Animelem=7
+trigger2=AnimElem=8||Animelem=9||Animelem=10||Animelem=11||Animelem=12||Animelem=13
+attr=S,SA
+damage=22,16
+animtype=Up
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=6,2
+sparkno=s8071+(Random%4)
+sparkxy=-10,-80
+hitsound=s1,13
+guard.sparkno=s8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=200
+ground.hittime=200
+ground.velocity=4,-7
+airguard.velocity=-1.9,-1
+air.velocity=0,-4
+air.type=High
+air.hittime=200
+fall=1
+fall.recover=0
+envshake.time=20
+p2stateno=19000
+
+[State 3336,Voz]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S0,20
+volume=30
+
+[State 3338,Voz2]
+type=PlaySnd
+trigger1=AnimElem=5&&Anim!=3003
+value=S0,21
+
+[State 3338,Effect]
+type=PlaySnd
+trigger1=AnimElem=2||Animelem=3||Animelem=4||Animelem=5||Animelem=6||Animelem=7
+trigger2=AnimElem=8||Animelem=9||Animelem=10||Animelem=11||Animelem=12||Animelem=13
+value=1,7
+persistent=0
+
+[State 3338,Effect2]
+type=PlaySnd
+trigger1=AnimElem=6
+value=S1,4
+
+[State 3338,Effect3]
+type=PlaySnd
+trigger1=AnimElem=6
+value=S1,10
+
+[State 3338,ChangeAnim]
+type=ChangeAnim
+trigger1=!AnimTime
+value=3003
+persistent=0
+
+;===============================================================================
+;ShinRyuKen Medium
+;===============================================================================
+[Statedef 3336]
+type=S
+movetype=A
+physics=S
+juggle=50
+anim=3338
+sprpriority=2
+poweradd=270
+velset=0,0
+ctrl=0
+
+[State 3336,playerpush]
+type=playerpush
+trigger1=AnimElemTime(3)>0
+value=0
+
+[State 3336,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8500
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3336,Superpause]
+type=SuperPause
+trigger1=!Time
+time=65
+movetime=65
+sound=S1,21
+pos=6,-12
+anim=-1
+poweradd=-2000
+darken=0
+movetime=65
+
+[State 3336,BGSuper]
+type=Explod
+trigger1=!Time
+Anim=6040
+ID=6040
+pos=10,-27
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=3
+
+[State 3336,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3336,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3336,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3336,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3336,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3336,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 3336,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3336,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3336,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3336,AfterImage]
+type=AfterImage
+trigger1=time=54&&Anim!=3003
+time=20
+TimeGap =1
+FrameGap=9
+length=18
+PalBright=7,7,7
+PalContrast=120,120,120
+PalAdd=0,0,0
+PalMul=1,1,1
+trans=add1
+
+[State 3336,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(5)>=1&&Time<200
+time=2
+
+[State 3336,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=0,0,0
+mul=0,0,0
+sinadd=-255,-255,-255, 99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3336,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3336,BGPalFx2]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3336,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3336,Aire]
+type=Explod
+trigger1=AnimElemTime(5)=0
+Anim=8044
+ID=8044
+pos=37,8
+postype=p1
+ontop=0
+bindtime=1
+removetime=-2
+supermove=1
+supermovetime=9
+ignorehitpause=1
+persistent=0
+
+[State 3336,Aire2]
+type=Explod
+trigger1=AnimElemTime(5)=0
+Anim=8044
+ID=8044
+sprpriority=10
+pos=-37,8
+postype=p1
+ontop=0
+facing=-1
+bindtime=1
+removetime=-2
+supermove=1
+supermovetime=9
+ignorehitpause=1
+persistent=0
+
+[State 3336,VarSet]
+type=VarSet
+trigger1=Time=0
+var(4)=ifelse((Command="SRK2"&&Power>=2000),1,ifelse(Command="SRK3"&&Power>=3000,2,0))
+
+[State 3336,StateTypeSet]
+type=StateTypeSet
+trigger1=AnimElemTime(7)=0
+StateType=A
+physics=A
+
+[State 3336,VelSet]
+type=VelSet
+trigger1=Anim!=3003&&AnimElem=7
+y=-(11+Var(4))
+
+[State 3336,VelAdd]
+type=VelAdd
+trigger1=Anim=3003&&Time>74&&Vel Y
+y=ifelse(Var(4)=0,.11,ifelse(Var(4)=1,.12,.1333))
+
+[State 3336,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=2||AnimElem=3||AnimElem=4||AnimElem=5||AnimElem=6||AnimElem=7||AnimElem=8||AnimElem=9
+trigger2=Animelem=10||AnimElem=11||AnimElem=12||AnimElem=13||AnimElem=14||AnimElem=15||AnimElem=16||AnimElem=17
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3336]
+type=HitDef
+trigger1=AnimElem=2||AnimElem=3||AnimElem=4||AnimElem=5||AnimElem=6||AnimElem=7||AnimElem=8||AnimElem=9
+trigger2=Animelem=10||AnimElem=11||AnimElem=12||AnimElem=13||AnimElem=14||AnimElem=15||AnimElem=16||AnimElem=17
+attr=S,SA
+damage=30,25
+animtype=Up
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=6, 2
+sparkno=s8071+(Random%4)
+sparkxy=-10,-80
+hitsound=s1,13
+guard.sparkno=s8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=250
+ground.hittime=250
+ground.velocity=4,-8
+airguard.velocity=-1.9,-.8
+air.velocity=0,-4
+air.type=High
+air.hittime=250
+fall=1
+fall.recover=0
+envshake.time=20
+p2stateno=19000
+
+[State 3336,Voz]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S0,20
+volume=30
+
+[State 3336,Effect]
+type=PlaySnd
+trigger1=AnimElem=2||AnimElem=3||AnimElem=4||AnimElem=5||AnimElem=6||AnimElem=7||AnimElem=8||AnimElem=9
+trigger2=Animelem=10||AnimElem=11||AnimElem=12||AnimElem=13||AnimElem=14||AnimElem=15||AnimElem=16||AnimElem=17
+value=1,7
+persistent=0
+
+[State 3336,Voz2]
+type=PlaySnd
+trigger1=AnimElem=5&&Anim!=3003
+value=S0,21
+
+[State 3336,Effect2]
+type=PlaySnd
+trigger1=AnimElem=6
+value=S1,4
+
+[State 3336,Effect3]
+type=PlaySnd
+trigger1=AnimElemTime(5)=0
+value=S0,52
+persistent=0
+
+[State 3336,Effect4]
+type=PlaySnd
+trigger1=AnimElem=6
+value=S1,10
+
+[State 3336,ChangeAnim]
+type=ChangeAnim
+trigger1=!AnimTime
+value=3003
+persistent=0
+
+;===============================================================================
+;ShinRyuKen High
+;===============================================================================
+[Statedef 3334]
+type=S
+movetype=A
+physics=S
+juggle=75
+anim=3339
+sprpriority=2
+poweradd=300
+velset=0,0
+ctrl=0
+
+[State 3334,playerpush]
+type=playerpush
+trigger1=AnimElemTime(3)>0
+value=0
+
+[State 3334,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8501
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3334,Superpause]
+type=SuperPause
+trigger1=!Time
+time=65
+movetime=65
+sound=S1,21
+pos=6,-12
+anim=-1
+poweradd=-3000
+darken=0
+movetime=65
+
+[State 3334,BGSuper]
+type=Explod
+trigger1=!Time
+Anim=6040
+ID=6040
+pos=10,-27
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=3
+
+[State 3334,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3334,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3334,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3334,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3334,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3334,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 3334,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3334,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3334,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3334,AfterImage]
+type=AfterImage
+trigger1=time=54&&Anim!=3003
+time=20
+TimeGap =1
+FrameGap=9
+length=18
+PalBright=7,7,7
+PalContrast=120,120,120
+PalAdd=0,0,0
+PalMul=1,1,1
+trans=add1
+
+[State 3334,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(5)>=1&&Time<200
+time=2
+
+[State 3334,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=0,0,0
+mul=0,0,0
+sinadd=-255,-255,-255, 99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3334,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3334,BGPalFx2]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3334,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3334,Aire]
+type=Explod
+trigger1=StateNo=3334&&AnimElem=4
+Anim=80444
+sprpriority=10
+pos=37,8
+postype=p1
+bindtime=1
+removetime=-2
+supermovetime=65
+ignorehitpause=1
+persistent=0
+ownpal=1
+
+[State 3334,Aire2]
+type=Explod
+trigger1=StateNo=3334&&AnimElem=4
+Anim=80444
+sprpriority=10
+pos=-37,8
+postype=p1
+facing=-1
+bindtime=1
+removetime=-2
+supermovetime =65
+ignorehitpause=1
+persistent=0
+ownpal=1
+
+[State 3334,Aire3]
+type=Explod
+trigger1=StateNo=3334&&AnimElem=5
+Anim=80444
+sprpriority=10
+pos=87,8
+postype=p1
+bindtime=1
+removetime=-2
+supermovetime=65
+ignorehitpause=1
+persistent=0
+ownpal=1
+
+[State 3334,Aire4]
+type=Explod
+trigger1=StateNo=3334&&AnimElem=5
+Anim=80444
+sprpriority=10
+pos=-87,8
+postype=p1
+facing=-1
+bindtime=1
+removetime=-2
+supermovetime=65
+ignorehitpause=1
+persistent=0
+ownpal=1
+
+[State 3334,Aire5]
+type=Explod
+trigger1=StateNo=3334&&AnimElem=6
+Anim=80444
+sprpriority=10
+pos=165,8
+postype=p1
+bindtime=1
+removetime=-2
+supermovetime=65
+ignorehitpause=1
+persistent=0
+ownpal=1
+
+[State 3334,Aire6]
+type=Explod
+trigger1=StateNo=3334&&AnimElem=6
+Anim=80444
+sprpriority=10
+pos=-165,8
+postype=p1
+facing=-1
+bindtime=1
+removetime=-2
+supermovetime=65
+ignorehitpause=1
+persistent=0
+ownpal=1
+
+[State 3334,BGOpenEnergya]
+type=Explod
+trigger1=StateNo=3334&&AnimElem=5
+Anim=8040
+ID=8040
+pos=0,0
+postype=p1
+bindtime=1
+removetime=-1
+removeongethit=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+Scale=1.1,1.1
+ownpal=1
+persistent=0
+
+[State 3334,RemoveOpenEnergya]
+type=RemoveExplod
+trigger1=AnimElemTime(29)=1
+ID=8040
+
+[State 3334,BGEndEnergya]
+type=Explod
+trigger1=StateNo=3334&&AnimElemTime(29)=1
+Anim=8041
+ID=8041
+pos=0,0
+postype=p1
+bindtime=1
+removetime=-2
+removeongethit=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+ownpal=1
+persistent=0
+
+[State 3334,VelAdd]
+type=VelAdd
+trigger1=AnimElemTime(20)=2
+y=-const(movement.yaccel)*10
+
+[State 3334,VarSet]
+type=VarSet
+trigger1=Time=0
+var(4)=ifelse((Command="SRK2"&&Power>=2000),1,ifelse(Command="SRK3"&&Power>=3000,2,0))
+
+[State 3334,StateTypeSet]
+type=StateTypeSet
+trigger1=AnimElemTime(15)=0
+StateType=A
+physics=A
+
+[State 3334,VelSet]
+type=VelSet
+trigger1=Anim!=3003&&AnimElem=15
+y=-(14+Var(4))
+
+[State 3334,VelAdd]
+type=VelAdd
+trigger1=Anim=3003&&Time>86&&Vel Y
+y=ifelse(Var(4)=0,.11,ifelse(Var(4)=1,.12,.1333))
+
+[State 3334,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=2||Animelem=3||Animelem=4||Animelem=5||Animelem=6||Animelem=7||Animelem=8||Animelem=9
+trigger2=Animelem=10||Animelem=11||Animelem=12||Animelem=13||Animelem=14||Animelem=15||Animelem=16||Animelem=17
+trigger3=Animelem=18||Animelem=19||Animelem=20||Animelem=21||Animelem=22||Animelem=23||Animelem=24||Animelem=25
+trigger4=Animelem=26||Animelem=27||Animelem=28||Animelem=29||Animelem=30
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3334]
+type=HitDef
+trigger1=var(9):=-10&&var(10):=-83
+trigger1=AnimElem=2||Animelem=3||Animelem=4||Animelem=5||Animelem=6||Animelem=7||Animelem=8||Animelem=9
+trigger2=Animelem=10||Animelem=11||Animelem=12||Animelem=13||Animelem=14||Animelem=15||Animelem=16||Animelem=17
+trigger3=Animelem=18||Animelem=19||Animelem=20||Animelem=21||Animelem=22||Animelem=23||Animelem=24||Animelem=25
+trigger4=Animelem=26||Animelem=27||Animelem=28||Animelem=29||Animelem=30
+attr=S,SA
+damage=31,30
+animtype=Up
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=s1515+(Random%4)
+sparkxy=-10,-80
+hitsound=s1,13
+guard.sparkno=s8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=300
+ground.hittime=300
+ground.velocity=4,-7
+airguard.velocity=-1.9,-1
+air.velocity=1,-6
+air.type=High
+air.hittime=300
+fall=1
+fall.recover=0
+envshake.time=100
+p2stateno=19000
+
+[State 3334]
+type=HitDef
+trigger1=AnimElem=31
+attr=S,SA
+damage=31,30
+animtype=Up
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=0,0
+sparkno=s8071+(Random%4)
+sparkxy=-10,-80
+hitsound=s1,13
+guard.sparkno=s8442
+guardsound=s1,16
+ground.type=High
+ground.slidetime=200
+ground.hittime=200
+ground.velocity=4,-7
+airguard.velocity=-1.9,-.8
+air.velocity=-10,-15
+air.type=High
+air.hittime=200
+fall=1
+fall.recover=0
+envshake.time=55
+p2stateno=19000
+
+[State 3334,Helper]
+type=Helper
+trigger1=StateNo=3334&&MoveHit
+helpertype=normal
+stateno=8084
+ID=8084
+name="Particles"
+postype=p2
+pos=0,0;(target,const(size.ground.front)+var(9)),var(10)-floor(p2dist y)
+ownpal=1
+facing=-1
+ignorehitpause=1
+persistent=0
+
+[State 3334,Voz]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S0,20
+volume=30
+
+[State 3334,Voz2]
+type=PlaySnd
+trigger1=AnimElem=8
+value=S0,21
+volume=100
+persistent=0
+channel=1
+
+[State 3334,Effect]
+type=PlaySnd
+trigger1=AnimElemTime(5)=0
+value=S0,52
+persistent=0
+channel=3
+
+[State 3334,Effect2]
+type=PlaySnd
+trigger1=!Time
+value=S1,4
+
+[State 3334,Effect3]
+type=PlaySnd
+trigger1=!Time
+value=S1,10
+
+[State 3334,ChangeAnim]
+type=ChangeAnim
+trigger1=!AnimTime
+value=3003
+persistent=0
+
+;===============================================================================
+;ShoriuReppa X3
+;===============================================================================
+;Starting reppa low
+[Statedef 3010]
+type=S
+movetype=I
+physics=S
+juggle=8
+velset=0,0
+ctrl=0
+anim=3330
+sprpriority=2
+poweradd=40
+
+[State 3010,Width]
+type=Width
+trigger1=AnimElem=2,>=1
+value=-20,0
+
+[State 3010,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8500
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3010,BGSuper1]
+type=Explod
+trigger1=!Time
+Anim=6040
+ID=6040
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=3
+
+[State 3010,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3010,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3010,ModifyExplod]
+type=ModifyExplod
+trigger1=Time <=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3010,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3010,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3010,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 3010,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3010,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3010,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3010,SuperPause]
+type=SuperPause
+trigger1=Time
+time=65
+pos=6,-12
+anim=-1
+sound=S1,21
+poweradd=-1000
+darken=0
+movetime=65
+persistent=0
+
+[State 3010,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=0,0,0
+mul=0,0,0
+sinadd=-255,-255,-255,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3010,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3010,BGPalFx]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3010,BG Cleaner]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3010,Voz]
+type=PlaySnd
+trigger1=!Time
+value=S0,18
+channel=8
+
+[State 3010,ChangeState]
+type=ChangeState
+trigger1=!AnimTime
+value=3011
+
+;=======================
+;Part2
+[Statedef 3011]
+type=S
+movetype=A
+physics=S
+juggle=7
+velset=11,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=60
+
+[State 3011,Aire]
+type=explod
+trigger1=anim=3331&&!animelemtime(1)
+vel=0,0
+anim=1617
+sprpriority=40
+postype=p1
+pos=50,5
+ownpal=1
+scale=.99,.99
+removetime=32
+
+[State 3011,Shadows]
+type=AfterImage
+trigger1=AnimElem =1
+time=51
+TimeGap=1
+FrameGap=7
+length=15
+PalBright=7,7,7
+PalContrast=120,120,120
+PalAdd=0,0,0
+PalMul=1,1,1
+trans=add1
+removeongethit=1
+persistent=0
+
+[State 3011,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(2)>=1&&Time>51
+time=51
+
+[State 3011,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3011]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=A,HA
+damage=20,15
+animtype=Hard
+hitflag=MAFD
+guardflag=MA
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,IfElse((AnimElem=1),-44,-76)
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=6
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3011,Voz]
+type=PlaySnd
+trigger1=Time=0
+value=S0,19
+channel=9
+
+[State 3011,ChangeState]
+type=ChangeState
+trigger1=Time=8
+value=3012
+
+;=======================
+;Paret3
+[Statedef 3012]
+type=S
+movetype=A
+physics=S
+juggle=7
+ctrl=0
+velset=0,0
+anim=3332
+sprpriority=9
+poweradd=50
+
+[State 3012,Effect]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S1,9
+
+[State 3012,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3012]
+type=Hitdef
+trigger1=AnimElem=1
+attr=S,SA
+damage=20,15
+animtype=Hard
+hitflag=MAFD
+guardflag=M
+priority=7,Hit
+pausetime=3,5
+sparkno=S8071+(Random%4)
+sparkxy=-23,-83
+hitsound=S1,13
+guard.sparkno=S8076
+guardsound=s3,16
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4, 1.6
+air.hittime=12
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+getpower=100,100
+givepower=20,9
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3012,ChangeState]
+type=ChangeState
+trigger1=Time=14
+value=3013
+
+;=======================
+;Parte4
+[Statedef 3013]
+type=S
+movetype=A
+physics=S
+juggle=1
+velset=11,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=50
+
+[State 3013,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3013]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=S,SA
+damage=20,15
+animtype=Hard
+hitflag=MAFD
+guardflag=M
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-3
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-10
+air.hittime=12
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+getpower=55
+givepower=20,9
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3013,ChangeState]
+type=ChangeState
+trigger1=Time=8
+value=3021
+
+;======================
+;End
+[Statedef 3021]
+type=A
+movetype=A
+physics=A
+juggle=7
+velset=0,0
+ctrl=0
+anim=3021
+sprpriority=2
+poweradd=60
+
+[State 3021,Effect]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S1,9
+
+[State 3021,Veladd]
+type=Veladd
+trigger1=Time=0
+X=3
+y=-9
+
+[State 3021,VelSet]
+type=VelSet
+trigger1=Animelem=3
+X=1
+
+[State 3021,Gravity]
+type=Gravity
+trigger1=AnimElem=3
+Value=.42
+
+[State 3021,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2||AnimElem=3||AnimElem=4||AnimElem=5
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3021]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=A,SA
+damage=20,15
+animtype=Hard
+guardflag=M
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=0,-20
+airguard.velocity=-1.4,-6
+air.type=High
+air.velocity=-1,-9
+air.hittime=12
+ground.cornerpush.veloff=0
+air.fall=1
+fall=1
+air.recover=0
+fall.recover=0
+getpower=60,60
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3021]
+type=Hitdef
+trigger1=AnimElem=3||AnimElem=4||AnimElem=5
+attr=A,HA
+damage=25,20
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=4,4
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=0,-20
+airguard.velocity=-1.4,-6
+air.type=High
+air.velocity=-1,-9
+air.hittime=12
+ground.cornerpush.veloff=0
+air.fall=1
+fall=1
+air.recover=0
+fall.recover=0
+getpower=60,60
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3021,ChangeState]
+type=ChangeState
+trigger1=AnimTime=21
+value=0
+ctrl=1
+
+;===============================================================================
+;ShoriuReppa Medium
+;===============================================================================
+;Starting
+[Statedef 3022]
+type=S
+movetype=I
+physics=S
+juggle=7
+velset=0,0
+ctrl=0
+anim=3330
+sprpriority=2
+poweradd=40
+
+[State 3022,Width]
+type=Width
+trigger1=AnimElem=2,>=1
+value=-20,0
+
+[State 3022,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8500
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3022,BGSuper1]
+type=Explod
+trigger1=!Time
+Anim=6040
+ID=6040
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=3
+
+[State 3022,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3022,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3022,ModifyExplod]
+type=ModifyExplod
+trigger1=Time <=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3022,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3022,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3022,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 3022,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3022,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3022,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3022,SuperPause]
+type=SuperPause
+trigger1=Time
+time=65
+pos=6,-12
+anim=-1
+sound=S1,21
+poweradd=-2000
+darken=0
+movetime=65
+persistent=0
+
+[State 3022,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=0,0,0
+mul=0,0,0
+sinadd=-255,-255,-255,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3022,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3022,BGPalFx]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3022,BG Cleaner]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3022,Voz]
+type=PlaySnd
+trigger1=Time=0
+value=S0,18
+channel=7
+
+[State 3022,ChangeState]
+type=ChangeState
+trigger1=!AnimTime
+value=3023
+
+;=======================
+;Parte2
+[Statedef 3023]
+type=S
+movetype=A
+physics=S
+juggle=7
+velset=7,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=40
+
+[State 3023,Aire]
+type=explod
+trigger1=anim=3331&&!animelemtime(1)
+vel=0,0
+anim=1617
+sprpriority=40
+postype=p1
+pos=50,5
+ownpal=1
+scale=.99,.99
+removetime=32
+
+[State 3023,Shadows]
+type=AfterImage
+trigger1=AnimElem=2
+time=77
+TimeGap=1
+FrameGap=7
+length=15
+PalBright=7,7,7
+PalContrast=120,120,220
+PalAdd=0,0,0
+PalMul=1,1,1
+trans=add1
+persistent=0
+removeongethit=1
+
+[State 3023,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(2)>=1&&Time<77
+time=77
+
+[State 3023,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3023]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=S,HA
+damage=20,15
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,IfElse((AnimElem=1),-44,-76)
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-3
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3023,ChangeState]
+type=ChangeState
+trigger1=Time=8
+value=3024
+
+;=======================
+;Parte3
+[Statedef 3024]
+type=S
+movetype=A
+physics=S
+juggle=7
+ctrl=0
+velset=0,0
+anim=6662
+sprpriority=9
+poweradd=40
+
+[State 3024,Voz]
+type=PlaySnd
+trigger1=Time=10
+value=S0,19
+channel=9
+
+[State 3024,Effect]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S1,9
+
+[State 3024,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2||AnimElem=3||AnimElem=4
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3024]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2||AnimElem=3||AnimElem=4
+attr=S,HA
+damage=20,15
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,5
+sparkno=S8071+(Random%4)
+sparkxy=-10,-83
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,1.6
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3024,ChangeState]
+type=ChangeState
+trigger1=Time=14
+value=3025
+
+;=======================
+;Parte4
+[Statedef 3025]
+type=S
+movetype=A
+physics=S
+juggle=8
+velset=10,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=40
+
+[State 3025,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3025]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=S,HA
+damage=15,10
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,IfElse((AnimElem=1),-44,-76)
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-10
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3025,ChangeState]
+type=ChangeState
+trigger1=Time=8
+value=3026
+
+;=======================
+;Parte5
+[Statedef 3026]
+type=S
+movetype=A
+physics=S
+juggle=8
+velset=0,0
+ctrl=0
+anim=3332
+sprpriority=9
+poweradd=40
+
+[State 3026,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3026]
+type=Hitdef
+trigger1=AnimElem=1
+attr=S,HA
+damage=15,10
+animtype=Hard
+guardflag=MA
+hitflag=MAF
+priority=7,Hit
+pausetime =3,5
+sparkno=S8071+(Random%4)
+sparkxy=-10,-83
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,1.6
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3026,ChangeState]
+type=ChangeState
+trigger1=Time=14
+value=3027
+
+;=======================
+;Parte6
+[Statedef 3027]
+type=S
+movetype=A
+physics=S
+juggle=8
+velset=11,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=50
+
+[State 3027,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3027]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=S,HA
+damage=20,15
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,IfElse((AnimElem=1),-44,-76)
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3027,ChangeState]
+type=ChangeState
+trigger1=Time=8
+value=3028
+
+;=======================
+;END
+[Statedef 3028]
+type=A
+movetype=A
+physics=A
+juggle=7
+velset=0,0
+ctrl=0
+anim=3022
+sprpriority=2
+poweradd=50
+
+[State 3028,Effect]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S1,9
+
+[State 3028,Veladd]
+type=Veladd
+trigger1=Time=0
+X=5.1
+y=-10
+
+[State 3028,VelSet]
+type=VelSet
+trigger1=Animelem=3
+X=1
+
+[State 3028,Gravity]
+type=Gravity
+trigger1=AnimElem=3
+Value=.42
+
+[State 3028,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2||AnimElem=3||AnimElem=4
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3028]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2||AnimElem=3||AnimElem=4
+attr=A,HA
+damage=25,20
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=5,5
+sparkno=S8071+(Random%4)
+sparkxy=-10,-76
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-2,-10
+airguard.velocity=-2,-10
+air.type=High
+air.velocity=-2,-11
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+fall=1
+air.recover=0
+fall.recover=0
+env.shake=1
+envshake.time=6
+envshake.ampl=6
+p2stateno=19000
+
+[State 3028,ChangeState]
+type=ChangeState
+trigger1=AnimTime=35
+value=0
+ctrl=1
+
+;===============================================================================
+;ShoriuReppa High
+;===============================================================================
+;Starting
+[Statedef 3330]
+type=S
+movetype=I
+physics=S
+juggle=0
+velset=0,0
+ctrl=0
+anim=3330
+sprpriority=2
+poweradd=40
+
+[State 3330,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8501
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3330,BGSuper1]
+type=Explod
+trigger1=!Time
+Anim=6040
+ID=6040
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=3
+
+[State 3330,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3330,BGSuper2]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3330,ModifyExplod]
+type=ModifyExplod
+trigger1=Time <=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3330,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3330,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3330,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 3330,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3330,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=9,-27
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3330,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3330,SuperPause]
+type=SuperPause
+trigger1=Time
+time=65
+pos=6,-12
+anim=-1
+sound=S1,21
+poweradd=-3000
+darken=0
+movetime=65
+persistent=0
+
+[State 3330,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=0,0,0
+mul=0,0,0
+sinadd=-255,-255,-255,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3330,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3330,BGPalFx]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3330,BG Cleaner]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3330,Voz]
+type=PlaySnd
+trigger1=Time=0
+value=S0,18
+channel=7
+
+[State 3330,ChangeState]
+type=ChangeState
+trigger1=!AnimTime
+value=3331
+
+;======================
+;Parte2
+[Statedef 3331]
+type=S
+movetype =A
+physics=S
+juggle=7
+velset=11,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=50
+
+[State 3331,Aire]
+type=explod
+trigger1=anim=3331&&!animelemtime(1)
+vel=0,0
+anim=1617
+sprpriority=40
+postype=p1
+pos=50,5
+ownpal=1
+scale=.99,.99
+removetime=32
+
+[State 3331,Shadows]
+type=AfterImage
+trigger1=AnimElem=2,1
+time=150
+TimeGap =1
+FrameGap=7
+length=15
+paladd=0,0,0
+palmul=.80,.80,.50
+palcontrast=110,110,110
+palbright=-110, -110,-110
+trans=add
+persistent=1
+removeongethit=1
+
+[State 3331,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(2)>=1&&Time<110
+time=110
+
+[State 3331,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3331]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=S,HA
+damage=25,20
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=2,2
+sparkno=S8071+(Random%4)
+sparkxy=-10,IfElse((AnimElem=1),-44,-76)
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+p2stateno=19000
+
+[State 3331,Voz]
+type=PlaySnd
+trigger1=Time=1
+value=S0,19
+channel=99
+
+[State 3331,ChangeState]
+type=ChangeState
+trigger1=Time=8
+value=3332
+
+;=======================
+;Parte3
+[Statedef 3332]
+type=S
+movetype=A
+physics=S
+juggle=7
+ctrl=0
+velset=0,0
+anim=3332
+sprpriority=9
+poweradd=40
+
+[State 3332,Effect]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S1,9
+
+[State 3332,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3332]
+type=Hitdef
+trigger1=AnimElem=1
+attr=S,HA
+damage=30,25
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=2,2
+sparkno=S8071+(Random%4)
+sparkxy=-10,-83
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4, 1.6
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+p2stateno=19000
+
+[State 3332,ChangeState]
+type=ChangeState
+trigger1=Time=14
+value=3328
+
+;=======================
+;Parte4
+[Statedef 3328]
+type=S
+movetype=A
+physics=S
+juggle=1
+velset=11,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=40
+
+[State 3328,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3328]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=S,HA
+damage=35,30
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=2,2
+sparkno=S8071+(Random%4)
+sparkxy=-10,IfElse((AnimElem=1),-44,-76)
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+p2stateno=19000
+
+[State 3328,ChangeState]
+type=ChangeState
+trigger1=Time=8
+value=3327
+
+;=======================
+;Parte5
+[Statedef 3327]
+type=S
+movetype=A
+physics=S
+juggle=7
+velset=0,0
+ctrl=0
+anim=3332
+sprpriority=9
+poweradd=40
+
+[State 3327,Effect]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S1,9
+
+[State 3327,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3327]
+type=Hitdef
+trigger1=AnimElem=1
+attr=S,HA
+damage=30,25
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=2,4
+sparkno=S8071+(Random%4)
+sparkxy=-10,-83
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4, 1.6
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=1
+air.recover=0
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+p2stateno=19000
+
+[State 3327,ChangeState]
+type=ChangeState
+trigger1=Time=14
+value=3326
+
+;=======================
+;Parte6
+[Statedef 3326]
+type=S
+movetype=A
+physics=S
+juggle=7
+velset=21,0
+ctrl=0
+anim=3331
+sprpriority=9
+poweradd=40
+
+[State 3326,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=2
+value=500,0,0
+time=1
+under=1
+ignorehitpause=1
+
+[State 3326]
+type=Hitdef
+trigger1=AnimElem=1||AnimElem=2
+attr=S,HA
+damage=35,30
+animtype=Hard
+guardflag=MA
+hitflag=MAFD
+priority=7,Hit
+pausetime=3,3
+sparkno=S8071+(Random%4)
+sparkxy=-10,IfElse((AnimElem=1),-44,-76)
+hitsound=S1,13
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-4
+airguard.velocity=-1.9,-.8
+air.type=High
+air.velocity=-1.4,-3
+air.hittime=50
+ground.cornerpush.veloff=0
+air.fall=0
+air.recover=0
+fall.recover=0
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+p2stateno=19000
+
+[State 3326,ChangeState]
+type=ChangeState
+trigger1=Time=8
+value=3329
+
+;=======================
+;End
+[Statedef 3329]
+type=A
+movetype=A
+physics=A
+juggle=0
+ctrl=0
+velset=3,-13
+anim=3329
+sprpriority=2
+poweradd=40
+
+[State 3329,fire]
+type=Explod
+trigger1=AnimElemTime(1)=0
+anim=8011
+ID=8011
+sprpriority=9
+postype=p1
+bindtime=-1
+ownpal=1
+pos=15,-27
+velocity=0,0
+removetime=-1
+removeongethit=1
+
+[State 3329,RemoveFire]
+type=RemoveExplod
+trigger1=AnimElemTime(20)=1||!stateno=1219
+ID=8011
+
+[State 3329,fire2]
+type=Explod
+trigger1=AnimElemTime(20)=1
+anim=8012
+ID=8012
+sprpriority=10
+postype=p1
+bindtime=-1
+ownpal=1
+pos=15,-27
+velocity=0,0
+removetime=-2
+removeongethit=1
+
+[State 3329,RemoveFire2]
+type=RemoveExplod
+trigger1=AnimElemTime(20)=1||!stateno=1219
+ID=8012
+
+[State 3329,Effect]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S1,19
+
+[State 3329,Effect2]
+type=PlaySnd
+trigger1=AnimElem=1
+value=S1,9
+
+[State 3329,Velset]
+type=Velset
+trigger1=AnimElem=22
+x = 1
+
+[State 3329,Gravity]
+type=Gravity
+trigger1=AnimElem=22
+Value=.42
+
+[State 3329,EnvColor]
+type=EnvColor
+triggerall=movehit
+trigger1=AnimElem=1||AnimElem=3||AnimElem=5||AnimElem=7||AnimElem=9||AnimElem=11
+trigger2=AnimElem=14||AnimElem=16||AnimElem=18||AnimElem=20||AnimElem=22
+value=500,0,0
+time=2
+under=1
+ignorehitpause=1
+
+[State 3329]
+type=Hitdef
+trigger1=Var(9):=-10&&var(10):=-83
+trigger1=AnimElem=1||AnimElem=2||AnimElem=3||AnimElem=4||AnimElem=5||AnimElem=6||AnimElem=7
+trigger2=AnimElem=8||AnimElem=9||AnimElem=10||AnimElem=11||AnimElem=12||AnimElem=13||AnimElem=14
+trigger3=AnimElem=15||AnimElem=16||AnimElem=17||AnimElem=18||AnimElem=19||AnimElem=20||AnimElem=21||AnimElem=22
+attr=A,HA
+damage=30,25
+animtype=High
+guardflag=MA
+hitflag=MAFD
+priority=10,Hit
+pausetime=5,3
+sparkno=S1515+(Random%4)
+sparkxy=-10,-83
+hitsound=S1,5
+guardsound=s3,16
+guard.sparkno=S8076
+ground.type=High
+ground.slidetime=50
+ground.hittime=50
+ground.velocity=-1.4,-4
+airguard.velocity=-1.9,-8
+air.type=Low
+air.velocity=-1.4,-5.3
+air.hittime=50
+air.fall=0
+air.recover=0
+fall.recover=0
+fall=1
+Palfx.time=ifelse(P2StateType=A,70,45)
+palfx.mul=251,173,23
+palfx.add=200,0,0
+palfx.sinadd=251,173,23,5
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+sprpriority=6
+p2stateno=19000
+
+[State 3329,ChangeState]
+type=ChangeState
+trigger1=Time=64
+value=0
+ctrl=1
+
+;===============================================================================
+;Shun Goku Satsu
+;===============================================================================
+;Starting
+[Statedef 3000]
+type=S
+movetype=A
+physics=N
+anim=3000
+Ctrl=0
+velset=0,0
+sprpriority=1
+poweradd=70
+
+[State 3000,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8501
+pos=0,0
+postype=Back
+bindtime=50
+supermove=1
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3000,BGSuper]
+type=AfterImage
+trigger1=AnimElem=2
+time=38
+timegap=1
+framegap=9
+lengt=18
+paladd=0,0,0
+palmul=.80,.80,.50
+palcontrast=110,110,110
+palbright=-255,-255,-255
+trans=add
+persistent=1
+
+[State 3000,AfterImageTime]
+type=AfterImageTime
+trigger1=AnimElemTime(2)>=1&&Time<50
+time=50
+
+[State 3000,SuperPause]
+type=SuperPause
+trigger1=AnimElem=1
+time=65
+pos=2,-109
+anim=-1
+sound=S1,21
+poweradd=-3000
+darken=0
+movetime=65
+
+[State 3000,BGSuper2]
+type=Explod
+trigger1=AnimElem=1
+Anim=6040
+ID=6040
+pos=7,-107
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+sprpriority=4
+supermovetime=65
+ignorehitpause=1
+
+[State 3000,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3000,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=7,-107
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3000,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3000,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6042
+ID=6042
+pos=7,-107
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3000,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3000,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=7,-107
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 3000,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3000,BGSuper6]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=7,-107
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3000,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3000,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=230,0,0
+mul=230,0,0
+sinadd=-355,-255,-255,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3000,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3000,BGPalFx]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3000,BG Cleaner]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3000,Velset]
+type=Velset
+trigger1=AnimElem=2||AnimElem=3||AnimElem=4||AnimElem=5||AnimElem=6||AnimElem=7&&!P2MoveType=H
+x=10
+
+[State 3000,AfterImageTimeC]
+type=AfterImageTime
+trigger1=AnimElemTime(2)>=1&&Time<110
+time=19
+
+[State 3000]
+type=HitDef
+trigger1=AnimElem=2||AnimElem=3||AnimElem=4||AnimElem=5||AnimElem=6||AnimElem=7&&!P2StateNo=40
+attr=S,SA
+hitflag=MAFD
+priority=8,Miss
+sparkno=-1
+p1stateno=3001
+p2stateno=3002
+guard.dist=0
+fall=1
+fall.recover=0
+
+[State 3000,EffectSombra]
+type=PlaySnd
+trigger1=AnimElem=2
+value=S1,24
+
+[State 3000,EffectSombra2]
+type=PlaySnd
+trigger1=AnimElemTime(2)=0
+value=S1,23
+
+[State 3000,ChangeState]
+type=ChangeState
+trigger1=AnimElemTime(7)=4
+value=0
+ctrl=1
+
+;=======================
+;Agarre+40Hits!
+[Statedef 3001]
+type=S
+movetype=I
+physics=N
+anim=3001
+poweradd=50
+VelSet=0,0
+ctrl=0
+
+[State 3001,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 3001,NotHitBy]
+type=NotHitBy
+trigger1=Time <280
+value=SCA
+time=1
+
+[State 3001,AllPalFx]
+type=AllPalFx
+trigger1=AnimElemTime(1)=5
+time=30
+sinadd=-200,-200,-200,120
+
+[State 3001,EnvColor]
+type=EnvColor
+trigger1=AnimElemTime(1)>30&&AnimElemTime(1)<280
+time=4
+value=0,0,0
+
+[State 3001,playerPush]
+type=playerPush
+trigger1=Time<280
+value=0
+
+[State 3001,HitAdd]
+type=HitAdd
+trigger1=AnimElemTime(1)=37||AnimElemTime(1)=47||AnimElemTime(1)=67||AnimElemTime(1)=77||AnimElemTime(1)=83||AnimElemTime(1)=104||AnimElemTime(1)=105
+trigger2=AnimElemTime(1)=112||AnimElemTime(1)=119||AnimElemTime(1)=125||AnimElemTime(1)=130||AnimElemTime(1)=145||AnimElemTime(1)=150
+trigger3=AnimElemTime(1)=155||AnimElemTime(1)=160||AnimElemTime(1)=165||AnimElemTime(1)=170||AnimElemTime(1)=175||AnimElemTime(1)=180
+trigger4=AnimElemTime(1)=185||AnimElemTime(1)=190||AnimElemTime(1)=195||AnimElemTime(1)=200||AnimElemTime(1)=205||AnimElemTime(1)=210
+trigger5=AnimElemTime(1)=215||AnimElemTime(1)=220||AnimElemTime(1)=225||AnimElemTime(1)=230||AnimElemTime(1)=235||AnimElemTime(1)=240
+trigger6=AnimElemTime(1)=245||AnimElemTime(1)=250||AnimElemTime(1)=255||AnimElemTime(1)=260||AnimElemTime(1)=265||AnimElemTime(1)=270
+trigger7=AnimElemTime(1)=275||AnimElemTime(1)=280
+value=1
+
+[State 3001,TargetLifeAdd]
+type=TargetLifeAdd
+trigger1=AnimElemTime(1)=37||AnimElemTime(1)=47||AnimElemTime(1)=67||AnimElemTime(1)=77||AnimElemTime(1)=83||AnimElemTime(1)=104||AnimElemTime(1)=105
+trigger2=AnimElemTime(1)=112||AnimElemTime(1)=119||AnimElemTime(1)=125||AnimElemTime(1)=130||AnimElemTime(1)=145||AnimElemTime(1)=150
+trigger3=AnimElemTime(1)=155||AnimElemTime(1)=160||AnimElemTime(1)=165||AnimElemTime(1)=170||AnimElemTime(1)=175||AnimElemTime(1)=180
+trigger4=AnimElemTime(1)=185||AnimElemTime(1)=190||AnimElemTime(1)=195||AnimElemTime(1)=200||AnimElemTime(1)=205||AnimElemTime(1)=210
+trigger5=AnimElemTime(1)=215||AnimElemTime(1)=220||AnimElemTime(1)=225||AnimElemTime(1)=230||AnimElemTime(1)=235||AnimElemTime(1)=240
+trigger6=AnimElemTime(1)=245||AnimElemTime(1)=250||AnimElemTime(1)=255||AnimElemTime(1)=260||AnimElemTime(1)=265||AnimElemTime(1)=270
+trigger7=AnimElemTime(1)=275||AnimElemTime(1)=280
+value=-14
+kill=AnimElemTime(1)=280
+absolute=1
+
+[State 3001,Sparks]
+type=Explod
+trigger1=AnimElemTime(1)=37||AnimElemTime(1)=47||AnimElemTime(1)=67||AnimElemTime(1)=77||AnimElemTime(1)=83||AnimElemTime(1)=104||AnimElemTime(1)=105
+trigger2=AnimElemTime(1)=112||AnimElemTime(1)=119||AnimElemTime(1)=125||AnimElemTime(1)=130||AnimElemTime(1)=145||AnimElemTime(1)=150
+trigger3=AnimElemTime(1)=155||AnimElemTime(1)=160||AnimElemTime(1)=165||AnimElemTime(1)=170||AnimElemTime(1)=175||AnimElemTime(1)=180
+trigger4=AnimElemTime(1)=185||AnimElemTime(1)=190||AnimElemTime(1)=195||AnimElemTime(1)=200||AnimElemTime(1)=205||AnimElemTime(1)=210
+trigger5=AnimElemTime(1)=215||AnimElemTime(1)=220||AnimElemTime(1)=225||AnimElemTime(1)=230||AnimElemTime(1)=235||AnimElemTime(1)=240
+trigger6=AnimElemTime(1)=245||AnimElemTime(1)=250||AnimElemTime(1)=255||AnimElemTime(1)=260||AnimElemTime(1)=265||AnimElemTime(1)=270
+trigger7=AnimElemTime(1)=275||AnimElemTime(1)=280
+Anim=8071+(Random%4)
+ID=8071
+pos=40,-60
+postype=p1
+ontop=1
+random=33,49
+bindtime=-1
+removetime=-2
+ignorehitpause=1
+pausemovetime=2
+supermovetime=2
+sprpriority=2
+
+[State 3001,HitSounds]
+type=PlaySnd
+trigger1=AnimElemTime(1)=37||AnimElemTime(1)=47||AnimElemTime(1)=67||AnimElemTime(1)=77||AnimElemTime(1)=83||AnimElemTime(1)=104||AnimElemTime(1)=105
+trigger2=AnimElemTime(1)=112||AnimElemTime(1)=119||AnimElemTime(1)=125||AnimElemTime(1)=130||AnimElemTime(1)=145||AnimElemTime(1)=150
+trigger3=AnimElemTime(1)=155||AnimElemTime(1)=160||AnimElemTime(1)=165||AnimElemTime(1)=170||AnimElemTime(1)=175||AnimElemTime(1)=180
+trigger4=AnimElemTime(1)=185||AnimElemTime(1)=190||AnimElemTime(1)=195||AnimElemTime(1)=200||AnimElemTime(1)=205||AnimElemTime(1)=210
+trigger5=AnimElemTime(1)=215||AnimElemTime(1)=220||AnimElemTime(1)=225||AnimElemTime(1)=230||AnimElemTime(1)=235||AnimElemTime(1)=240
+trigger6=AnimElemTime(1)=245||AnimElemTime(1)=250||AnimElemTime(1)=255||AnimElemTime(1)=260||AnimElemTime(1)=265||AnimElemTime(1)=270
+trigger7=AnimElemTime(1)=275||AnimElemTime(1)=280
+value=1,13
+
+[State 3001,SignoParte1]
+type=Helper
+trigger1=AnimElemTime(1)=100
+helpertype=normal
+stateno=6031
+ID=6031
+name="SignoParte1"
+postype=Left
+pos=0,0
+ownpal =1
+facing=1
+ontop=1
+
+[State 3001,SignoParte2]
+type=Helper
+trigger1=AnimElemTime(1)=35
+helpertype=normal
+stateno=6030
+ID=6030
+name="SignoParte2"
+postype=Left
+pos=70,40
+ownpal=1
+facing=1
+ontop=1
+
+[State 3001,SignoParte3]
+type=Helper
+trigger1=AnimElemTime(1)=140
+helpertype=normal
+stateno=6032
+ID=6032
+name="SignoParte3"
+postype=Left
+pos=107,181
+ownpal=1
+facing=1
+ontop=1
+
+[State 3001,SignoParte4]
+type=Helper
+trigger1=AnimElemTime(1)=180
+helpertype=normal
+stateno=6033
+ID=6033
+name="SignoParte4"
+postype=Left
+pos=220,181
+ownpal=1
+facing=1
+ontop=1
+
+[State 3001,EffectAgarre]
+type=PlaySnd
+trigger1=!Time
+value=1,17
+channel=1
+
+[State 3001,EffectPuño]
+type=PlaySnd
+trigger1=AnimElem=4
+value=1,10
+channel=1
+
+[State 3001,Narrador]
+type=PlaySnd
+trigger1=!Time&&EnemyNear,Life<=532
+value=0,58
+
+[State 3001,TargetBind]
+type=TargetBind
+trigger1=AnimElemTime(1)=0
+pos=45,0
+
+[State 3001,VarRandom]
+type=VarRandom
+trigger1=1
+v=17
+range=0,4
+
+[State 3001,ChangeState]
+type=ChangeState
+trigger1=NumEnemy=1
+trigger1=P2Life=0
+trigger2=NumEnemy=2
+trigger2=(EnemyNear(0),Life)+(EnemyNear(1),Life)=0
+value=Ifelse(Var(17)=1,185,Ifelse(Var(17)=2,3007,Ifelse(Var(17)=3,30100,30103)))
+
+[State 3001,ChangeState2]
+type=ChangeState
+trigger1=AnimElemTime(1)=280
+value=Ifelse(Var(17)=1,3004,Ifelse(Var(17)=2,3006,Ifelse(Var(17)=3,3009,30102)))
+
+[State 3001,ChangeState3]
+type=ChangeState
+trigger1=AnimElemTime(1)=280&&Var(0)=5
+value=180
+
+;========================
+;P2tateno
+[Statedef 3002]
+type=L
+movetype=H
+physics=N
+velset=0,0
+poweradd=500
+
+[State 3002,ChangeAnim2]
+type=ChangeAnim2
+Trigger1=!Time
+value=3002
+
+[State 3002,SelfState]
+type=SelfState
+trigger1=Time=360&&Alive
+value=5120
+
+[State 3002,SelfState]
+type=SelfState
+trigger1=!Alive
+value=5150
+
+;===============================================================================
+;Random´s Win´s Shun Goku Satsu
+;===============================================================================
+;Win Sin K.O 1/1
+[Statedef 3004]
+type=S
+movetype=I
+physics=N
+anim=3004
+poweradd=0
+sprpriority=2
+
+[State 3004,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 3004,ScreenShake]
+type=Envshake
+trigger1=!Time
+freq=90
+ampl=7
+Time=30
+
+[State 3004,EffectPiso]
+type=PlaySnd
+trigger1=!Time
+value=1,6
+
+[State 3004,Voz]
+type=PlaySnd
+trigger1=!Time
+value=0,13
+channel=1
+
+[State 3004,SignoEspalda]
+type=Explod
+trigger1=Time=2
+anim=8021
+sprpriority=4
+postype=p1
+pos=13,-39
+velocity =0,0
+removetime=80
+bindtime=-1
+ownpal=1
+scale=0.4,0.4
+
+[State 3004,NotHitBy]
+type=NotHitBy
+trigger1=Time<100
+value=SCA
+time=1
+
+[State 3004,playerpush]
+type=playerpush
+trigger1=Time<80
+value=0
+
+[State 3004,ChangeState]
+type=ChangeState
+trigger1=Time=80
+value=0
+ctrl=1
+
+;=======================
+;Acertado+Win K.O 1/2
+[Statedef 185]
+type=S
+anim=3005
+sprpriority=3
+Ctrl=0
+
+[State 185, BGPalFX]
+type=BGPalFX
+trigger1=Time<300
+Time=2
+add=-255,-255,-255
+
+[State 185,BGPalFX]
+type=BGPalFX
+trigger1=Time=300
+Time=120
+add=-255,-255,-255
+sinadd=255,255,255,500
+
+[State 185,K,O]
+type=PlaySnd
+trigger1=!Time
+value=1,22
+channel=1
+
+[State 185,KoSnd2]
+type=PlaySnd
+trigger1=Time=1
+value=2,61
+
+[State 185,KoSnd2]
+type=PlaySnd
+trigger1=Time=88
+value=0,54
+volume=200
+
+[State 185,AssertSpecial]
+type=AssertSpecial
+trigger1=50
+flag=NoKoSnd
+flag2=NoKoSlow
+
+[State 185,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=300
+flag=NoMusic
+flag3=NoFG
+
+[State 185,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 185,SignoEspalda]
+type=Explod
+trigger1=Time=2
+anim=8022
+sprpriority=4
+postype=p1
+pos=13,-39
+velocity=0,0
+removetime=-1
+bindtime=-1
+ownpal=1
+scale=0.4,0.4
+
+[State 185,Signo]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8080
+ID=8080
+name="Signo"
+pos=-43,-193
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=9999999999
+Scale=1.2,1.2
+
+[State 185,Rayos]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8081
+ID=8081
+name="Rayos"
+pos=0,-150
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=999999999
+
+[State 185,Fuego]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8082
+ID=8082
+name="Fuego"
+pos=0,-150
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=999999999
+
+[State 185,CtrlSet]
+type=CtrlSet
+trigger1=Time=550
+value=1
+
+;===================
+;Win SGS +K.0 1/3
+[Statedef 186]
+type=S
+anim=3005
+sprpriority=3
+
+[State 186,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=50
+flag=RoundNotOver
+
+[State 186,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 186,CtrlSet]
+type=CtrlSet
+trigger1=!Time
+value=0
+
+;===============================================================================
+;Win Sin K.O 2/1
+[Statedef 3006]
+type=S
+movetype=I
+physics=N
+anim=3006
+poweradd=0
+sprpriority=2
+
+[State 3006,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=80
+flag=NoBarDisplay
+
+[State 3006,NotHitBy]
+type=NotHitBy
+trigger1=Time<100
+value=SCA
+time=1
+
+[State 3006,playerpush]
+type=playerpush
+trigger1=Time<80
+value=0
+
+[State 3006,ChangeState]
+type=ChangeState
+trigger1=Time=80
+value=0
+ctrl=1
+
+;=======================
+;Acertado+Win K.O 2/2
+[Statedef 3007]
+type=S
+anim=3007
+sprpriority=3
+Ctrl=0
+
+[State 185, BGPalFX]
+type=BGPalFX
+trigger1=Time<300
+Time=2
+add=-255,-255,-255
+
+[State 185,BGPalFX]
+type=BGPalFX
+trigger1=Time=300
+Time=120
+add=-255,-255,-255
+sinadd=255,255,255,500
+
+[State 185,K,O]
+type=PlaySnd
+trigger1=!Time
+value=1,22
+channel=1
+
+[State 185,KoSnd2]
+type=PlaySnd
+trigger1=Time=1
+value=2,61
+
+[State 185,KoSnd2]
+type=PlaySnd
+trigger1=Time=88
+value=0,54
+volume=200
+
+[State 185,AssertSpecial]
+type=AssertSpecial
+trigger1=50
+flag=NoKoSnd
+flag2=NoKoSlow
+
+[State 185,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=300
+flag=NoMusic
+flag3=NoFG
+
+[State 185,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 185,Signo]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8080
+ID=8080
+name="Signo"
+pos=-43,-193
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=9999999999
+Scale=1.2,1.2
+
+[State 185,Rayos]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8081
+ID=8081
+name="Rayos"
+pos=0,-150
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=999999999
+
+[State 185,Fuego]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8082
+ID=8082
+name="Fuego"
+pos=0,-150
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=999999999
+
+[State 185,CtrlSet]
+type=CtrlSet
+trigger1=Time=550
+value=1
+
+;===================
+;Win SGS +K.0 2/3
+[Statedef 3008]
+type=S
+anim=3007
+sprpriority=3
+
+[State 3008,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=50
+flag=RoundNotOver
+
+[State 3008,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 3008,CtrlSet]
+type=CtrlSet
+trigger1=!Time
+value=0
+
+;===============================================================================
+;Win Sin K.O 3/1
+[Statedef 3009]
+type=S
+movetype=I
+physics=N
+anim=3009
+poweradd=0
+sprpriority=2
+
+[State 3009,Yeahh]
+type=PlaySnd
+trigger1=!Time
+value=0,8
+channel=1
+
+[State 3009,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=80
+flag=NoBarDisplay
+
+[State 3009,NotHitBy]
+type=NotHitBy
+trigger1=Time<100
+value=SCA
+time=1
+
+[State 3009,playerpush]
+type=playerpush
+trigger1=Time<80
+value=0
+
+[State 3009,ChangeState]
+type=ChangeState
+trigger1=Time=80
+value=0
+ctrl=1
+
+;=======================
+;Acertado+Win K.O 3/2
+[Statedef 30100]
+type=S
+anim=30100
+sprpriority=3
+Ctrl=0
+
+[State 30100,BGPalFX]
+type=BGPalFX
+trigger1=Time<300
+Time=2
+add=-255,-255,-255
+
+[State 30100,BGPalFX]
+type=BGPalFX
+trigger1=Time=300
+Time=120
+add=-255,-255,-255
+sinadd=255,255,255,500
+
+[State 30100,Yeahh]
+type=PlaySnd
+trigger1=!Time
+value=0,8
+channel=1
+
+[State 30100,K,O]
+type=PlaySnd
+trigger1=!Time
+value=1,22
+channel=1
+
+[State 30100,KoSnd2]
+type=PlaySnd
+trigger1=Time=1
+value=2,61
+
+[State 30100,KoSnd2]
+type=PlaySnd
+trigger1=Time=88
+value=0,54
+volume=200
+
+[State 30100,AssertSpecial]
+type=AssertSpecial
+trigger1=50
+flag=NoKoSnd
+flag2=NoKoSlow
+
+[State 30100,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=300
+flag=NoMusic
+flag3=NoFG
+
+[State 30100,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 30100,Signo]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8080
+ID=8080
+name="Signo"
+pos=-43,-193
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=9999999999
+Scale=1.2,1.2
+
+[State 30100,Rayos]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8081
+ID=8081
+name="Rayos"
+pos=0,-150
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=999999999
+
+[State 30100,Fuego]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8082
+ID=8082
+name="Fuego"
+pos=0,-150
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=999999999
+
+[State 30100,CtrlSet]
+type=CtrlSet
+trigger1=Time=550
+value=1
+
+;===================
+;Win SGS +K.0 3/3
+[Statedef 30101]
+type=S
+anim=30100
+sprpriority=3
+
+[State 30101,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=50
+flag=RoundNotOver
+
+[State 30101,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 30101,CtrlSet]
+type=CtrlSet
+trigger1=!Time
+value=0
+
+;===============================================================================
+;Win Sin K.O 4/1
+[Statedef 30102]
+type=S
+movetype=I
+physics=N
+anim=30102
+poweradd=0
+sprpriority=2
+
+[State 30102,ScreenShake]
+type=Envshake
+trigger1=!Time
+freq=90
+ampl=7
+Time=30
+
+[State 30102,EffectPiso]
+type=PlaySnd
+trigger1=!Time
+value=1,6
+
+[State 30102,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=80
+flag=NoBarDisplay
+
+[State 30102,NotHitBy]
+type=NotHitBy
+trigger1=Time<100
+value=SCA
+time=1
+
+[State 30102,playerpush]
+type=playerpush
+trigger1=Time<80
+value=0
+
+[State 30102,ChangeState]
+type=ChangeState
+trigger1=Time=80
+value=0
+ctrl=1
+
+;=======================
+;Acertado+Win K.O 4/2
+[Statedef 30103]
+type=S
+anim=30104
+sprpriority=3
+Ctrl=0
+
+[State 30103,BGPalFX]
+type=BGPalFX
+trigger1=Time<300
+Time=2
+add=-255,-255,-255
+
+[State 30103,BGPalFX]
+type=BGPalFX
+trigger1=Time=300
+Time=120
+add=-255,-255,-255
+sinadd=255,255,255,500
+
+[State 30103,K,O]
+type=PlaySnd
+trigger1=!Time
+value=1,22
+channel=1
+
+[State 30103,KoSnd2]
+type=PlaySnd
+trigger1=Time=1
+value=2,61
+
+[State 30103,KoSnd2]
+type=PlaySnd
+trigger1=Time=88
+value=0,54
+volume=200
+
+[State 30103,AssertSpecial]
+type=AssertSpecial
+trigger1=50
+flag=NoKoSnd
+flag2=NoKoSlow
+
+[State 30103,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=300
+flag=NoMusic
+flag3=NoFG
+
+[State 30103,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 30103,Signo]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8080
+ID=8080
+name="Signo"
+pos=-43,-193
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=9999999999
+Scale=1.2,1.2
+
+[State 30103,Rayos]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8081
+ID=8081
+name="Rayos"
+pos=0,-150
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=999999999
+
+[State 30103,Fuego]
+type=helper
+trigger1=!Time
+helpertype=normal
+stateno=8082
+ID=8082
+name="Fuego"
+pos=0,-150
+postype=Left
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=999999999
+
+[State 30103,CtrlSet]
+type=CtrlSet
+trigger1=Time=550
+value=1
+
+;===================
+;Win SGS +K.0 4/3
+[Statedef 30104]
+type=S
+anim=30104
+sprpriority=3
+
+[State 30104,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=50
+flag=RoundNotOver
+
+[State 30104,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 30104,CtrlSet]
+type=CtrlSet
+trigger1=!Time
+value=0
+
+;===================================================================================== >
+;Signo Por Partes
+;===================================================================================== >
+[Statedef 6030]
+physics=N
+anim=8084
+velset=0,0
+sprpriority=-1
+
+[State 6030,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 6030,PalFx]
+type=PalFx
+trigger1=!Time
+time=20
+add=-255,-255,-255
+sinadd=255,255,255,240
+
+[State 6030,SignoParte1]
+type=Explod
+trigger1=Time=1
+anim=6030
+ID=6030
+sprpriority=-1
+postype=Left
+pos=133,80
+velocity=0,0
+supermove=1
+supermovetime=245
+ignorehitpause=1
+removetime=247
+bindtime=-1
+ontop=1
+
+[State 6030,PalFx]
+type=PalFx
+trigger1=Time=205
+time=40
+add=0,0,0
+sinadd=-255,-255,-255,240
+
+[State 6030,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 6030,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 6030,DestroySelf]
+type=DestroySelf
+trigger1=Time=245
+
+;=======================
+;SignoParte3
+[Statedef 6031]
+physics=N
+anim=8084
+velset=0,0
+sprpriority=-1
+
+[State 6031,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 6031,PalFx]
+type=PalFx
+trigger1=!Time
+time=20
+add=-255,-255,-255
+sinadd=255,255,255,240
+
+[State 6031,SignoParte2]
+type=Explod
+trigger1=Time=1
+anim=6031
+ID=6031
+sprpriority=-1
+postype=Left
+pos=132,80
+velocity=0,0
+supermove=1
+supermovetime=9
+ignorehitpause=1
+removetime=182
+bindtime=-1
+ontop=1
+
+[State 6031,PalFx]
+type=PalFx
+trigger1=Time=140
+time=40
+add=0,0,0
+sinadd=-255,-255,-255, 240
+
+[State 6031,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 6031,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 6031,DestroySelf]
+type=DestroySelf
+trigger1=Time=180
+
+;=======================
+;SignoParte3
+[Statedef 6032]
+physics=N
+anim=8084
+velset=0,0
+sprpriority=-1
+
+[State 6032,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 6032,PalFx]
+type=PalFx
+trigger1=!Time
+time=20
+add=-255,-255,-255
+sinadd=255,255,255,240
+
+[State 6032,SignoParte3]
+type=Explod
+trigger1=Time=1
+anim=6032
+ID=6032
+sprpriority=-1
+postype=Left
+pos=143,79
+velocity=0,0
+supermove=1
+supermovetime=9
+ignorehitpause=1
+removetime=142
+bindtime=-1
+ontop=1
+
+[State 6032,PalFx]
+type=PalFx
+trigger1=Time=100
+time=40
+add=0,0,0
+sinadd=-255,-255,-255,240
+
+[State 6032,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 6032,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 6032,DestroySelf]
+type=DestroySelf
+trigger1=Time=140
+
+;=======================
+;SignoParte4
+[Statedef 6033]
+physics=N
+anim=8084
+velset=0,0
+sprpriority=-1
+
+[State 6033,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 6033,PalFx]
+type=PalFx
+trigger1=!Time
+time=20
+add=-255,-255,-255
+sinadd=255,255,255, 240
+
+[State 6033,SignoParte4]
+type=Explod
+trigger1=Time=1
+anim=6033
+ID=6033
+sprpriority=-1
+postype=Left
+pos=143,80
+velocity=0,0
+supermove=1
+supermovetime=9
+ignorehitpause=1
+removetime=102
+bindtime=-1
+ontop=1
+
+[State 6033,PalFx]
+type=PalFx
+trigger1=Time=59
+time=40
+add=0,0,0
+sinadd=-255,-255,-255, 240
+
+[State 6033,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 6033,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 6033,DestroySelf]
+type=DestroySelf
+trigger1=Time=99
+
+;===============================================================================
+;Shun Goku Satsu K.O BG 1/3
+;===============================================================================
+;Signo
+[Statedef 8080]
+physics=N
+anim=8080
+velset=0,0
+sprpriority=-9
+
+[State 8080,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 8080,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 8080,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 8080,Trans]
+type=Trans
+trigger1=time>=300
+trans=addalpha
+alpha=400-Ceil(.00037+Time-256/2.9),256
+
+[State 8080,DestroySelf]
+type=DestroySelf
+trigger1=Time=550
+
+;=======================
+;Rayos
+[Statedef 8081]
+physics =N
+anim=8081
+velset=0,0
+sprpriority=100
+
+[State 8081,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 8081,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 8081,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 8081,Trans]
+type=Trans
+trigger1=time>=300
+trans=addalpha
+alpha=400-Ceil(.00037+Time-256/2.9),256
+
+[State 8081,DestroySelf]
+type=DestroySelf
+trigger1=Time=550
+
+;=======================
+;Fuego
+[Statedef 8082]
+physics=N
+anim=8082
+velset=0,0
+sprpriority=1
+
+[State 8082,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 8082,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 8082,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 8082,Trans]
+type=Trans
+trigger1=time>=300
+trans=addalpha
+alpha=400-Ceil(.00037+Time-256/2.9),256
+
+[State 8082,DestroySelf]
+type=DestroySelf
+trigger1=Time=550
+
+;===============================================================================
+;Shun Goku Satsu K.O BG 2/3
+;===============================================================================
+;Signo
+[Statedef 8090]
+physics=N
+anim=8090
+velset=0,0
+sprpriority=-9
+
+[State 8090,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 8090,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 8090,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 8090,Trans]
+type=Trans
+trigger1=time>=300
+trans=addalpha
+alpha=400-Ceil(.00037+Time-256/2.9),256
+
+[State 8090,DestroySelf]
+type=DestroySelf
+trigger1=Time=550
+
+;=======================
+;Rayos
+[Statedef 8091]
+physics =N
+anim=8091
+velset=0,0
+sprpriority=100
+
+[State 8091,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 8091,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 8091,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 8091,Trans]
+type=Trans
+trigger1=time>=300
+trans=addalpha
+alpha=400-Ceil(.00037+Time-256/2.9),256
+
+[State 8091,DestroySelf]
+type=DestroySelf
+trigger1=Time=550
+
+;=======================
+;Fuego
+[Statedef 8092]
+physics=N
+anim=8092
+velset=0,0
+sprpriority=1
+
+[State 8092,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 8092,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 8092,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 8092,Trans]
+type=Trans
+trigger1=time>=300
+trans=addalpha
+alpha=400-Ceil(.00037+Time-256/2.9),256
+
+[State 8092,DestroySelf]
+type=DestroySelf
+trigger1=Time=550
+
+;===============================================================================
+;Shun Goku Satsu K.O BG 3/3
+;===============================================================================
+;Signo
+[Statedef 8100]
+physics=N
+anim=8100
+velset=0,0
+sprpriority=-9
+
+[State 8100,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 8100,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 8100,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 8100,Trans]
+type=Trans
+trigger1=time>=300
+trans=addalpha
+alpha=400-Ceil(.00037+Time-256/2.9),256
+
+[State 8100,DestroySelf]
+type=DestroySelf
+trigger1=Time=550
+
+;=======================
+;Rayos
+[Statedef 8101]
+physics =N
+anim=8101
+velset=0,0
+sprpriority=100
+
+[State 8101,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 8101,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 8101,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 8101,Trans]
+type=Trans
+trigger1=time>=300
+trans=addalpha
+alpha=400-Ceil(.00037+Time-256/2.9),256
+
+[State 8101,DestroySelf]
+type=DestroySelf
+trigger1=Time=550
+
+;=======================
+;Fuego
+[Statedef 8102]
+physics=N
+anim=8102
+velset=0,0
+sprpriority=1
+
+[State 8102,ScreenBound]
+type=ScreenBound
+trigger1=1
+value=1
+
+[State 8102,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=NoShadow
+
+[State 8102,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<=1000
+flag=NoBarDisplay
+
+[State 8102,Trans]
+type=Trans
+trigger1=time>=300
+trans=addalpha
+alpha=400-Ceil(.00037+Time-256/2.9),256
+
+[State 8102,DestroySelf]
+type=DestroySelf
+trigger1=Time=550
+
+;==========================================================================================\
+;Shinkuu Hadouken´S
+;==========================================================================================/
+;Low
+[Statedef 3773]
+type=S
+movetype=A
+physics=S
+juggle=30
+poweradd=100
+velset=0,0,0
+anim=1020
+ctrl=0
+sprpriority=2
+
+[State 3775,varset]
+type=varset
+trigger1=!Time
+var(11)=IfElse(command="SHK1",1,IfElse(command="SHK2",2,3))
+
+[State 3773,Width]
+type=Width
+trigger1=AnimElemTime(5)>=0&&AnimElemTime(10)<0
+value=40,0
+
+[State 3773,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8500
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3773,SuperPause]
+type=SuperPause
+trigger1=AnimElem=3
+time=65
+pos=-27,-71
+anim=-1
+sound=S1,21
+poweradd=-1000
+darken=0
+movetime=65
+
+[State 3773,BGSuper]
+type=Explod
+trigger1=Time=1
+Anim=6040
+ID=6040
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=3
+
+[State 3773,ModifyExplod]
+type=ModifyExplod
+trigger1=Time <=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3773,BGSuper2]
+type = Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3773,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3773,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+pos=-22, -67
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+ID=6042
+
+[State 3773,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3773,BGSuper4]
+type = Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 3773,ModifyExplod]
+type=ModifyExplod
+trigger1=Time <=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3773,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=-22, -67
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3773,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3773,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=0,0,0
+mul=0,0,0
+sinadd=-255,-255,-255,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3773,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3773,BGPalFx2]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3773,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3773,BGAire]
+type=Explod
+trigger1=AnimElemTime(5)=0
+anim=8042
+sprpriority=2
+postype=p1
+pos=0,0
+velocity =0,0
+removetime=-2
+bindtime=-1
+
+[State 3773,BGAire2]
+type=Explod
+trigger1=AnimElemTime(5)=0
+anim=8043
+sprpriority=4
+postype=p1
+pos=0,0
+velocity=0,0
+removetime=-2
+bindtime=-1
+
+[State 3773,ScreenShake]
+type=Envshake
+trigger1=AnimElemTime(5)=0
+freq=90
+ampl=7
+Time=4
+
+[State 3773,Effect]
+type=playsnd
+trigger1=Animelem=5
+value=1,18
+
+[State 3773,ShinkuuHadouken]
+type=Helper
+trigger1=Animelem=5
+Pos=46,-68
+stateno=8004
+id=8004
+name="ShinkuuHadouken"
+sprpriority=10
+helpertype=normal
+ownpal=1
+
+[State 3773,Helper]
+type=Helper
+trigger1=ProjHit8004=1
+helpertype=normal
+stateno=8085
+ID=8085
+name="Particles"
+postype=p2
+pos=target,const(size.mid.pos.x),target,const(size.mid.pos.y)
+ownpal=1
+facing=-1
+ignorehitpause=1
+persistent=1
+
+[State 3773,OpenEspecial]
+type=Playsnd
+trigger1=Animelem=3
+value=S1,21
+
+[State 3773,Voz]
+type=Playsnd
+trigger1=AnimelemTime(3)=0
+value=S0,59
+
+[State 3773,Voz2]
+type=Playsnd
+trigger1=AnimelemTime(5)=0
+value=S0,15
+
+[State 3773,ChangeState]
+type=ChangeState
+trigger1=!AnimTime
+value=0
+ctrl=1
+
+;===============================================================================
+;Shinkuu Hadouken Medium
+[Statedef 3774]
+type=S
+movetype=A
+physics=S
+juggle=0
+poweradd=120
+attr=S,SA
+velset=0,0
+anim=1020
+ctrl=0
+sprpriority=1
+
+[State 3774,varset]
+type=varset
+trigger1=!Time
+var(11)=IfElse(command="SHK1",1,IfElse(command="SHK2",2,3))
+
+[State 3774,Width]
+type=Width
+trigger1=AnimElemTime(5)>=0&&AnimElemTime(10)<0
+value=40,0
+
+[State 3774,BGPantallaCortada]
+type=Explod
+triggerall=statetype!=A
+trigger1=animelem=1
+anim=8500
+pos=0,0
+postype=Back
+bindtime=50
+supermove = 1
+pausemovetime=40
+ontop=1
+scale=2,1
+ownpal=1
+removeongethit=1
+
+[State 3774,SuperPause]
+type=SuperPause
+trigger1=AnimElem=3
+time=65
+pos=-27,-71
+anim=-1
+sound=S1,21
+poweradd=-2000
+darken=0
+movetime=65
+
+[State 3774,BGSuper]
+type=Explod
+trigger1=Time=1
+Anim=6040
+ID=6040
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=-1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=3
+
+[State 3774,ModifyExplod]
+type=ModifyExplod
+trigger1=Time <=256
+ID=6040
+scale=.281-(.0102*(Time-50)),.281-(.0102*(Time-50))
+
+[State 3774,BGSuper2]
+type = Explod
+trigger1=!Time
+Anim=6041
+ID=6041
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+
+[State 3774,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6041
+scale=.1+(Time*.177),.1+(Time*.177)
+
+[State 3774,BGSuper3]
+type=Explod
+trigger1=!Time
+Anim=6042
+pos=-22, -67
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+ID=6042
+
+[State 3774,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6042
+scale=.00102+(Time*.177),.00102+(Time*.177)
+
+[State 3774,BGSuper4]
+type=Explod
+trigger1=!Time
+Anim=6043
+ID=6043
+pos=-22,-67
+postype=p1
+ontop=0
+bindtime=1
+removetime=65
+supermove=1
+supermovetime=65
+ignorehitpause=1
+sprpriority=9
+
+[State 3774,ModifyExplod]
+type=ModifyExplod
+trigger1=Time <=256
+ID=6043
+scale=.33-(.0202*(Time-50)),.33-(.0202*(Time-50))
+
+[State 3774,BGSuper5]
+type=Explod
+trigger1=!Time
+Anim=6044
+ID=6044
+pos=-22, -67
+postype=p1
+ontop=0
+bindtime=1
+removetime=35
+supermove=1
+supermovetime=35
+ignorehitpause=1
+
+[State 3774,ModifyExplod]
+type=ModifyExplod
+trigger1=Time<=65
+ID=6044
+scale=.00102+(Time*.77),.00102+(Time*.77)
+
+[State 3774,BGPalFx]
+type=BGPalFX
+trigger1=!Time
+time=34
+add=0,0,0
+mul=0,0,0
+sinadd=-255,-255,-255,99
+invertall=0
+color=256
+ignorehitpause=1
+
+[State 3774,EnvColor]
+type=EnvColor
+trigger1=Time=32
+time=12
+value=0,0,0
+under=1
+
+[State 3774,BGPalFx2]
+type=BGPalFX
+trigger1=Time=40
+time=25
+add=-255,-255,-255
+sinadd=255,255,255,120
+
+[State 3774,AssertSpecial]
+type=AssertSpecial
+trigger1=Time<54
+flag=noFG
+
+[State 3774,BGAire]
+type=Explod
+trigger1=AnimElemTime(5)=0
+anim=8042
+sprpriority=2
+postype=p1
+pos=0,0
+velocity =0,0
+removetime=-2
+bindtime=-1
+
+[State 3774,BGAire2]
+type=Explod
+trigger1=AnimElemTime(5)=0
+anim=8043
+sprpriority=4
+postype=p1
+pos=0,0
+velocity=0,0
+removetime=-2
+bindtime=-1
+
+[State 3774,ScreenShake]
+type=Envshake
+trigger1=AnimElemTime(5)=0
+freq=90
+ampl=7
+Time=4
+
+[State 3774,Effect]
+type=playsnd
+trigger1=Animelem=5
+value=1,18
+
+[State 3774,ShinkuuHadouken]
+type=Helper
+trigger1=Animelem=5
+Pos=46,-68
+stateno=8004
+id=8004
+name="ShinkuuHadouken"
+sprpriority=10
+helpertype=normal
+ownpal=1
+
+[State 3774,Helper]
+type=Helper
+trigger1=ProjHit8004=1
+helpertype=normal
+stateno=8085
+ID=8085
+name="Particles"
+postype=p2
+pos=target,const(size.mid.pos.x),target,const(size.mid.pos.y)
+ownpal=1
+facing=-1
+ignorehitpause=1
+persistent=1
+
+[State 3774,OpenEspecial]
+type=Playsnd
+trigger1=Animelem=3
+value=S1,21
+
+[State 3774,Voz]
+type=Playsnd
+trigger1=AnimelemTime(3)=0
+value=S0,60
+
+[State 3774,Voz2]
+type=Playsnd
+trigger1=AnimelemTime(5)=0
+value=S0,15
+
+[State 3774,ChangeState]
+type=ChangeState
+trigger1=!AnimTime
+value=0
+ctrl=1
+
+;===================================================================================== >
+;Shinkuu Hadouken X2
+;===================================================================================== >
+[Statedef 8004]
+type=S
+movetype=A
+physics=N
+ctrl=0
+anim=8004
+sprpriority=6
+velset=0,0
+juggle=0
+
+[State 8004,VarSet]
+type=VarSet
+trigger1=!time
+var(11)=root,Var(11)
+
+[State 8004,VarAdd]
+type=varAdd
+trigger1=!Time
+var(12)=1
+
+[State 8004,PosAdd]
+type=PosAdd
+trigger1=MoveContact
+x=-3
+
+[State 8004,VelSet]
+type=VelSet
+trigger1=1
+x=IfElse(var(12)>2,6,IfElse(var(11)=1,9,IfElse(var(11)=2,11.2,11.2)))
+y=0
+
+[State 8004,Assertspecial]
+type=AssertSpecial
+trigger1=1
+flag=noshadow
+
+[State 8004,HitOverride]
+type=HitOverride
+trigger1=Time>=0
+slot=1
+time=1
+stateno=80000
+attr=SCA,AP
+ignorehitpause=1
+
+[State 8004]
+type=HitDef
+trigger1=1
+trigger1=Var(9):=-10&&var(10):=4
+attr=S,HP
+getpower=40
+animtype=hard
+damage=IfElse(var(11)=1,40,IfElse(var(11)=2,45,43)),5
+hitflag=MAFD
+guardflag=MA
+priority=7,Hit
+pausetime=5,7
+damage=20,15
+animtype=Heavy
+guard.sparkno=S8076
+sparkno=S1515+(Random%4)
+sparkxy=15,4
+hitsound=s4,5
+guardsound=s3,16
+ground.type=Low
+ground.slidetime=30
+ground.hittime=30
+Ground.velocity=0
+air.velocity=-7.5,-5
+air.juggle=0
+ownpal=1
+fall=IfElse(var(12)>=IfElse(var(11)=1,5,IfElse(var(11)=2,7,9)),1,0)
+kill=1
+Palfx.time=ifelse(P2StateType=A,70,45)
+palfx.mul=251,173,23
+palfx.add=200,0,0
+palfx.sinadd=251,173,23,5
+envshake.time=15
+envshake.freq=103
+envshake.ampl=5
+sprpriority=6
+
+[State 8004,Flames]
+type=helper
+triggerall=StateNo=8004&&MoveHit
+trigger1=!NumHelper(40001)
+helpertype=normal
+stateno=40001
+ID=40001
+name="PFlames"
+pos=0,0
+postype=p1
+bindtime=-1
+ownpal=1
+persistent=0
+removetime=999999999
+supermovetime=999999999
+
+[State 8004,Helper]
+type=Helper
+trigger1=StateNo=8004&&MoveHit&&NumTarget
+helpertype=normal
+stateno=8084
+ID=8084
+name="Particles"
+postype=p2
+pos=(target,const(size.ground.front)+var(9)),var(10)-floor(p2dist y)
+ownpal=1
+facing=-1
+ignorehitpause=1
+persistent=0
+
+[State 8004,ChangeState]
+type=Changestate
+trigger1=MoveContact
+value=IfElse(var(12)>=IfElse(var(11)=1,6,IfElse(var(11)=2,10,10)),80000,8004)
+
+[State 8004,DestroySelf]
+type=DestroySelf
+trigger1=FrontEdgeDist<-105||BackEdgeDist<-105
+
+;=======================
+;Shinkuu Hadouken Contact
+[Statedef 80000]
+type=S
+movetype=I
+physics=S
+ctrl=0
+anim=8084
+velset=0,0
+poweradd=0
+sprpriority=6
+
+[State 80000,Contact]
+type=Explod
+trigger1=AnimElemTime(1)
+anim=8006
+postype=p1
+pos=24,0
+facing=1
+ignorehitpause=1
+sprpriority=10
+ID=8006
+removetime=-2
+
+[State 8006,AssertSpecial]
+type=AssertSpecial
+trigger1=1
+flag=noshadow
+
+[State 8006,PlayerPush]
+type=PlayerPush
+trigger1=1
+value=0
+
+[State 8006,DestroySelf]
+type=DestroySelf
+trigger1=!AnimTime

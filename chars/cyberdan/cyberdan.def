@@ -1,0 +1,35 @@
+; Definition file for Cyber Dan
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Cyber Dan"        ;Name of character
+displayname = "Cyber Dan" ;Name of character to display
+versiondate = 07,31,2000    ;Version date of character
+mugenversion = 07,31,2000   ;Version of M.U.G.E.N character works on
+author = "BlackJack"         ;Character author name
+pal.defaults = 1,2,3,4,5,6      ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = cd.cmd   ;Command set
+movelist = movelist.dat ;Ikemen command list
+cns     = cd.cns   ;Constants
+st      = cd.cns   ;States
+stcommon = common1.cns ;Common states
+sprite  = cd.sff   ;Sprite
+anim    = cd.air   ;Animation
+sound   = cd.snd   ;Sound
+pal1    = cd1.act  ;Palettes (can have up to 12)
+pal2    = cd2.act
+pal3    = cd3.act
+pal4    = cd4.act
+pal5    = cd5.act
+pal6    = cd6.act
+pal7    = act7.act
+pal8    = act8.act 
+pal9    = act9.act 
+pal10    = act10.act 
+pal11    = act11.act 
+pal12    = act12.act 
+

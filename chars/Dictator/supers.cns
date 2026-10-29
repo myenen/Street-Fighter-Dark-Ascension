@@ -1,0 +1,1100 @@
+;---------------------------------------------------------------------------
+; Triple Kung Fu Palm (hyper)
+; CNS difficulty: medium
+; Notes: Notice that the HitDefs in supers have "getpower = 0". This makes
+;        sure KFM doesn't recharge his super guage as he hits.
+;        Also, the attributes for the HitDefs is "HA" for "hyper attack",
+;        ie. "attr = S, HA".
+[Statedef 3000]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+velset = 0,0
+anim = ifelse(pos y >= 0,1210,1212)
+ctrl = 0
+sprpriority = 1
+
+[State 1080, STS]
+type = StateTypeSet
+trigger1 = pos y < 0
+statetype = A
+physics = N
+
+;-----------------------
+;Super Move FX
+[State 3000, Super A]
+type = SuperPause
+trigger1 = anim = 1210
+trigger1 = AnimElem = 2
+trigger2 = anim = 1212
+trigger2 = AnimElem = 1
+pos = ifelse(pos y >= 0,-100,-80),ifelse(pos y >= 0,-120,-150)
+anim = S4005
+sound = S15, 5
+time = 50
+movetime = 48
+poweradd = -1000
+
+[State 3000, Spark 2]
+type = explod
+trigger1 = time = 0
+anim = 4001
+id = 4001
+pos = ifelse(pos y >= 0,-300,-300),ifelse(pos y >= 0,150,100)
+postype = Right
+sprpriority = 3
+bindtime = -1
+ignorehitpause = 1
+scale = 3,1
+removeongethit = 1
+supermove = 1
+
+[State 3000, dust pwr]
+type = Explod
+trigger1 = time = 48
+trigger1 = pos y >= 0
+id = 180
+anim = 2001
+sprpriority = 3
+pos = 40,4
+ownpal = 1
+
+[State 3000, Super B]
+type = AfterImage
+trigger1 = time = 40
+time = 999
+TimeGap = 2
+FrameGap = 4
+Trans = none
+palcolor = 0
+paladd = 0,16,128
+
+[State 3000, Super C]
+type = AfterImageTime
+trigger1 = time > 4
+time = 8
+;-----------------------------
+
+;Glowing hand FX
+[State 200, Elem 2]
+type = Explod
+trigger1 = anim = 1210
+trigger1 = time = 30
+trigger2 = anim = 1212
+trigger2 = time = 10
+anim = 1211
+id = 1211
+postype = p1
+pos = ifelse(pos y >= 0,0,28),ifelse(pos y >= 0,0,-31)
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+supermove = 1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = anim = 1210
+trigger1 = Animelem = 3
+trigger2 = anim = 1212
+trigger2 = Animelem = 2
+ID = 1211
+
+[State 3000, 1]
+type = PlaySnd
+trigger1 = time = 0
+value = 195, 1
+channel = 0
+
+[State 3000, 1]
+type = PlaySnd
+trigger1 = anim = 1210
+trigger1 = animelem = 5
+trigger2 = anim = 1212
+trigger2 = animtime = 0
+value = 123, 3
+channel = 0
+
+[State 3000, 1]
+type = ChangeAnim
+trigger1 = anim = 1210
+trigger1 = animtime = 0
+trigger2 = anim = 1212
+trigger2 = animtime = 0
+value = 1220
+
+[State 3000, 4]
+type = VelAdd
+trigger1 = time > 48 && vel x < 12
+x = 1.5
+
+[State 3000, 5]
+type = HitDef
+triggerall = anim = 1210
+trigger1 = AnimElem = 4
+attr = S, HA
+animtype  = Hard
+damage    = 50,2
+getpower  = 0
+priority  = 6
+sparkno = 3
+guardflag = MA
+hitflag = MAF
+pausetime = 2,5
+sparkxy = -10,-70
+hitsound   = S205,0
+guardsound = S16,0
+ground.type = Low
+ground.slidetime = 30
+ground.hittime  = 30
+ground.velocity = -5,-2
+air.velocity = -3,-2
+fall = 1
+fall.animtype = Hard
+fall.recover = 0
+palfx.time = 40
+palfx.add = 143,122,248
+palfx.mul = 140,50,150
+palfx.sinadd = 85,110,55,10
+Palfx.color = 0
+ground.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+
+
+;-------------------------------------
+[State 3000, 6]
+type = playerpush
+trigger1 = var(25) <= 0 || UniqHitCount >= 9 || moveguarded
+value = 0
+
+[State 3000, 1]
+type = varadd
+trigger1 = MoveContact
+v = 25
+value = -1
+
+[State 3000, 1]
+type = VarSet
+trigger1 = time = 0
+v = 25
+value = 6
+;------------------------------
+[State 3000, 6]
+type = HitDef
+triggerall = UniqHitCount < 6 
+triggerall = anim = 1220 && var(25) > 0
+trigger1 = AnimElemTime(1) = 0 || AnimTime = 0
+trigger2 = AnimElemTime(2) = 0 || AnimTime = 0
+trigger3 = AnimElemTime(3) = 0 || AnimTime = 0
+trigger4 = AnimElemTime(4) = 0 || AnimTime = 0
+trigger5 = AnimElemTime(5) = 0 || AnimTime = 0
+trigger6 = AnimElemTime(6) = 0 || AnimTime = 0
+trigger7 = AnimElemTime(7) = 0 || AnimTime = 0
+trigger8 = AnimElemTime(8) = 0 || AnimTime = 0
+attr = S, HA
+animtype  = Hard
+damage    = 50,2
+getpower  = 0
+priority  = 5
+guardflag = MA
+sparkno = 3
+hitflag = MAF
+pausetime = 6,6
+sparkxy = -50,-80
+hitsound   = S205,0
+guardsound = S16,0
+ground.type = Low
+ground.slidetime = 30
+ground.hittime  = 30
+ground.velocity = -7, -3
+guard.velocity = -12
+air.velocity = -5,-3
+airguard.velocity = -3,-3
+fall.animtype = Hard
+fall = 1
+fall.recover = 0
+palfx.time = 40
+palfx.add = 143,122,248
+palfx.mul = 140,50,150
+palfx.sinadd = 85,110,55,10
+Palfx.color = 0
+ground.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+
+;------------------------------
+
+[State 3000, 1]
+type = varadd
+triggerall = var(25) < 3
+trigger1 = command = "a" || command = "b" || command = "c"
+trigger2 = command = "x" || command = "y" || command = "z"
+trigger3 = TimeMod = 2, 1 && var(0) = 1
+v = 25
+value = 1
+
+[State 3000, 6]
+type = HitDef
+triggerall = UniqHitCount = [6,8] 
+triggerall = anim = 1220 
+trigger1 = var(0) != 1 && TimeMod = 2, 1
+trigger1 = command = "a" || command = "b" || command = "c"
+trigger2 = command = "x" || command = "y" || command = "z"
+trigger3 = TimeMod = 2, 1 && var(0) = 1
+attr = S, HA
+animtype  = Hard
+damage    = 3,2
+getpower  = 0
+priority  = 5
+guardflag = MA
+sparkno = 3
+hitflag = MAF
+pausetime = 6,6
+sparkxy = -50,-80
+hitsound   = S205,0
+guardsound = S16,0
+ground.type = Low
+ground.slidetime = 30
+ground.hittime  = 30
+ground.velocity = -7, -3
+guard.velocity = -2
+air.velocity = -5,-3
+airguard.velocity = -3,-3
+fall.animtype = Hard
+fall = 1
+fall.recover = 0
+palfx.time = 40
+palfx.add = 143,122,248
+palfx.mul = 140,50,150
+palfx.sinadd = 85,110,55,10
+Palfx.color = 0
+ground.cornerpush.veloff = 0
+air.cornerpush.veloff = 0
+
+[State 3000, 7]
+type = ChangeState
+trigger1 = frontedgedist <= 20 && var(25) >= 7
+trigger2 = time >= 120
+value = ifelse(pos y >= 0,0,78)
+ctrl = 1;ifelse(pos y >= 0,1,0)
+
+:---------------------
+;Glowing hand FX
+[State 200, Elem 1 Pup 2]
+type = Explod
+triggerall = numexplod(1239) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(1) = 0 || AnimTime = 0
+anim = 1239
+id = 1239
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+;--------------------
+[State 200, Elem 2 Pup 2]
+type = Explod
+triggerall = numexplod(1240) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(2) = 0 || AnimTime = 0
+anim = 1240
+id = 1240
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(1) = 0
+;trigger1 = numexplod(1240) = 1
+ID = 1239
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(2) = 0
+ID = 1240
+
+;-----------------------------
+;Glowing hand FX
+[State 200, Elem 4 Pup 1]
+type = Explod
+triggerall = numexplod(1232) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(3) = 0 || AnimTime = 0
+anim = 1232
+id = 1232
+postype = p1
+pos = -60, 0
+sprpriority = 2   
+facing = 1
+removetime = -1
+bindtime = -1
+
+;Glowing hand FX
+[State 200, Elem 4 Pup 2]
+type = Explod
+triggerall = numexplod(1235) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(3) = 0 || AnimTime = 0
+anim = 1235
+id = 1235
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(3) = 0
+ID = 1232
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(3) = 0
+ID = 1235
+;ignorehitpause = 1
+
+;-----------------------------
+;Glowing hand FX
+[State 200, Elem 4 Pup 1]
+type = Explod
+triggerall = numexplod(1237) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(4) = 0 || AnimTime = 0
+anim = 1237
+id = 1237
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+
+;Glowing hand FX
+[State 200, Elem 4 Pup 2]
+type = null;Explod
+triggerall = numexplod(1227) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(4) = 0 || AnimTime = 0
+anim = 1227
+id = 1227
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(4) = 0
+ID = 1237
+;ignorehitpause = 1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(4) = 0
+ID = 1227
+;ignorehitpause = 1
+
+;-------------------------------
+
+;-------------------------------
+;-----------------------------
+;Glowing hand FX
+[State 200, Elem 5 Pup 1]
+type = Explod
+triggerall = numexplod(1222) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(5) = 0 || AnimTime = 0
+anim = 1222
+id = 1222
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+
+;Glowing hand FX
+[State 200, Elem 5 Pup 2]
+type = Explod
+triggerall = numexplod(1225) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(5) = 0 || AnimTime = 0
+anim = 1225
+id = 1225
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(5) = 0
+ID = 1225
+;ignorehitpause = 1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(5) = 0
+ID = 1222
+;ignorehitpause = 1
+
+;-------------------------------
+;Glowing hand FX
+[State 200, Elem 6 Pup 2]
+type = Explod
+triggerall = numexplod(1245) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(6) = 0 || AnimTime = 0
+anim = 1225
+id = 1245
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(6) = 0
+ID = 1245
+;ignorehitpause = 1
+
+;-----------------------------
+;Glowing hand FX
+[State 200, Elem 7 Pup 1]
+type = Explod
+triggerall = numexplod(1244) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(7) = 0 || AnimTime = 0
+anim = 1244
+id = 1244
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+
+;Glowing hand FX
+[State 200, Elem 7 Pup 2]
+type = Explod
+triggerall = numexplod(1221) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(7) = 0 || AnimTime = 0
+anim = 1221
+id = 1221
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(7) = 0
+ID = 1244
+;ignorehitpause = 1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(7) = 0
+ID = 1221
+;ignorehitpause = 1
+
+;-------------------------------
+;Glowing hand FX
+[State 200, Elem 8 Pup 2]
+type = Explod
+triggerall = numexplod(1226) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(8) = 0 || AnimTime = 0
+anim = 1226
+id = 1226
+postype = p1
+pos = 0, 0
+sprpriority = 2  
+facing = 1
+removetime = -1
+bindtime = -1
+
+;Glowing hand FX
+[State 200, Elem 8 Pup 2]
+type = Explod
+triggerall = numexplod(1223) != 1
+trigger1 = anim = 1220
+trigger1 = AnimElemTime(8) = 0 || AnimTime = 0
+anim = 1223
+id = 1223
+postype = p1
+pos = 0, 0
+sprpriority = 3   
+facing = 1
+removetime = -1
+bindtime = -1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(8) = 0
+ID = 1223
+;ignorehitpause = 1
+
+[State 205, Rem fx]
+type = RemoveExplod
+trigger1 = !AnimElemTime(8) = 0
+ID = 1226
+;ignorehitpause = 1
+
+;------------------------------------------------
+;---------------------------------------------------------------------------
+; Smash Kung Fu Upper (hyper)
+[Statedef 3050]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+velset = 0,0
+anim = 3000
+ctrl = 0
+sprpriority = 2
+
+;-----------------------
+;Super Move FX
+[State 3000, Super A]
+type = SuperPause
+trigger1 = AnimElem = 1
+pos = -30,-120
+;pos = ifelse(pos y >= 0,-100,-80),ifelse(pos y >= 0,-120,-150)
+anim = S4005
+sound = S15, 5
+time = 50
+movetime = 48
+poweradd = -1000
+
+[State 3000, Spark 2]
+type = explod
+trigger1 = time = 0
+anim = 4001
+id = 4001
+pos = -300,150
+postype = Right
+sprpriority = 3
+bindtime = -1
+ignorehitpause = 1
+scale = 3,1
+removeongethit = 1
+supermove = 1
+
+[State 3000, Super B]
+type = AfterImage
+trigger1 = time = 40
+time = 999
+TimeGap = 2
+FrameGap = 4
+Trans = none
+palcolor = 0
+paladd = 0,16,128
+
+[State 3050, Super D]
+type = NotHitBy
+trigger1 = time = [0,80]
+value = SCA
+time = 1
+;-----------------------------
+[State 3050, 1]
+type = PlaySnd
+trigger1 = time = 0
+value = 198, 0
+channel = 0
+
+;--------------------------------------------
+;Call 2 Helpers
+[State 3050: Helper Above]
+type = Helper
+trigger1 = (NumHelper(3051) = 0)
+trigger1 = animelem = 7
+helpertype = Normal
+name = "bison1"
+id = 3051
+pos = 0,-70
+postype = p1
+facing = 0
+stateno = 3051
+keyctrl = 1
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+
+[State 3050: Helper Behind]
+type = Helper
+trigger1 = (NumHelper(3052) = 0) 
+trigger1 = animelem = 7
+helpertype = Normal
+name = "bison2"
+id = 3052
+pos = -20,0
+postype = p1
+facing = 0
+stateno = 3051
+keyctrl = 1
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+;----------------------------
+
+[State 3050, 1]
+type = PlaySnd
+trigger1 = animelem = 2
+trigger2 = animelem = 8
+value = 730,0
+
+[State 3050, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 3055;0
+;ctrl = 1
+
+;------------------------------------------------------------
+;---------------------------------------------------------------------------
+; Smash Kung Fu Upper 2 helper
+[Statedef 3051]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+velset = 0,0
+anim = 3001
+ctrl = 0
+sprpriority = ifelse(ishelper(3051),3,1)
+
+;-----------------------
+;Super Move FX
+[State 3000, Super B]
+type = AfterImage
+trigger1 = time = 0
+time = 999
+TimeGap = 2
+FrameGap = 4
+Trans = none
+palcolor = 0
+paladd = 0,16,128
+
+[State 3050, Super D]
+type = NotHitBy
+trigger1 = time = 0
+value = SCA
+time = 30
+;-----------------------------
+;--------------------------------------------
+[State 3050, NHB]
+type = NotHitBy
+trigger1 = 1
+value = , AT
+time = -1
+
+[State 3050, HO]
+type = HitOverride
+trigger1 = 1
+attr = SCA, AA,AP,AT
+time = -1
+stateno = 1094
+
+;----------------------------
+[State 3050, 7]
+type = ChangeState
+trigger1 = AnimTime = 0 
+value = 3055
+
+;----------------------------
+;[State 3050, 7]
+;type = ChangeState
+;trigger1 = AnimTime = 0 || parent,stateno != 3050
+;value = 1094
+
+;[State 3050, 7]
+;type = ChangeState
+;trigger1 = AnimTime = 0
+;value = 0
+;ctrl = 1
+
+;------------------------------------------------------------
+
+;-----------------------------------------------
+; Kung Fu Knee Z Ground
+[Statedef 3055]
+type    = S
+movetype= A
+physics = S
+velset = 0,0
+anim = ifelse(pos y < 0,3002,1010)
+ctrl = 0
+sprpriority = 2
+
+;--------------------------------------------
+[State 3050, NHB]
+type = NotHitBy
+trigger1 = ishelper
+trigger1 = 1
+value = SCA;, AT
+time = -1
+
+[State 3050, Super D]
+type = NotHitBy
+trigger1 = !ishelper
+trigger1 = time = 0
+value = SCA
+time = 25
+;--------------------------------------------
+
+[State 1010, dust pwr]
+type = Explod
+triggerall = numexplod(2001) != 1
+trigger1 = time = 0 && pos y >= 0
+id = 180
+anim = 2001
+sprpriority = 2
+pos = 40,4
+ownpal = 1
+
+[State 1080, STS]
+type = StateTypeSet
+trigger1 = pos y < 0
+statetype = A
+physics = N
+
+
+[State 1050, 1]
+type = PlaySnd
+trigger1 = Time = 1
+value = 0, 2
+
+[State 1050, 3]
+type = Velset
+trigger1 = time = 5
+x = 10
+y = -4
+
+[State 1050, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 3056
+
+;------------------
+; Light Kung Fu Knee - jump
+[Statedef 3056]
+type    = A
+movetype= A
+physics = N
+
+
+[State 1050, 1]
+type = PlaySnd
+trigger1 = !ishelper
+trigger1 = Time = 1
+value = 0, 2
+
+[State 191, 1] ;Freeze animation until PreIntro is over
+type = ChangeAnim
+trigger1 = time = 0
+value = 3003
+
+;------------------------
+;Vel P1
+[State 1050, 3]
+type = Velset
+trigger1 = !ishelper(3051)
+trigger1 = time = 0
+x = 11
+y = 2
+
+[State 3056, 1] ;Gravity
+type = VelAdd
+trigger1 = !ishelper(3051)
+trigger1 = 1
+y = .2
+;-------------------------
+
+;------------------------
+;Vel P1
+[State 1050, 3]
+type = Velset
+trigger1 = ishelper(3051)
+trigger1 = time = 0
+x = 8
+y = ifelse(prevstateno = 3057,0,2)
+
+[State 3056, 1] ;Gravity
+type = VelAdd
+trigger1 = ishelper(3051) && prevstateno != 3057
+y = .2
+
+[State 3056, 1] ;Gravity
+type = VelAdd
+trigger1 = ishelper(3051) && prevstateno = 3057
+x = 2
+;-------------------------
+
+[State 1050, 4]
+type = HitDef
+trigger1 = animelem = 1
+attr = A, HA
+getpower = 0
+animtype  = Medium
+damage    = ifelse(ishelper,8,30), 4
+priority  = 5
+guardflag = MA
+pausetime = 9,10
+sparkno = 3
+sparkxy = -10,-70
+hitsound = S235, 0                  ;Sound to play on hit
+guardsound = S16, 0                ;Sound to play on guard
+ground.type = High
+ground.slidetime = 20
+ground.hittime  = 20
+ground.velocity = -1
+guard.velocity = -7
+air.velocity = -3.5,-2
+fall = 0
+
+[State 1050, 4]
+type = HitDef
+trigger1 = animelem = 2
+trigger2 = animelem = 3
+attr = A, HA
+getpower = 0
+animtype  = Medium
+damage    = ifelse(ishelper,8,30), 4
+priority  = 5
+sparkno = 3
+guardflag = MA
+pausetime = 9,10
+sparkxy = -10,-70
+hitsound = S235, 0                  ;Sound to play on hit
+guardsound = S16, 0                ;Sound to play on guard
+ground.type = High
+ground.slidetime = 20
+ground.hittime  = 20
+ground.velocity = -1
+guard.velocity = -7
+air.velocity = -2,-2
+fall = 0
+
+[State 220, 1]
+type = PlaySnd
+trigger1 = movehit && animelem = 2
+value = 270, 1
+channel = 0
+
+[State 3001, No scroll]
+type = ScreenBound
+trigger1 = ishelper
+value = 1
+movecamera = 0,0
+
+
+[State 3056, 3] ;Change state when KFM is close to ground
+type = changestate
+triggerall = ishelper
+trigger1 = parent,stateno != [3050,3059]
+value = 1094
+ignorehitpause = 1
+
+[State 3056, 3] ;Change state when KFM is close to ground
+type = destroyself
+triggerall = ishelper
+trigger1 = ishelper && frontedgedist <= 0
+trigger2 = time >= 10 && prevstateno = 3057
+value = 1094
+ignorehitpause = 1
+
+[State 3056, 3] ;Change state when KFM is close to ground
+type = ChangeState
+triggerall = ishelper
+trigger1 = Vel Y > 0 && Pos Y >= -50 && prevstateno != 3057
+;trigger2 = time >= 10 && prevstateno != 3057
+value = 3057
+ignorehitpause = 1
+
+[State 3056, 3] ;Change state when KFM is close to ground
+type = ChangeState
+trigger1 = !ishelper
+trigger1 = Vel Y > 0 && Pos Y >= -10 && prevstateno != 3057
+value = 3057
+
+[State 3056, 3] ;Change state when KFM is close to ground
+type = ChangeState
+trigger1 = !ishelper
+trigger1 = Vel Y > 0 && Pos Y >= -10 && prevstateno = 3057
+value = 3058
+;-----------------------------------------------
+; 2nd Hits
+[Statedef 3057]
+type    = A
+movetype= A
+physics = N
+velset = 0,0
+anim = 3004
+ctrl = 0
+sprpriority = 2
+
+
+[State 1050, 1]
+type = PlaySnd
+trigger1 = Time = 1
+value = 0, 2
+
+[State 1050, 3]
+type = Velset
+trigger1 = time = 5
+x = 11
+y = -4
+
+[State 1050, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 3056
+
+
+;---------------------------------------------------------------------------
+; Slide
+[Statedef 3058]
+type    = C
+movetype= A
+physics = C
+ctrl = 0
+anim = 3005
+sprpriority = 2
+velset = 0,0
+
+
+[State 3059, 1] ;Reset y-position to ground level
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 3000, Super C]
+type = null;AfterImageTime
+trigger1 = time > 4
+time = 8
+
+;[State 3058, 2]
+;type = PlaySnd
+;trigger1 = Time = 2
+;value = 440, 0
+
+[State VelSet] ;initial velocity
+type = VelSet
+trigger1 = Time = 6
+x = 30
+y = 0
+
+[State VelSet] ;stop all movement
+type = VelSet
+trigger1 = Time = 31
+x = 0
+y = 0
+
+[State 100, 3]
+type = MakeDust
+trigger1 = Time = [6,31]
+trigger1 = vel x > 0
+pos = -5,-2
+spacing = 3
+
+[State 3058, 2]
+type = PlaySnd
+trigger1 = Time = 2
+value = 270, 1
+channel = 0
+
+[State 3058, 3]
+type = HitDef
+trigger1 = animelem = 2
+attr = C, HA
+getpower = 0
+damage    = 25,5
+hitflag = M
+guardflag = L
+pausetime = 5,12
+sparkno = 3
+sparkxy = -5,-10
+hitsound = S235, 0                  ;Sound to play on hit
+guardsound = S16, 0                ;Sound to play on guard
+ground.type = Low
+ground.slidetime = 30
+ground.hittime  = 30
+ground.velocity = -1.5
+air.velocity = -1.2,-3
+guard.velocity = -5
+ground.cornerpush.veloff = 0
+fall = 0
+
+[State 3058, 3]
+type = HitDef
+trigger1 = animelem = 3
+attr = C, HA
+getpower = 0
+damage    = 27,5
+hitflag = M
+guardflag = L
+pausetime = 12,12
+sparkno = 3
+sparkxy = -5,-10
+hitsound = S240, 0                  ;Sound to play on hit
+guardsound = S16, 0                ;Sound to play on guard
+ground.type = Trip
+ground.slidetime = 10
+ground.hittime  = 15
+ground.velocity = -1.5,-2
+air.velocity = -1.2,-3
+guard.velocity = -5
+ground.cornerpush.veloff = 0
+fall = 1
+
+[State 3058, 4]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 3059
+ctrl = 0
+
+;-----------------------------------------------------
+;------------------
+; Light Kung Fu Knee - land
+[Statedef 3059]
+type    = S
+movetype= I
+physics = S
+anim = 3006
+sprpriority = 1
+velset = 0,0
+
+[State 3000, Super C]
+type = AfterImageTime
+trigger1 = time = 0
+time = 4
+
+;[State 3059, 1] ;Reset y-position to ground level
+;type = PosSet
+;trigger1 = Time = 0
+;y = 0
+
+[State 3059, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;--------------------------------------------------

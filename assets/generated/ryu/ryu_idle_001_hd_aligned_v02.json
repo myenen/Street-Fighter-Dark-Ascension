@@ -1,0 +1,35 @@
+{
+  "status": "Aligned reference candidate only; no game integration",
+  "source": "ryu_idle_001_hd_cutout_v02.png",
+  "asset_pixels_per_original_unit": 8,
+  "canvas": [
+    768,
+    896
+  ],
+  "original_axis_on_canvas": [
+    48,
+    96
+  ],
+  "hd_axis_on_canvas": [
+    384,
+    768
+  ],
+  "original_visible_size": [
+    35,
+    79
+  ],
+  "hd_visible_size_original_units": [
+    38.125,
+    79.0
+  ],
+  "placement": [
+    228,
+    152
+  ],
+  "method": "Uniform scale to original visible height; horizontal visible-bounds centers aligned. Original SFF origin retained on common canvas. No pose deformation.",
+  "limitations": [
+    "Matching height and origin does not match anatomy or foot angles.",
+    "Original xscale/yscale=1.3 and all hitboxes remain unchanged.",
+    "Do not replace SFF sprite directly: HD requires an appropriate visual scale at import."
+  ]
+}

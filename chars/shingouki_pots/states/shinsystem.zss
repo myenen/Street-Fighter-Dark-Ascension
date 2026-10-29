@@ -1,0 +1,4558 @@
+# _____________________________________
+#| Shin Gouki by Phantom.of.the.Server |
+# ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+#==============================================================================================
+#=======================================<COMMON STATES>========================================
+#==============================================================================================
+
+#====================<STANDING>====================
+
+#============================================================
+# State 0
+#============================================================
+[StateDef 0;
+	type: S;
+	physics: S;
+	moveType: I;
+	velSet: 0, 0;
+	sprPriority: 0;
+	juggle: 0;
+]
+
+# Gone
+if isHelper {
+	destroySelf{removeexplods: 1}
+}
+
+# Anim
+if (anim != 0 && anim != 5)
+|| (anim = 5 && !animTime) {
+	changeAnim{value: 0}
+}
+
+# Dead
+if !alive {
+	selfState{value: 5050; ctrl: 0}
+}
+
+# Not Myself
+if inCustomState
+&& time > 0 {
+	selfState{value: 5040}
+}
+
+#====================<CROUCHING>====================
+
+#============================================================
+# State 10
+#============================================================
+[StateDef 10;
+	type: C;
+	physics: C;
+	moveType: I;
+	velSet: 0, 0;
+	sprPriority: 0;
+]
+
+# Anim
+if !time {
+	if anim = 12
+	|| anim = 47 {
+		changeAnim{value: 10; elem: 3 - animElemno(0)}
+	}
+}
+
+# Anim
+if anim != 10 {
+	changeAnim{value: 10}
+}
+
+# End
+if !animTime {
+	selfState{value: 11}
+}
+
+#============================================================
+# State 11
+#============================================================
+
+[StateDef 11;
+	type: C;
+	physics: C;
+	moveType: I;
+	anim: 11;
+	velSet: 0, 0;
+	sprPriority: 0;
+]
+
+# Anim
+if anim = 6
+&& !animTime {
+	changeAnim{value: 11}
+}
+
+#============================================================
+# State 12
+#============================================================
+
+[StateDef 12;
+	type: S;
+	physics: S;
+	moveType: I;
+	velSet: 0, 0;
+	sprPriority: 0;
+]
+
+# Anim
+if !time
+&& anim = 10 {
+	changeAnim{value: 12; elem: 3 - animElemno(0)}
+}
+
+# Anim
+if anim != 12 {
+	changeAnim{value: 12}
+}
+
+# End
+if !animTime {
+	selfState{value: 0}
+}
+
+#====================<WALKING>====================
+
+#============================================================
+# State 20
+#============================================================
+[StateDef 20;
+	type: S;
+	physics: S;
+	moveType: I;
+	sprPriority: 0;
+]
+
+# Vel
+if command = "holdfwd" {
+	velSet{x: const(velocity.walk.fwd.x)}
+}
+
+# Vel
+if command = "holdback" {
+	velSet{x: const(velocity.walk.back.x)}
+}
+
+# Anim
+if vel x > 0 {
+	if (anim != 5 && anim != 12 && anim != 20)
+	|| (anim = 5 && !animTime)
+	|| (anim = 12 && !animTime) {
+		changeAnim{value: 20}
+	}
+}
+
+# Anim
+if vel x < 0 {
+	if (anim != 5 && anim != 12 && anim != 21)
+	|| (anim = 5 && !animTime)
+	|| (anim = 12 && !animTime) {
+		changeAnim{value: 21}
+	}
+}
+
+#===================<JUMPING>================
+
+#----- JUMP START -----
+#============================================================
+# State 40
+#============================================================
+[StateDef 40;
+	type: S;
+	physics: S;
+	moveType: I;
+	anim: 40;
+	ctrl: 0;
+	velSet: 0, 0;
+	sprPriority: 1;
+	facep2: (prevStateNo != 100);
+]
+
+# Keyboard Check
+# Currently Obsolete in Ikemen
+if !time
+&& !AIlevel
+&& prevStateNo = 52
+&& (command = "holddown" && command = "holdup") {
+	changeState{value: 10; ctrl: 1}
+}
+
+# Direction
+if !time {
+	varSet{sysv: 1; value: 0}
+}
+
+# Direction
+persistent(0) if !AIlevel
+&& time >= 1
+&& (command = "holdfwd" || command = "holdback") {
+	varSet{sysv: 1; value: (command = "holdfwd") - (command = "holdback")}
+}
+
+# Direction
+if AIlevel {
+	varSet{
+		sysv: 1;
+		value: ifelse(p2BodyDist x < 30, 0, ifelse((life - p2life) > 200 && p2moveType != H && random < 333, -1, 1));
+	}
+}
+
+# Direction AI Aerial Rave
+if AIlevel
+&& prevStateNo = 420 {
+	varSet{sysv: 1; value: 1}
+}
+
+# High Jump
+if !time {
+	mapSet{map: "jumptype"; value: 0}
+}
+
+# High Jump
+if !time
+&& !AIlevel
+&& map(cmd_highjump) {
+	mapSet{map: "jumptype"; value: 3}
+}
+
+# High Jump
+if !time
+&& AIlevel
+&& (p2BodyDist x > 80 && p2stateType != L)
+&& random < 333 {
+	mapSet{map: "jumptype"; value: 3}
+}
+
+# Running Jump
+if prevStateNo = 100 {
+	mapSet{map: "jumptype"; value: 3}
+	varSet{sysv: 1; value: 1}
+}
+
+# Low Jump
+if !AIlevel
+&& command != "holdup"
+&& map(jumptype) != [1, 2] {
+	mapSet{map: "jumptype"; value: ifelse((map(jumptype) = 3 && sysvar(1)), 2, 1)}
+}
+
+# Low Jump
+if AIlevel
+&& !animTime
+&& map(jumptype) != [1, 2]
+&& (p2stateType = S || p2stateType = C)
+&& p2BodyDist x < 70
+&& random < ifelse(sysvar(1) = 1, 500, 125)
+&& random < ifelse(p2stateType = C, 500, 250) {
+	mapSet{map: "jumptype"; value: ifelse((map(jumptype) = 3 && sysvar(1)), 2, 1)}
+}
+
+# Jump Cancel
+if prevStateNo = 420 {
+	mapSet{map: "jumptype"; value: 3}
+	mapSet{map: "juggle_count"; value: 0}
+}
+
+if !animTime {
+	# Sound
+	playSnd{value: 0, ifelse(map(jumptype) = [2, 3], 41, 40)}
+	# Dust
+	helper{
+		helpertype: normal;
+		stateno: 7100;
+		id: 7100;
+		name: "Jump Dust";
+		posType: p1;
+		ownpal: 1;
+	}
+	# Vel Normal
+	velSet{
+		x: ifelse(!sysvar(1), const(velocity.jump.neu.x), ifelse(sysvar(1) = 1, const(velocity.jump.fwd.x), const(velocity.jump.back.x)));
+		y: const(velocity.jump.y);
+	}
+}
+
+# Vel Short
+if !animTime && map(jumptype) = 1 {
+	velSet{
+		x: ifelse(!sysvar(1), const(velocity.jump.neu.x), ifelse(sysvar(1) = 1, const(velocity.jump.fwd.x), const(velocity.jump.back.x)));
+		y: 0.75 * const(velocity.jump.y);
+	}
+}
+
+# Vel Medium
+if !animTime && map(jumptype) = 2 {
+	velSet{
+		x: ifelse(!sysvar(1), const(velocity.jump.neu.x), ifelse(sysvar(1) = 1, const(velocity.runjump.fwd.x), const(velocity.runjump.back.x)));
+		y: 0.75 * const(velocity.jump.y);
+	}
+}
+
+# Vel Long
+if !animTime && map(jumptype) = 3 {
+	velSet{
+		x: ifelse(!sysvar(1), const(velocity.jump.neu.x), ifelse(sysvar(1) = 1, const(velocity.runjump.fwd.x), const(velocity.runjump.back.x)));
+		y: ifelse(!sysvar(1), const(velocity.runjump.y), const(velocity.jump.y));
+	}
+}
+
+# End
+if !animTime {
+	selfState{value: 50; ctrl: 1}
+}
+
+#----- JUMP UP -----
+
+#============================================================
+# State 50
+#============================================================
+[StateDef 50;
+	type: A;
+	physics: N;
+	moveType: I;
+	sprPriority: 1;
+]
+
+# Anim
+persistent(0) if !time {
+	changeAnim{value: ifelse(!vel x, 41, ifelse(vel x > 0, 42, 43)) + 10 * (map(jumptype) = [1, 2])}
+}
+
+# No Guard
+if map(jumptype) = 1 || map(jumptype) = 2 {
+	assertSpecial{flag: noairguard}
+}
+
+# Grounded Frame
+if time < 1 && prevStateNo = 40 {
+	posfreeze{value: 1}
+}
+
+# Accel
+if time >= 1 || prevStateNo != 40 {
+	gravity{}
+}
+
+# Land
+if vel y > 0
+&& pos y > -vel y {
+	selfState{value: 52}
+}
+
+#----- JUMP FALL -----
+
+#============================================================
+# State 51
+#============================================================
+[StateDef 51;
+	type: A;
+	physics: N;
+	moveType: I;
+	sprPriority: 1;
+]
+
+# Accel
+gravity{}
+
+# Land
+if vel y > 0
+&& pos y > -vel y {
+	selfState{value: 52}
+}
+
+#----- JUMP LAND -----
+
+#============================================================
+# State 52
+#============================================================
+[StateDef 52;
+	type: S;
+	physics: S;
+	moveType: I;
+	anim: 47;
+	ctrl: 1; # State -1 only sees this in the next frame
+	velSet: 0, 0;
+	sprPriority: 1;
+]
+
+# Pos
+posSet{y: 0}
+
+# Hop Recovery
+if !time
+&& (map(jumptype) = 1 || map(jumptype) = 2)
+&& prevStateNo = [600, 699] {
+	changeAnim{value: 57}
+}
+
+# Hop Recovery
+if !time
+&& anim = 57 {
+	ctrlset{value: 0}
+}
+
+# Disable Trip Guard
+if !time
+&& (prevStateNo != [5000, 5999] && prevmoveType != H)
+&& (prevStateNo != 50 && prevStateNo != 51 && prevStateNo != [120, 155])
+&& prevStateNo != 703 { # Air parry
+	assertSpecial{flag: nostandguard; flag2: nocrouchguard; flag3: noairguard}
+}
+
+# Trip Guard
+if !time
+&& ctrl
+&& inguarddist
+&& isAsserted(nostandguard) = 0
+&& isAsserted(nocrouchguard) = 0 {
+	if (!AIlevel
+	&& command = "holdback")
+	|| (AIlevel
+	&& random < (1000 * (AIlevelF / 8.0))) {
+		changeState{value: 120}
+	}
+}
+
+# No Walk
+if animTime
+&& anim != 5 {
+	assertSpecial{flag: nowalk}
+}
+
+if !time {
+	# Sound
+	playSnd{value: 0, 52}
+	# Dust
+	explod{
+		anim: 7102;
+		sprPriority: -5;
+		posType: p1;
+		scale: 0.5, 0.5;
+		pausemovetime: -1;
+		supermovetime: -1;
+		ownpal: 1;
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: 0; ctrl: 1}
+}
+
+#======================<RUN>===========================
+
+#============================================================
+# State 100
+#============================================================
+[StateDef 100;
+	type: S;
+	moveType: I;
+	physics: S;
+	velSet: 0, 0;
+	anim: 100;
+	ctrl: 0;
+	sprPriority: 1;
+]
+
+if !time {
+	# Sound
+	playSnd{value: 0, 100}
+	# Dust
+	helper{
+		helpertype: normal;
+		stateno: 7104;
+		id: 7100;
+		name: "Dash Dust";
+		posType: p1;
+		pausemovetime: 255;
+		supermovetime: 255;
+		ownpal: 1;
+	}
+}
+
+# Pos
+posSet{y: 0}
+# Vel
+velSet{x: const(velocity.run.fwd.x)}
+
+# steps
+if animElem = 3 || animElem = 6 {
+	playSnd{value: 0, ifelse((animElem = 3), 103, 106)}
+}
+
+# Jump
+if !AIlevel
+&& (command = "holdfwd" && command = "holdup") {
+	changeState{value: 40}
+}
+
+# Jump
+if AIlevel
+&& random < 25 {
+	changeState{value: 40}
+}
+
+# End
+if time >= 9 {
+	if (!AIlevel
+	&& (command != "holdfwd" || command = "holdback"))
+	|| (AIlevel && (p2moveType = A || p2dist x < 80))
+	|| p2dist x < -const(size.ground.back) {
+		changeState{value: 101}
+	}
+}
+
+#----- STOP -----
+
+#============================================================
+# State 101
+#============================================================
+[StateDef 101;
+	type: S;
+	physics: S;
+	moveType: I;
+	anim: 101;
+	ctrl: 0;
+	sprPriority: 1;
+]
+
+if !time {
+	# Sound
+	playSnd{value: 0, 101}
+	# Dust
+	explod{
+		anim: 7103;
+		sprPriority: 3;
+		posType: p1;
+		pos: 0, 0;
+		scale: 0.5, 0.5;
+		pausemovetime: -1;
+		supermovetime: -1;
+		ownpal: 1;
+	}
+}
+
+# Jump
+if !AIlevel
+&& command = "holdup" {
+	changeState{value: 40}
+}
+
+# End
+if !animTime {
+	changeState{value: ifelse(command = "holddown", 10, 0); ctrl: 1}
+}
+
+#========================<FORWARD DASH>==========================
+
+#============================================================
+# State 102
+#============================================================
+[StateDef 102;
+	type: S;
+	physics: N;
+	moveType: I;
+	velSet: 0, 0;
+	anim: 102;
+	ctrl: 0;
+	sprPriority: 1;
+]
+
+# Run
+if !time {
+	varSet{sysv: 1; value: 1}
+}
+
+# Run
+if time <= 5 {
+	if (!AIlevel
+	&& command != "holdfwd")
+	|| (AIlevel && p2BodyDist x < 120) {
+		varSet{sysv: 1; value: 0}
+	}
+}
+
+# Run
+if time = 5 && sysvar(1) {
+	changeState{value: 100}
+}
+
+# Freeze
+if time <= 1
+|| (time < 5
+&& sysvar(1) = 1) {
+	changeAnim{value: 102; elem: 1}
+}
+
+# Vel
+if vel x {
+	veladd{x: -0.50}
+}
+
+if animElem = 2 {
+	# Vel
+	velSet{x: 11.00; y: 0}
+	# Sound
+	playSnd{value: 0, 102}
+	# Dust
+	helper{
+		helpertype: normal;
+		stateno: 7104;
+		id: 7100;
+		name: "Dash Dust";
+		posType: p1;
+		pausemovetime: 255;
+		supermovetime: 255;
+		ownpal: 1;
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: 103}
+}
+
+#----- LAND -----
+
+#============================================================
+# State 103
+#============================================================
+[StateDef 103;
+	type: S;
+	physics: S;
+	ctrl: 1;
+	anim: 103;
+	velSet: 0, 0;
+]
+
+# Pos
+posSet{y: 0}
+
+if !time {
+	# Sound
+	playSnd{value: 0, 103}
+	# Dust
+	explod{
+		anim: 7102;
+		sprPriority: -3;
+		posType: p1;
+		scale: 0.5, 0.5;
+		pausemovetime: -1;
+		supermovetime: -1;
+		ownpal: 1;
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: 0; ctrl: 1}
+}
+
+#========================<BACK DASH>==========================
+
+#============================================================
+# State 105
+#============================================================
+[StateDef 105;
+	type: A;
+	physics: N;
+	moveType: I;
+	velSet: 0, 0;
+	anim: 105;
+	ctrl: 0;
+	sprPriority: 1;
+]
+
+# Vel
+if vel x {
+	veladd{x: 0.50}
+}
+
+if animElem = 2 {
+	# Vel
+	velSet{x: const(velocity.run.back.x); y: const(velocity.run.back.y)}
+	# Sound
+	playSnd{value: 0, 105}
+	# Dust
+	helper{
+		helpertype: normal;
+		stateno: 7104;
+		id: 7100;
+		name: "Dash Dust";
+		posType: p1;
+		facing: -1;
+		pausemovetime: 255;
+		supermovetime: 255;
+		ownpal: 1;
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: 106}
+}
+
+#----- LAND -----
+
+#============================================================
+# State 106
+#============================================================
+[StateDef 106;
+	type: S;
+	physics: S;
+	ctrl: 0;
+	anim: 106;
+	velSet: 0, 0;
+]
+
+# Pos
+posSet{y: 0}
+
+if !time {
+	# Sound
+	playSnd{value: 0, 106}
+	# Dust
+	explod{
+		anim: 7102;
+		sprPriority: -3;
+		posType: p1;
+		scale: 0.5, 0.5;
+		pausemovetime: -1;
+		supermovetime: -1;
+		ownpal: 1;
+	}
+}
+
+# Ctrl
+if time >= 2 {
+	ctrlset{value: 1}
+}
+
+# End
+if !animTime {
+	changeState{value: 0; ctrl: 1}
+}
+
+#========================<GUARD>========================
+
+#----- START -----
+#============================================================
+# State 120
+#============================================================
+[StateDef 120;
+	type: U;
+	physics: U;
+]
+
+# Do or do not
+assertSpecial{flag: nostandguard; flag2: nocrouchguard; flag3: noairguard}
+
+# AI Tranquilizer
+if AIlevel {
+	assertSpecial{flag: nohardcodedkeys}
+}
+
+# Type
+if !time
+&& stateType = S {
+	stateTypeSet{physics: S}
+}
+
+# Type
+if !time
+&& stateType = C {
+	stateTypeSet{physics: C}
+}
+
+# Type
+if !time
+&& stateType = A {
+	stateTypeSet{physics: A}
+}
+
+# Vel
+if !time
+&& stateType != A {
+	velSet{x: 0; y: 0}
+}
+
+# High to Low
+if stateType = S {
+	if (!AIlevel
+	&& command = "holddown")
+	|| (AIlevel
+	&& !map(ai_blockhigh)) {
+		stateTypeSet{stateType: C; physics: C}
+	}
+}
+
+# Low to High
+if stateType = C {
+	if (!AIlevel
+	&& command != "holddown")
+	|| (AIlevel
+	&& map(ai_blockhigh)) {
+		stateTypeSet{stateType: S; physics: S}
+	}
+}
+
+# Anim
+if !time {
+	changeAnim{value: 120 + (stateType = C) + (stateType = A) * 2}
+}
+
+# End
+if !animTime {
+	changeState{value: 130 + (stateType = C) + (stateType = A) * 2}
+}
+
+# Stop Guarding
+if stateType != A {
+	if !inguarddist
+	|| (!AIlevel
+	&& p2dist x >= 0
+	&& (command != "holdback" || command = "holdfwd"))
+	|| (!AIlevel
+	&& p2dist x < 0
+	&& (command != "holdfwd" || command = "holdback"))
+	|| ((AIlevel && numEnemy)
+	&& p2, hitdefattr = SCA, AT) {
+		changeState{value: 140}
+	}
+}
+
+# No Walking
+if ctrl {
+	if (p2dist x >= 0
+	&& command != "holdfwd")
+	|| (p2dist x < 0
+	&& command != "holdback") {
+		assertSpecial{flag: nowalk}
+	}
+}
+
+#----- STAND GUARD (Guarding) -----
+
+#============================================================
+# State 130
+#============================================================
+[StateDef 130;
+	type: S;
+	physics: S;
+	velSet: ifelse(prevStateNo = 132 && abs(vel x) < 5, 0, vel x), 0;
+]
+
+# Do or do not
+assertSpecial{flag: nostandguard; flag2: nocrouchguard}
+
+# AI Tranquilizer
+if AIlevel {
+	assertSpecial{flag: nohardcodedkeys}
+}
+
+# Anim
+if anim != 130 {
+	changeAnim{value: 130}
+}
+
+# AI fix
+if AIlevel
+&& numEnemy
+&& (time >= 120 || p2, time >= 60)
+&& random < 17 {
+	changeState{value: 40}
+}
+
+if !time
+&& (prevStateNo = 132 || (prevStateNo = [154, 155])) {
+	# Sound
+	playSnd{value: 0, 52}
+	# Dust
+	explod{
+		anim: 7102;
+		sprPriority: -3;
+		posType: p1;
+		scale: 0.5, 0.5;
+		pausemovetime: -1;
+		supermovetime: -1;
+		ownpal: 1;
+	}
+}
+
+# High to Low
+if (!AIlevel
+&& command = "holddown")
+|| (AIlevel
+&& !map(ai_blockhigh)) {
+	changeState{value: 131}
+}
+
+# Stop Guarding
+if !inguarddist
+|| (!AIlevel
+&& p2dist x >= 0
+&& (command != "holdback" || command = "holdfwd"))
+|| (!AIlevel
+&& p2dist x < 0
+&& (command != "holdfwd" || command = "holdback"))
+|| ((AIlevel && numEnemy)
+&& p2, hitdefattr = SCA, AT) {
+	changeState{value: 140}
+}
+
+# No Walking
+if ctrl {
+	if (p2dist x >= 0
+	&& command != "holdfwd")
+	|| (p2dist x < 0
+	&& command != "holdback") {
+		assertSpecial{flag: nowalk}
+	}
+}
+
+#----- CROUCH GUARD (Guarding) -----
+
+#============================================================
+# State 131
+#============================================================
+[StateDef 131;
+	type: C;
+	physics: C;
+	velSet: ifelse(prevStateNo = 132 && abs(vel x) < 5, 0, vel x), 0;
+]
+
+# Do or do not
+assertSpecial{flag: nostandguard; flag2: nocrouchguard}
+
+# AI Tranquilizer
+if AIlevel {
+	assertSpecial{flag: nohardcodedkeys}
+}
+
+# Anim
+if anim != 131 {
+	changeAnim{value: 131}
+}
+
+# Low to High
+if (!AIlevel
+&& command != "holddown")
+|| (AIlevel
+&& map(ai_blockhigh)) {
+	changeState{value: 130}
+}
+
+# AI fix
+if AIlevel
+&& numEnemy
+&& (time >= 120 || p2, time >= 60)
+&& random < 17 {
+	changeState{value: 40}
+}
+
+# Stop Guarding
+if !inguarddist
+|| (!AIlevel
+&& p2dist x >= 0
+&& (command != "holdback" || command = "holdfwd"))
+|| (!AIlevel
+&& p2dist x < 0
+&& (command != "holdfwd" || command = "holdback"))
+|| ((AIlevel && numEnemy)
+&& p2, hitdefattr = SCA, AT) {
+	changeState{value: 140}
+}
+
+#----- AIR GUARD (Guarding) -----
+
+#============================================================
+# State 132
+#============================================================
+[StateDef 132;
+	type: A;
+	physics: N;
+]
+
+# Do or do not
+assertSpecial{flag: noairguard}
+
+# AI Tranquilizer
+if AIlevel {
+	assertSpecial{flag: nohardcodedkeys}
+}
+
+# Anim
+if anim != 132 {
+	changeAnim{value: 132}
+}
+
+# Accel
+veladd{y: const(movement.yaccel)}
+# Var
+varSet{sysv: 0; value: vel y > 0 && (pos y > -vel y)}
+
+if sysvar(0) {
+	# Vel
+	velSet{y: 0}
+	# Pos
+	posSet{y: 0}
+}
+
+# End
+if sysvar(0) && inguarddist {
+	if (!AIlevel
+	&& ifelse(p2dist x < 0, command = "holdfwd", command = "holdback"))
+	|| AIlevel {
+		changeState{value: 130}
+	}
+}
+
+# End
+if sysvar(0) {
+	changeState{value: 52}
+}
+
+#----- GUARD (End) -----
+
+#============================================================
+# State 140
+#============================================================
+[StateDef 140;
+	type: U;
+	physics: U;
+	ctrl: 1;
+]
+
+# Type
+if !time
+&& stateType = S {
+	stateTypeSet{physics: S}
+}
+
+# Type
+if !time
+&& stateType = C {
+	stateTypeSet{physics: C}
+}
+
+# Type
+if !time
+&& stateType = A {
+	stateTypeSet{physics: A}
+}
+
+# High to Low
+if stateType = S {
+	if (!AIlevel
+	&& command = "holddown")
+	|| (AIlevel
+	&& !map(ai_blockhigh)) {
+		stateTypeSet{stateType: C; physics: C}
+	}
+}
+
+# Low to High
+if stateType = C {
+	if (!AIlevel
+	&& command != "holddown")
+	|| (AIlevel
+	&& map(ai_blockhigh)) {
+		stateTypeSet{stateType: S; physics: S}
+	}
+}
+
+# Anim
+if !time {
+	changeAnim{value: 140 + (stateType = C) + (stateType = A) * 2}
+}
+
+# No Walking
+if ctrl {
+	if (p2dist x >= 0
+	&& command != "holdfwd")
+	|| (p2dist x < 0
+	&& command != "holdback") {
+		assertSpecial{flag: nowalk}
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: (stateType = C) * 11 + (stateType = A) * 51}
+}
+
+#----- STAND GUARD HIT (Shaking) -----
+
+#============================================================
+# State 150
+#============================================================
+[StateDef 150;
+	type: S;
+	physics: N;
+	moveType: H;
+	velSet: 0, 0;
+]
+
+# Stop Snd
+if !time {
+	stopsnd{channel: 0}
+}
+
+# Anim
+changeAnim{value: 150}
+
+# End
+if hitshakeover {
+	changeState{
+		value: ifelse((!AIlevel && command = "holddown") || (AIlevel && !map(ai_blockhigh)), 153, 151);
+	}
+}
+
+# High to Low
+if stateType = S {
+	if (!AIlevel
+	&& command = "holddown")
+	|| (AIlevel
+	&& !map(ai_blockhigh)) {
+		stateTypeSet{stateType: C; physics: C}
+	}
+}
+
+# Low to High
+if stateType = C {
+	if (!AIlevel
+	&& command != "holddown")
+	|| (AIlevel
+	&& map(ai_blockhigh)) {
+		stateTypeSet{stateType: S; physics: S}
+	}
+}
+
+# Rumble
+if !time {
+	forcefeedback{waveform: square; time: max(4, getHitVar(hitshaketime) / 2)}
+}
+
+#----- STAND GUARD HIT 2 (Knocked back) -----
+
+#============================================================
+# State 151
+#============================================================
+[StateDef 151;
+	type: S;
+	physics: S;
+	moveType: H;
+	anim: 130;
+]
+
+# Vel
+if !time {
+	hitvelSet{x: 1}
+}
+
+# Vel
+if time = getHitVar(slidetime)
+|| hitover {
+	velSet{x: 0}
+}
+
+# Ctrl
+if time = getHitVar(ctrltime) {
+	ctrlset{value: 1}
+}
+
+# High to Low
+if stateType = S {
+	if (!AIlevel
+	&& command = "holddown")
+	|| (AIlevel
+	&& !map(ai_blockhigh)) {
+		stateTypeSet{stateType: C; physics: C}
+	}
+}
+
+# Low to High
+if stateType = C {
+	if (!AIlevel
+	&& command != "holddown")
+	|| (AIlevel
+	&& map(ai_blockhigh)) {
+		stateTypeSet{stateType: S; physics: S}
+	}
+}
+
+# End
+if hitover {
+	changeState{value: 130; ctrl: 1}
+}
+
+#----- CROUCH GUARD HIT (Shaking) -----
+
+#============================================================
+# State 152
+#============================================================
+[StateDef 152;
+	type: C;
+	physics: N;
+	moveType: H;
+	velSet: 0, 0;
+]
+
+# Stop Snd
+if !time {
+	stopsnd{channel: 0}
+}
+
+# Anim
+changeAnim{value: 151}
+
+# End
+if hitshakeover {
+	changeState{
+		value: ifelse((!AIlevel && command = "holddown") || (AIlevel && !map(ai_blockhigh)), 153, 151);
+	}
+}
+
+# High to Low
+if stateType = S {
+	if (!AIlevel
+	&& command = "holddown")
+	|| (AIlevel
+	&& !map(ai_blockhigh)) {
+		stateTypeSet{stateType: C; physics: C}
+	}
+}
+
+# Low to High
+if stateType = C {
+	if (!AIlevel
+	&& command != "holddown")
+	|| (AIlevel
+	&& map(ai_blockhigh)) {
+		stateTypeSet{stateType: S; physics: S}
+	}
+}
+
+# Rumble
+if !time {
+	forcefeedback{waveform: square; time: max(4, getHitVar(hitshaketime) / 2)}
+}
+
+#----- CROUCH GUARD HIT 2 (Knocked back) -----
+
+#============================================================
+# State 153
+#============================================================
+[StateDef 153;
+	type: C;
+	physics: C;
+	moveType: H;
+	anim: 131;
+]
+
+# Vel
+if !time {
+	hitvelSet{x: 1}
+}
+
+# Vel
+if time = getHitVar(slidetime)
+|| hitover {
+	velSet{x: 0}
+}
+
+# Ctrl
+if time = getHitVar(ctrltime) {
+	ctrlset{value: 1}
+}
+
+# High to Low
+if stateType = S {
+	if (!AIlevel
+	&& command = "holddown")
+	|| (AIlevel
+	&& !map(ai_blockhigh)) {
+		stateTypeSet{stateType: C; physics: C}
+	}
+}
+
+# Low to High
+if stateType = C {
+	if (!AIlevel
+	&& command != "holddown")
+	|| (AIlevel
+	&& map(ai_blockhigh)) {
+		stateTypeSet{stateType: S; physics: S}
+	}
+}
+
+# End
+if hitover {
+	changeState{value: 131; ctrl: 1}
+}
+
+#----- AIR GUARD HIT (Shaking) -----
+
+#============================================================
+# State 154
+#============================================================
+[StateDef 154;
+	type: A;
+	physics: N;
+	moveType: H;
+	velSet: 0, 0;
+]
+
+# Stop Snd
+if !time {
+	stopsnd{channel: 0}
+}
+
+# Anim
+changeAnim{value: 152}
+
+# End
+if hitshakeover {
+	changeState{value: 155}
+}
+
+# Rumble
+if !time {
+	forcefeedback{waveform: square; time: max(4, getHitVar(hitshaketime) / 2)}
+}
+
+#----- AIR GUARD HIT 2 (Knocked away) -----
+
+#============================================================
+# State 155
+#============================================================
+[StateDef 155;
+	type: A;
+	physics: N;
+	moveType: H;
+	anim: 132;
+]
+
+# Vel
+if !time {
+	hitvelSet{x: 1; y: 1}
+}
+
+# Accel
+veladd{y: const(movement.yaccel)}
+
+# Ctrl
+if time = getHitVar(ctrltime) {
+	ctrlset{value: 1}
+}
+
+# Var
+varSet{sysv: 0; value: vel y > 0 && (pos y > -vel y)}
+
+if sysvar(0) {
+	# Vel
+	velSet{y: 0}
+	# Pos
+	posSet{y: 0}
+}
+
+# End
+if sysvar(0) && inguarddist {
+	if (!AIlevel
+	&& ifelse(p2dist x < 0, command = "holdfwd", command = "holdback"))
+	|| AIlevel {
+		changeState{value: 130}
+	}
+}
+
+# End
+if sysvar(0) {
+	changeState{value: 52}
+}
+
+#====================<PARRY>====================
+
+#----- STANDING -----
+#============================================================
+# State 700
+#============================================================
+[StateDef 700;
+	type: S;
+	physics: S;
+	moveType: I;
+	anim: 700;
+	velSet: 0, 0;
+	ctrl: 0;
+	sprPriority: 2;
+	powerAdd: 0;
+	facep2: 1;
+]
+
+# HB
+hitBy{value: SCA, AT; time: 1}
+
+# Check Parried Helper
+if !time {
+	mapSet{map: "parry_helper_ID"; value: 0}
+	if getHitVar(playerID)
+	&& playerIDexist(getHitVar(playerID))
+	&& playerID(getHitVar(playerID)), isHelper {
+		mapSet{map: "parry_helper_ID"; value: getHitVar(playerID)}
+	}
+}
+
+# Freeze Parried Helper
+if playerIDexist(map(parry_helper_ID))
+&& playerID(map(parry_helper_ID)), moveType = A
+&& playerID(map(parry_helper_ID)), hitpausetime = 0 {
+	posadd{
+		redirectid: map(parry_helper_ID);
+		x: -1 * playerID(map(parry_helper_ID)), vel x;
+		y: -1 * playerID(map(parry_helper_ID)), vel y;
+	}
+}
+
+# Consecutive Parries
+if !time
+&& map(parry_nowalk) > 0 {
+	posadd{x: -8}
+}
+
+# Freeze
+posfreeze{value: 1}
+# No walking
+mapSet{map: "parry_nowalk"; value: 4}
+
+if !time {
+	# Sound
+	playSnd{value: 3, (random < 500); channel: 0}
+	# Sound
+	playSnd{value: 7, 3}
+	# Flash
+	palFx{add: 0, 64, 255; sinadd: 0, -64, -255, 60; time: 15}
+	# FX
+	explod{
+		anim: 7200;
+		sprPriority: 5;
+		posType: p1;
+		pos: 36, -65;
+		pausemovetime: -1;
+		supermovetime: -1;
+		scale: 0.5, 0.5;
+		ownpal: 1;
+	}
+	# Shake
+	envshake{time: 1; ampl: 0}
+}
+
+# End
+if !animTime {
+	changeState{value: 0; ctrl: 1}
+}
+
+#----- CROUCHING -----
+
+#============================================================
+# State 701
+#============================================================
+[StateDef 701;
+	type: C;
+	physics: C;
+	moveType: I;
+	anim: 701;
+	velSet: 0, 0;
+	ctrl: 0;
+	sprPriority: 2;
+	powerAdd: 0;
+	facep2: 1;
+]
+
+# HB
+hitBy{value: SCA, AT; time: 1}
+
+# Check Parried Helper
+if !time {
+	mapSet{map: "parry_helper_ID"; value: 0}
+	if getHitVar(playerID)
+	&& playerIDexist(getHitVar(playerID))
+	&& playerID(getHitVar(playerID)), isHelper {
+		mapSet{map: "parry_helper_ID"; value: getHitVar(playerID)}
+	}
+}
+
+# Freeze Parried Helper
+if playerIDexist(map(parry_helper_ID))
+&& playerID(map(parry_helper_ID)), moveType = A
+&& playerID(map(parry_helper_ID)), hitpausetime = 0 {
+	posadd{
+		redirectid: map(parry_helper_ID);
+		x: -1 * playerID(map(parry_helper_ID)), vel x;
+		y: -1 * playerID(map(parry_helper_ID)), vel y;
+	}
+}
+
+# Freeze
+posfreeze{value: 1}
+# No walking
+mapSet{map: "parry_nowalk"; value: 4}
+
+if !time {
+	# Sound
+	playSnd{value: 3, (random < 500); channel: 0}
+	# Sound
+	playSnd{value: 7, 3}
+	# Flash
+	palFx{add: 0, 64, 255; sinadd: 0, -64, -255, 60; time: 15}
+	# FX
+	explod{
+		anim: 7200;
+		sprPriority: 5;
+		posType: p1;
+		pos: 27, -21;
+		pausemovetime: -1;
+		supermovetime: -1;
+		scale: 0.5, 0.5;
+		ownpal: 1;
+	}
+	# Shake
+	envshake{time: 1; ampl: 0}
+}
+
+# End
+if !animTime {
+	changeState{value: 11; ctrl: 1}
+}
+
+#----- JUMPING -----
+
+#============================================================
+# State 702
+#============================================================
+[StateDef 702;
+	type: A;
+	physics: N;
+	moveType: I;
+	anim: 702;
+	ctrl: 0;
+	sprPriority: 2;
+	powerAdd: 0;
+	facep2: 1;
+]
+
+# HB
+hitBy{value: SCA, AT; time: 1}
+
+# Check Parried Helper
+if !time {
+	mapSet{map: "parry_helper_ID"; value: 0}
+	if getHitVar(playerID)
+	&& playerIDexist(getHitVar(playerID))
+	&& playerID(getHitVar(playerID)), isHelper {
+		mapSet{map: "parry_helper_ID"; value: getHitVar(playerID)}
+	}
+}
+
+# Freeze Parried Helper
+if playerIDexist(map(parry_helper_ID))
+&& playerID(map(parry_helper_ID)), moveType = A
+&& playerID(map(parry_helper_ID)), hitpausetime = 0 {
+	posadd{
+		redirectid: map(parry_helper_ID);
+		x: -1 * playerID(map(parry_helper_ID)), vel x;
+		y: -1 * playerID(map(parry_helper_ID)), vel y;
+	}
+}
+
+# Freeze
+posfreeze{value: 1}
+
+if !time {
+	# Sound
+	playSnd{value: 3, (random < 500); channel: 0}
+	# Sound
+	playSnd{value: 7, 3}
+	# Flash
+	palFx{add: 0, 64, 255; sinadd: 0, -64, -255, 60; time: 15}
+	# FX
+	explod{
+		anim: 7200;
+		sprPriority: 5;
+		posType: p1;
+		pos: 41, -64;
+		pausemovetime: -1;
+		supermovetime: -1;
+		scale: 0.5, 0.5;
+		ownpal: 1;
+	}
+	# Shake
+	envshake{time: 1; ampl: 0}
+}
+
+# End
+if !animTime {
+	changeState{value: 703; ctrl: 1}
+}
+
+#============================================================
+# State 703
+#============================================================
+
+[StateDef 703;
+	type: A;
+	physics: N;
+	moveType: I;
+	anim: 703;
+	ctrl: 1;
+]
+
+# Vel
+if !time {
+	velSet{x: vel x; y: ifelse(vel y < -2.5, vel y, -2.5)}
+}
+
+# Accel
+if time > 0 {
+	gravity{}
+}
+
+# Land
+if vel y > 0
+&& pos y > -vel y {
+	changeState{value: 52}
+}
+
+#----- HELPER -----
+
+#============================================================
+# State 705
+#============================================================
+[StateDef 705;
+	type: A;
+	physics: N;
+	moveType: I;
+	anim: ifelse(root, stateType = C, 706, ifelse(root, stateType = A, 707, 705));
+	velSet: 0, 0;
+	ctrl: 0;
+]
+
+# NHB
+notHitBy{value: SCA}
+# Bind
+bindToRoot{time: -1}
+
+# Anim
+if !time {
+	if (!(root, AIlevel)
+	&& root, command = "D")
+	|| (root, AIlevel
+	&& ((root, stateType != A) && p2stateType = C)) {
+		changeAnim{value: 706}
+	}
+}
+
+# Anim
+if !time {
+	if (!(root, AIlevel)
+	&& root, command = "F")
+	|| (root, AIlevel
+	&& anim != 706) {
+		changeAnim{value: ifelse((root, stateType = A), 707, 705)}
+	}
+}
+
+# Anim
+if anim = 705 || anim = 707 {
+	changeAnim{value: ifelse((root, stateType = A), 707, 705)}
+}
+
+# Disable
+if time >= ifelse((root, stateType = A), 8, 10)
+|| facing != (root, facing)
+|| (!(root, ctrl)
+&& root, stateno != [700, 702]
+&& root, stateno != 5120)
+|| (root, stateno = [120, 155]
+&& root, stateno != 140) {
+	varSet{v: 0; value: 1}
+}
+
+# Disable
+if !var(0)
+&& !(root, AIlevel) {
+	if (root, p2dist x >= 0
+	&& root, command = "holdback")
+	|| (root, p2dist x < 0
+	&& root, command = "holdfwd")
+	|| (time < 5
+	&& root, p2dist x >= 0
+	&& (root, command = "holdfwd" + root, command = "holddown") > 1)
+	|| (time < 5
+	&& root, p2dist x < 0
+	&& (root, command = "holdback" + root, command = "holddown") > 1)
+	|| (time >= 5
+	&& root, p2dist x >= 0
+	&& (root, command = "holdfwd" || root, command = "holddown"))
+	|| (time >= 5
+	&& root, p2dist x < 0
+	&& (root, command = "holdback" || root, command = "holddown"))
+	|| (time >= 1
+	&& (anim = 705 || anim = 707)
+	&& root, command = "D")
+	|| (time >= 1
+	&& anim = 706
+	&& ifelse(root, p2dist x < 0, root, command = "B", root, command = "F")) {
+		varSet{v: 0; value: 1}
+	}
+}
+
+# Disable
+if var(0) = 1 {
+	changeAnim{value: 9999}
+}
+
+# Standing / Air
+if !var(0)
+&& (anim = 705 || anim = 707)
+&& root, hitbyattr(SCA, AA, AP) {
+	reversalDef{
+		reversal.attr: SCA, AA;
+		p1stateno: 706;
+		pausetime: 0, 15;
+		sparkno: -1;
+		numhits: 0;
+	}
+}
+
+# Crouching
+if !var(0)
+&& anim = 706
+&& root, hitbyattr(SC, AA, AP) { # No air
+	reversalDef{
+		reversal.attr: SC, AA;
+		p1stateno: 706;
+		pausetime: 0, 15;
+		sparkno: -1;
+		numhits: 0;
+	}
+}
+
+# Disable
+if var(0) = 1 {
+	reversalDef{
+		reversal.attr: ;
+		pausetime: 0, 0;
+		sparkno: -1;
+		numhits: 0;
+	}
+}
+
+# End
+if time >= 23
+|| root, moveType != I
+|| (root, ctrl = 0
+&& (root, stateno != [700, 702] && root, stateno != 5120))
+|| (root, stateno = [700, 702]
+&& root, time <= 1) {
+	destroySelf{}
+}
+
+#----- Success -----
+
+#============================================================
+# State 706
+#============================================================
+[StateDef 706;
+	moveType: I;
+	ctrl: 0;
+]
+
+# Disable
+varSet{v: 0; value: 1}
+
+# End
+if root, stateno = [700, 702]
+|| time >= 2 {
+	destroySelf{}
+}
+
+#==========<DODGE>==========
+
+#============================================================
+# State 710
+#============================================================
+[StateDef 710;
+	type: S;
+	physics: S;
+	moveType: I;
+	anim: 710;
+	velSet: 0, 0;
+	ctrl: 0;
+	sprPriority: -1;
+]
+
+# Erase Inputs
+persistent(0) ignoreHitPause if !AIlevel && time <= 0 {
+	mapSet{map: "cmd_erase_completed"; value: 1}
+}
+
+# Sound
+if !time {
+	playSnd{value: 4, 13; channel: 0}
+}
+
+# Sound
+if animElem = 1 {
+	playSnd{value: 1, 4}
+}
+
+# Push
+playerPush{value: 0}
+
+# HB
+if animTime != 0 {
+	hitBy{value: SCA, AT; time: 1}
+}
+
+# Attack
+if !AIlevel
+&& time = [15, 25]
+&& (command = "a" || command = "b" || command = "c" || command = "x" || command = "y" || command = "z") {
+	changeState{value: ifelse((command = "a" || command = "b" || command = "c"), 241, 220)}
+}
+
+# Attack
+if AIlevel
+&& time = [15, 25]
+&& !inguarddist
+&& p2dist y >= -60
+&& abs(map(truebodydistx)) < 60 {
+	changeState{value: ifelse(abs(map(truebodydistx)) < 30, 241, 220)}
+}
+
+# AI Guard
+if AIlevel
+&& animTime = [-10, -1]
+&& facing = 1 {
+	assertInput{flag: L}
+}
+
+# AI Guard
+if AIlevel
+&& animTime = [-10, -1]
+&& facing = -1 {
+	assertInput{flag: R}
+}
+
+# End
+if !animTime {
+	changeState{value: 0; ctrl: 1}
+}
+
+#==========<ROLL>==========
+
+#----- FORWARD -----
+#============================================================
+# State 720
+#============================================================
+[StateDef 720;
+	type: S;
+	physics: N;
+	moveType: I;
+	anim: 720;
+	velSet: 0, 0;
+	ctrl: 0;
+	sprPriority: 1;
+]
+
+# Erase Inputs
+persistent(0) ignoreHitPause if !AIlevel && time <= 0 {
+	mapSet{map: "cmd_erase_completed"; value: 1}
+}
+
+# Sound
+if animElem = 1 {
+	playSnd{
+		value: 3, ifelse(random < 250, 0, ifelse(random < 333, 1, ifelse(random < 500, 3, 4)));
+		channel: 0;
+	}
+}
+
+if animElem = 2 {
+	# Sound
+	playSnd{value: 0, 102}
+	# Vel
+	velSet{x: 5.34}
+}
+
+# Vel
+if animElem = 9 {
+	velSet{x: 0}
+}
+
+# HB
+if animElemTime(8) < 0 {
+	hitBy{value: SCA, AT; time: 1}
+}
+
+# Push
+if animElemTime(9) < 0 {
+	playerPush{value: 0}
+}
+
+# End
+if !animTime {
+	changeState{value: 0; ctrl: 1}
+}
+
+#----- BACK -----
+
+#============================================================
+# State 725
+#============================================================
+[StateDef 725;
+	type: S;
+	physics: N;
+	moveType: I;
+	anim: 725;
+	velSet: 0, 0;
+	ctrl: 0;
+	sprPriority: 1;
+]
+
+# Erase Inputs
+persistent(0) ignoreHitPause if !AIlevel && time <= 0 {
+	mapSet{map: "cmd_erase_completed"; value: 1}
+}
+
+# Sound
+if animElem = 1 {
+	playSnd{
+		value: 3, ifelse(random < 250, 0, ifelse(random < 333, 1, ifelse(random < 500, 3, 4)));
+		channel: 0;
+	}
+}
+
+if animElem = 2 {
+	# Sound
+	playSnd{value: 0, 102}
+	# Vel
+	velSet{x: -4.01}
+}
+
+# Vel
+if animElem = 9 {
+	velSet{x: 0}
+}
+
+# HB
+if animElemTime(8) < 0 {
+	hitBy{value: SCA, AT; time: 1}
+}
+
+# Push
+if animElemTime(9) < 0 {
+	playerPush{value: 0}
+}
+
+# End
+if !animTime {
+	changeState{value: 0; ctrl: 1}
+}
+
+#==========<POWER CHARGE>==========
+
+#============================================================
+# State 740
+#============================================================
+[StateDef 740;
+	type: S;
+	physics: S;
+	moveType: I;
+	anim: 740;
+	ctrl: 0;
+	velSet: 0, 0;
+]
+
+# Erase Inputs
+persistent(0) ignoreHitPause if !AIlevel && time <= 0 {
+	mapSet{map: "cmd_erase_completed"; value: 1}
+}
+
+# Power
+powerAdd{value: 4 + ifelse(time < 60, 0, (time - 60) / 15)}
+
+# Sound
+if time = 8 {
+	playSnd{value: 3, 2; channel: 0}
+}
+
+# Flash
+palFx{time: 1; add: 75 + ceil(sin(time / 6.0 * pi) * 75), 25 + ceil(sin(time / 6.0 * pi) * 25), 0}
+
+# FX
+if !numHelper(7240) {
+	helper{
+		helpertype: normal;
+		stateno: 7240;
+		id: 7240;
+		name: "Power Charge";
+		posType: p1;
+		pausemovetime: 65535;
+		supermovetime: 65535;
+		ownpal: 1;
+	}
+}
+
+# FX
+if !numHelper(7241) {
+	helper{
+		helpertype: normal;
+		stateno: 7241;
+		id: 7241;
+		name: "Particles";
+		posType: p1;
+		pausemovetime: 65535;
+		supermovetime: 65535;
+		ownpal: 1;
+	}
+}
+
+# Aura
+if animElemTime(5) >= 0 && !numHelper(6000) {
+	helper{
+		helpertype: normal;
+		stateno: 6000;
+		id: 6000;
+		name: "Aura";
+		posType: p1;
+		size.xscale: 0.5 * const(size.xscale);
+		size.yscale: 0.5 * const(size.yscale);
+		ownpal: 1;
+	}
+}
+
+# End
+if time >= 24 {
+	if (power >= const(data.power) || power >= powerMax || roundState != 2)
+	|| (!AIlevel
+	&& (command != "/b" || command != "/y"))
+	|| (AIlevel
+	&& (inguarddist || p2BodyDist x <= 120))
+	|| (AIlevel
+	&& p2moveType = A
+	&& (p2stateno = [3000, 4999] || (p2, vel x * p2, facing * facing) < -1)) {
+		changeState{value: 741}
+	}
+}
+
+#----- END -----
+
+#============================================================
+# State 741
+#============================================================
+[StateDef 741;
+	type: S;
+	physics: S;
+	moveType: I;
+	anim: 741;
+	velSet: 0, 0;
+	ctrl: 0;
+]
+
+# Sound
+if !time {
+	stopsnd{channel: 0}
+}
+
+# Sound
+if !time
+&& power >= const(data.power) {
+	playSnd{value: 4, 15; channel: 0}
+}
+
+# End
+if !animTime {
+	changeState{value: 0; ctrl: 1}
+}
+
+#==========<GUARD CANCEL>==========
+
+#============================================================
+# State 750
+#============================================================
+[StateDef 750;
+	type: S;
+	physics: S;
+	moveType: I;
+	anim: 750;
+	ctrl: 0;
+	velSet: 0, 0;
+	powerAdd: -1000;
+	sprPriority: 2;
+	facep2: 1;
+]
+
+# Strength
+ignoreHitPause if !time
+&& !AIlevel {
+	mapSet{
+		map: "strength";
+		value: ifelse((command = "counter_a" + command = "counter_b" + command = "counter_c") >= 2, 1, 0);
+	}
+}
+
+# Strength AI
+ignoreHitPause if !time
+&& AIlevel {
+	mapSet{
+		map: "strength";
+		value: ifelse((p2stateType = A), 0, ifelse((p2stateType = C), 1, ifelse(random < 500, 0, 1)));
+	}
+}
+
+if !time {
+	# Sound
+	playSnd{value: 3, 0; channel: 0}
+	# Flash
+	palFx{add: 255, 255, 255; time: 5}
+}
+
+# Super Pause FX
+persistent(0) if !time {
+	helper{
+		helpertype: normal;
+		stateno: 7250;
+		id: 7250;
+		posType: p1;
+		pos: 23, -74;
+		ownpal: 1;
+		supermovetime: 999;
+	}
+}
+
+if !time {
+	# Super Pause
+	superpause{
+		time: 10;
+		movetime: 10;
+		anim: -1;
+		sound: s7, 1;
+		p2defmul: 1;
+		darken: 0;
+	}
+	# Guard Points
+	guardpointsadd{value: -min((guardpoints - 1), 300)}
+}
+
+# End
+if time >= 15 {
+	changeState{value: ifelse(map(strength) = 1, 2910, 2900)}
+}
+
+#====================<CUSTOM COMBO>====================
+
+#----- GROUND -----
+#============================================================
+# State 760
+#============================================================
+[StateDef 760;
+	type: S;
+	physics: S;
+	moveType: A;
+	anim: 760;
+	velSet: 0, 0;
+	ctrl: 0;
+	sprPriority: 2;
+	powerAdd: -2000;
+]
+
+# NHB
+notHitBy{value: SCA; time: 8}
+# Freeze
+posfreeze{value: 1}
+
+# Var
+if time >= 4 {
+	mapSet{map: "customcombo"; value: 300}
+}
+
+if time = 4 {
+	# Sound
+	playSnd{value: 4, 11; channel: 0}
+	# Superpause FX
+	helper{
+		helpertype: normal;
+		stateno: 7260;
+		id: 7260;
+		name: "Custom Combo Startup";
+		posType: p1;
+		pos: -4, -56;
+		supermovetime: 255;
+		size.xscale: 1;
+		size.yscale: 1;
+		ownpal: 1;
+	}
+	# Super Pause
+	superpause{
+		time: 30;
+		movetime: 30;
+		anim: -1;
+		sound: s7, 2;
+		p2defmul: 1;
+		darken: 0;
+	}
+}
+
+if !animTime {
+	# Afterimage
+	afterimage{
+		time: 2;
+		timegap: 1;
+		framegap: 4;
+		length: 13;
+		palbright: 0, 0, 0;
+		palcontrast: 64, 128, 192;
+		palpostbright: 0, 0, 0;
+		paladd: 0, 0, 0;
+		palmul: 0.75, 0.75, 0.75;
+		trans: add1;
+	}
+	# End
+	changeState{value: 0; ctrl: 1}
+}
+
+#----- AIR -----
+
+#============================================================
+# State 765
+#============================================================
+[StateDef 765;
+	type: A;
+	physics: N;
+	moveType: A;
+	anim: 765;
+	ctrl: 0;
+	sprPriority: 2;
+	powerAdd: -2000;
+]
+
+# NHB
+notHitBy{value: SCA; time: 8}
+
+# Var
+if time >= 4 {
+	mapSet{map: "customcombo"; value: 300}
+}
+
+if time = 4 {
+	# Sound
+	playSnd{value: 4, 11; channel: 0}
+	# Superpause FX
+	helper{
+		helpertype: normal;
+		stateno: 7260;
+		id: 7260;
+		name: "Custom Combo Startup";
+		posType: p1;
+		pos: 1, -84;
+		supermovetime: 255;
+		size.xscale: 1;
+		size.yscale: 1;
+		ownpal: 1;
+	}
+	# Super Pause
+	superpause{
+		time: 30;
+		movetime: 30;
+		anim: -1;
+		sound: s7, 2;
+		p2defmul: 1;
+		darken: 0;
+	}
+}
+
+if !animTime {
+	# Afterimage
+	afterimage{
+		time: 2;
+		timegap: 1;
+		framegap: 4;
+		length: 13;
+		palbright: 0, 0, 0;
+		palcontrast: 64, 128, 192;
+		palpostbright: 0, 0, 0;
+		paladd: 0, 0, 0;
+		palmul: 0.75, 0.75, 0.75;
+		trans: add1;
+	}
+	# End
+	changeState{value: 766; ctrl: 1}
+}
+
+# Freeze
+posfreeze{value: 1}
+
+#============================================================
+# State 766
+#============================================================
+
+[StateDef 766;
+	type: A;
+	physics: N;
+	moveType: I;
+	anim: 766;
+	ctrl: 1;
+]
+
+# Accel
+gravity{}
+
+# Land
+if vel y > 0
+&& pos y > -vel y {
+	changeState{value: 52}
+}
+
+#====================<CHEAP K.O.>====================
+
+#============================================================
+# State 5950
+#============================================================
+[StateDef 5950;
+	type: S;
+	moveType: H;
+	physics: S;
+	anim: 5950;
+	velSet: 0, 0;
+]
+
+# NHB
+notHitBy{value: SCA}
+# Pos
+posSet{y: 0}
+# Assert
+assertSpecial{
+	flag: nokosnd;
+	flag2: nomakedust;
+	flag3: sizepushonly; # because anim has no Clsn2
+}
+
+# KO Snd
+if !time
+&& !alive {
+	stopsnd{channel: 0}
+}
+
+# KO Snd
+if animElem = 2
+&& !alive {
+	playSnd{value: 11, 3}
+}
+
+if animElem = 3 {
+	# Sound
+	playSnd{value: F 7, 0; freqmul: 1.2}
+	# FX
+	explod{
+		anim: F 60;
+		posType: p1;
+		pos: -5 * const(size.xscale), 0;
+		scale: 0.67, 0.67;
+		sprPriority: -10;
+		ownpal: 1;
+	}
+}
+
+if animElem = 7 {
+	# Pos
+	posadd{x: ceil(-16 * const(size.xscale))}
+	# Sound
+	playSnd{value: F 7, 0}
+	# FX
+	explod{
+		anim: F 60;
+		posType: p1;
+		pos: 0, 0;
+		ownpal: 1;
+		sprPriority: -10;
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: ifelse(alive, 5110, 5150)}
+}
+
+#==========<TAUNT>==========
+
+#============================================================
+# State 195
+#============================================================
+[StateDef 195;
+	type: S;
+	physics: S;
+	moveType: A;
+	anim: 195;
+	velSet: 0, 0;
+	sprPriority: 2;
+	juggle: ifelse(p2stateType = L && !map(customcombo), 8, 0);
+	ctrl: 0;
+]
+
+# Give power
+if time = 1
+&& numEnemy {
+	powerAdd{redirectid: p2, ID; value: min(ceil(p2, powerMax / 9.0), 334)}
+}
+
+if animElem = 5 {
+	# Hit
+	hitdef{
+		id: 195;
+		attr: S, SA;
+		hitflag: MAFD;
+		guardflag: M;
+		priority: 4, Hit;
+		air.juggle: 0 * (map(juggle_start) := 1 | map(juggle_increase) := 1 | map(juggle_limit) := 4);
+		damage: 10, 0;
+		getpower: ifelse(moveHit, 25, 100) * map(meterscaling), ifelse(moveguarded, 25, 50) * map(meterscaling);
+		givepower: 40, 40;
+		pausetime: 4, 4;
+		animtype: Back;
+		fall.animtype: Back;
+		ground.type: High;
+		air.type: Low;
+		ground.hittime: 1 + 18;
+		ground.slidetime: 18;
+		guard.hittime: 1 + 16;
+		guard.ctrltime: 1 + 16;
+		guard.slidetime: 16;
+		air.hittime: 18;
+		down.hittime: 18;
+		ground.velocity: -4, -8;
+		ground.cornerpush.veloff: 0;
+		guard.velocity: -10.52;
+		air.velocity: -4, -8;
+		air.cornerpush.veloff: 0;
+		airguard.cornerpush.veloff: 0;
+		down.velocity: -4, -8;
+		yaccel: 0.4850;
+		fall: 1;
+		forcenofall: !map(customcombo);
+		fall.recover: 1;
+		fall.recovertime: 120;
+		hitsound: s2, 12;
+		hitsound.channel: 2;
+		guardsound: s2, 0;
+		guardsound.channel: 2;
+		sparkno: -1 + 0 * (map(sparkno) := 8013);
+		guard.sparkno: -1 + 0 * (map(guard.sparkno) := 8001);
+		sparkxy: -10 + 0 * (map(sparkx.min) := -40) * (map(sparkx.max) := 40), map(sparky) := -70;
+		palfx.time: 60;
+		palfx.color: 0;
+		palfx.sinadd: 128, 128, 128, 4;
+		palfx.mul: map(palfx1_r), map(palfx1_g), map(palfx1_b);
+	}
+	# Aura
+	helper{
+		helpertype: normal;
+		stateno: 6000;
+		id: 6000;
+		name: "Aura";
+		posType: p1;
+		size.xscale: 0.5 * const(size.xscale);
+		size.yscale: 0.5 * const(size.yscale);
+		ownpal: 1;
+	}
+	# Kanji
+	helper{
+		helpertype: normal;
+		stateno: 6002;
+		id: 6002;
+		name: "Kanji";
+		posType: p1;
+		pos: -5, -100;
+		facing: ifelse(facing = -1, -1, 1);
+		size.xscale: 0.5 * const(size.xscale);
+		size.yscale: 0.5 * const(size.yscale);
+		ownpal: 1;
+	}
+	# Afterimage
+	explod{
+		id: 195;
+		posType: p1;
+		pos: 0, 0;
+		sprPriority: sprPriority + 1;
+		anim: anim;
+		animfreeze: 1;
+		animElem: animElemno(0);
+		removetime: 16;
+		trans: addAlpha;
+		alpha: 256, 0;
+		scale: const(size.xscale), const(size.yscale);
+		interpolation.time: 16;
+		interpolation.alpha: 0, 256;
+		interpolation.scale: 1.15 * const(size.xscale), 1.15 * const(size.yscale);
+		removeonchangeState: 1;
+		ownpal: 1;
+	}
+}
+
+# Sound
+if animElem = 6 {
+	playSnd{value: 4, 6; channel: 0}
+}
+
+if animElem = 5 {
+	# Sound
+	playSnd{value: 5, 5}
+	# Dust
+	helper{
+		helpertype: normal;
+		stateno: 8111;
+		id: 8100;
+		name: "Impact Dust";
+		posType: p1;
+		pos: -34, 0;
+		ownpal: 1;
+	}
+	# Shake
+	envshake{
+		time: 24;
+		freq: 180;
+		ampl: 4;
+		decay: 1.0;
+	}
+}
+
+# Type
+if animElem = 6 {
+	stateTypeSet{moveType: I}
+}
+
+# End
+if !animTime {
+	changeState{value: 0; ctrl: 1}
+}
+
+#==========<LOSE (Time over)>==========
+
+#============================================================
+# State 170
+#============================================================
+[StateDef 170;
+	type: S;
+	ctrl: 0;
+	anim: 170;
+	velSet: 0, 0;
+]
+
+# NHB
+notHitBy{value: SCA; time: 1}
+
+if animElem = 2 {
+	# Dust
+	explod{
+		anim: 7102;
+		id: 7102;
+		sprPriority: -10;
+		posType: p1;
+		pos: -6, 0;
+		ownpal: 1;
+		scale: 0.33, 0.33;
+	}
+	# Sound
+	playSnd{value: 0, 52}
+}
+
+#==========<DRAWGAME (Time over)>==========
+
+#============================================================
+# State 175
+#============================================================
+[StateDef 175;
+	type: S;
+	ctrl: 0;
+	anim: 175;
+	velSet: 0, 0;
+]
+
+# NHB
+notHitBy{value: SCA; time: 1}
+
+if animElem = 5 {
+	# Dust
+	helper{
+		helpertype: normal;
+		stateno: 8111;
+		id: 8100;
+		name: "Impact Dust";
+		posType: p1;
+		pos: -5, 8;
+		ownpal: 1;
+	}
+	# Sound
+	playSnd{value: 5, 5}
+}
+
+#==========<INITIALIZE>==========
+
+#----- Before Config -----
+#============================================================
+# State 5900
+#============================================================
+[StateDef 5900;
+	type: S;
+	anim: 9999;
+]
+
+# Var Reset
+if !roundsexisted {
+	varrangeset{value: 0}
+	varrangeset{fvalue: 0}
+}
+
+# Palette
+remappal{source: 1, 1; dest: 1, palno}
+
+# Set PalFX 1 Colors
+if palno = 8 { # Magenta
+	map(palfx1_r) := 256;
+	map(palfx1_g) := 0;
+	map(palfx1_b) := 128;
+} else if palno = 9 { # Orange
+	map(palfx1_r) := 256;
+	map(palfx1_g) := 128;
+	map(palfx1_b) := 0;
+} else if palno = 10 { # Blue
+	map(palfx1_r) := 0;
+	map(palfx1_g) := 128;
+	map(palfx1_b) := 256;
+} else { # Purple (Default)
+	map(palfx1_r) := 128;
+	map(palfx1_g) := 0;
+	map(palfx1_b) := 256;
+}
+
+# End
+if time > 0 { # Wait until enemy is initialized
+	changeState{
+		value: 5901; # Config
+	}
+}
+
+#----- After Config -----
+
+#============================================================
+# State 5902
+#============================================================
+[StateDef 5902;
+	type: S;
+]
+
+# Intro vs Evil Ryu
+if numEnemy
+&& teamleader = playerno
+&& enemy, teamleader = enemy, playerno
+&& (!roundsexisted || !(enemy, roundsexisted))
+&& (enemy, authorname = "Phantom.of.the.Server" && enemy, name = "Ryu")
+&& enemy, var(1) = [2, 3] {
+	changeState{value: 6910}
+}
+
+# Intro vs Vega
+if numEnemy
+&& !numpartner
+&& teamleader = playerno
+&& enemy, teamleader = enemy, playerno
+&& !roundsexisted
+&& (enemy, authorname = "Phantom.of.the.Server" && enemy, name = "Vega") {
+	changeState{value: 6911}
+}
+
+# Intro vs Haohmaru
+if numEnemy
+&& (!numpartner && numEnemy = 1)
+&& (!roundsexisted && !(enemy, roundsexisted)) {
+	if (enemy, name = "Cvshaohmaru" && enemy, authorname = "Z Sabre User")
+	|| (enemy, name = "HaohmaruMG" && enemy, authorname = "Master Gouken")
+	|| (enemy, name = "cvshaohmaru" && enemy, authorname = "Warusaki3") {
+		changeState{value: 6912}
+	}
+}
+
+# Intro vs Adon
+if numEnemy
+&& (!numpartner && numEnemy = 1)
+&& (!roundsexisted && !(enemy, roundsexisted))
+&& (enemy, authorname = "Sepp" && enemy, name = "Adon") {
+	changeState{value: 6913}
+}
+
+# Intro vs Evil Ken
+if numEnemy
+&& (!numpartner && numEnemy = 1)
+&& !roundsexisted
+&& (enemy, authorname = "Reu" && enemy, name = "Evil Ken") {
+	changeState{value: 192}
+}
+
+# Intro vs Nash
+if numEnemy
+&& (!numpartner && numEnemy = 1)
+&& (!roundsexisted && !(enemy, roundsexisted))
+&& (enemy, name = "Nash" && enemy, authorname = "Phantom.of.the.Server") {
+	changeState{value: 194}
+}
+
+# Turns Intro
+if teammode = turns
+&& (!roundsexisted && roundno >= 2) {
+	changeState{value: 6900}
+}
+
+# End
+changeState{value: ifelse(roundno = 1, 190, 0)}
+
+#==========<PREINTRO>==========
+
+#============================================================
+# State 190
+#============================================================
+[StateDef 190;
+	type: S;
+	ctrl: 0;
+	velSet: 0, 0;
+]
+
+# Vega Exists
+if !time {
+	varSet{v: 0; value: 0}
+}
+
+# Vega Exists
+if numHelper(6100) {
+	varSet{v: 0; value: 1}
+}
+
+# Vega Exists
+if numEnemy {
+	if (enemy, name = "Shin Gouki" && enemy, authorname = "Phantom.of.the.Server" && enemy, numHelper(6100))
+	|| (enemy, name = "cvsgouki" && enemy, authorname = "Warusaki3")
+	|| (enemy, name = "cvsvega" && (enemy, authorname = "Warusaki3" || enemy, authorname = "Gargoyle"))
+	|| (enemy, name = "M.Bison" && enemy, authorname = "N-Mario")
+	|| (enemy, name = "M. Bison" && enemy, authorname = "VK, Updated by Terry Kuo, adapted by Tenebrous")
+	|| (enemy, name = "CvSBison" && enemy, authorname = "Team Kai(Saiai and Koga)")
+	|| (enemy, name = "M. Bison" && enemy, authorname = "VK, Updated by Terry Kuo, adapted by Tenebrous")
+	|| (enemy, name = "Cammy" && enemy, authorname = "Phantom.of.the.Server")
+	|| (enemy, name = "Shining Force 2 Kraken" && enemy, authorname = "Phantom.of.the.Server")
+	|| (enemy, name = "Sky Chase" && enemy, authorname = "Phantom.of.the.Server") {
+		varSet{v: 0; value: 1}
+	}
+}
+
+# Boss Intro
+if !var(0)
+&& AIlevel
+&& ishometeam
+&& matchno >= 8
+&& gamemode = "arcade" {
+	changeState{value: 193}
+}
+
+# Kill Vega
+if !time
+&& (!numpartner && !var(0)) {
+	if (AIlevel
+	&& random < 250)
+	|| (!AIlevel
+	&& command = "holdup") {
+		changeState{value: 194}
+	}
+}
+
+# SvC Intro
+if random < 250
+&& (numpartner = 0 && numEnemy = 1)
+&& (enemy, name != "Shin Gouki" || enemy, authorname != "Phantom.of.the.Server" || enemy, stateno != 6914) {
+	changeState{value: 6914}
+}
+
+# Intro
+changeState{value: ifelse(random < 333, 191, ifelse(random < 500, 192, 193))}
+
+#==========<INTRO 1 - KANJI>==========
+
+#============================================================
+# State 191
+#============================================================
+[StateDef 191;
+	type: S;
+	anim: 191;
+	sprPriority: -2;
+]
+
+# Intro
+assertSpecial{flag: intro}
+
+# Wait
+if roundState = 0 {
+	assertSpecial{flag: animfreeze}
+}
+
+# Kanji
+if numexplod(6010)
+&& roundState = 0 {
+	modifyexplod{anim: 6010; id: 6010}
+}
+
+# Kanji
+if !time {
+	explod{
+		anim: 6010;
+		id: 6010;
+		sprPriority: sprPriority + 1;
+		posType: p1;
+		facing: ifelse(facing = -1, -1, 1);
+		pos: ifelse(facing = -1, 34, 0);
+		bindtime: -1;
+		removeongethit: 1;
+		ownpal: 1;
+	}
+}
+
+# Afterimage
+if time = 0 || time = 1 {
+	explod{
+		id: 191;
+		posType: p1;
+		pos: 0, 0;
+		sprPriority: sprPriority + 1;
+		anim: anim;
+		animfreeze: 1;
+		animElem: animElemno(0);
+		scale: 1.1 * const(size.xscale), 1.1 * const(size.yscale);
+		removetime: 90;
+		trans: addAlpha;
+		alpha: ifelse(numexplod(191), 128, 256), ifelse(numexplod(191), 128, 0);
+		interpolation.time: 90;
+		interpolation.alpha: 0, 256;
+		interpolation.scale: const(size.xscale), const(size.yscale);
+		removeonchangeState: 1;
+		ownpal: 1;
+	}
+}
+
+# Afterimage
+if numexplod(191) {
+	modifyexplod{
+		id: 191;
+		index: 0;
+		posType: p1;
+		pos: 1 * cos((gametime + 0) / 45.0 * pi), -1 + 1 * sin((gametime + 5) / 45.0 * pi);
+		sprPriority: sprPriority + 1;
+		anim: anim;
+		animfreeze: 1;
+		animElem: animElemno(0);
+	}
+}
+
+# Afterimage
+if numexplod(191) > 1 {
+	modifyexplod{
+		id: 191;
+		index: 1;
+		posType: p1;
+		pos: 2 * cos((gametime + 10) / 45.0 * pi), -2 + 2 * sin((gametime + 15) / 45.0 * pi);
+		sprPriority: sprPriority + 1;
+		anim: anim;
+		animfreeze: 1;
+		animElem: animElemno(0);
+	}
+}
+
+# Sound
+persistent(0) if roundState != 0
+&& animElemTime(2) >= -60 {
+	playSnd{value: 4, 3; channel: 0}
+}
+
+# Sprite Priority
+if animElem = 4 {
+	sprPriority{value: 0}
+}
+
+# End
+if !animTime {
+	changeState{value: 0}
+}
+
+#==========<INTRO 2 - STOMP>==========
+
+#============================================================
+# State 192
+#============================================================
+[StateDef 192;
+	type: S;
+	anim: 192;
+	sprPriority: -1;
+]
+
+# Intro
+assertSpecial{flag: intro}
+
+# Wait
+if roundState = 0
+|| (time < 660
+&& (enemy, authorname = "Reu" && enemy, name = "Evil Ken")) {
+	assertSpecial{flag: animfreeze}
+}
+
+# Sprite Priority
+if animElemTime(4) >= 0 {
+	sprPriority{value: 0}
+}
+
+persistent(0) if animElem = 7 {
+	# Aura
+	helper{
+		helpertype: normal;
+		stateno: 6000;
+		id: 6000;
+		name: "Aura";
+		posType: p1;
+		size.xscale: 0.5 * const(size.xscale);
+		size.yscale: 0.5 * const(size.yscale);
+		ownpal: 1;
+	}
+	# Kanji
+	helper{
+		helpertype: normal;
+		stateno: 6002;
+		id: 6002;
+		name: "Kanji";
+		posType: p1;
+		pos: -5, -100;
+		facing: ifelse(facing = -1, -1, 1);
+		size.xscale: 0.5 * const(size.xscale);
+		size.yscale: 0.5 * const(size.yscale);
+		ownpal: 1;
+	}
+}
+
+if animElem = 7 {
+	# Afterimage
+	explod{
+		id: 192;
+		posType: p1;
+		pos: 0, 0;
+		sprPriority: sprPriority + 1;
+		anim: anim;
+		animfreeze: 1;
+		animElem: animElemno(0);
+		removetime: 16;
+		trans: addAlpha;
+		alpha: 256, 0;
+		scale: const(size.xscale), const(size.yscale);
+		interpolation.time: 16;
+		interpolation.alpha: 0, 256;
+		interpolation.scale: 1.15 * const(size.xscale), 1.15 * const(size.yscale);
+		removeonchangeState: 1;
+		ownpal: 1;
+	}
+	# Sound
+	playSnd{value: 3, 5; channel: 0}
+	# Sound
+	playSnd{value: 5, 5}
+	# Dust
+	helper{
+		helpertype: normal;
+		stateno: 8111;
+		id: 8100;
+		name: "Impact Dust";
+		posType: p1;
+		pos: -34, 0;
+		ownpal: 1;
+	}
+	# Shake
+	envshake{
+		time: 24;
+		freq: 180;
+		ampl: 4;
+		decay: 1.0;
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: 0}
+}
+
+#==========<INTRO 3 - ENERGY>==========
+
+#============================================================
+# State 193
+#============================================================
+[StateDef 193;
+	type: S;
+	anim: 193;
+	sprPriority: -2;
+]
+
+# Intro
+assertSpecial{flag: intro}
+
+# Wait
+if roundState = 0 {
+	assertSpecial{flag: animfreeze}
+}
+
+# Kanji
+if numexplod(6015)
+&& animElemTime(1) = 0 {
+	modifyexplod{anim: ifelse(facing = -1, 6016, 6015); id: 6015}
+}
+
+if !time {
+	# Kanji
+	explod{
+		anim: ifelse(facing = -1, 6016, 6015);
+		id: 6015;
+		sprPriority: sprPriority + 1;
+		posType: p1;
+		bindtime: -1;
+		removeongethit: 1;
+		ownpal: 1;
+	}
+	# Sound
+	playSnd{value: 5, 11}
+	# Hadou
+	explod{
+		anim: 6020;
+		id: 6020;
+		sprPriority: 0;
+		posType: p1;
+		pos: 16, -72;
+		removetime: 600;
+		removeongethit: 1;
+		removeonchangeState: 1;
+		ownpal: 1;
+	}
+}
+
+# Grow
+if time < 80 {
+	modifyexplod{id: 6020; scale: 0.5 * sin(time / 160.0 * pi), 0.5 * sin(time / 160.0 * pi)}
+}
+
+# Normal
+if time >= 80
+&& animElemTime(1) <= 120 {
+	modifyexplod{id: 6020; scale: 0.5, 0.5}
+}
+
+# Shrink
+if animElemTime(1) > 120
+&& animElemTime(1) <= 270 {
+	modifyexplod{
+		id: 6020;
+		scale: 0.5 * cos((animElemTime(1) - 120) / 300.0 * pi), 0.5 * cos((animElemTime(1) - 120) / 300.0 * pi);
+		trans: addAlpha;
+		alpha: ifelse(animElemTime(1) <= 195, 256, 256 - 256 * ((animElemTime(1) - 195) / 75.0)), 256;
+	}
+}
+
+# Remove
+if animElemTime(1) = 270 {
+	removeexplod{id: 6020}
+}
+
+# FX
+if animElemTime(1) = 120 {
+	helper{
+		helpertype: normal;
+		stateno: 6021;
+		id: 6021;
+		name: "Red Particles";
+		posType: p1;
+		ownpal: 1;
+	}
+}
+
+# Aura
+if animElemTime(5) < 120 {
+	explod{
+		id: 193;
+		posType: p1;
+		pos: -1 + (random / 500.0), (random / 500.0);
+		sprPriority: sprPriority + 1;
+		anim: anim;
+		animfreeze: 1;
+		animElem: animElemno(0);
+		removetime: 12;
+		trans: addAlpha;
+		alpha: 64, 256;
+		scale: const(size.xscale), const(size.yscale);
+		palfx.time: 12;
+		palfx.color: 0;
+		palfx.mul: map(palfx1_r), map(palfx1_g), map(palfx1_b);
+		interpolation.time: 12;
+		interpolation.alpha: 0, 256;
+		interpolation.scale: 1.20, 1.20;
+		removeonchangeState: 1;
+		ownpal: 1;
+	}
+}
+
+# Dust
+if !(animElemTime(1) % 12)
+&& (animElemTime(1) > 120 && animElemTime(1) <= 240) {
+	explod{
+		anim: 7102;
+		id: 7102;
+		sprPriority: -2;
+		posType: p1;
+		pos: ifelse(animElemTime(4) >= 0, 16, 20), 0;
+		ownpal: 1;
+		scale: 0.5, 0.5;
+	}
+}
+
+# Sound
+if animElemTime(1) = [100, 239] {
+	playSnd{value: 5, 12; channel: 4; lowpriority: 1}
+}
+
+# Sound Fade
+if animElemTime(1) = [240, 260] {
+	modifysnd{channel: 4; volumescale: 100 - 5 * (animElemTime(1) - 240)}
+}
+
+# Sound
+if animElemTime(1) = 170 {
+	playSnd{value: 4, 7; channel: 0}
+}
+
+# Shake
+if !(time % 4)
+&& animElemTime(1) = [120, 240] {
+	envshake{time: 4; freq: 180; ampl: 1}
+}
+
+# End
+if !animTime {
+	changeState{value: 0}
+}
+
+#========================<MISOGI INTRO>=============================
+
+#============================================================
+# State 194
+#============================================================
+[StateDef 194;
+	type: A;
+	physics: N;
+	moveType: I;
+	anim: 194;
+	ctrl: 0;
+	sprPriority: -1;
+]
+
+# Intro
+assertSpecial{flag: intro}
+
+# Wait
+if roundState = 0 {
+	assertSpecial{flag: animfreeze}
+}
+
+# Pos
+if animElemTime(5) < 0 {
+	screenBound{value: 1; movecamera: 1, 0}
+}
+
+# Vega
+if !time {
+	helper{
+		helpertype: normal;
+		stateno: 6100;
+		id: 6100;
+		name: "Vega";
+		posType: p1;
+		pos: 20, -pos y;
+		size.shadowoffset: 6;
+		ownpal: 1;
+	}
+}
+
+# Palfx
+if animElemTime(2) < 0 {
+	palFx{add: -255, -255, -255; sinadd: 255, 255, 255, 32; time: 8}
+}
+
+# Pos
+if !time {
+	posadd{y: -240}
+}
+
+# Vel
+if animElem = 2 {
+	velSet{y: 20}
+}
+
+# Accel
+if animElemTime(2) > 0
+&& animElemTime(5) < 0 {
+	veladd{y: 0.5}
+}
+
+# Anim
+persistent(0) if time
+&& animElemTime(5) < 0
+&& vel y > 0
+&& pos y > -vel y {
+	changeAnim{value: 194; elem: 5}
+}
+
+# Stop
+if animElemTime(5) >= 0 {
+	posSet{y: 0}
+	velSet{y: 0}
+}
+
+# Eye
+if animElemTime(3) >= 0
+&& animElemTime(4) < 0 {
+	explod{
+		id: 4111;
+		anim: 8060;
+		posType: p1;
+		pos: -13 * const(size.xscale), -78 * const(size.yscale) - vel y;
+		sprPriority: sprPriority + 1;
+		removetime: 16;
+		trans: addAlpha;
+		alpha: 256, 256;
+		scale: 0.025, 0.025 * abs(vel y);
+		palfx.time: 4;
+		palfx.color: 0;
+		palfx.mul: 256, 0, 0;
+		interpolation.time: 4;
+		interpolation.alpha: 0, 256;
+		removeonchangeState: 1;
+		ownpal: 1;
+	}
+}
+
+if animElem = 5 {
+	# Shake
+	envshake{
+		time: 24;
+		freq: 180;
+		ampl: 4;
+		decay: 1.0;
+	}
+	# Sound
+	playSnd{value: 5, 10}
+	# Dust
+	explod{
+		anim: 7102;
+		id: 7102;
+		sprPriority: -2;
+		posType: p1;
+		scale: 0.75, 0.75;
+		ownpal: 1;
+	}
+}
+
+# Sound
+if animElem = 3 {
+	playSnd{value: 4, 10; channel: 0}
+}
+
+# Sound
+if animElem = 25 {
+	playSnd{value: 4, 15; channel: 0}
+}
+
+# End
+if !animTime {
+	changeState{value: 0}
+}
+
+#====================<TURNS INTRO>====================
+
+#============================================================
+# State 6900
+#============================================================
+[StateDef 6900;
+	type: A;
+	anim: 6900;
+	velSet: 0, 0;
+	ctrl: 0;
+]
+
+# Intro
+assertSpecial{flag: intro}
+
+# Wait
+if roundState = 0 {
+	assertSpecial{flag: animfreeze}
+}
+
+# Camera
+screenBound{value: 0; movecamera: 0, 0}
+
+# Camera
+if !numHelper(8999) {
+	helper{
+		helpertype: normal;
+		stateno: 8999;
+		id: 8999;
+		name: "Camera";
+		posType: p1;
+	}
+}
+
+# Pos
+if !time {
+	posSet{x: (-320 + abs(pos x)) * facing}
+}
+
+# Vel
+persistent(0) if roundState != 0 {
+	velSet{x: (helper(8999), rootdist x) / -40.0; y: -10.25}
+}
+
+# Accel
+if roundState != 0 {
+	veladd{y: 0.5}
+}
+
+# End
+if time
+&& vel y > 0
+&& pos y > -vel y {
+	changeState{value: 6901}
+}
+
+#----- Land -----
+
+#============================================================
+# State 6901
+#============================================================
+[StateDef 6901;
+	type: S;
+	physics: S;
+	anim: 6901;
+	velSet: 0, 0;
+]
+
+# Intro
+assertSpecial{flag: intro}
+
+# Pos
+if !time
+&& numHelper(8999) {
+	posSet{x: helper(8999), pos x}
+}
+
+# Pos
+if !time {
+	posSet{y: 0}
+}
+
+# Sound
+if animElem = 4 {
+	playSnd{value: 3, 5; channel: 0}
+}
+
+if !time {
+	# Sound
+	playSnd{value: 0, 52}
+	# Dust
+	explod{
+		anim: 7102;
+		id: 7102;
+		sprPriority: -3;
+		posType: p1;
+		scale: 0.5, 0.5;
+		pausemovetime: -1;
+		supermovetime: -1;
+		ownpal: 1;
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: 0}
+}
+
+#==========<INTRO vs EVIL RYU>==========
+
+#============================================================
+# State 6910
+#============================================================
+[StateDef 6910;
+	type: S;
+	physics: N;
+	anim: 6910;
+	sprPriority: 0;
+]
+
+# Intro
+assertSpecial{flag: intro}
+
+# Camera
+if !numHelper(8999) {
+	helper{
+		helpertype: normal;
+		stateno: 8999;
+		id: 8999;
+		name: "Camera";
+		posType: p1;
+	}
+}
+
+# Screen
+screenBound{value: 0; movecamera: 0, 1}
+
+# Vel
+if !time {
+	posSet{x: -240 * facing}
+}
+
+# Vel
+persistent(0) if numEnemy
+&& ifelse(enemy, authorname = "Phantom.of.the.Server", roundState != 0, time = 0) {
+	velSet{x: 6}
+}
+
+# Sound
+persistent(0) if numEnemy
+&& ifelse(enemy, authorname = "Phantom.of.the.Server", roundState != 0, time = 1) {
+	playSnd{value: 5, 6}
+}
+
+# Anim
+if animElemTime(2) < 0
+&& p2dist x <= 72 {
+	changeAnim{value: 6910; elem: 2}
+}
+
+# Sound
+if animElem = 2 {
+	playSnd{value: 4, 10; channel: 0}
+}
+
+if animElemTime(2) >= 0 && animElemTime(3) < 0 {
+	# Vel
+	velSet{x: 0}
+	# Pos
+	posSet{x: -36 * facing}
+}
+
+# fadeout
+if animElemTime(2) = 10 {
+	allpalFx{time: 20; sinadd: -255, -255, -255, 80}
+}
+
+if animElemTime(2) >= 30 && animElemTime(3) < 0 {
+	# black
+	envcolor{time: 2; value: 0, 0, 0}
+	# Assert
+	assertSpecial{flag: nobardisplay; flag2: noBG; flag3: noFG}
+}
+
+# Grab Sound
+if animElem = 2 {
+	playSnd{value: 2, 800; volumescale: 75}
+}
+
+# HitSound
+if (animElemTime(2) >= 30 && animElemTime(3) < 0)
+&& (animElemTime(2) % 6) = 1 {
+	playSnd{value: 2, 0; channel: 2}
+}
+
+# Shake
+if teamside = 1
+&& (animElemTime(2) >= 30 && animElemTime(3) < 0)
+&& (animElemTime(2) % 6) = 1 {
+	envshake{time: 12; freq: 180; ampl: ifelse((gametime % 2), -2, 2)}
+}
+
+# Anim
+if animElemTime(2) >= 72 && animElemTime(3) < 0 {
+	changeAnim{value: 6910; elem: 3}
+}
+
+# Sound
+if animElem = 3 {
+	playSnd{value: 5000, 3; channel: 0}
+}
+
+if animElem = 3 && teamside = 1 {
+	# Sound
+	playSnd{value: 7, 1}
+	# Lightning
+	helper{
+		helpertype: normal;
+		stateno: 7250;
+		id: 7250;
+		posType: left;
+		pos: 160, -60;
+		ownpal: 1;
+		supermovetime: 999;
+	}
+}
+
+# Vel
+if animElem = 3 {
+	velSet{x: -6}
+}
+
+if animElemTime(3) >= 0 && (helper(8999), rootdist x <= 0) {
+	# Pos
+	posSet{x: helper(8999), pos x}
+	# Vel
+	velSet{x: 0}
+}
+
+# End
+if !animTime {
+	changeState{value: 0}
+}
+
+#========================<INTRO vs VEGA>=============================
+
+#============================================================
+# State 6911
+#============================================================
+[StateDef 6911;
+	type: A;
+	physics: N;
+	moveType: I;
+	anim: 6911;
+	ctrl: 0;
+	sprPriority: -1;
+]
+
+# Intro
+assertSpecial{flag: intro}
+
+# Pos
+if animElemTime(5) < 0 {
+	screenBound{value: 0; movecamera: 1, 0}
+}
+
+# Palfx
+if animElemTime(2) <= 0 {
+	palFx{add: -255, -255, -255; sinadd: 255, 255, 255, 28; time: 7}
+}
+
+# Pos
+if !time {
+	posSet{y: -240}
+}
+
+# Sound
+persistent(0) if (roundState != 0
+&& enemy, authorname = "Phantom.of.the.Server")
+|| (time = 5
+&& enemy, authorname != "Phantom.of.the.Server") {
+	playSnd{value: 4, 7; channel: 0}
+}
+
+# Anim
+if roundState = 0
+&& enemy, authorname = "Phantom.of.the.Server" {
+	changeAnim{value: 6911; elem: 1}
+}
+
+# Accel
+if animElemTime(2) >= 0 {
+	veladd{y: 0.5}
+}
+
+if animElem = 2 {
+	# Vel
+	velSet{y: 15}
+	# Sound
+	playSnd{value: 5, 9}
+}
+
+# Eye
+if animElemTime(4) >= 0
+&& animElemTime(5) < 0 {
+	explod{
+		id: 4111;
+		anim: 8060;
+		posType: p1;
+		pos: -18 * const(size.xscale), -78 * const(size.yscale) - vel y;
+		sprPriority: sprPriority + 1;
+		removetime: 16;
+		trans: addAlpha;
+		alpha: 256, 256;
+		scale: 0.025, 0.025 * abs(vel y);
+		palfx.time: 4;
+		palfx.color: 0;
+		palfx.mul: 256, 0, 0;
+		interpolation.time: 4;
+		interpolation.alpha: 0, 256;
+		removeonchangeState: 1;
+		ownpal: 1;
+	}
+}
+
+# Anim
+persistent(0) if time
+&& animElemTime(5) < 0
+&& pos y > -vel y {
+	changeAnim{value: 6911; elem: 5}
+}
+
+# Stop
+if animElemTime(5) >= 0 {
+	posSet{y: 0}
+	velSet{y: 0}
+}
+
+if animElem = 5 {
+	# Shake
+	envshake{
+		time: 24;
+		freq: 180;
+		ampl: 4;
+		decay: 1.0;
+	}
+	# Sound
+	playSnd{value: 5, 10}
+	# Dust
+	explod{
+		anim: 7102;
+		id: 7102;
+		sprPriority: -5;
+		posType: p1;
+		scale: 0.5, 0.5;
+		ownpal: 1;
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: 0}
+}
+
+#==========<INTRO vs HAOHMARU>==========
+
+#============================================================
+# State 6912
+#============================================================
+[StateDef 6912;
+	type: S;
+	anim: 6912;
+	sprPriority: -2;
+]
+
+# Intro
+assertSpecial{flag: intro}
+
+# Sprite Priority
+if animElemTime(4) >= 0 {
+	sprPriority{value: 0}
+}
+
+# Kanji
+if !time {
+	explod{
+		anim: 6014;
+		id: 6014;
+		sprPriority: sprPriority + 1;
+		posType: p1;
+		facing: ifelse(facing = -1, -1, 1);
+		pos: ifelse(facing = -1, 34, 0);
+		bindtime: -1;
+		removeongethit: 1;
+		ownpal: 1;
+	}
+}
+
+# Sound
+if time = 180 {
+	playSnd{value: 4, 15; channel: 0}
+}
+
+# End
+if !animTime {
+	changeState{value: 0}
+}
+
+#==========<INTRO vs ADON by Sepp>==========
+
+#============================================================
+# State 6913
+#============================================================
+[StateDef 6913;
+	type: S;
+	anim: 6913;
+	sprPriority: -1;
+]
+
+# Intro
+ignoreHitPause {
+	assertSpecial{flag: intro}
+}
+
+# Sound
+persistent(0) if animElemTime(2) < 0 && time = 15 {
+	playSnd{value: 4, 3; channel: 0}
+}
+
+# Anim
+if animElemTime(5) > 0 && animElemTime(6) < 0 {
+	changeAnim{value: 6913; elem: 5}
+}
+
+# Anim
+if animElemTime(6) < 0 && (p2, anim = 1220) && (p2, vel x > 0) && p2dist x <= 102 {
+	changeAnim{value: 6913; elem: 6}
+}
+
+if animElem = 6 {
+	# Sound
+	playSnd{value: 5, 14}
+	# Dust
+	explod{
+		anim: 7103;
+		id: 7103;
+		sprPriority: 3;
+		posType: p1;
+		pos: -35;
+		vel: -0.5, 0;
+		ownpal: 1;
+		scale: 0.5, 0.5;
+	}
+}
+
+# Sound
+if animElem = 11 {
+	playSnd{value: 4, 10; channel: 0}
+}
+
+# Type
+if animElemTime(11) >= 0 && animElemTime(18) < 0 {
+	stateTypeSet{moveType: A}
+}
+
+# Hit
+if animElem = 13 {
+	hitdef{
+		#id: stateNo;
+		attr: S, NA;
+		hitflag: MAF;
+		priority: 4, Hit;
+		getpower: 0, 0;
+		givepower: 0;
+		pausetime: 16, 16;
+		animtype: Up;
+		ground.type: High;
+		air.type: High;
+		ground.hittime: 1 + 16;
+		ground.slidetime: 12;
+		ground.velocity: -1, -6;
+		air.velocity: -1, -6;
+		hitsound: s2, 3;
+		hitsound.channel: 2;
+		sparkno: -1 + 0 * (map(sparkno) := 8011);
+		guard.sparkno: -1 + 0 * (map(guard.sparkno) := 8000);
+		sparkxy: -10 + 0 * (map(sparkx.min) := 30) * (map(sparkx.max) := 70), map(sparky) := -76;
+		envshake.time: 12;
+		envshake.ampl: ifelse((gametime % 2), -2, 2);
+		sprPriority: 1;
+	}
+}
+
+persistent(0) if animElem = 24 {
+	# Aura
+	helper{
+		helpertype: normal;
+		stateno: 6000;
+		id: 6000;
+		name: "Aura";
+		posType: p1;
+		size.xscale: 0.5 * const(size.xscale);
+		size.yscale: 0.5 * const(size.yscale);
+		ownpal: 1;
+	}
+	# Kanji
+	helper{
+		helpertype: normal;
+		stateno: 6002;
+		id: 6002;
+		name: "Kanji";
+		posType: p1;
+		pos: -5, -100;
+		facing: ifelse(facing = -1, -1, 1);
+		size.xscale: 0.5 * const(size.xscale);
+		size.yscale: 0.5 * const(size.yscale);
+		ownpal: 1;
+	}
+}
+
+if animElem = 24 {
+	# Sound
+	playSnd{value: 4, 13; channel: 0}
+	# Sound
+	playSnd{value: 5, 5}
+	# Dust
+	helper{
+		helpertype: normal;
+		stateno: 8111;
+		id: 8100;
+		name: "Impact Dust";
+		posType: p1;
+		pos: -34, 0;
+		ownpal: 1;
+	}
+	# Shake
+	envshake{
+		time: 24;
+		freq: 180;
+		ampl: 4;
+		decay: 1.0;
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: 0}
+}
+
+#==========<INTRO 5 - SVC CHAOS>==========
+
+#============================================================
+# State 6914
+#============================================================
+[StateDef 6914;
+	type: S;
+	anim: 6914;
+	sprPriority: -2;
+]
+
+# Intro
+assertSpecial{flag: intro}
+
+# Wait
+if roundState = 0
+|| (p2stateno != 0
+&& time < 300) {
+	assertSpecial{flag: animfreeze}
+}
+
+# Sound
+if animElem = 2 {
+	playSnd{value: 5, 20}
+}
+
+# Sound
+if animElem = 3 {
+	playSnd{value: 3, 7; channel: 0}
+}
+
+# Sound
+if animElem = 4 {
+	playSnd{value: 5, 21}
+}
+
+# Black
+if animElemTime(2) >= 0
+&& animElemTime(3) < 0 {
+	envcolor{value: 0, 0, 0}
+	assertSpecial{flag: nobardisplay; flag2: noBG; flag3: noFG}
+}
+
+# Closeup
+if animElemTime(2) = [0, 2] {
+	explod{
+		id: 6030;
+		anim: 6030;
+		posType: left;
+		pos: 160, ifelse((gamewidth / gameheight) > 1.55, 90, 120);
+		trans: addAlpha;
+		alpha: 64, 256;
+		removetime: abs(animElemTime(3));
+		removeonchangeState: 1;
+		ontop: 1;
+	}
+}
+
+# Afterimage
+if animElem = 3 {
+	afterimage{
+		time: abs(animElemTime(4));
+		timegap: 1;
+		framegap: 1;
+		length: 3;
+		palbright: 0, 0, 0;
+		palcontrast: 256, 256, 256;
+		palpostbright: 0, 0, 0;
+		paladd: 0, 0, 0;
+		palmul: 0.75, 0.75, 0.75;
+		trans: addAlpha;
+		alpha: 128, 128;
+	}
+}
+
+if animElem = 4 {
+	# Large Dust Front
+	explod{
+		id: 7107;
+		anim: 7107;
+		animElem: 5;
+		sprPriority: 5;
+		trans: addAlpha;
+		alpha: 256, 256;
+		posType: p1;
+		pos: 0, 0;
+		ownpal: 1;
+	}
+	# Shake
+	envshake{
+		time: 24;
+		freq: 180;
+		ampl: 4;
+		decay: 1.0;
+	}
+}
+
+# End
+if !animTime {
+	changeState{value: 0}
+}
+
+#====================<WIN POSE DECIDER>====================
+
+#============================================================
+# State 180
+#============================================================
+[StateDef 180;
+	type: S;
+	ctrl: 0;
+	velSet: 0, 0;
+]
+
+# Quote
+victoryquote{value: randomrange(1, 15)}
+
+# Quote
+if numEnemy {
+	if enemynear, name = "Ryu"
+	|| (enemynear, name = "cvsryu" || enemynear, name = "svcryu") {
+		victoryquote{value: 50}
+	}
+}
+
+# Quote
+if numEnemy {
+	if enemynear, name = "Gen"
+	|| (enemynear, name = "cvsgen" || enemynear, name = "MasterGen") {
+		victoryquote{value: 51}
+	}
+}
+
+# No turning
+if prevStateNo = 4190 {
+	assertSpecial{flag: noautoturn}
+}
+
+# winSGS / misogi
+if prevStateNo = 4090 || prevStateNo = 4190 {
+	changeState{value: prevStateNo}
+}
+
+# Win
+if !time
+&& (command = "/x" || command = "/y" || command = "/z" || command = "/a" || command = "/b" || command = "/c") {
+	changeState{
+		value: ifelse((command = "/z" || command = "/c"), 183, ifelse((command = "/y" || command = "/b"), 181, 182));
+	}
+}
+
+# Win
+if !time {
+	changeState{value: ifelse(random < 333, 181, ifelse(random < 500, 182, 183))}
+}
+
+#==========<WIN 1 - TURN>==========
+
+#============================================================
+# State 181
+#============================================================
+[StateDef 181;
+	type: S;
+	anim: 181;
+	ctrl: 0;
+	velSet: 0, 0;
+]
+
+# Wait
+if time < 300 {
+	assertSpecial{flag: roundnotover}
+}
+
+# Sprite Priority
+if animElem = 2 {
+	sprPriority{value: -4}
+}
+
+# Sound
+if animElem = 4 {
+	playSnd{
+		value: 4, ifelse(life < (lifeMax * 0.10), 16, ifelse(life < (lifeMax * 0.667), 8, 1));
+		channel: 0;
+	}
+}
+
+# Kanji
+if animElemTime(4) = 15 {
+	explod{
+		anim: 6011;
+		id: 6011;
+		sprPriority: sprPriority + 1;
+		posType: p1;
+		facing: ifelse(facing = -1, -1, 1);
+		pos: ifelse(facing = -1, 34, 0);
+		bindtime: -1;
+		removeongethit: 1;
+		ownpal: 1;
+	}
+}
+
+#==========<WIN 2 - FLEX>==========
+
+#============================================================
+# State 182
+#============================================================
+[StateDef 182;
+	type: S;
+	anim: 182;
+	ctrl: 0;
+	velSet: 0, 0;
+]
+
+# Wait
+if time < 300 {
+	assertSpecial{flag: roundnotover}
+}
+
+# Sound
+persistent(0) if animElem = 3 {
+	playSnd{value: 3, 5; channel: 0}
+}
+
+#==========<WIN 3 - STOMP>==========
+
+#============================================================
+# State 183
+#============================================================
+[StateDef 183;
+	type: S;
+	anim: 183;
+	ctrl: 0;
+	velSet: 0, 0;
+]
+
+# Wait
+if time < 300 {
+	assertSpecial{flag: roundnotover}
+}
+
+persistent(0) if animElem = 5 {
+	# Aura
+	helper{
+		helpertype: normal;
+		stateno: 6000;
+		id: 6000;
+		name: "Aura";
+		posType: p1;
+		size.xscale: 0.5 * const(size.xscale);
+		size.yscale: 0.5 * const(size.yscale);
+		ownpal: 1;
+	}
+	# Kanji
+	helper{
+		helpertype: normal;
+		stateno: 6002;
+		id: 6002;
+		name: "Kanji";
+		posType: p1;
+		pos: -5, -100;
+		facing: ifelse(facing = -1, -1, 1);
+		size.xscale: 0.5 * const(size.xscale);
+		size.yscale: 0.5 * const(size.yscale);
+		ownpal: 1;
+	}
+}
+
+if animElem = 5 {
+	# Sound
+	playSnd{value: 5, 5}
+	# Sound
+	playSnd{value: 4, 13; channel: 0}
+	# Dust
+	helper{
+		helpertype: normal;
+		stateno: 8111;
+		id: 8100;
+		name: "Impact Dust";
+		posType: p1;
+		pos: -34, 0;
+		ownpal: 1;
+	}
+}
+
+# Shake
+if roundState = 4
+&& animElemTime(5) >= 0
+&& !(time % 2) {
+	envshake{
+		time: 2;
+		freq: 180;
+		ampl: 1;
+		dir: (gametime % 90) * 4;
+	}
+}
+
+# Sound
+if roundState = 4
+&& animElemTime(5) >= 0 {
+	playSnd{value: 5, 12; channel: 5; lowpriority: 1}
+}
+
+#==========<WIN by S.G.S.>==========
+
+#============================================================
+# State 4090
+#============================================================
+[StateDef 4090;
+	type: S;
+	anim: 4090;
+	velSet: 0, 0;
+	ctrl: 0;
+	sprPriority: -4;
+]
+
+# Wait
+if time < 300 {
+	assertSpecial{flag: roundnotover}
+}
+
+# Remove Kanji
+if !time
+&& numexplod(6013) {
+	removeexplod{id: 6013}
+}
+
+# Kanji Back
+if !time
+&& prevStateNo = 4010 {
+	explod{
+		id: 6010;
+		anim: 6012;
+		sprPriority: sprPriority + 1;
+		posType: p1;
+		pos: ifelse(facing = -1, 34, 0);
+		facing: ifelse(facing = -1, -1, 1);
+		bindtime: -1;
+		removeongethit: 1;
+		ownpal: 1;
+	}
+}
+
+# Kanji Back Brighten
+if time <= 30
+&& prevStateNo = 4010 {
+	modifyexplod{
+		id: 6010;
+		palfx.time: 60;
+		palfx.add: 255, 255, 255;
+		palfx.sinadd: -255, -255, -255, 240;
+	}
+}
+
+# Kanji Background
+if !time
+&& prevStateNo = 4010
+&& (!numHelper(8690) && !numHelper(8600)) {
+	helper{
+		helpertype: normal;
+		stateno: 8690;
+		id: 8690;
+		posType: left;
+		ownpal: 1;
+	}
+}
+
+# Sound
+if time = 10
+&& prevStateNo = 4010 {
+	playSnd{value: 4, 12; channel: 0}
+}
+
+# Allow Round End
+if time >= 120
+&& roundState = [2, 3]
+&& time > (fightscreenvar(round.over.hittime) + fightscreenvar(round.over.waittime) + fightscreenvar(round.over.wintime) + fightscreenvar(round.over.wintime))
+&& !numHelper(8690) {
+	ctrlset{value: 1}
+}
+
+#==========<WIN by MISOGI>==========
+
+#============================================================
+# State 4190
+#============================================================
+[StateDef 4190;
+	type: S;
+	velSet: 0, 0;
+	ctrl: 0;
+	sprPriority: -4;
+]
+
+# Wait
+if time < 300 {
+	assertSpecial{flag: roundnotover}
+}
+
+# No turning
+assertSpecial{flag: noautoturn}
+
+# Anim
+if anim != 4190 {
+	changeAnim{value: 4190}
+}
+
+if animElem = 9 {
+	# Sound
+	playSnd{value: 4, 8; channel: 0}
+	# Kanji
+	explod{
+		anim: 6011;
+		id: 6011;
+		sprPriority: sprPriority + 1;
+		posType: p1;
+		facing: ifelse(facing = -1, -1, 1);
+		pos: ifelse(facing = -1, 34, 0);
+		bindtime: -1;
+		removeongethit: 1;
+		ownpal: 1;
+	}
+}
+
+# Allow Round End
+if time >= 120
+&& roundState = [2, 3]
+&& time > (fightscreenvar(round.over.hittime) + fightscreenvar(round.over.waittime) + fightscreenvar(round.over.wintime)) {
+	ctrlset{value: 1}
+}
+
+#==========<CONTINUE?>==========
+
+#============================================================
+# State 5500
+#============================================================
+[StateDef 5500;
+	type: S;
+	anim: 5500;
+	ctrl: 0;
+	velSet: 0, 0;
+]
+
+# Anim
+if !time {
+	changeAnim{value: 5500}
+}
+
+#==========<FALL RECOVERY>==========
+
+#============================================================
+# State 5200
+#============================================================
+[StateDef 5200;
+	type: A;
+	physics: N;
+	moveType: H;
+]
+
+# Anim
+if anim = 5035
+&& !animTime {
+	changeAnim{value: 5050}
+}
+
+# Accel
+if time > 0 {
+	veladd{y: max(0.35, getHitVar(yaccel))}
+}
+
+# End
+if vel y > 0
+&& pos y >= const(movement.air.gethit.groundrecover.groundlevel) {
+	selfState{value: 5201}
+}
+
+#============================================================
+# State 5201
+#============================================================
+
+[StateDef 5201;
+	type: S;
+	physics: N;
+	moveType: I;
+	anim: 5200;
+	ctrl: 0;
+	facep2: 1;
+]
+
+# Pos
+posSet{y: 0}
+
+# Vel
+if !time {
+	velSet{x: -8; y: 0}
+}
+
+# Vel
+velmul{x: 0.9}
+
+# Sound
+if animElem = 1 {
+	playSnd{value: 3, 1; channel: 0}
+}
+
+if !time {
+	# Sound
+	playSnd{value: 0, 5200}
+	# Flash
+	palFx{add: 255, 255, 255; sinadd: -255, -255, -255, 20; time: 5}
+	# FX
+	explod{
+		id: 8200;
+		anim: 8200;
+		posType: p1;
+		pos: 0, ceil(-16 * const(size.yscale));
+		pausemovetime: -1;
+		supermovetime: -1;
+		ownpal: 1;
+		ontop: 1;
+	}
+}
+
+# NHB
+notHitBy{value: SCA; time: 1}
+
+# End
+if !animTime {
+	changeState{value: 0; ctrl: 1}
+}
+
+#============================================================
+# State 5210
+#============================================================
+
+[StateDef 5210;
+	type: A;
+	physics: N;
+	moveType: I;
+	anim: 5210;
+	ctrl: 0;
+]
+
+if !time {
+	# Sound
+	playSnd{value: 3, 1; channel: 0}
+	# Sound
+	playSnd{value: 0, 5200}
+	# Flash
+	palFx{add: 255, 255, 255; sinadd: -255, -255, -255, 20; time: 5}
+	# FX
+	explod{
+		id: 8200;
+		anim: 8200;
+		posType: p1;
+		pos: 0, ceil(-74 * const(size.yscale));
+		pausemovetime: -1;
+		supermovetime: -1;
+		ownpal: 1;
+		ontop: 1;
+	}
+}
+
+# Accel
+veladd{y: const(movement.air.gethit.airrecover.yaccel)}
+
+# Vel
+if !time {
+	velmul{
+		x: const(velocity.air.gethit.airrecover.mul.x);
+		y: const(velocity.air.gethit.airrecover.mul.y);
+	}
+	veladd{
+		x: const(velocity.air.gethit.airrecover.add.x);
+		y: const(velocity.air.gethit.airrecover.add.y);
+	}
+}
+
+# Up
+if !time
+&& command = "holdup" {
+	veladd{y: const(velocity.air.gethit.airrecover.up)}
+}
+
+# Down
+if !time
+&& command = "holddown" {
+	veladd{y: const(velocity.air.gethit.airrecover.down)}
+}
+
+# Forward
+if !time
+&& command = "holdfwd" {
+	veladd{x: const(velocity.air.gethit.airrecover.fwd)}
+}
+
+# Back
+if !time
+&& command = "holdback" {
+	veladd{x: const(velocity.air.gethit.airrecover.back)}
+}
+
+# Turn
+if !time
+&& p2dist x < 0 {
+	turn{}
+}
+
+# NHB
+if time < 14 {
+	notHitBy{value: SCA; time: 1}
+}
+
+# Ctrl
+if time >= 14 {
+	ctrlset{value: 1}
+}
+
+# Land
+if vel y > 0
+&& pos y > -vel y {
+	changeState{value: 52}
+}
+
+#==========<RECOVERY ROLL>==========
+
+#============================================================
+# State 5220
+#============================================================
+[StateDef 5220;
+	type: A;
+	physics: N;
+	moveType: H;
+]
+
+# Anim
+if anim = 5035
+&& !animTime {
+	changeAnim{value: 5050}
+}
+
+# Accel
+veladd{y: max(0.35, getHitVar(yaccel))}
+
+# End
+if vel y > 0
+&& pos y >= const(movement.air.gethit.groundrecover.groundlevel) {
+	selfState{value: 5221}
+}
+
+#============================================================
+# State 5221
+#============================================================
+
+[StateDef 5221;
+	type: S;
+	physics: N;
+	moveType: I;
+	anim: 5220;
+	ctrl: 0;
+	velSet: 0, 0;
+	sprPriority: 1;
+	facep2: 1;
+]
+
+# Push
+playerPush{value: 0}
+# Pos
+posSet{y: 0}
+
+# Vel
+if time = 10 {
+	velSet{x: 6.15}
+}
+
+# End
+if (time >= 29 && command != "holdfwd")
+|| time >= 48 {
+	changeState{value: 11; ctrl: 1}
+}
+
+#========================<TARGET OTG OVERRIDE>========================
+
+#============================================================
+# State 1115080
+#============================================================
+[StateDef 1115080;
+	type: L;
+	physics: N;
+	moveType: H;
+	velSet: 0, 0;
+]
+
+# Pos
+posSet{y: 0}
+# Anim
+changeAnim{value: 5080}
+
+# End
+if hitshakeover {
+	changeState{value: 1115081}
+}
+
+#============================================================
+# State 1115081
+#============================================================
+
+[StateDef 1115081;
+	type: L;
+	physics: C;
+	moveType: H;
+	velSet: 0, 0;
+]
+
+# Var
+if !time {
+	varSet{sysv: 0; value: 1}
+}
+
+# End
+if time >= 18 {
+	selfState{value: 5110}
+}

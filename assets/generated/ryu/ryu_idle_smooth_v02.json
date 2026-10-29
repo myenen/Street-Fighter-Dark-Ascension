@@ -1,0 +1,12 @@
+{
+  "status": "review candidate; removed from character select until approved",
+  "master": "ryu_idle_001_hd_aligned_v02.png",
+  "method": "single-master deterministic breathing deformation",
+  "frame_count": 12,
+  "ticks_per_frame": 2,
+  "cycle_ticks": 24,
+  "seconds_at_60_fps": 0.4,
+  "vertical_amplitude_hd_pixels": 6.0,
+  "equivalent_original_pixels": 0.75,
+  "feet_locked": true
+}

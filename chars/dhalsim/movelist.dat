@@ -1,0 +1,50 @@
+<#f0f000>THROWS / UNIQUE ATTACKS</>
+
+Yoga Smash <#bebebe>(close)</>              [_B/_F]_+^2P
+Yoga Throw <#bebebe>(close)</>              [_B/_F]_+^2K
+Air Yoga Throw <#bebebe>(air, close)</>      [_B/_F]_+^2P
+Yoga Shock                         (hold) _B_+^LP
+Drill Head <#bebebe>(air)</>                 _D_+^HP
+Drill Kick <#bebebe>(air)</>                 _D_+^K
+Zero Counter <#bebebe>(guarding, 1000)</>    _F_+^P_+^K
+
+<#f0f000>SPECIAL MOVES - DHALSIM FORM</>
+
+Yoga Fire                          _D_DF_F^P
+Yoga Flame                         _F_D_D_B^P
+Yoga Blast                         _F_D_D_B^K
+Yoga Teleport Forward              _F_D_DF^3P / _F_D_DF^3K
+Yoga Teleport Back                 _B_D_DB^3P / _B_D_DB^3K
+Recovery Teleport <#bebebe>(while hit)</>    _B_DB_D^K
+
+<#f0f000>SUPER MOVES - DHALSIM FORM</>
+
+Yoga Inferno <#bebebe>(1000-3000)</>        _B_D_F_B_D_F^P
+Yoga Stream <#bebebe>(1000-3000)</>         _F_D_B_F_D_B^P
+Yoga Strike <#bebebe>(1000-3000)</>         _B_D_F_B_D_F^K
+
+<#f0f000>ARMOR TRANSFORMATION</>
+
+Kanata <#bebebe>(once per match)</>          _F_D_DF^S / _B_D_DB^S
+
+<#f0f000>SPECIAL MOVES - GERMAN ARMOR FORM</>
+
+Forward / Back Dash                _F_F / _B_B
+Yoga German Heading                ^3P
+Yoga Rocket Punch                  _D_DF_F^P
+Yoga German Missile                _D_DF_F^K
+Yoga Hurricane Arm                 _D_F_DF^P
+MAX Yoga Hurricane Arm <#bebebe>(1000)</>   _D_F_DF^P_+^K
+Yoga Spark Thunder                 ^P_MASH
+Yoga Messerschmitt <#bebebe>(air)</>         ^3P
+Yoga German Bomb <#bebebe>(during Messerschmitt)</> _B_F^K
+
+<#f0f000>SUPER MOVE - GERMAN ARMOR FORM</>
+
+Yoga German Explosion <#bebebe>(1000 or life below 50%)</> _F_D_B_F_D_B^P
+MAX German Explosion <#bebebe>(3000, or 1000 + low life)</> _F_D_B_F_D_B^HP
+
+<#f0f000>SYSTEM</>
+
+Air Recovery                       ^2P
+Ground Recovery                    ^2K

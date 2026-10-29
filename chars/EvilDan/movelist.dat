@@ -1,0 +1,40 @@
+<#f0f000>THROWS</>
+
+Seoi Nage					_AIROK_CLOSE[_B/_F]_+^2P
+Saikyou Jigoku Otoshi				_CLOSE[_B/_F]_+^2K
+Saikyou Jigoku Otosareta			_AIR_CLOSE[_B/_F]_+^2K
+
+<#f0f000>SPECIAL MOVES</>
+
+Gadouken					_D_DF_F^P
+Premium Sign					_D_DF_F^K
+Dakku Kiaku					_AIROK_D_DB_B^K
+Kouryuken					_F_D_DF^P
+_!Seoi Kouryuken				_F_D_DF^P
+Danujin Kyaku					_AIR_D_DF_F^K
+Makuu Shihai Forward				_F_D_DF[^2P/^2K]
+Makuu Shihai Backward				_B_D_DB[^2P/^2K]
+Zenpou Tenshin					^LP_+^LK
+Shinpou Dan					^MP_+^MK
+
+<#f0f000>LEVEL 1 SUPER COMBOS</>
+
+Shin Dakku Kiaku				_AIROK_D_DF_F_D_DF_F^K
+Shinkuu Gadouken				_D_DF_F_D_DF_F^P
+Shin Premium Sign				_B_DB_D_DF_F^2K
+Gadanu Messhuu					_AIR_D_DF_F_D_DF_F^K
+Kouryurekka					_D_DF_F_D_DF_F^K
+
+<#f0f000>LEVEL 2 SUPER COMBO</>
+
+Hisshou Buraiken				_D_DB_B_D_DB_B^P
+
+<#f0f000>SYSTEM</>
+
+Forward Dash / Back Dash			_F_F / _B_B
+Super Jump					_TAP_D,_U
+Alpha Counter					(during guard)_B_DB_D[^P/^K]
+Fall Recovery					(when allowed)^2P/^2K
+Mini Taunt					_D_D^S
+Taunt						^S
+

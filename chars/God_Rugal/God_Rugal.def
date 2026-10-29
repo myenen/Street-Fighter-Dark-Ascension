@@ -1,0 +1,40 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = "Androide GRugal"
+displayname = "God Rugal"
+versiondate = 20/12/2007
+mugenversion = 1.0
+author = "@ndroide"
+pal.defaults = 6,1,2,3,4,5,6
+
+[Files]
+sprite = God_Rugal.sff
+anim = God_Rugal.air
+sound = God_Rugal.snd
+cmd = God_Rugal.cmd
+movelist = movelist.dat
+cns = God_Rugal.cns
+stcommon = common1.cns
+st = God_Rugal.cns
+st1 = st.cns
+st2 = ia.cns
+pal1 = God_Rugal1.act
+pal2 = God_Rugal2.act
+pal3 = God_Rugal3.act
+pal4 = God_Rugal4.act
+pal5 = God_Rugal5.act
+pal6 = God_Rugal6.act
+;pal7 = God_Rugal7.act
+;pal8 = God_Rugal8.act
+;pal9 = God_Rugal9.act
+;pal10 = God_Rugal10.act
+;pal11 = God_Rugal11.act
+;pal12 = God_Rugal12.act
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 

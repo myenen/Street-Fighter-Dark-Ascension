@@ -1,0 +1,39 @@
+<#f0f000>THROWS</>
+
+Overhead Throw					_CLOSE[_B/_F]_+^LP_+^MP
+Kick Throw					_CLOSE[_B/_F]_+^LK_+^MK
+
+<#f0f000>SPECIAL MOVES</>
+
+Bolt Hadouken					_D_DF_F^P
+Fire Bolt Hadouken				_D_DB_B^P
+Zankuu Bolt Hadouken				_AIR_D_DF_F^P
+Air Bolt Hadouken				_AIR_D_DB_B^P
+Shining Circuit Shoryuken			_F_D_DF^P
+Thunder Shock Zankukyakyu			_D_DB_B^K
+Diving Rocket Kujinkyaku			_AIR_D_DF_F^K
+
+<#f0f000>LEVEL 1 HYPERS</>
+
+Shoryureppa					_D_DF_F^2P
+High Mega Gou Beam				_D_DB_B^2P
+Air Mega Gou Beam				_AIR_D_DF_F^2P
+Mega Zankuu Hadouken				_AIR_D_DB_B^2P
+Shippu Jinrai Kyaku				_D_DB_B^2K
+
+<#f0f000>LEVEL 2 HYPER</>
+
+Electric Sphere					_B_F^MP_+^HP
+
+<#f0f000>LEVEL 3 HYPER</>
+
+Shining Gou Shock				^LP_^LP_F_^LK_^HP
+
+<#f0f000>SYSTEM</>
+
+Forward Dash / Back Dash			_F_F / _B_B
+Super Jump					_TAP_D,_U
+Guard Push					(during guard)^MP_+^HP
+Wakeup Roll					(while down)[_F/_B]
+Taunt						^S
+

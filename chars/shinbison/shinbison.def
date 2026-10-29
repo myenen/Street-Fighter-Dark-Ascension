@@ -1,0 +1,34 @@
+;----------------------------
+;   Shin Bison's Def File
+;    Autor B,Skryo-Rextrion
+;----------------------------
+
+;Info = Infos of Character
+;Files = Files for the player
+
+[Info]
+name   = "Shin Bison"
+displayname  = "Shin Bison"
+versiondate  =  16,01,2003
+mugenversion =  14,04,2001
+author = "B.Skryo-Rextrion"
+pal.defaults = 4,5,6,1,2,3
+[Files]
+cmd     = shinbison.cmd
+cns     = shinbison.cns
+st      = shinbison.cns
+stcommon  = common1.cns
+sprite  = shinbison.sff
+anim    = shinbison.air
+sound   = shinbison.snd
+movelist = movelist.dat ; IKEMEN command list
+pal1  = shinbison01.act
+pal2  = shinbison02.act
+pal3  = shinbison03.act
+pal4  = shinbison04.act
+pal5  = shinbison05.act
+pal6  = shinbison06.act
+
+[Arcade]
+intro.storyboard = D:\MUGEN\extrastuff\add-ons\Intros&Endings\sfa2intro/introsfa2.def
+ending.storyboard = end/sfabisonend.def

@@ -1,0 +1,32 @@
+<#f0f000>UNIQUE ATTACKS</>
+
+Collarbone Breaker				_F_+^MP
+Senpukyaku					_F_+^MK
+Heavy Press					_AIR_D_+^HK
+Flight / End Flight				_AIROK_D_D^HK
+
+<#f0f000>SPECIAL MOVES</>
+
+Hadouken					_AIROK_D_DF_F^P
+Shoryuken					_AIROK_F_D_DF^P
+Tatsumaki Senpukyaku				_AIROK_D_DB_B^K
+Dive Kick					_AIR_D_DF_F^K
+Teleport Forward				_F_D_DF^K
+Teleport Backward				_B_D_DB^K
+
+<#f0f000>HYPER MOVES</>
+
+Shinkuu Hadouken				_AIROK_D_DF_F^2P
+Shinkuu Tatsumaki Senpukyaku			_D_DB_B^2K
+Shinryuken					_D_DF_F^2K
+Shin Shoryuken <#bebebe>(3000)</>		_D_DB_B^2P
+Shun Goku Satsu <#bebebe>(3000)</>		^LP_^LP_F_^LK_^HP
+
+<#f0f000>SYSTEM</>
+
+Dash / Air Dash					_F_F
+Back Dash / Air Back Dash			_B_B
+Super Jump					_TAP_D,_U / ^3K
+Advancing Guard					(during guard)^2P
+Taunt						^S
+

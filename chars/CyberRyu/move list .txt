@@ -1,0 +1,33 @@
+                               Cyber Ryu
+             by  Kenshiro99 and commissioned by RAMON GARCIA
+
+
+============================== MOVELIST ====================================
+Basic Moves
+Super Jump: D, U or 3 Kicks [Only "U" after you hit a launcher]
+Dash/Hop Backward/Air Dash: FF/BB
+Advancing Guard: 2 PUNCHES in Guard
+
+Unique Moves
+Dash Elbow: in Run, press strong punch
+Rocket Arm: during strong punch and crouching strong punch, press strong punch
+Heavy Press: In Air, D + strong kick
+Colarbone break: F + medium punch
+Senpukyaku: F + medium kick
+Flight: D, D + strong kick ( AIr OK )
+
+Supers Moves
+Hadouken: D, DF, F + punch ( AIR OK )( hold button to Sen Hadouken )
+Shoryuken: F, D, DF + punch ( AIr OK )( press button again to Sen SHoryuken )
+Tatsumaki Senpukyaku:  D, DB, B + kick ( Air OK )
+Dive Kick: D, DF, F + kick ( Air Only )
+Teleport: F, D, DF + kick or B, D, DB + kick
+
+Hyper moves
+Shinku Hadouken: D, DF, F 2 Punches ( AIr OK )
+Shinku Tatsumaki Senpukyaku: D, DB, B 2 kickes
+Shinryu Ken: D, DF, F 2 kickes
+Shin Shoryuken: D, DB, B 2 punches ( LV3 )
+Shun Goku Satsu: light punch, light punch, F, Light kick, strong punch ( LV3 )
+
+

@@ -1,0 +1,167 @@
+;サリーちゃん
+;--------------------------------------
+;立ち
+[Statedef 6000]
+type = S
+anim = 6000
+SprPriority = -5
+
+;右向き
+[State 6000, 右]
+type = changestate
+trigger1 = rootdist X > 0
+value = 6010
+
+;喜び
+[State 6000, 喜]
+type = changestate
+trigger1 = time > 10 && p2stateno = [5000,5070]
+value = 6030
+
+;哀しみ
+[State 6000, 哀]
+type = changestate
+trigger1 = time > 10 && root, stateno = [5000,5070]
+value = 6020
+
+;大喜び
+[State 6000, 大喜]
+type = changestate
+trigger1 = root, stateno = [181,186]
+value = 6040
+
+;泣き
+[State 6000, 泣]
+type = changestate
+trigger1 = (root, stateno = 170) || (root, stateno = 5150)
+value = 6050
+
+;--------------------------------------
+;右向き
+[Statedef 6010]
+type = S
+anim = 6010
+SprPriority = -5
+
+;左向き
+[State 6010, 左]
+type = changestate
+trigger1 = rootdist X < 0
+value = 6000
+
+;喜び
+[State 6010, 喜]
+type = changestate
+trigger1 = time > 10 && p2stateno = [5000,5070]
+value = 6030
+
+;哀しみ
+[State 6010, 哀]
+type = changestate
+trigger1 = time > 10 && root, stateno = [5000,5070]
+value = 6020
+
+;大喜び
+[State 6010, 大喜]
+type = changestate
+trigger1 = root, stateno = [181,186]
+value = 6040
+
+;泣き
+[State 6010, 泣]
+type = changestate
+trigger1 = (root, stateno = 170) || (root, stateno = 5150)
+value = 6050
+
+;--------------------------------------
+;哀しみ
+[Statedef 6020]
+type = S
+anim = 6020
+SprPriority = -5
+
+;左向き
+[State 6020, 左]
+type = changestate
+trigger1 = time > 480
+value = 6000
+
+;喜び
+[State 6020, 喜]
+type = changestate
+trigger1 = root, stateno != [5000,5070]
+trigger1 = p2stateno = [5000,5070]
+value = 6030
+
+;大喜び
+[State 6020, 大喜]
+type = changestate
+trigger1 = root, stateno = [181,186]
+value = 6040
+
+;泣き
+[State 6020, 泣]
+type = changestate
+trigger1 = (root, stateno = 170) || (root, stateno = 5150)
+value = 6050
+
+;--------------------------------------
+;喜び
+[Statedef 6030]
+type = S
+anim = 6030
+SprPriority = -5
+
+;左向き
+[State 6030, 左]
+type = changestate
+trigger1 = time > 480
+value = 6000
+
+;哀しみ
+[State 6030, 哀]
+type = changestate
+trigger1 = root, stateno = [5000,5070]
+trigger1 = p2stateno != [5000,5070]
+value = 6020
+
+;大喜び
+[State 6030, 大喜]
+type = changestate
+trigger1 = root, stateno = [181,186]
+value = 6040
+
+;泣き
+[State 6030, 泣]
+type = changestate
+trigger1 = (root, stateno = 170) || (root, stateno = 5150)
+value = 6050
+
+;--------------------------------------
+;大喜び
+[Statedef 6040]
+type = S
+anim = 6040
+SprPriority = -5
+
+[State 6040, パピィ]
+type = PlaySnd
+trigger1 = Time = 40
+value = 6000, 0
+
+;--------------------------------------
+;泣き
+[Statedef 6050]
+type = S
+anim = 6050
+SprPriority = -5
+
+[State 6050, 1]
+type = null
+trigger1 = 1
+
+
+
+
+
+

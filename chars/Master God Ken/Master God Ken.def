@@ -1,0 +1,27 @@
+[Info]
+name="MasterGoDKen"        
+displayname="Master God Ken" 
+GodKen By="Moldredd"
+Master GodKen By="Etalking"          
+pal.defaults=1,2,3,4,5,6
+
+[Files]
+cmd=Comandos.cmd   
+movelist=movelist.dat
+cns=Informacion.cns
+st=Basico.cns
+st2=Sistema.cns 
+st3=Movimientos.cns
+st4=Especiales.cns
+stcommon=common1.cns 
+sprite=Esprite.sff   
+anim=Animaciones.air   
+sound=Sonidos.snd   
+
+;[Act]
+pal1=ACT/OscuroB.act
+pal2=ACT/Alternativo.act
+pal3=ACT/Oscuro.act
+pal4=ACT/MGK.act
+pal5=ACT/OscuroG.act
+pal6=ACT/Green.act

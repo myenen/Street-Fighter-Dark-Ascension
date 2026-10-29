@@ -1,0 +1,33 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = "Evil Dan"
+displayname = "Evil Dan"
+versiondate = 30/04/2021;Updated to 1.0 on 30/04/2021 by Lash
+mugenversion = 1.0
+author = "ilcane87"
+pal.defaults = 1,2
+
+[Files]
+sprite = EvilDan.sff
+anim = EvilDan.air
+sound = EvilDan.snd
+cmd = EvilDan.cmd
+movelist = movelist.dat
+cns = EvilDan.cns
+stcommon = common1.cns
+st = EvilDan.cns
+pal1 = EvilDan.act
+pal2 = Dan2.act
+pal3 = Dan3.act
+pal4 = dan4.act
+pal5 = dan5.act
+pal6 = dan6.act
+pal7 = dan.act
+
+[Arcade]
+;intro.storyboard = 
+;ending.storyboard = 

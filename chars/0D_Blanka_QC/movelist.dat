@@ -1,0 +1,38 @@
+<#f0f000>THROWS / UNIQUE ATTACKS</>
+
+Throw                                ^LP_+^LK
+Saving Attack                        ^MP_+^MK
+Rock Crush                           [_B/_F]_+^LP
+Amazon River Run                     _DF_+^HP
+Guard Cancel <#bebebe>(guarding, 500)</>    _F_+^HP / _F_+^HK
+
+<#f0f000>SPECIAL MOVES</>
+
+Electric Thunder                     ^P_MASH
+Rolling Attack                       (hold) _B_F^P
+Vertical Rolling                     (hold) _D_U^P
+Backstep Rolling                     (hold) _B_F^K
+Surprise Forward                     _F_+^3K
+Surprise Back                        _B_+^3K
+
+<#f0f000>EX SPECIAL MOVES <#bebebe>(500)</></>
+
+EX Electric Thunder                  ^2P_MASH
+EX Rolling Attack                    (hold) _B_F^MP_+^HP
+EX Vertical Rolling                  (hold) _D_U^MP_+^HP
+EX Backstep Rolling                  (hold) _B_F^MK_+^HK
+
+<#f0f000>SUPER MOVES</>
+
+Grand Shave Rolling <#bebebe>(1000)</>      (hold) _B_F_B_F^LP
+Direct Lightning <#bebebe>(2000)</>         (hold) _B_F_B_F^MP
+Lightning Cannonball <#bebebe>(3000)</>     (hold) _B_F_B_F^HP
+Shout of Earth - Anti-Air <#bebebe>(1000-3000)</> (hold) _B_F_B_U^P
+Shout of Earth - Ground <#bebebe>(1000-3000)</>   (hold) _B_F_B_F^K
+Tropical Hazard <#bebebe>(1000-3000)</>     (hold) _B_F_B_U^K
+
+<#f0f000>SYSTEM</>
+
+Forward / Back Dash                  _F_F / _B_B
+Wake-Up Movement                     (hold) _B / _F
+Taunt                                ^S

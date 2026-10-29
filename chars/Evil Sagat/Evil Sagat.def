@@ -1,0 +1,34 @@
+; Definition file for Evilsagat, the man with the big ol' scar...
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Evil Sagat"               ;The real name of the char
+displayname = "Evil Sagat"        ;The name displayed
+versiondate = 05,24,2005     ;When did I make him?
+mugenversion = 07,31,2000    ;Version of M.U.G.E.N Evilsagat works on
+author = "Greetlock"           ;Actual Sagat character created by Kogason
+pal.defaults = 1,2,3,4,5,6   ;Paletes in order of Preference
+
+; Files for the player
+[Files]
+cmd      = evilsagat.cmd   ;Command set
+cns      = evilsagat.cns   ;Constants
+st       = evilsagat.cns   ;States
+stcommon = common1.cns ;Common states
+sprite   = evilsagat.sff   ;Sprite
+anim     = evilsagat.air   ;Animation
+sound    = evilsagat.snd   ;Sound
+movelist = movelist.dat
+pal1     = evilsagat1.act  ;Palettes (can have up to 12)
+;pal2     = evilsagat2.act
+;pal3     = evilsagat3.act
+;pal4     = evilsagat4.act
+;pal5     = green.act
+
+[Arcade]
+intro.storyboard =
+ending.storyboard =
+pal1     = evilsagat1.act
+pal7     = evilsagat9.act ; Only for those who took the time to look at evilsagat's def file ^__^ just backspace over that ; behind pal7. now enjoy!
+

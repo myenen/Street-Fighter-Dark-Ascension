@@ -1,0 +1,277 @@
+;====================<VARIABLE LIST>====================
+
+;var(3)  : Jump Type (0 = Normal; 1 = Low Jump; 2 = Long Low Jump; 3 = Long Jump)
+;var(4)  : Chain Combo (0 = Off; 1 = On)
+
+;var(6)  : Cancel Flag
+;var(7)  : Able to Super Cancel
+;var(8)  : Able to Hyper Cancel
+;var(9)  : Counter Flag
+;var(10) : Button Detect (0 = Light; 1 = Medium; 2 = Heavy)
+
+;var(13) : Hit Count
+
+;var(15) : Juggle Points
+;var(16) : Juggle Flag
+;var(17) : Ticks UnGuardable
+;var(18) : ProjContact (0 = No; 1 = Yes)
+;var(19) : Throw Escape
+;var(20) : Custom Combo Time
+;var(21) : Super Cancel Flag
+;var(22) : Hyper Cancel Flag
+
+;var(23) : Super Finish Type (900 = Custom Combo; 3000 = Somersault Strike; 3100 = Total Wipeout; 3200 = Sonic Hurricane)
+
+;var(25) : Ticks to Apply EX FX
+;var(26) : Ticks Unable to Walk
+;var(30) : Hit Detection
+;var(31) : Hit Sound (0 = Light Punch; 1 = Medium Punch; 2 = Heavy Punch; 3 = Light Kick; 4 = Medium Kick; 5 = Heavy Kick; 6 = Projectile Hit; 800 = Grab)
+;var(32) : Guard Sound
+;var(33) : Hit Spark (8010 = Light; 8011 = Medium; 8012 = Heavy; 8013 = Special; 8014 = Super)
+;var(34) : Guard Spark (8000 = Normal; 8001 = Special)
+;var(35) : Spark xPos
+;var(36) : Spark yPos
+;var(38) : Throw (0 = Allowed; 1 = Not Allowed)
+;var(39) : Projectile Flag (0 = Off; 1 = On)
+
+;var(47) : Ticks Back is held down
+;var(48) : Back Charge Buffer
+;var(49) : Ticks Down is held down
+;var(50) : Down Charge Buffer
+
+;var(58) : Game Time
+
+;fvar(5) : Amount of Corner Push
+;fvar(10): Damage Dampener
+;fvar(11): Damage Dampener with Counter Multiplier Added
+
+; _________________________________________
+;| Sakura by varo_hades                    |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<CONSTANTS>====================
+[Data]
+life = 1000
+power = 3000
+attack = 100
+defence = 100
+fall.defence_up = 90
+lieDown.time = 11
+airJuggle = 15
+sparkNo = s8010
+guard.sparkNo = s8000
+KO.echo = 0
+volume = 128
+IntPersistIndex = 0
+FloatPersistIndex = 0
+
+[Size]
+xscale = 0.5
+yScale = 0.5
+ground.back = 15
+ground.front = 15
+air.back = 15
+air.front = 15
+height = 60
+attack.dist = 160
+proj.attack.dist = 90
+proj.doScale = 0
+head.pos = -3,-78
+mid.pos = -5,-55
+shadowoffset = 0
+draw.offset = 0,0 
+
+[Velocity]
+walk.fwd = 2.7
+walk.back = -2.7
+run.fwd = 5.3,0
+run.back = -6,-4
+jump.neu = 0,-9.8
+jump.fwd = 3.2
+jump.back = -3.2
+runJump.fwd = 4.5,-10.5
+runJump.back = -4.5,-10.5
+airjump.neu = 0,-8.1
+airjump.back = -2.1
+airjump.fwd = 2.1
+
+[Movement]
+airJump.num = 0
+airJump.height = 0
+yAccel = 0.5
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundLevel = 25
+air.gethit.groundRecover.ground.threshold = -20
+air.gethit.groundRecover.groundLevel = 10
+air.gethit.airRecover.threshold = -1
+air.gethit.airRecover.yAccel = 0.35
+air.gethit.trip.groundLevel = 15
+down.bounce.offset = 0,18
+down.bounce.yAccel = 0.7
+down.bounce.groundLevel = 12
+down.friction.threshold = 0.5
+
+[Quotes]
+victory0 = "Do you have time for another beating before my next class?"
+victory1 = "Now you know, justice always prevails!"
+victory2 = "Victory is mine. Get up loser, so I can smack you again!"
+victory3 = "Wow, that was cool, do it again!"
+victory4 = "Did I impress you? I really hope I did!"
+victory5 = "How dare you claim to be a true street fighter! You're pathetic!"
+victory6 = "I like street fighting better than sparring in rival schools!"
+victory7 = "I'll be late for class, but it's okay! A good street fight is worth it!"
+victory8 = "Oh, no! I was supposed to go to the mall with Kei!"
+victory9 = "Okay, I'll skip class to fight you again! But only this time!"
+victory10 = "That must have been a real street fight! I could feel it!"
+victory11 = "That's it? I wanted a harder fight!"
+victory12 = "Oh no! I forgot to try out that new combo I was practicing yesterday."
+victory13 = "What's that? A rematch? You've got it! See you next time."
+victory14 = "C'mon! Get back up! This is too fun to give up soon."
+victory15 = "I guess I don't know my own strength."
+victory16 = "I can't allow myself to lose! I have my reasons..."
+victory17 = "I'm learning a lot of new skills today. And I'm just getting started..."
+victory18 = "That was fun! Let's do this again sometime!"
+victory19 = "What do I want to do when I grow up? I know... gym teacher!"
+victory20 = "I hate to say it, but your moves are just plain booooring."
+victory21 = "You could use some improvement in the technique department."
+victory22 = "I feel great! All that jogging must be paying off!"
+victory23 = "Nice move! I think I've got the gist of it. I'll try it myself next time!"
+victory24 = "Cool! We finished in time for me to meet up with Kei after all!"
+victory25 = "I really got a sense of how strong you are during the fight!"
+victory26 = "Uh-oh! I forgot to text Karin! Can I borrow your cell for a sec?"
+victory27 = "No sweat!"
+victory28 = "It feels great when you can pull off combos just how you imagine 'em!"
+
+;Abel
+victory50 = "Really? I have a dog, too! I go jogging with him all the time!"
+
+;Adon
+victory51 = "Fighting should be fun! You looked really angry the whole time."
+
+;Akuma
+victory52 = "I was concentrating so hard, I can't even remember how I won!"
+
+;Balrog
+victory53 = "You weren't as strong as you loo- ...Ha ha! Just kidding! Don't get mad!"
+
+;Blanka
+victory54 = "You're looking for Hibiki-san, too? I wonder where he got off to..."
+
+;Cammy
+victory55 = "We'll have to take our time and enjoy the fight next time!"
+
+;Chun-Li
+victory56 = "Take me to work with you sometime, will you? Please?"
+
+;Cody
+victory57 = "So American prisons really DO have uniforms like that?"
+
+;C.Viper
+victory58 = "I thought your moves were pretty cool until I realized you used those gadgets!"
+
+;Dan
+victory59 = "You OK, Hibiki-san? Looks like your eyes are rolled back into your head..."
+
+;Decapre
+victory60 = "You look a lot like her... But you act so different. Just who are you, anyway?"
+
+;Dee Jay
+victory61 = "Sorry! I was too busy fighting to listen to your rhythm!"
+
+;Dhalsim
+victory62 = "I wish I could teleport like that when I'm running late for school!"
+
+;Dudley
+victory63 = "I never realized there were so many different styles of boxing!"
+
+;El Fuerte
+victory64 = "Y'know, seasoning is a really important part of cooking."
+
+;E. Honda
+victory65 = "I saw you on TV, Honda-san! I hope everything works out for you!"
+
+;Elena
+victory66 = "Phew, that was fun! Come to Japan next time and we can hang out!"
+
+;Evil Ryu
+victory67 = "Ryu-san! Wake up, please!"
+
+;Fei Long
+victory68 = "Are you looking for any extras for your new movie?"
+
+;Gen
+victory69 = "You sure have a lot of moves! But I prefer quality over quantity!"
+
+;Gouken
+victory70 = "So you were Ryu-san's teacher? It's so nice to meet you!"
+
+;Guile
+victory71 = "Your moves allow you to cover ground and aerial attacks! I'll have to try that!"
+
+;Guy
+victory72 = "Comfortable shoes are a fighter's best friend!"
+
+;Hakkan
+victory73 = "Nice moves! Now, to go wash this oil off my hands..."
+
+;Hugo
+victory74 = "I wish I was a bit taller. It must be nice to be so big!"
+
+;Ibuki
+victory75 = "Don't you stand out walking around in those silly pajamas all the time?"
+
+;Juri
+victory76 = "Hey! Chill out! This isn't supposed to be a fight to the death, ya know!"
+
+;Ken
+victory77 = "Aha ha ha ha ha! I've grown stronger, huh?"
+
+;Makoto
+victory78 = "Nice moves! Wanna go again?"
+
+;Oni
+victory79 = "My body can't stop shaking... How did I win that one!?"
+
+;Poison
+victory80 = "I like your shoes. I bet it took a lot of practice to walk in them."
+
+;M. Bison
+victory81 = "It takes more than flying and teleporting to impress me!"
+
+;Rolento
+victory82 = "Military training, huh? I could see how marching and singing could be fun..."
+
+;Rose
+victory83 = "I know what you mean. I hate waking up in the morning, too."
+
+;Rufus
+victory84 = "Will you teach me to ride a motorcycle some time?"
+
+;Ryu
+victory85 = "Wow! I did it! I really won! Can I try again?"
+
+;Sagat
+victory86 = "I'll keep training so Ryu-san will consider ME his rival one day!"
+
+;Seth
+victory87 = "The best way to learn moves is to pay attention and practice!"
+
+;T. Hawk
+victory88 = "Your homeland sounds like a great place!"
+
+;Vega
+victory89 = "Why do you wear that mask? Is there a festival or something going on?"
+
+;Yang
+victory90 = "I can lend you some hairspray if you need to fix your bangs."
+
+;Yun
+victory91 = "Eep! Sorry I ruined your hat! Don't Worry, I'll get yu a new one"
+
+;Zangief
+victory92 = "I'd better gain some weight so you can't toss me around like a rag doll."
+
+;Karin
+victory93 = "Hmm, let's see...I think I'm in the lead now for our battle total."

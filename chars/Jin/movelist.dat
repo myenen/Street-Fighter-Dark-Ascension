@@ -1,0 +1,47 @@
+<#f0f000>THROWS</>
+
+Tidal Wave					_CLOSE[_B/_F]_+^2P
+Over the Shoulder Reverse Throw			_CLOSE[_B/_F]_+^2K
+
+<#f0f000>UNIQUE ATTACKS</>
+
+Shun Masatsu					_B_+^MP,^LP
+Evil Intent					_B_+^HP,^LP,^MP
+Corpse Thrust					_F_+^HP
+
+<#f0f000>SPECIAL MOVES</>
+
+Penetrating Fist				_D_DF_F^P
+_!EX Penetrating Fist				_D_DF_F^2P
+Median Line Destruction				_D_DB_B^P
+_!EX Median Line Destruction			_D_DB_B^2P
+Special Step					_F_D_DF[^P/^K]
+Mental Alertness					_D_DF_F^K
+Double Lift Kick					_D_DB_B^K
+_!EX Double Lift Kick				_D_DB_B^2K
+Power Stance					_B_D_DB^P
+
+<#f0f000>SUPER MOVES</>
+
+Devil Spark <#bebebe>(1000)</>			_D_DF_F_D_DF_F^P
+Devil Dance <#bebebe>(1000)</>			_D_DB_B_D_DB_B^P
+Rage of Jin <#bebebe>(1000)</>			_D_DF_F_D_DF_F^K
+Max Devil Spark <#bebebe>(2000)</>		_D_DF_F_D_DF_F^2P
+Max Devil Dance <#bebebe>(2000)</>		_D_DB_B_D_DB_B^2P
+Max Rage of Jin <#bebebe>(2000)</>		_D_DF_F_D_DF_F^2K
+Devil Lift Beam <#bebebe>(3000)</>		_D_F_D_F^HP_+^HK
+Hell to Heaven <#bebebe>(3000)</>		_D_DB_B_D_DB_B^HP_+^HK
+
+<#f0f000>SYSTEM</>
+
+Run / Back Dash					_F_F / _B_B
+Sidestep					^LP_+^LK
+Forward / Back Roll				[_F/_B]_+^LP_+^LK
+Parry High / Air Parry				_TAP_F
+Parry Low					_TAP_D
+Power Charge					(hold)^MP_+^MK
+Zero Counter					(during guard)_B_DB_D[^P/^K]
+Custom Combo					_AIROK^HP_+^HK
+Fall Recovery					(when allowed)^2P/^2K
+Taunt						^S
+

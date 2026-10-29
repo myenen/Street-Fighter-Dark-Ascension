@@ -1,0 +1,32 @@
+
+;-----äÓñ{èÓïÒ------------------------------------------------------
+
+[Info]
+Name         = "Blanka" 
+DisplayName  = "Blanka_QC"
+VersionDate  = 
+MugenVersion = 06,14,2003 
+Author       = "(^o^)"  
+Pal.Defaults = 1,2,3,4
+
+[Files]
+Cmd      = Blanka.cmd.cns  
+Cns      = Blanka.cns  
+St       = Blanka.cns  
+St1      = Blanka-N.cns 
+St2      = Blanka-2-3.cns 
+St3      = config.txt
+St4      = BlankaAI.cns
+StCommon = common1.cns 
+Sprite   = Blanka.sff  
+Anim     = Blanka.air 
+Sound    = Blanka.snd
+Movelist = movelist.dat 
+
+
+Pal1 = Act/Blanka4.act
+Pal2 = Act/Blanka5.act
+Pal3 = Act/Blanka6.act
+Pal4 = Act/Blanka1.act
+Pal5 = Act/Blanka2.act
+Pal6 = Act/Blanka3.act

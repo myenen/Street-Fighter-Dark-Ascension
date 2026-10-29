@@ -1,0 +1,24 @@
+Mech Zangief Ending
+
+(First Release: June 18, 2005)
+-w/ typing text animation.
+
+ - Created by RUDOLF27 
+(rudolfjohnm@yahoo.com)
+(http://rudolf27.cjb.net/)
+
+How to install:
+
+- Unzip all files in Mech Zangief's folder.
+- Open Mech Zangief's .def file and enter these:
+===========================================
+[Arcade]
+ending.storyboard= mechzend.def
+===========================================
+- Then run mugen. Enjoy!
+
+
+Credits:
+- Elecbyte
+- Capcom
+- Marvel VS. Street Fighter

@@ -1,0 +1,1973 @@
+#  _____________________________________
+# | Shin Gouki by Phantom.of.the.Server |
+#  ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+
+###################################################################################################
+#											FUNCTIONS											#
+###################################################################################################
+
+# Detect closest enemy fireball
+[Function P2ClosestFireball()]
+
+# Check helpers
+if p2, numHelper > 0 {
+	for i = 0; p2, numHelper - 1; 1 {
+		if playerIDexist(p2, helper(-1, $i), ID) {
+			if p2, helper(-1, $i), hitdefattr = SCA, AP {
+				if !playerIDexist(map(ai_p2fireball_ID))
+				|| abs(p2, helper(-1, $i), pos x - pos x) < abs(map(ai_p2fireball_distx)) {
+					map(ai_p2fireball_ID) := p2, helper(-1, $i), ID;
+					map(ai_p2fireball_super) := (p2, helper(-1, $i), hitdefattr = SCA, HP);
+					map(ai_p2fireball_distx) := ((p2, helper(-1, $i), pos x) - pos x) * facing;
+					map(ai_p2fireball_disty) := ((p2, helper(-1, $i), pos y) - pos y);
+					if p2, helper(-1, $i), vel x != 0 {
+						map(ai_p2fireball_eta) := (map(ai_p2fireball_distx) - 20) / p2, helper(-1, $i), vel x; # Good enough estimate
+					}
+				}
+			}
+		}
+	}
+}
+
+# Check projectiles
+if p2, numProj > 0 {
+	for i = 0; p2, numProj - 1; 1 {
+		if abs(p2, projVar(-1, $i, pos x) - pos x) < abs(map(ai_p2fireball_distx)) {
+			map(ai_p2fireball_ID) := -1;
+			map(ai_p2fireball_super) := (p2, projVar(-1, $i, attr) = SCA, HP);
+			map(ai_p2fireball_distx) := (p2, projVar(-1, $i, pos x) - pos x) * facing;
+			map(ai_p2fireball_disty) := (p2, projVar(-1, $i, pos y) - pos y);
+			if p2, projVar(-1, $i, vel x) != 0 {
+				map(ai_p2fireball_eta) := (map(ai_p2fireball_distx) - 20) / p2, projVar(-1, $i, vel x); # Good enough estimate
+			}
+		}
+	}
+}
+
+
+# Nakoruru Spark Particle
+[Function NakoSpark_Particle(spark_x, spark_y, type)]
+ignoreHitPause {
+	explod{
+		ID: 8000;
+		anim: ifelse($type = 0, 8061, ifelse($type = 1, 8071, 8081));
+		posType: p1;
+		pos: $spark_x, $spark_y;
+		vel: -10 + (random / 50.0), -10 + (random / 50.0);
+		facing: ifelse($spark_x < 0, -1, 1);
+		scale: 0.4 + (random / 5000.0), 0.4 + (random / 5000.0);
+		trans: addAlpha;
+		alpha: 256, 256;
+		removetime: 16;
+		interpolation.time: 16;
+		interpolation.alpha: 0, 256;
+		pausemovetime: -1;
+		supermovetime: -1;
+		ownpal: 1;
+		ontop: 1;
+	}
+}
+
+
+# Generate Hit Sparks
+[Function HitSparks(spark_no, spark_x, spark_y)]
+ignoreHitPause {
+
+	# Check if custom or screenpack sparks should be used
+	let custom = 1;
+	if !isHelper {
+		let custom = ifelse(map(cfg_sparks) = 2, 2, ifelse(map(cfg_sparks) = 0, 0, 1));
+	} else {
+		let custom = ifelse(root, map(cfg_sparks) = 2, 2, ifelse(root, map(cfg_sparks) = 0, 0, 1));
+	}
+
+	# Custom sparks
+	if $custom {
+
+		# Guard sparks
+		if $spark_no = [8000, 8001] {
+			explod{
+				ID: 8000;
+				anim: $spark_no;
+				# Scaled through air file
+				posType: p1;
+				pos: $spark_x, $spark_y;
+				facing: ifelse($spark_x < 0, -1, 1);
+				removetime: -2;
+				pausemovetime: -1;
+				supermovetime: -1;
+				ownpal: 1;
+				ontop: 1;
+			}
+		}
+
+		# Geese style hit sparks
+		if $custom = 1 && $spark_no = [8010, 8029] {
+			# Set scale
+			let spark_scale = 0.3 + ($spark_no % 10) * 0.05;
+			# Blunt Attacks
+			if $spark_no = [8010, 8019] {
+				# Main
+				explod{
+					ID: 8000;
+					anim: 8010;
+					posType: p1;
+					pos: $spark_x, $spark_y;
+					facing: ifelse($spark_x < 0, -1, 1);
+					scale: $spark_scale, $spark_scale;
+					angle: 30 * (random % 12);
+					removetime: 10;
+					interpolation.time: 10;
+					interpolation.scale: 0, 0;
+					interpolation.angle: -1080;
+					pausemovetime: -1;
+					supermovetime: -1;
+					ownpal: 1;
+					ontop: 1;
+				}
+				# Center
+				explod{
+					ID: 8000;
+					anim: 8011;
+					posType: p1;
+					pos: $spark_x, $spark_y;
+					facing: ifelse($spark_x < 0, -1, 1);
+					scale: 0.5 * $spark_scale, 0.5 * $spark_scale;
+					angle: 90 * (random % 4);
+					trans: addAlpha;
+					alpha: 256, 256;
+					removetime: 16;
+					interpolation.time: 16;
+					interpolation.scale: $spark_scale, $spark_scale;
+					interpolation.alpha: 0, 256;
+					pausemovetime: -1;
+					supermovetime: -1;
+					ownpal: 1;
+					ontop: 1;
+				}
+				# Streaks
+				explod{
+					ID: 8000;
+					anim: 8012;
+					posType: p1;
+					pos: $spark_x, $spark_y;
+					facing: ifelse($spark_x < 0, -1, 1);
+					scale: 0.5 * $spark_scale, 0.5 * $spark_scale;
+					angle: 90 * (random % 4);
+					trans: addAlpha;
+					alpha: 256, 256;
+					removetime: 16;
+					interpolation.time: 16;
+					interpolation.scale: $spark_scale, $spark_scale;
+					interpolation.alpha: 0, 256;
+					pausemovetime: -1;
+					supermovetime: -1;
+					ownpal: 1;
+					ontop: 1;
+				}
+				# Impact
+				explod{
+					ID: 8000;
+					anim: 8014;
+					posType: p1;
+					pos: $spark_x, $spark_y;
+					facing: ifelse($spark_x < 0, -1, 1);
+					scale: $spark_scale, $spark_scale;
+					angle: 90 * (random % 4);
+					trans: addAlpha;
+					alpha: 128, 256;
+					removetime: 8;
+					interpolation.time: 8;
+					interpolation.scale: 0, 0;
+					pausemovetime: -1;
+					supermovetime: -1;
+					ownpal: 1;
+					ontop: 1;
+				}
+			}
+			# Slashing Attacks
+			if $spark_no = [8020, 8029] {
+				# Main
+				explod{
+					ID: 8000;
+					anim: 8020;
+					posType: p1;
+					pos: $spark_x, $spark_y;
+					facing: ifelse($spark_x < 0, -1, 1);
+					scale: 0.55 * $spark_scale, 1.10 * $spark_scale;
+					angle: 15 * (random % 24);
+					removetime: 10;
+					interpolation.time: 10;
+					interpolation.scale: 2 * $spark_scale, 0;
+					pausemovetime: -1;
+					supermovetime: -1;
+					ownpal: 1;
+					ontop: 1;
+				}
+				# Streaks
+				explod{
+					ID: 8000;
+					anim: 8012;
+					posType: p1;
+					pos: $spark_x, $spark_y;
+					facing: ifelse($spark_x < 0, -1, 1);
+					scale: 0.4 * $spark_scale, 0.4 * $spark_scale;
+					angle: 90 * (random % 4);
+					trans: addAlpha;
+					alpha: 256, 256;
+					removetime: 16;
+					interpolation.time: 16;
+					interpolation.scale: 0.8 * $spark_scale, 0.8 * $spark_scale;
+					interpolation.alpha: 0, 256;
+					pausemovetime: -1;
+					supermovetime: -1;
+					ownpal: 1;
+					ontop: 1;
+				}
+				# Center
+				if $spark_no = [8023, 8024] {
+					explod{
+						ID: 8000;
+						anim: 8021;
+						posType: p1;
+						pos: $spark_x, $spark_y;
+						facing: ifelse($spark_x < 0, -1, 1);
+						scale: 0.4 * $spark_scale, 0.4 * $spark_scale;
+						angle: 90 * (random % 4);
+						trans: addAlpha;
+						alpha: 256, 256;
+						removetime: 16;
+						interpolation.time: 16;
+						interpolation.scale: 0.8 * $spark_scale, 0.8 * $spark_scale;
+						interpolation.alpha: 0, 256;
+						pausemovetime: -1;
+						supermovetime: -1;
+						ownpal: 1;
+						ontop: 1;
+					}
+				}
+			}
+			# Impact on enemy's back
+			if $spark_no = [8013, 8014]
+			|| $spark_no = [8023, 8024] {
+				if p2moveType = H && p2, getHitVar(playerno) = playerno && p2, animElemvar(group) >= 0 {
+					if p2, anim = [5080, 5089] || p2, anim = [5100, 5119]
+					|| p2, animElemvar(group) = [5001, 5002] || p2, animElemvar(group) = [5011, 5012] || p2, animElemvar(group) = [5031, 5032]
+					|| p2, animElemvar(group) = [5040, 5042] || p2, animElemvar(group) = [5061, 5062] || p2, animElemvar(group) = [5071, 5072] { # type L
+						let impact_posy = p2dist y;
+					} else if p2, animElemvar(group) = 5020 || p2, anim = [5020, 5029] { # type C
+						let impact_posy = p2dist y + 0.50 * p2, const(size.head.pos.y);
+					} else {
+						let impact_posy = p2dist y + 0.75 * p2, const(size.head.pos.y);
+					}
+					let impact_facing = cond(isHelper, ifelse(p2, p2dist x < 0, -1, 1), ifelse(p2dist x < 0, -1, 1));
+					explod{
+						ID: 8013;
+						anim: 8013;
+						posType: p1;
+						pos: p2dist x + $impact_facing * p2, const(size.ground.back), $impact_posy;
+						facing: $impact_facing;
+						vfacing: ifelse(random < 500, -1, 1);
+						scale: 0.5 * $spark_scale, 0.5 * $spark_scale;
+						trans: addAlpha;
+						alpha: 256, 256;
+						#bindtime: 8;
+						removetime: 8;
+						interpolation.time: 8;
+						interpolation.scale: $spark_scale, $spark_scale;
+						interpolation.alpha: 0, 256;
+						pausemovetime: -1;
+						supermovetime: -1;
+						sprPriority: -10;
+						ownpal: 1;
+					}
+				}
+			}
+		}
+
+		# Nakoruru style hit sparks
+		if $custom = 2 && $spark_no = [8010, 8029] {
+			# Blunt Attacks
+			if $spark_no = [8010, 8019] {
+				# Main Angled Circle
+				explod{
+					ID: 8000;
+					anim: ifelse($spark_no = 8014, 8080, ifelse($spark_no = 8013, 8070, 8060));
+					posType: p1;
+					pos: $spark_x, $spark_y;
+					facing: ifelse($spark_x < 0, -1, 1);
+					scale: 0.5, 0.5;
+					angle: 15 * (random % 24);
+					removetime: 10;
+					interpolation.time: 10;
+					interpolation.scale: 2, 0;
+					pausemovetime: -1;
+					supermovetime: -1;
+					ownpal: 1;
+					ontop: 1;
+				}
+				# Center Fireworks
+				explod{
+					ID: 8000;
+					anim: 8062;
+					posType: p1;
+					pos: $spark_x, $spark_y;
+					facing: ifelse($spark_x < 0, -1, 1);
+					scale: ifelse($spark_no = 8014 || $spark_no = 8024, 0.625, ifelse($spark_no = 8013 || $spark_no = 8023, 0.565, 0.500)),
+						ifelse($spark_no = 8014 || $spark_no = 8024, 0.625, ifelse($spark_no = 8013 || $spark_no = 8023, 0.565, 0.500));
+					angle: 45 * (random % 8);
+					trans: addAlpha;
+					alpha: 256, 256;
+					removetime: 13;
+					interpolation.time: 13;
+					interpolation.alpha: 0, 256;
+					pausemovetime: -1;
+					supermovetime: -1;
+					ownpal: 1;
+					ontop: 1;
+				}
+			}
+			# Slash Attacks
+			if $spark_no = [8020, 8029] {
+				# Main Angled Circle
+				explod{
+					ID: 8000;
+					anim: ifelse($spark_no = 8024, 8085, ifelse($spark_no = 8023, 8075, 8065));
+					posType: p1;
+					pos: $spark_x, $spark_y;
+					facing: ifelse($spark_x < 0, -1, 1);
+					scale: 0.25, 0.50;
+					angle: 15 * (random % 24);
+					removetime: 10;
+					interpolation.time: 10;
+					interpolation.scale: 1, 0;
+					pausemovetime: -1;
+					supermovetime: -1;
+					ownpal: 1;
+					ontop: 1;
+				}
+
+			}
+			# Special / Super Circle
+			if $spark_no = [8013, 8014]
+			|| $spark_no = [8023, 8024] {
+				explod{
+					ID: 8000;
+					anim: 8073;
+					posType: p1;
+					pos: $spark_x, $spark_y;
+					facing: ifelse($spark_x < 0, -1, 1);
+					scale: ifelse($spark_no = 8014 || $spark_no = 8024, 0.30, 0.25), ifelse($spark_no = 8014 || $spark_no = 8024, 0.30, 0.25);
+					angle: 45 * (random % 8);
+					trans: addAlpha;
+					alpha: 256, 256;
+					removetime: 8;
+					interpolation.time: 8;
+					interpolation.scale: ifelse($spark_no = 8014 || $spark_no = 8024, 0.60, 0.50), ifelse($spark_no = 8014 || $spark_no = 8024, 0.60, 0.50);
+					interpolation.alpha: 0, 256;
+					pausemovetime: -1;
+					supermovetime: -1;
+					ownpal: 1;
+					ontop: 1;
+				}
+			}
+			# Normal Particles
+			if $spark_no = 8014 || $spark_no = 8024 {
+				let nakoparticle = 2;
+			} else if $spark_no = 8013 || $spark_no = 8023 {
+				let nakoparticle = 1;
+			} else {
+				let nakoparticle = 0;
+			}
+			call NakoSpark_Particle($spark_x, $spark_y, $nakoparticle);
+			call NakoSpark_Particle($spark_x, $spark_y, $nakoparticle);
+			call NakoSpark_Particle($spark_x, $spark_y, $nakoparticle);
+			call NakoSpark_Particle($spark_x, $spark_y, $nakoparticle);
+		}
+
+	}
+
+	# Screenpack sparks
+	if !$custom {
+		# Convert custom numbers to screenpack numbers
+		switch $spark_no {
+			case 8000; 8001:
+				let spark_ffx_no = 40;
+			case 8010; 8021:
+				let spark_ffx_no = 0;
+			case 8011; 8021:
+				let spark_ffx_no = 1;
+			case 8012; 8022:
+				let spark_ffx_no = 2;
+			case 8013; 8023:
+				let spark_ffx_no = 3;
+			case 8014; 8024:
+				let spark_ffx_no = 3;
+			default:
+				let spark_ffx_no = 0;
+		}
+		explod{
+			ID: 8000;
+			anim: F $spark_ffx_no;
+			posType: p1;
+			pos: $spark_x, $spark_y;
+			facing: ifelse($spark_x < 0, -1, 1);
+			removetime: -2;
+			pausemovetime: -1;
+			supermovetime: -1;
+			ownpal: 1;
+			ontop: 1;
+		}
+	}
+
+}
+
+
+###################################################################################################
+#											STATE +1											 #
+###################################################################################################
+
+[Statedef +1]
+
+# +1, Juggle System
+ignoreHitPause {
+	# Disable Juggling
+	if cond(isHelper, root, map(juggle_count), map(juggle_count)) >= map(juggle_limit)
+	&& cond(isHelper, root, map(customcombo) = 0, map(customcombo) = 0) { # Custom Combo has infinite limit
+		assertSpecial{flag: nofallhitflag}
+	}
+}
+
+# +1, Variable Height
+ignoreHitPause if !isHelper && !inCustomState {
+	if stateNo = 245 {
+		# Do nothing
+	} else if stateType = A && moveType != H && p2stateType != A {
+		# Several compromises made to keep compatibility with Mugen characters
+		let vh_box_top = 92; #CvS2
+		let vh_box_bottom = 34; #CvS2
+		let vh_average_stand = 77; #CvS2
+		let vh_average_crouch = 49; #SFA3 = CvS2
+		let vh_average_down = 12; #CvS2
+		if stateNo != [100, 106] {
+			if p2stateType = S {
+				height{value: $vh_box_top - const(size.height), -($vh_box_bottom - ($vh_average_stand - 60))}
+			}
+			if p2stateType = C {
+				height{value: $vh_box_top - const(size.height), -($vh_box_bottom - ($vh_average_crouch - 60))}
+			}
+		}
+		if p2stateType = L {
+			if p2dist y > -($vh_box_bottom - $vh_average_down) {
+				if map(truebodyDistx) = [0, vel x] || map(truebodyDistx) = [vel x, 0] {
+					playerPush{value : 0}
+				}
+			}
+		}
+	}
+}
+
+# Fake Hit Sparks
+if inCustomState = 0 && pausetime = 0 {
+	# Hyakki Gosai
+	if stateNo = 1341 && animElem = 2 {
+		let spark_no = 8013;
+		let spark_x = 17 * const(size.xscale);
+		let spark_y = -30 * const(size.yscale);
+		call HitSparks($spark_no, $spark_x, $spark_y);
+	}
+	# Shun Goku Satsu
+	if stateNo = 4010
+	&& (animElemno(0) = [2, 34] && animElemTime(animElemno(0)) = 0) {
+		let spark_no = ifelse(map(cfg_sparks) = 1, 8012, 8014);
+		let spark_x = 45 - 30 + (random / 16.67);
+		let spark_y = (target, const(size.mid.pos.y)) - 30 + (random / 16.67);
+		call HitSparks($spark_no, $spark_x, $spark_y);
+	}
+	# Shun Goku Satsu intro
+	if stateNo = 6910
+	&& animElemTime(2) >= 30 && animElemTime(3) < 0 && (animElemTime(2) % 6) = 1 {
+		let spark_no = 8001;
+		let spark_x = -30 + (random % 61) + p2dist x;
+		let spark_y = -100 + (random % 61);
+		call HitSparks($spark_no, $spark_x, $spark_y);
+	}
+}
+
+# +1, Debug text
+ignoreHitPause if !isHelper {
+	if !AIlevel {
+		displaytoclipboard{
+			text: "Damage = %.1f%% Juggle = %d Unthrowable = %d";
+			params: attack, ceil(map(juggle_count)), ceil(map(unthrowable));
+		}
+	} else {
+		displaytoclipboard{
+			text: "AI Combo %d Punish %d Attack %d";
+			params: floor(map(ai_combowindow)), floor(map(ai_punishwindow)), floor(map(ai_attackwindow));
+		}
+	}
+	appendtoclipboard {
+		text: "\nBy PotS - https://network.mugenguild.com/pots/";
+	}
+}
+
+
+###################################################################################################
+#											STATE -1											 #
+###################################################################################################
+
+
+###################################################################################################
+#											STATE -2											  #
+###################################################################################################
+
+[Statedef -2]
+
+# -2, P2 Fall Recovery
+ignoreHitPause if p2moveType = H && p2stateType = A {
+	if p2, getHitVar(playerno) = playerno
+	&& p2, getHitVar(fall.recover)
+	&& p2, getHitVar(isbound) = 0
+	&& p2, alive && p2, dizzy = 0
+	&& p2, inCustomState = 0 # Fall recovery in custom states is best handled inside each state
+	&& p2, vel y > 0
+	&& p2, pos y >= p2, const(movement.air.gethit.groundrecover.ground.threshold)
+	&& (p2, getHitVar(fall.time) * p2, getHitVar(yaccel) > -p2, getHitVar(yvel)) {
+		# Reset time when near ground
+		if p2, getHitVar(fall.recovertime) > 0 {
+			getHitVarSet{fall.recovertime: 0; redirectID: p2, ID}
+		}
+		# Ikemen doesn't normally allow recovery in these states
+		if (p2stateNo = [5030, 5035] || p2stateNo = 5071)
+		&& p2, standby = 0
+		&& p2, canRecover
+		&& p2, command = "recovery" {
+			selfState{value: 5200; redirectID: p2, ID}
+		}
+	}
+}
+
+# -2, P2 Air Reset
+ignoreHitPause if numEnemy {
+	for i = 0; numEnemy - 1; 1 {
+		if enemy($i), moveType = H
+		&& enemy($i), stateType = A
+		&& enemy($i), getHitVar(playerno) = playerno
+		&& enemy($i), getHitVar(guarded) = 0
+		&& enemy($i), hitFall = 0
+		&& enemy($i), ctrl = 0
+		&& enemy($i), time < 60 {
+			notHitBy{value: SCA; time: 2; redirectID: enemy($i), ID}
+		}
+	}
+}
+
+# P2 Air Reset Trip Guard
+ignoreHitPause if p2stateNo = 52 {
+	if alive && !standby {
+		if p2, ctrl = 0 && (p2, prevStateNo = [5000, 5999] || p2, prevmoveType = H) {
+			ctrlSet{value: 1; redirectID: p2, ID}
+		}
+	}
+}
+
+# -2, P2 Hard Knockdown
+ignoreHitPause if p2moveType = H {
+	if p2, getHitVar(playerno) = playerno
+	&& p2, alive
+	&& p2, dizzy = 0
+	&& p2, getHitVar(down.recover) = 0
+	&& p2, getHitVar(fall.recover) = 0 {
+		if p2, getHitVar(fallcount) <= 1 {
+			if !map(message_hkd) {
+				if p2stateType = L
+				&& p2stateNo != 5080
+				&& p2, getHitVar(isbound) = 0
+				&& p2, pos y = 0 && p2, vel y = 0 {
+					lifebarAction{text: "Hard Knockdown"; top: 1; redirectID: p2, ID}
+					mapSet{map: "message_hkd"; value: 1}
+				}
+			}
+		} else {
+			getHitVarSet{down.recover: 1; redirectID: p2, ID} # Just in case
+		}
+	}
+} else if map(message_hkd) {
+	mapSet{map: "message_hkd"; value: 0}
+}
+
+# Untechable throw message
+ignoreHitPause if moveHitVar(frame)
+&& map(throwtech_timer) = 0
+&& numTarget = 1
+&& target, getHitVar(attr) = S, NT {
+	lifebarAction{text: "Untechable"; top: 1; redirectID: p2, ID}
+}
+
+
+# P2 Custom State - Face First Knockdown
+ignoreHitPause if moveHit = 1
+&& numTarget(1320)
+&& (stateno = 1320 || prevStateNo = 1320)
+&& target(1320), getHitVar(frame)
+&& (target(1320), stateno = 5000 || target(1320), stateno = 5010) {
+	targetState{value: 1390; id: 1320}
+}
+
+# Aerial Rave Juggle
+ignoreHitPause if time = 1 && map(juggle_count) != 0 {
+	if (stateno = 40 && prevStateNo = 420) || (stateno = [600, 699] && prevStateNo = [600, 699]) {
+		mapSet{map: "juggle_count"; value: 0}
+	}
+}
+
+# Reset Combo Limits
+ignoreHitPause if numEnemy
+&& p2, time > 0
+&& (p2moveType != H || p2stateno = p2, const(statedizzy)) {
+	map(jugglereset) := 0;
+	map(wallbounce) := 0;
+}
+
+# Custom Combo End
+ignoreHitPause if map(customcombo) != 0 {
+	if map(customcombo) < 0
+	|| standby
+	|| moveType = H
+	|| roundState != 2
+	|| stateno = [3000, 4999] {
+		mapSet{map: "customcombo"; value: 0}
+	}
+}
+
+ignoreHitPause if map(customcombo) > 0 {
+	# Custom Combo Timer
+	mapAdd{map: "customcombo"; value: -1}
+	# Custom Combo Disable Guard
+	assertSpecial{flag: nostandguard; flag2: nocrouchguard; flag3: noairguard}
+}
+
+# Custom Combo PalFX
+ignoreHitPause if map(customcombo) > 60 {
+	palFx{
+		time: 2;
+		add: 24 + ceil(sin(map(customcombo) / 16.0 * pi) * 24), 24 + ceil(sin(map(customcombo) / 16.0 * pi) * 24), 24 + ceil(sin(map(customcombo) / 16.0 * pi) * 24);
+	}
+}
+
+# Custom Combo PalFX
+ignoreHitPause if map(customcombo) = [1, 60]
+&& !(gametime % 4) {
+	palFx{time: 2; add: 0, 96, 256}
+}
+
+# Throw in Front
+ignoreHitPause {
+	map(grabbehind) := 0;
+	if p2dist x < 0
+	&& p2dist x < ifelse((facing = p2, facing), -(p2, const(size.ground.front)), -(p2, const(size.ground.back))) {
+		map(grabbehind) := 1;
+	}
+}
+
+# Unthrowable Flag
+ignoreHitPause if map(unthrowable) > 0
+&& numEnemy
+&& (p2stateno != 52 || p2, ctrl || p2, time >= 6) {
+	mapAdd{map: "unthrowable"; value: -1}
+}
+
+# Unthrowable Flag - Jump Start
+ignoreHitPause if numEnemy
+&& p2stateno = 40
+&& p2moveType = I
+&& p2, time < 10 {
+	mapSet{map: "unthrowable"; value: 1}
+}
+
+# Unthrowable Flag - Hurt
+ignoreHitPause if p2, ctrl = 0
+&& p2, anim != 5300
+&& p2stateno != p2, const(statedizzy) {
+	if p2stateno = [150, 155]
+	|| p2stateno = 5120
+	|| p2stateno = 5201
+	|| (p2moveType = H
+	&& p2stateType != A
+	&& !map(customcombo))
+	|| (p2moveType = H
+	&& p2stateType = A
+	&& p2, hitfall = 0) {
+		mapSet{map: "unthrowable"; value: 3}
+	}
+}
+
+# Unthrowable Flag - Crumple
+ignoreHitPause if numEnemy
+&& numTarget(1510)
+&& p2, ID = target(1510), ID
+&& target(1510), inCustomState
+&& target(1510), stateno = [1520, 1521] {
+	mapSet{map: "unthrowable"; value: 0}
+}
+
+# Damage Scaling - Reset
+ignoreHitPause if p2moveType != H
+&& p2, dizzy = 0
+&& p2stateno != p2, const(statedizzy) {
+	map(combototal) := 0;
+	map(combocheck) := 0;
+}
+
+# Damage Scaling - Attack Connected Flag
+ignoreHitPause if moveContact = 1
+&& hitcount <= 1 {
+	mapSet{map: "combocheck"; value: 1}
+}
+
+# Damage Scaling - Base Formula
+ignoreHitPause {
+	mapSet{
+		map: "damagescaling";
+		value: ifelse(map(combototal) <= 0, 1, ifelse(map(combototal) >= 9, 0.1, 1 - 0.1 * map(combototal)));
+	}
+}
+
+# Damage Scaling - Chain Combos
+ignoreHitPause if !map(customcombo)
+&& numTarget
+&& p2moveType = H
+&& stateno = [200, 699]
+&& prevStateNo = [200, 699]
+&& (ifelse((stateno = 200 || stateno = 201 || stateno = 400), (prevStateNo != 200 && prevStateNo != 201 && prevStateNo != 400 && prevStateNo != 430), 1))
+&& (ifelse((stateno = 230 || stateno = 430), prevStateNo != 430, 1)) {
+	mapSet{map: "damagescaling"; value: 0.75 * map(damagescaling)}
+}
+
+# Damage Scaling - Custom Combo Calculation
+ignoreHitPause if map(customcombo) {
+	if map(customcombo_p2life) < p2life {
+		map(customcombo_p2life) := p2life;
+	}
+	map(customcombo_damage) := (map(customcombo_p2life) - p2life);
+} else {
+	map(customcombo_p2life) := p2life;
+	map(customcombo_damage) := 0;
+}
+
+# Damage Scaling - Custom Combo
+ignoreHitPause if map(customcombo)
+&& numEnemy {
+	mapSet{
+		map: "damagescaling";
+		value: max(0.1, ifelse(map(customcombo_damage) <= 0, 1.0, ifelse(map(customcombo_damage) >= 450, 0.1, (500 - map(customcombo_damage)) / 500.0)) * map(damagescaling));
+	}
+}
+
+# Damage Scaling - Minimum Super Damage
+ignoreHitPause if stateno = [3000, 4999] {
+	if map(superlevel) = 3 && map(damagescaling) < 0.5 {
+		map(damagescaling) := 0.5;
+	} else if map(superlevel) = 2 && map(damagescaling) < 0.4 {
+		map(damagescaling) := 0.4;
+	} else if map(damagescaling) < 0.3 {
+		map(damagescaling) := 0.3;
+	}
+}
+
+# Meter Scaling
+ignoreHitPause {
+	if map(customcombo) {
+		map(meterscaling) := 0;
+	} else {
+		map(meterscaling) := map(damagescaling);
+	}
+}
+
+# Damage Scaling - Override Fall Defense Bonus
+ignoreHitPause if numEnemy
+&& p2moveType = H
+&& p2, getHitVar(playerno) = playerno {
+	assertSpecial{redirectid: p2, ID; flag: nofalldefenceup}
+}
+
+# Damage Scaling - Long Combo Guts
+ignoreHitPause if numEnemy
+&& p2, receiveddamage >= (p2, lifeMax * 0.50) {
+	mapSet{
+		map: "damagescaling";
+		value: map(damagescaling) * ifelse(p2, receiveddamage >= (p2, lifeMax * 0.85), 0.75, ifelse(p2, receiveddamage >= (p2, lifeMax * 0.70), 0.90, 0.95));
+	}
+}
+
+# Damage Scaling - Root Multiplier
+ignoreHitPause {
+	attackmulset{
+		value: map(damagescaling); # * ifelse(map(counterhit_buffer), 1.2, 1)
+	}
+}
+
+# No Dizzy >:)
+if AIlevel >= 8 {
+	if stateno = const(StateDizzy)
+	|| (anim = 5300
+	&& p2moveType != A
+	&& (vel y = 0 && pos y = 0)
+	&& ((enemy, name = "Catwalk") + (enemy, authorname = "Phantom.of.the.Server")) != 2) {
+		selfState{value: 0; ctrl: 1}
+	}
+}
+
+# KO snd
+ignoreHitPause if (alive
+&& map(kosound) > 0)
+|| !alive {
+	mapSet{map: "kosound"; value: ifelse(alive, 0, map(kosound) + 1)}
+}
+
+# KO snd
+ignoreHitPause if !alive
+&& map(kosound) = 1
+&& !isAsserted(nokosnd)
+&& stateno != 5950 {
+	playSnd{value: 11, ifelse(random < 500, 1, 2)}
+}
+
+# Drop Target
+ignoreHitPause if numTarget = 1
+&& target, time > 0 {
+	if target, stateno = 5040
+	|| target, stateno = 5201
+	|| (target, moveType != H
+	&& target, moveReversed = 0) {
+		targetDrop{}
+	}
+}
+
+# Get Hit Voice
+if alive
+&& time <= 1
+&& moveType = H
+&& !hitoverridden
+&& stateno != [120, 155]
+&& getHitVar(damage) = (0, life) {
+	if (getHitVar(animtype) = 0 && random < 250)
+	|| (getHitVar(animtype) = 1 && random < 375)
+	|| (getHitVar(animtype) >= 2 && random < 500)
+	|| getHitVar(damage) >= 100
+	|| getHitVar(fall)
+	|| getHitVar(attr) = SCA, HA, HT, HP {
+		playSnd{value: 5000, (random % 5); channel: 0}
+	}
+}
+
+# Get Hit Voice
+if alive
+&& time = 1
+&& moveType = H {
+	if (stateno = 5100
+	&& (getHitVar(fall.damage) > 0 || sysvar(1) > 14))
+	|| ((stateno = 5050 || stateno = 5100)
+	&& prevStateNo != [5000, 5120]) {
+		playSnd{value: 5000, (random % 5); lowpriority: 1; channel: 0}
+	}
+}
+
+# Get Hit Voice
+if alive
+&& time = 1
+&& moveType = H
+&& inCustomState {
+	if anim = [5000, 5002]
+	|| anim = [5010, 5012]
+	|| anim = [5020, 5022]
+	|| anim = 5030
+	|| anim = 5070
+	|| anim = 5080
+	|| anim = [5100, 5101]
+	|| anim = 5170
+	|| anim = 5950
+	|| anim = 170 {
+		playSnd{value: 5000, (random % 5); lowpriority: 1; channel: 0}
+	}
+}
+
+# Dizzy Voice
+if time = 1
+&& anim = 5300 {
+	playSnd{value: 5000, 4; channel: 0}
+}
+
+# Guard Break Voice
+if time = 1
+&& stateno = const(StateGuardBreakRecover) {
+	playSnd{value: 5000, ifelse(random < 500, 3, 4); lowpriority: 1; channel: 0}
+}
+
+
+###################################################################################################
+#											STATE -3											 #
+###################################################################################################
+
+[Statedef -3]
+
+# Infinite Prevention System
+ignoreHitPause if p2moveType = H {
+	if p2, getHitVar(playerno) = playerno
+	&& p2, hitFall = 0
+	&& p2stateType != A
+	&& (p2, getHitVar(hitcount) >= 50 || combocount >= 100)
+	&& stateNo != [3000, 4999]
+	&& !map(customcombo) {
+		hitFallset{value: 1; redirectID: p2, ID}
+	}
+}
+
+# Check if Zoom is allowed
+ignoreHitPause if roundState = 3 {
+	mapSet{map: "zoom_allowed"; value: 1}
+	for i = 1; 8; 1 {
+		if playerNoExist($i) {
+			if player($i), alive && player($i), standby = 0 {
+				if player($i), playerno != playerno
+				&& player($i), getHitVar(playerno) != playerno {
+					mapSet{map: "zoom_allowed"; value: 0}
+				}
+			}
+		}
+	}
+}
+
+# -3, Turning Threshold
+if roundState = 2
+&& backedgedist > 0
+&& p2dist x >= -const(size.ground.back) {
+	assertSpecial{flag: noautoturn}
+}
+
+# -3, True p2BodyDist X
+# Is considered 0 when characters overlap
+ignoreHitPause {
+	if p2BodyDist x < 0 || facing = p2, facing {
+		# P1 Reference Point
+		let p1ref = ifelse(p2dist x < 0, clsnvar(size, 0, back), clsnvar(size, 0, front));
+		# P2 Reference Point
+		if p2dist x >= 0 {
+			let p2ref = ifelse(p2, facing = facing, -p2, clsnvar(size, 0, back), p2, clsnvar(size, 0, front));
+		} else {
+			let p2ref = ifelse(p2, facing = facing, -p2, clsnvar(size, 0, front), p2, clsnvar(size, 0, back));
+		}
+		# Calculate
+		if abs(p2dist x) <= abs($p1ref + $p2ref) {
+			mapSet{map: "truebodyDistx"; value: 0}
+		} else {
+			mapSet{map: "truebodyDistx"; value: p2dist x - $p1ref - $p2ref}
+		}
+	} else {
+		mapSet{map: "truebodyDistx"; value: p2BodyDist x}
+	}
+}
+
+# Corner Priority
+ignoreHitPause if moveType != H && abs(p2dist x) < 80
+&& (frontedgedist < vel x || backedgedist < -vel x) {
+	if stateType = A && map(jumptype) = 3
+	|| stateNo = 1400 && animElemTime(6) >= 0 { # Teleport
+		width{edge: -1, -1}
+		if stateType = A && p2, backedgedist = 0 {
+			assertSpecial{flag: noturntarget}
+		}
+	} else if p2moveType = H || p2stateType = L {
+		width{edge: 1, 1}
+	}
+}
+
+# Corner Push Set
+ignoreHitPause if moveContact = 1 {
+	if numTarget && reversalDefAttr != SCA, AA, AP, AT {
+		mapSet{map: "cornerpush"; value: -1 * target, getHitVar(xvel)}
+	}
+}
+
+# Corner Push Reset
+if map(cornerpush) {
+	if !numTarget {
+		mapSet{map: "cornerpush"; value: 0}
+	} else {
+		if target, moveType != H
+		|| target, getHitVar(playerID) != ID
+		|| target, getHitVar(slidetime) = 0
+		|| (target, stateType = S && abs(map(cornerpush)) < 1.0)
+		|| target, hitFall = 1
+		|| target, vel y != 0 {
+			mapSet{map: "cornerpush"; value: 0}
+		}
+	}
+}
+
+# Corner Push Apply
+if map(cornerpush) && numTarget {
+	if target, pausetime = 0 &&	target, getHitVar(hitshaketime) <= 0 {
+		if (target, stateType = S || target, stateType = C) &&
+		((target, backedgedist <= 0 && (target, getHitVar(xvel) * target, facing) < 0) ||
+		(target, frontedgedist <= 0 && (target, getHitVar(xvel) * target, facing) > 0)) {
+			posadd{x: map(cornerpush) * facing}
+		}
+		# Friction
+		mapSet{map: "cornerpush"; value: map(cornerpush) * ifelse(target, stateType = C, target, const(movement.crouch.friction), target, const(movement.stand.friction))}
+	}
+}
+
+# -3, Auto P2 Facing
+ignoreHitPause if p2moveType = H && p2, time <= 0 {
+	if p2, getHitVar(playerno) = playerno
+	&& p2, getHitVar(facing) = 0
+	&& p2, hitShakeOver = 0 &&	p2stateType != L
+	&& p2, hitoverridden = 0 && p2, inCustomState = 0 {
+		if (p2, facing = facing && p2, p2dist x < p2, const(size.ground.front)) ||
+		(p2, facing != facing && p2, p2dist x < -(p2, const(size.ground.back))) {
+			turn{redirectID: p2, ID}
+		}
+	}
+}
+
+# -3, Unguardable Freeze
+ignoreHitPause if p2, pausetime > 0 {
+	for i = 1; numEnemy; 1 {
+		if numEnemy >= $i {
+			if enemy($i - 1), pausetime > 0 && enemy($i - 1), stateNo != [120, 155] {
+				assertSpecial{flag: nostandguard; flag2: nocrouchguard; flag3: noairguard; redirectID: enemy($i - 1), ID}
+			}
+		}
+	}
+}
+
+# Juggling Acceleration Fix
+# For Mugen characters that override air get hit states and still duplicate acceleration
+ignoreHitPause if p2moveType = H {
+	if p2, time = 1 {
+		if p2, getHitVar(playerno) = playerno
+		&& (p2stateNo = 5035 || p2stateNo = 5050)
+		&& p2, inCustomState = 0 {
+			if p2, vel y = [(map(p2_yaccelfix) + 1.9 * p2, getHitVar(yaccel)), (map(p2_yaccelfix) + 3.1 * p2, getHitVar(yaccel))] {
+				velSet{y: map(p2_yaccelfix) + p2, getHitVar(yaccel); redirectID: p2, ID}
+			}
+		}
+	}
+	mapSet{map: "p2_yaccelfix"; value: p2, vel y}
+}
+
+# Underground Juggling
+ignoreHitPause if numEnemy && p2moveType = H {
+	if p2, getHitVar(playerno) = playerno
+	&& p2, getHitVar(isbound) = 0
+	&& p2, pos y > 0 {
+		# Fix position
+		if p2, time <= 0 && p2, hitShakeOver = 0 {
+			posSet{y: 0; redirectID: p2, ID}
+		}
+		# Change state type
+		if p2stateType = A && p2, vel y > 0
+		&& (p2stateNo = [5020, 5109] || p2, inCustomState) {
+			stateTypeSet{stateType: L; redirectID: p2, ID}
+		}
+	}
+}
+
+# P2 OTG - Stay Down
+ignoreHitPause if p2moveType = H {
+	if p2, getHitVar(playerno) = playerno
+	&& (p2stateNo = [5020, 5030] || p2stateNo = 5070)
+	&& p2, getHitVar(down.velocity.x) = 0
+	&& p2, getHitVar(down.velocity.y) = 0
+	&& p2, pos y >= -24
+	&& p2, prevstateType = L
+	&& p2stateType = A
+	&& p2, alive {
+		selfState{value: 1115080; readplayerID: ID; redirectID: p2, ID}
+	}
+}
+
+# -3, Cheap KO
+ignoreHitPause if moveType = H {
+	let cheap = 0;
+	if stateNo = [5000, 5019]
+	&& !isAsserted(noKO)
+	&& getHitVar(kill)
+	&& getHitVar(frame)
+	&& getHitVar(damage) > 0
+	&& getHitVar(damage) >= life {
+		if prevStateNo = [120, 155]
+		&& getHitVar(guarddamage) > 0 { # Mitigates false positives
+			let cheap = 1;
+		}
+		if getHitVar(hitdamage) = [1, 50]
+		&& getHitVar(ground.animtype) = 0
+		&& abs(getHitVar(xvel)) < 10
+		&& receiveddamage <= 50 # Because of combos
+		&& getHitVar(attr) != SCA, HA, HT, HP {
+			let cheap = 1;
+		}
+		if $cheap {
+			assertSpecial{flag: nokosnd}
+			selfState{value: 5950}
+		}
+	}
+}
+
+# -3, Tag In Sounds
+if stateNo = const(StateTagEnteringScreen) {
+	if time = 1 {
+		playSnd{value: 4, ifelse(random < 333, 8, ifelse(random < 500, 10, 13)); channel: 0}
+	}
+	if (anim = const(AnimTagEnteringScreen) || anim = 100) && (animElem = 3 || animElem = 6) {
+		playSnd{value: 0, ifelse((animElem = 3), 103, 106)}
+	}
+}
+
+# -3, Allow win pose selection
+# This workaround is currently necessary in Ikemen because holding a button skips the win screen
+if !AIlevel && roundState = [3, 4] {
+	if (inputTime(a) > 0 || inputTime(b) > 0 || inputTime(c) > 0 || inputTime(x) > 0 || inputTime(y) > 0 || inputTime(z) > 0 || inputTime(s) > 0) &&
+		inputTime(a) != 1 && inputTime(b) != 1 && inputTime(c) != 1 && inputTime(x) != 1 && inputTime(y) != 1 && inputTime(z) != 1 && inputTime(s) != 1 {
+		assertSpecial{flag: postroundinput; flag2: roundnotskip}
+	}
+}
+
+# P2 layering and hitshake during pause
+if pausetime = 0 && p2, pausetime > 0 {
+	if sprPriority >= 0
+	&& sprPriority = p2, sprPriority
+	&& cond((p2, numTarget), (p2, target, getHitVar(isbound) = 0), 1) {
+		sprPriority{value: p2, sprPriority - 1; redirectID: p2, ID}
+	}
+	if p2, getHitVar(hitshaketime) > 0 {
+		offset{x: (gametime % 2) * facing; redirectID: p2, ID}
+	}
+}
+
+
+# Parry Detection
+if roundState = 2
+&& !numHelper(705)
+&& !map(customcombo)
+&& ifelse(stateType = A, map(jumptype) != [1, 2], 1)
+&& ((moveType = I && ctrl) || stateno = [700, 702] || stateno = 5120) {
+	let createHelper = 0;
+	# Player
+	if !AIlevel {
+		if command != "rlsdir" {
+			if (stateType = S || stateType = C || stateno = 5120)
+			&& (((p2dist x >= 0 && command = "F") || (p2dist x < 0 && command = "B")) || command = "D") {
+				let createHelper = 1;
+			}
+			if stateType = A
+			&& ((p2dist x >= 0 && command = "F") || (p2dist x < 0 && command = "B")) {
+				let createHelper = 1;
+			}
+		}
+	}
+	# AI
+	if AIlevel {
+		if inguarddist && stateno != [700, 702] {
+			if p2BodyDist x < map(ai_p2fireball_distx)
+			&& random < (ifelse(life < 100 || guardpoints < 200, 100, 50) * (AIlevelF / 8.0)) {
+				let createHelper = 1;
+			}
+			if map(ai_p2fireball_eta) = [1,8]
+			&& random < 200 * (AIlevelF/8.0) {
+				let createHelper = 1;
+			}
+		}
+		if stateno = [700, 702] && time = 14
+		&& random < (250 + 700 * (AIlevel / 8.0)) {
+			let createHelper = 1;
+		}
+	}
+	if $createHelper {
+		helper {
+			helpertype: normal;
+			stateno: 705;
+			id: 705;
+			name: "Parry Detection";
+			posType: p1;
+			pausemovetime: 65535;
+			supermovetime: 65535;
+		}
+	}
+}
+
+# Parry Attacks
+if numHelper(705)
+&& stateno != [700, 702]
+&& helper(705), stateno = 706 {
+	changeState{
+		value: ifelse((helper(705), anim = 707), 702, ifelse((helper(705), anim = 706), 701, 700));
+		ctrl: 0;
+	}
+}
+
+# Parry Projectiles
+ignoreHitPause if numHelper(705)
+&& stateno != [700, 702]
+&& (!(helper(705), var(0)) && (helper(705), anim = 705)) {
+	hitOverride{
+		attr: SA, AP;
+		stateno: 700;
+		slot: 0;
+		time: 1;
+	}
+}
+
+# Parry Projectiles
+ignoreHitPause if numHelper(705)
+&& stateno != [700, 702]
+&& (!(helper(705), var(0)) && (helper(705), anim = 706)) {
+	hitOverride{
+		attr: C, AP;
+		stateno: 701;
+		slot: 0;
+		time: 1;
+	}
+}
+
+# Parry Projectiles
+ignoreHitPause if numHelper(705)
+&& stateno != [700, 702]
+&& (!(helper(705), var(0)) && (helper(705), anim = 707)) {
+	hitOverride{
+		attr: SCA, AP;
+		stateno: 702;
+		slot: 0;
+		time: 1;
+	}
+}
+
+# NoWalk after Parry
+if map(parry_nowalk) > 0 {
+	assertSpecial{flag: nowalk}
+	mapAdd{map: "parry_nowalk"; value: -1}
+}
+
+# ProjContact Reset
+if map(projcontact) {
+	if ((stateno != 1000 && stateno != 1020 && stateno != [1050, 1053])
+	&& (stateno != 3000 && (stateno != [3020, 3022]) && stateno != 3050 && stateno != 3070 && stateno != 4200 && stateno != 4300))
+	|| (stateno = 1000 && animElemTime(5) < 0)
+	|| (stateno = 1020 && animElemTime(10) < 0)
+	|| (stateno = 1050 && animElemTime(2) < 0)
+	|| (stateno = 3000 && anim = 3000)
+	|| stateno = 3020
+	|| (stateno = 3050 && animElemTime(8) < 0)
+	|| (stateno = 3070 && animElemTime(5) < 0)
+	|| (stateno = 4200 && animElemTime(15) < 0)
+	|| (stateno = 4300 && anim = 4300 && animElemTime(6) < 0) {
+		mapSet{map: "projcontact"; value: 0}
+	}
+}
+
+# ProjContact Timer
+if map(projcontact) {
+	mapAdd{map: "projcontact"; value: 1}
+}
+
+# Projectile Flag
+ignoreHitPause {
+	mapSet{map: "projflag"; value: 0}
+}
+
+# Projectile Flag
+ignoreHitPause if map(projflag) != 1
+&& map(customcombo) <= 0 {
+	if ((stateno != 1000 && numHelper(1005))
+	&& helper(1005), stateno = 1005)
+	|| ((stateno != 1020 && numHelper(1025))
+	&& helper(1025), stateno = 1025)
+	|| ((stateno != 1050 && numHelper(1055))
+	&& helper(1055), stateno = 1055)
+	|| ((stateno != 1050 && numHelper(1056))
+	&& helper(1056), stateno = 1055)
+	|| ((stateno != 3000 && numHelper(3005))
+	&& helper(3005), stateno = 3005)
+	|| ((stateno != [3021, 3022] && numHelper(3025))
+	&& helper(3025), stateno = 3025)
+	|| ((stateno != 3050 && numHelper(3055))
+	&& helper(3055), stateno = 3055)
+	|| ((stateno != 3070 && numHelper(3075))
+	&& helper(3075), stateno = 3075)
+	|| ((stateno != 4200 && numHelper(4206))
+	&& helper(4206), stateno = 4206)
+	|| ((stateno != 4300 && numHelper(4305))
+	&& helper(4305), stateno = 4305) {
+		mapSet{map: "projflag"; value: 1}
+	}
+}
+
+# Cancel into Normals Reset
+ignoreHitPause if moveType = H
+|| moveReversed != [1, 2] {
+	mapSet{map: "normalcancel"; value: 0}
+}
+
+# Cancel into Normals Check
+ignoreHitPause if map(customcombo) {
+	if (stateno = [200, 699]
+	&& (moveContact || moveReversed))
+	|| ((stateno = [1000, 2999] && stateType != A)
+	&& (moveContact || moveReversed || map(projcontact))) {
+		mapSet{map: "normalcancel"; value: 1}
+	}
+}
+
+# Special Cancel Reset
+ignoreHitPause if moveType = H
+|| moveReversed != [1, 2] {
+	mapSet{map: "specialcancel"; value: 0}
+}
+
+# Special Cancel Check
+ignoreHitPause if stateno = [200, 2999] {
+	if (map(customcombo) && stateno = [200, 699])
+	|| ((map(customcombo) && stateno = [1000, 2999] && ((moveContact + moveReversed) || map(projcontact))))
+	|| (!AIlevel
+	&& time <= 2
+	&& stateno = [200, 699]
+	&& prevStateNo != [200, 4999])
+	|| (stateno = [200, 699]
+	&& (stateno != 245 && stateno != [255, 256])
+	&& (moveContact + moveReversed) = [1, 12])
+	|| (stateno = 1341
+	&& (animElemTime(2) > 0 && map(customcombo))
+	&& cond(numTarget, target, getHitVar(isbound) = 0, 1))
+	|| (stateno = [1351, 1352]
+	&& ((animElemTime(2) > 0 || stateno = 1352) && map(customcombo))
+	&& cond(numTarget, target, getHitVar(isbound) = 0, 1)) {
+		mapSet{map: "specialcancel"; value: 1}
+	}
+}
+
+# Super Cancel Reset
+ignoreHitPause if moveType = H
+|| moveReversed != [1, 2] {
+	mapSet{map: "supercancel"; value: 0}
+}
+
+# Super Cancel Check
+ignoreHitPause if stateno = [200, 2999] {
+	if map(specialcancel)
+	|| (stateno = 245
+	&& (moveContact + moveReversed) = [1, 12])
+	|| (stateno = 1000
+	&& (animElemTime(5) < 12 && map(projcontact) = [1, 12]))
+	|| (stateno = 1020
+	&& (animElemTime(10) < 24 && map(projcontact) = [1, 12]))
+	|| (stateno = 1050
+	&& (animElemTime(5) < 12 && map(projcontact) = [1, 12]))
+	|| (stateno = 1100
+	&& (moveContact + moveReversed) = [1, 24])
+	|| (stateno = 1200
+	&& (moveContact + moveReversed) = [1, 12])
+	|| (stateno = 1250
+	&& (moveContact + moveReversed) = [1, 12])
+	|| (stateno = 1310
+	&& (moveContact + moveReversed) = [1, 12])
+	|| (stateno = 1320
+	&& (moveContact + moveReversed) = [1, 12])
+	|| (stateno = 1330
+	&& (moveContact + moveReversed) = [1, 12])
+	|| (stateno = 1510
+	&& (moveContact + moveReversed) = [1, 12]) {
+		mapSet{map: "supercancel"; value: 1}
+	}
+}
+
+# Hyper Cancel Reset
+ignoreHitPause if moveType = H
+|| moveReversed != [1, 2] {
+	mapSet{map: "hypercancel"; value: 0}
+}
+
+# Hyper Cancel Check
+ignoreHitPause if stateno = [3000, 4999] {
+	if (stateno = 3000
+	&& (anim = 3001 && map(projcontact) = [1, 12]))
+	|| (stateno = [3021, 3022]
+	&& map(projcontact) = [1, 12])
+	|| (stateno = 3050
+	&& (animElemTime(8) = [1, 32] && map(projcontact) = [1, 12]))
+	|| (stateno = 3070
+	&& (animElemTime(35) < 0 && map(projcontact) = [1, 12]))
+	|| (stateno = 3100
+	&& (moveContact + moveReversed) = [1, 24])
+	|| (stateno = 3200
+	&& (moveContact + moveReversed) = [1, 12])
+	|| (stateno = 3250
+	&& (moveContact + moveReversed) = [1, 12])
+	|| (stateno = 4200
+	&& (animElemTime(15) > 12 && map(projcontact) = [1, 12]))
+	|| (stateno = 4300
+	&& (animElemTime(7) >= 1 && map(projcontact) = [1, 12])) {
+		mapSet{map: "hypercancel"; value: 1}
+	}
+}
+
+# Throw Cancel Fix
+# Because first frame of a throw has movehit and Custom Combo has so much freedom
+ignoreHitPause if moveHitvar(frame)
+&& hitdefattr != SCA, AA, AP
+&& numTarget
+&& target, getHitVar(frame)
+&& target, stateOwner, ID = ID
+&& (time <= 0 && target, time <= 0) {
+	map(normalcancel) := 0;
+	map(specialcancel) := 0;
+	map(supercancel) := 0;
+	map(hypercancel) := 0;
+}
+
+# Super Cancel Flag Reset
+ignoreHitPause if map(supercancelflag)
+&& ((stateno != [3000, 4999]) || moveType = H) {
+	mapSet{map: "supercancel_flag"; value: 0}
+}
+
+# Hyper Cancel Flag Reset
+ignoreHitPause if map(hypercancelflag)
+&& ((stateno != [3000, 4999]) || moveType = H) {
+	mapSet{map: "hypercancel_flag"; value: 0}
+}
+
+# Movement Afterimage
+if time = 1 && !map(customcombo) {
+	if (stateno = 50 && map(jumptype) = [2, 3])
+	|| stateno = [710, 725] {
+		afterimage{
+			time: 2;
+			timegap: 1;
+			framegap: 4;
+			length: 9;
+			palbright: 0, 0, 0;
+			palcontrast: 128, 128, 128;
+			palpostbright: 0, 0, 0;
+			paladd: 0, 0, 0;
+			palmul: 0.9, 0.9, 0.9;
+			trans: add1;
+		}
+	}
+}
+
+# Lv1 Super Afterimage
+if (stateno = 3000 && time = 3)
+|| (stateno = 3050 && time = 3)
+|| (stateno = 3100 && time = 3)
+|| (stateno = 3200 && time = 3)
+|| (stateno = 3250 && time = 3)
+|| (stateno = 3300 && time = 3) {
+	afterimage{
+		time: 2;
+		timegap: 1;
+		framegap: 10;
+		length: 21;
+		palcolor: 0;
+		palbright: 0, 0, 0;
+		palcontrast: 0, 64, 256;
+		palpostbright: 0, 0, 0;
+		paladd: 0, 0, 0;
+		palmul: 0.75, 0.75, 0.75;
+		trans: add1;
+	}
+}
+
+# Lv2 Super Afterimage
+if (stateno = 3020 && time = 3)
+|| (stateno = 3070 && time = 3)
+|| (stateno = 4200 && time = 3)
+|| (stateno = 4300 && time = 3) {
+	afterimage{
+		time: 2;
+		timegap: 1;
+		framegap: 10;
+		length: 21;
+		palcolor: 0;
+		palbright: 0, 0, 0;
+		palcontrast: 192, 0, 256;
+		palpostbright: 0, 0, 0;
+		paladd: 0, 0, 0;
+		palmul: 0.75, 0.75, 0.75;
+		trans: add1;
+	}
+}
+
+# Lv3 Super Afterimage
+if (stateno = 4000 && time = 3)
+|| (stateno = 4100
+&& (anim = 4101 && animElemTime(1) = 1))
+|| (stateno = 6910 && time = 1) {
+	afterimage{
+		time: 2;
+		timegap: 1;
+		framegap: 10;
+		length: 21;
+		palcolor: 0;
+		palbright: 0, 0, 0;
+		palcontrast: 256, 0, 0;
+		palpostbright: 0, 0, 0;
+		paladd: 0, 0, 0;
+		palmul: 0.75, 0.75, 0.75;
+		trans: add1;
+	}
+}
+
+# Afterimage Persist
+ignoreHitPause if ((stateno = 50 || stateno = [600, 699])
+&& ((map(jumptype) = 2 || map(jumptype) = 3) && vel y < -1))
+|| map(customcombo) > 0
+|| stateno = [710, 725]
+|| (stateno = [3000, 4999]
+&& (anim != 1101 && anim != 1102 && anim != 3205 && stateno != 4090 && stateno != 4190 && anim != 4301))
+|| (stateno = 6910 && animElemTime(2) < 0) {
+	afterimagetime{time: 2}
+}
+
+# Scary Supers
+if stateno = [3000, 4999] {
+	attackdist{value: 320}
+}
+
+# Jump Reset
+if map(jumptype)
+&& stateno != 40
+&& (stateType != A || moveType = H) {
+	mapSet{map: "jumptype"; value: 0}
+}
+
+# Reset Super Finish Var
+if map(superfinish)
+&& roundState = [0, 2] {
+	mapSet{map: "superfinish"; value: 0}
+}
+
+# Custom Combo Finish
+ignoreHitPause if winKO
+&& roundState = 3
+&& (map(customcombo) && !numHelper(8600))
+&& p2, getHitVar(playerno) = playerno {
+	if moveContact = [1, 4]
+	|| (numHelper(1005)
+	&& helper(1005), map(projcontact))
+	|| (numHelper(1025)
+	&& helper(1025), map(projcontact))
+	|| (numHelper(1055)
+	&& helper(1055), map(projcontact))
+	|| (numHelper(1056)
+	&& helper(1056), map(projcontact))
+	|| (stateno = 805
+	&& (animElemTime(4) >= 0 && animElemTime(6) < 0))
+	|| (stateno = 810
+	&& animElemTime(4) = [0, 1])
+	|| (stateno = 815
+	&& animElemTime(12) = [0, 1])
+	|| (stateno = 860
+	&& animElemTime(8) = [0, 1])
+	|| (stateno = 1341
+	&& animElemTime(2) = [0, 1])
+	|| (stateno = 1351
+	&& time <= 1) {
+		helper{
+			helpertype: normal;
+			stateno: 8600;
+			id: 8600 + 0 * (map(superfinish) := 900);
+			name: "Super Finish";
+			posType: left;
+			pos: 160, -120;
+			ownpal: 1;
+			pausemovetime: 999;
+			supermovetime: 999;
+		}
+	}
+}
+
+# Super Finish
+ignoreHitPause if winHyper
+&& roundState = 3
+&& !map(superfinish)
+&& !numHelper(8600) && !numHelper(8690)
+&& p2, getHitVar(playerno) = playerno {
+	let superState = -1;
+	# Determine finishing move
+	if moveContact = [1, 4] && stateno = [3000, 4999] {
+		let superState = stateno;
+	} else if numHelper(3005) && helper(3005), map(projcontact) {
+		let superState = 3000;
+	} else if stateno = [3021, 3022] && map(projcontact) {
+		let superState = 3020;
+	} else if numHelper(3025) && helper(3025), map(projcontact) {
+		let superState = 3020;
+	} else if numHelper(3055) && helper(3055), map(projcontact) {
+		let superState = 3050;
+	} else if stateno = 3070 && map(projcontact) {
+		let superState = 3070;
+	} else if numHelper(3075) && helper(3075), map(projcontact) {
+		let superState = 3070;
+	} else if numHelper(4205) && helper(4205), map(projcontact) {
+		let superState = 4200;
+	} else if numHelper(4206) && helper(4206), map(projcontact) {
+		let superState = 4200;
+	} else if numHelper(4305) && helper(4305), map(projcontact) {
+		let superState = 4300;
+	}
+	if $superState > 0 {
+		map(superfinish) := $superState;
+		helper{
+			helpertype: normal;
+			stateno: 8600;
+			id: 8600;
+			name: "Super Finish";
+			posType: left;
+			pos: 160, -120;
+			ownpal: 1;
+			pausemovetime: 999;
+			supermovetime: 999;
+		}
+	}
+}
+
+# Victory Camera
+if roundState != 4 {
+	mapSet{map: "victorycam"; value: 0}
+}
+
+# Victory Camera
+if map(cfg_winzoom)
+&& map(zoom_allowed)
+&& (alive && !standby)
+&& winKO
+&& stateno > 180
+&& roundState = 4
+&& cameraZoom <= 1
+&& screenpos y = [0, gameheight]
+&& numEnemy
+&& p2, inCustomState = 0 {
+	mapSet{map: "victorycam"; value: 1}
+}
+
+# Victory Camera
+if map(victorycam) {
+	zoom{
+		scale: 1.0 / cameraZoom;
+		lag: 0.92;
+		stagebound: 1;
+		camerabound: 0;
+		pos: pos x * cameraZoom, 0;
+	}
+}
+
+# Victory BGM
+if map(victorybgm) != 0
+&& motifstate(victoryscreen) = 0 {
+	mapSet{map: "victorybgm"; value: 0}
+}
+
+# Victory BGM
+if map(cfg_victorybgm)
+&& motifstate(victoryscreen)
+&& teamleader = playerno
+&& matchover
+&& alive
+&& win {
+	mapAdd{map: "victorybgm"; value: 1}
+}
+
+# Victory BGM
+if map(cfg_victorybgm)
+&& map(victorybgm) = [1, 5] {
+	playbgm{bgm: ""}
+}
+
+# Victory BGM
+if map(cfg_victorybgm)
+&& map(victorybgm) = 6 {
+	playbgm{bgm: "shinwin.mp3"; loop: 0; volume: 100}
+}
+
+# Antifreeze
+if !ctrl
+&& time >= 300
+&& roundState = 2 {
+	if (pos y > 0 && screenpos y > gameheight)
+	|| !selfanimexist(anim) {
+		changeState{value: 5040}
+	}
+}
+
+# Antifreeze
+if numEnemy
+&& moveType != A
+&& p2, time >= 300
+&& p2, inCustomState
+&& p2, stateOwner, playerno = playerno {
+	selfState{redirectid: p2, ID; value: 5040}
+}
+
+
+###################################################################################################
+#											STATE -4											  #
+###################################################################################################
+
+[Statedef -4]
+
+# -4, Juggle System
+ignoreHitPause {
+	# Reset Juggle Count
+	if map(juggle_count) > 0
+	&& p2, getHitVar(frame) = 0 { # Allow time for P2 to go from type S to type A
+		if p2moveType != H
+		|| p2, ctrl
+		|| p2, hitFall = 0
+		|| p2stateType = S || p2stateType = C
+		|| (p2stateType = L && p2, pos y = 0 && p2, vel y = 0)
+		|| p2stateNo = [120, 155] || p2stateNo = 5201 || p2stateNo = 5210
+		|| moveguarded = 1 || moveReversed = 1
+		|| roundState != 2 {
+			mapSet{map: "juggle_count"; value: 0}
+		}
+	}
+	# Increase Juggle Count
+	if pausetime = 0
+	&& moveHitvar(frame)
+	&& moveHit = 1
+	&& numTarget
+	&& p2, hitFall
+	&& p2moveType = H
+	&& p2, getHitVar(frame)
+	&& (p2, getHitVar(playerID) = ID || moveHitVar(playerID) = p2, ID) {
+		if map(juggle_timer) <= 0 {
+			mapAdd{map: "juggle_count"; value: map(juggle_start); redirectID: cond(isHelper, root, ID, ID)}
+		} else {
+			mapAdd{map: "juggle_count"; value: map(juggle_increase); redirectID: cond(isHelper, root, ID, ID)}
+		}
+	}
+	# Juggle Timer
+	# To determine if a certain move is a juggle starter
+	if p2moveType = H
+	&& p2, hitFall
+	&& p2, pausetime = 0 {
+		if p2, getHitVar(playerno) = playerno {
+			mapAdd{map: "juggle_timer"; value: 1}
+		}
+	} else {
+		mapSet{map: "juggle_timer"; value: 0}
+	}
+}
+
+# Counter Hit buffer
+ignoreHitPause if pausetime = 0 {
+	if movecountered {
+		if stateNo = 215 || stateNo = [255, 256] {
+			mapSet{map: "counterhit_buffer"; value: 1}
+		}
+	} else if !moveHit {
+		mapSet{map: "counterhit_buffer"; value: 0}
+	}
+}
+
+# -4, Counter Hit bonus
+ignoreHitPause if pausetime = 0
+&& moveHitvar(frame) && moveHit = 1
+&& (movecountered = 1 || map(counterhit_buffer)) # MoveCountered has limits against multiple enemies
+&& cond(isHelper, root, moveType != H, moveType != H) {
+	for i = 0; numPlayer - 1; 1 {
+		if playerIndexExist($i)
+		&& playerIndex($i), getHitVar(frame)
+		&& (playerIndex($i), getHitVar(playerID) = ID || playerIndex($i), ID = moveHitVar(playerID))
+		&& playerIndex($i), moveType = H
+		&& (playerIndex($i), prevmoveType = A || playerIndex($i), receivedHits > 1) # Just countered or counter buffer active
+		&& playerIndex($i), getHitVar(guarded) = 0 {
+			let time = playerIndex($i), getHitVar(hittime);
+			getHitVarSet{
+				hittime: $time + ifelse($time < 16, 2, ifelse($time < 19, 3, 4));
+				redirectID: playerIndex($i), ID;
+			}
+			lifeadd{
+				value: -0.20 * playerIndex($i), getHitVar(damage);
+				kill: playerIndex($i), getHitVar(kill);
+				redirectID: playerIndex($i), ID;
+			}
+			dizzypointsadd{
+				value: -0.20 * playerIndex($i), getHitVar(dizzypoints);
+				redirectID: playerIndex($i), ID;
+			}
+			# Sweep hard knockdown
+			if stateNo = 450 {
+				getHitVarSet{
+					fall.recover: 0;
+					down.recover: 0;
+					down.recovertime: 30;
+					redirectID: playerIndex($i), ID;
+				}
+			}
+		}
+	}
+}
+
+# Damage Scaling - Helper Update Root
+ignoreHitPause if isHelper
+&& pausetime = 0
+&& !map(combocheck)
+&& (moveContact && numTarget) {
+	root, map(combocheck) := 1;
+	map(combocheck) := 1;
+}
+
+# Damage Scaling - Helper Multiplier
+ignoreHitPause if isHelper {
+	attackmulset{value: root, map(damagescaling)}
+}
+
+# Generate Hit Sparks
+ignoreHitPause if moveHitvar(frame)
+&& inCustomState = 0 && pausetime = 0
+&& reversalDefAttr != SCA, AA, AP, AT && hitdefattr != SCA, AT {
+	if moveContact = 1
+	&& (map(guard.sparkno) = [8000, 8009] || map(sparkno) = [8010, 8099]) {
+		if !isHelper {
+			let spark_scaleoffset_x = const(size.xscale);
+			let spark_scaleoffset_y = const(size.yscale);
+		} else {
+			let spark_scaleoffset_x = 1;
+			let spark_scaleoffset_y = 1;
+		}
+		let spark_y = map(sparky) * $spark_scaleoffset_y;
+		# Find the appropriate enemies
+		for i = 0; numPlayer - 1; 1 {
+			if playerIndexExist($i)
+			&& playerIndex($i), getHitVar(frame)
+			&& (playerIndex($i), getHitVar(playerID) = ID || playerIndex($i), ID = moveHitVar(playerID)) { # Latter in case partner hits them as well
+				let spark_no = ifelse(playerIndex($i), getHitVar(guarded), map(guard.sparkno), map(sparkno));
+				let getterdist = (playerIndex($i), pos x - pos x) * facing;
+				let spark_x = cond($getterdist > (map(sparkx.max) * $spark_scaleoffset_x), (map(sparkx.max) * $spark_scaleoffset_x), cond($getterdist > (map(sparkx.min) * $spark_scaleoffset_x), $getterdist, (map(sparkx.min) * $spark_scaleoffset_x)));
+				if !isHelper || playerIndex($i), hitoverridden = 0 {
+					call HitSparks($spark_no, $spark_x, $spark_y);
+				}
+				# Counter hit spark
+				if moveHit = 1
+				&& (movecountered = 1 || map(counterhit_buffer)) # MoveCountered has limits against multiple enemies
+				&& cond(isHelper, root, moveType != H, moveType != H)
+				&& (!isHelper || playerIndex($i), hitoverridden = 0)
+				&& playerIndex($i), moveType = H
+				&& (playerIndex($i), prevmoveType = A || playerIndex($i), receivedHits > 1) # Just countered or counter buffer active
+				&& playerIndex($i), getHitVar(guarded) = 0
+				&& map(sparkno) = [8010, 8099] {
+					explod{
+						ID: 8000;
+						anim: 8290;
+						posType: p1;
+						pos: $spark_x, $spark_y;
+						scale: 0.2, 0.2;
+						trans: addAlpha;
+						alpha: 256, 256;
+						removetime: 16;
+						interpolation.time: 16;
+						interpolation.scale: 1.0, 1.0;
+						interpolation.alpha: 0, 256;
+						pausemovetime: -1;
+						supermovetime: -1;
+						ownpal: 1;
+						ontop: 1;
+					}
+				}
+			}
+		}
+	}
+}
+
+# Reset Spark Variables
+ignoreHitPause if map(sparkno) >= 0 || map(guard.sparkno) >= 0 {
+	if !moveHitvar(frame) && hitdefattr != SCA, AA, AP {
+		mapSet{map: "sparkno"; value: -1}
+		mapSet{map: "guard.sparkno"; value: -1}
+		mapSet{map: "sparkx.min"; value: 0}
+		mapSet{map: "sparkx.max"; value: 0}
+		mapSet{map: "sparky"; value: 0}
+	}
+}
+
+# Generate particle effects
+# This block must be placed before the next one so we have a buffer for traded hits
+ignoreHitPause if map(hitparticles) {
+	if moveHitvar(frame) && moveHit = 1 && numTarget {
+		# Iterate all targets to see if they already have a particles helper
+		for i = 0; numTarget - 1; 1 {
+			if target(-1, $i), getHitVar(frame)
+			&& target(-1, $i), getHitVar(guarded) = 0
+			&& target(-1, $i), getHitVar(playerID) = ID {
+				# Search all particle helpers for a match with this target
+				let addHelper = 1;
+				for j = 0; numHelper(map(hitparticles)) - 1; 1 {
+					if helper(map(hitparticles), $j), map(target) = target(-1, $i), ID {
+						# Match found. Just refresh the timer
+						helper(map(hitparticles), $j), map(timer) := 60;
+						let addHelper = 0;
+						break;
+					}
+				}
+				if $addHelper {
+					# Attach a new helper to this target
+					helper {
+						helpertype:	normal;
+						stateNo: 	map(hitparticles);
+						ID:			map(hitparticles);
+						name: 		"Particle Emitter";
+						posType:	p2;
+						ownpal:		1;
+						map.target: target(-1, $i), ID;
+						map.timer: 60;
+					}
+				}
+			}
+		}
+	}
+	map(hitparticles) := 0;
+}
+
+# Set particle effects type
+ignoreHitPause {
+	if stateNo = 195 || stateNo = 3300 || isHelper(3005) || isHelper(3055) || isHelper(4206) || isHelper(4305) {
+		map(hitparticles) := 8150; # Purple fire
+	}
+	if isHelper(1025) {
+		map(hitparticles) := 8151; # Regular fire
+	}
+}
+
+# Fireball Hue Shifting
+ignoreHitPause if isHelper {
+	if (gametime % 2) {
+		if isHelper(3005) || isHelper(3025) || isHelper(3055) || isHelper(3075)
+		|| isHelper(4203) || isHelper(4205) || isHelper(4206) || isHelper(4305) {
+			if palno = 9 {
+				palFx{time: 1; hue: -64}
+			} else {
+				palFx{time: 1; hue: 64}
+			}
+		}
+	}
+}
+
+# KKZ explod hue
+# Should follow the same as above
+ignoreHitPause if !isHelper {
+	if (gametime % 2) && numexplod(4207) {
+		if palno = 9 {
+			let kkz_hue = -64;
+		} else {
+			let kkz_hue = 64;
+		}
+		modifyexplod{
+			ID: 4207;
+			palfx.time: 1;
+			palfx.hue: $kkz_hue;
+		}
+	}
+}

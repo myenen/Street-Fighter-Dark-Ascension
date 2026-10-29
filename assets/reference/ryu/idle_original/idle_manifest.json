@@ -1,0 +1,107 @@
+{
+  "source": "chars/SSF2_SNES_Ryu/Media/Ryu.sff",
+  "palette": "chars/SSF2_SNES_Ryu/Palettes/Ryu.act",
+  "action": 0,
+  "ticks_per_frame": 6,
+  "cycle_ticks": 24,
+  "cycle_seconds_at_60fps": 0.4,
+  "canvas_size": [
+    96,
+    112
+  ],
+  "anchor": [
+    48,
+    96
+  ],
+  "frames": [
+    {
+      "file": "ryu_idle_001.png",
+      "sprite": [
+        0,
+        0
+      ],
+      "raw_size": [
+        35,
+        79
+      ],
+      "sff_axis": [
+        18,
+        77
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        35,
+        79
+      ],
+      "ticks": 6
+    },
+    {
+      "file": "ryu_idle_002.png",
+      "sprite": [
+        0,
+        1
+      ],
+      "raw_size": [
+        36,
+        78
+      ],
+      "sff_axis": [
+        19,
+        76
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        36,
+        78
+      ],
+      "ticks": 6
+    },
+    {
+      "file": "ryu_idle_003.png",
+      "sprite": [
+        0,
+        2
+      ],
+      "raw_size": [
+        35,
+        79
+      ],
+      "sff_axis": [
+        18,
+        77
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        35,
+        79
+      ],
+      "ticks": 6
+    },
+    {
+      "file": "ryu_idle_004.png",
+      "sprite": [
+        0,
+        3
+      ],
+      "raw_size": [
+        35,
+        80
+      ],
+      "sff_axis": [
+        18,
+        78
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        35,
+        80
+      ],
+      "ticks": 6
+    }
+  ],
+  "palette_order": "MUGEN ACT: reverse RGB triplets to map PCX indices"
+}

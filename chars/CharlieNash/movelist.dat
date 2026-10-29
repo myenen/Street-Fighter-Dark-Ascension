@@ -1,0 +1,60 @@
+<#f0f000>MODE SELECTION</>
+
+SFA Charlie                          Palettes 1-6
+SF5 Nash                             Palettes 7-12
+
+<#f0f000>SFA CHARLIE - UNIQUE ATTACKS</>
+
+Dragon Suplex                       _CLOSE[_B/_F]_+^2P
+Knee Bazooka                        [_B/_F]_+^LK
+
+<#f0f000>SFA CHARLIE - SPECIAL MOVES</>
+
+Sonic Boom                          (hold) _B_F^P
+Somersault Kick                     (hold) _D_U^K
+Moonsault Kick                      _AIR_U_UF_F^K
+EX Sonic Boom <#bebebe>(500)</>            (hold) _B_F^2P
+EX Somersault Kick <#bebebe>(500)</>       (hold) _D_U^2K
+EX Moonsault Kick <#bebebe>(500)</>        _AIR_U_UF_F^2K
+
+<#f0f000>SFA CHARLIE - SUPER MOVES</>
+
+Sonic Break <#bebebe>(1000)</>             (hold) _B_F_B_F^P
+Somersault Justice <#bebebe>(1000 / 2000)</> (hold) _DB_D_DF_F_UF^K / (hold) _DB_D_DF_F_UF^2K
+Crossfire Blitz <#bebebe>(1000 / 2000)</>   (hold) _B_F_B_F^K / (hold) _B_F_B_F^2K
+Crossfire Blitz III <#bebebe>(3000)</>      (hold) _B_F_B_F^3K / _D_DB_B_D_DB_B^2K
+
+<#f0f000>SF5 NASH - UNIQUE ATTACKS</>
+
+Dragon Suplex                       _CLOSE[_B/_F]_+^2P
+Chopping Assault                    _F_+^MP
+Spinning Back Knuckle               _F_+^HP
+Knee Bazooka                        [_B/_F]_+^LK
+Rolling Sobat                       _F_+^MK
+
+<#f0f000>SF5 NASH - SPECIAL MOVES</>
+
+Sonic Boom                          _D_DF_F^P
+Tragedy Assault                     _F_D_DF_F^P
+Sonic Scythe                        _D_DB_B^K
+Moonsault Slash                     _D_DF_F^K
+EX Sonic Boom <#bebebe>(500)</>            _D_DF_F^2P
+EX Tragedy Assault <#bebebe>(500)</>       _F_D_DF_F^2P
+EX Sonic Scythe <#bebebe>(500)</>          _D_DB_B^2K
+EX Moonsault Slash <#bebebe>(500)</>       _D_DF_F^2K
+
+<#f0f000>SF5 NASH - SUPER MOVES</>
+
+Crossfire Blitz <#bebebe>(1000 / 2000)</>  _D_DF_F_D_DF_F^K / _D_DF_F_D_DF_F^2K
+Punishment Saber <#bebebe>(3000)</>        _D_DB_B_D_DB_B^2P
+
+<#f0f000>SYSTEM</>
+
+Custom Combo <#bebebe>(1000)</>            ^HP_+^HK
+Power Charge                        (hold) ^MP_+^MK
+High / Low / Air Parry              (tap) _F / _D / _AIR_F
+Zero Counter <#bebebe>(guarding, 1000)</>  _B_DB_D^P / _B_DB_D^K
+Dodge / Roll                        ^LP_+^LK / [_F/_B]_+^LP_+^LK
+Safe Fall                           ^2P / ^LP_+^LK
+Forward Run                         _F_F
+Backward Dash                       _B_B

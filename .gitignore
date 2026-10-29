@@ -1,0 +1,26 @@
+# IKEMEN runtime data
+save/logs/
+save/replays/
+save/stats.json
+
+# Local import and backup folders
+_imports/
+_import/
+_removed/
+
+# Generated crash and debug files
+*.log
+*.dmp
+debug/
+
+# Windows and editor files
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+*~

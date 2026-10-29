@@ -1,0 +1,44 @@
+[Info]
+name="C.Akuma_MvC HI-RES"
+displayname="Cyber Akuma"
+versiondate=07.14.2010
+mugenversion=04.14.2001
+author="Scar" & RAMON GARCIA & "Yolomate"
+;New pallets by Yolomate, thank you so much man :) 
+;HI-RES edit by RAMON GARCIA = filtered sprites, popularly known as HI-RES
+;https://www.facebook.com/groups/MugenDownloadLinksAndShareRamonGarcia
+
+pal.defaults=1,2,3,4,5,6,7,8,9,10,11,12
+
+[Files]
+cmd=command\C.Akuma_MvC.cmd
+movelist=movelist.dat
+sprite=animation\C.Akuma_MvC.sff
+anim=animation\C.Akuma_MvC.air
+sound=sound\C.Akuma_MvC.snd
+cns=cns\C.Akuma_MvC.cns
+stcommon=cns\common1.cns
+st=cns\C.Akuma_MvC.cns
+st1=cns\supers.cns
+st2=cns\hypers.cns
+st3=cns\helpers.cns
+pal1=act\1.act
+pal2=act\2.act
+pal3=act\12-Gold Arm.act
+pal4=act\13-Dark Blue.act
+pal5=act\15-Ken Akuma.act
+pal6=act\14-Dark Violet.act
+pal7=act\11-Silver Arm.act
+pal8=act\3.act
+pal9=act\8.act
+pal10=act\6.act
+pal11=act\10.act
+pal12=act\16-Blanka Akuma.act
+;pal8=act\9.act
+;pal9=act\4.act
+;pal10=act\5.act
+;pal11=act\7.act
+
+[Arcade]
+intro.storyboard=
+ending.storyboard=

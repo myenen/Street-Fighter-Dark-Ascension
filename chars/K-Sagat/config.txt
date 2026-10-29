@@ -1,0 +1,23 @@
+;--------------------------------------------------------------------------
+[Statedef 10000]
+type    = S
+velset = 0,0
+anim = 4001
+ctrl = 0
+sprpriority = 5
+
+;51=combo gauge x
+;52=combo guage y
+[State 0, VarSet]
+type = parentVarSet
+trigger1 =1
+var(51)=13
+[State 0, VarSet]
+type = parentVarSet
+trigger1 =1
+var(52)=45
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = roundstate = 2
+

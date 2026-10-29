@@ -1,0 +1,2227 @@
+# _____________________________________
+#| Shin Gouki by Phantom.of.the.Server |
+# ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+#==============================================================================================
+#=======================================< COMMAND FILE >=======================================
+#==============================================================================================
+
+#============================================================
+# State -1
+#============================================================
+
+[StateDef -1]
+
+# Guard Cancel
+if !AIlevel
+&& command = "counter_F"
+&& ((command = "counter_a" + command = "counter_b" + command = "counter_c") >= 2 || (command = "counter_x" + command = "counter_y" + command = "counter_z") >= 2)
+&& roundState = 2
+&& stateType != A
+&& (power >= 1000 && !map(customcombo)) {
+	if stateno = [150, 153]
+	&& getHitVar(ctrltime) > 5 {
+		changeState{value: 750}
+	}
+}
+
+# Roll Recovery
+if !AIlevel
+&& (command = "a" || command = "b" || command = "c")
+&& (roundState = 2 && alive)
+&& (!hitfall || getHitVar(fall.recover)) {
+	if !ctrl
+	&& (stateno = 5040 || stateno = 5050)
+	&& vel y > 0
+	&& pos y >= const(movement.air.gethit.groundrecover.ground.threshold) {
+		changeState{value: 5220}
+	}
+}
+
+# Forward Roll
+if !AIlevel
+&& map(cmd_ax)
+&& roundState = 2
+&& stateType != A {
+	if (ifelse(map(cmd_reverse), command = "/$B", command = "/$F")
+	&& (ctrl || stateno = [100, 101]))
+	|| (map(customcombo) && map(normalcancel)) {
+		changeState{value: 720}
+	}
+}
+
+# Back Roll
+if !AIlevel
+&& map(cmd_ax)
+&& roundState = 2
+&& stateType != A {
+	if ifelse(map(cmd_reverse), command = "/$F", command = "/$B")
+	&& (ctrl || stateno = [100, 101]) {
+		changeState{value: 725}
+	}
+}
+
+# Dodge
+if !AIlevel
+&& map(cmd_ax)
+&& roundState = 2
+&& stateType != A {
+	if ctrl || stateno = [100, 101] {
+		changeState{value: 710}
+	}
+}
+
+# Ashura Senkuu
+if !AIlevel
+&& (map(cmd_623kkk) || map(cmd_623ppp) || map(cmd_421kkk) || map(cmd_421ppp))
+&& roundState = 2
+&& stateType != A {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| map(specialcancel) {
+		changeState{value: 1400}
+	}
+}
+
+# Messatsu Gou Hadou Agyo
+if !AIlevel
+&& map(cmd_214214pp)
+&& roundState = 2
+&& stateType != A
+&& (power >= 2000 && map(customcombo) <= 60)
+&& !map(projflag) {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| map(supercancel)
+	|| (map(hypercancel)
+	&& stateno != [3021, 3022]) {
+		changeState{value: 3020}
+	}
+}
+
+# Tenshou Kaireki Jin
+if !AIlevel
+&& map(cmd_222kk)
+&& roundState = 2
+&& stateType != A
+&& (power >= 2000 && map(customcombo) <= 60)
+&& !numHelper(4305) {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| ((map(supercancel) || (map(hypercancel) && stateno != 4300)))
+	|| (stateno = 1400 && anim = 1400 && animElemTime(6) >= 0) {
+		changeState{value: 4300}
+	}
+}
+
+# Kongou Kokuretsu Zan
+if !AIlevel
+&& map(cmd_222pp)
+&& roundState = 2
+&& stateType != A
+&& (power >= 2000 && map(customcombo) <= 60) {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| ((map(supercancel) || (map(hypercancel) && stateno != 4200))) {
+		changeState{value: 4200}
+	}
+}
+
+# Shun Goku Satsu
+if !AIlevel
+&& map(cmd_demon)
+&& roundState = 2
+&& stateType != A
+&& (power >= 3000 && map(customcombo) <= 60) {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| ((map(supercancel) || (map(hypercancel) && stateno != 4000)))
+	|| stateno = [200, 499] {
+		changeState{value: 4000}
+	}
+}
+
+# Misogi
+if !AIlevel
+&& map(cmd_888pp)
+&& roundState = 2
+&& stateType != A
+&& (power >= 3000 && map(customcombo) <= 60) {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| ((map(supercancel) || (map(hypercancel) && stateno != 4100))) {
+		changeState{value: 4100}
+	}
+}
+
+# Tenma Gou Zankuu Agyo
+if !AIlevel
+&& map(cmd_root236236pp)
+&& roundState = 2
+&& stateType = A
+&& (power >= 2000 && map(customcombo) <= 60)
+&& map(jumptype) != [1, 2]
+&& !map(projflag) {
+	if ctrl
+	|| ((map(supercancel) || (map(hypercancel) && stateno != 3070))) {
+		changeState{value: 3070}
+	}
+}
+
+# Messatsu Gou Shoryuu
+if !AIlevel
+&& map(cmd_236236p)
+&& roundState = 2
+&& stateType != A
+&& (power >= 1000 && map(customcombo) <= 60) {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| ((map(supercancel) || (map(hypercancel) && stateno != 3100))) {
+		changeState{value: 3100}
+	}
+}
+
+# Messatsu Gou Senpuu
+if !AIlevel
+&& map(cmd_root214214k)
+&& roundState = 2
+&& stateType = A
+&& (power >= 1000 && map(customcombo) <= 60)
+&& map(jumptype) != [1, 2] {
+	if ctrl
+	|| ((map(supercancel) || (map(hypercancel) && (stateno != [3200, 3299])))) {
+		changeState{value: 3250}
+	}
+}
+
+# Messatsu Gou Rasen
+if !AIlevel
+&& map(cmd_214214k)
+&& roundState = 2
+&& stateType != A
+&& (power >= 1000 && map(customcombo) <= 60) {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| ((map(supercancel) || (map(hypercancel) && (stateno != [3200, 3299])))) {
+		changeState{value: 3200}
+	}
+}
+
+# Tenma Shinzui Wari
+if !AIlevel
+&& map(cmd_root236236k)
+&& roundState = 2
+&& stateType = A
+&& (power >= 1000 && map(customcombo) <= 60)
+&& map(jumptype) != [1, 2] {
+	if ctrl
+	|| ((map(supercancel) || (map(hypercancel) && stateno != 3300))) {
+		changeState{value: 3300}
+	}
+}
+
+# Tenma Gou Zankuu
+if !AIlevel
+&& map(cmd_root236236p)
+&& roundState = 2
+&& stateType = A
+&& (power >= 1000 && map(customcombo) <= 60)
+&& map(jumptype) != [1, 2]
+&& !map(projflag) {
+	if ctrl
+	|| ((map(supercancel) || (map(hypercancel) && stateno != 3050))) {
+		changeState{value: 3050}
+	}
+}
+
+# Messatsu Gou Hadou
+if !AIlevel
+&& map(cmd_214214p)
+&& roundState = 2
+&& stateType != A
+&& (power >= 1000 && map(customcombo) <= 60)
+&& !map(projflag) {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| ((map(supercancel) || (map(hypercancel) && stateno != 3000))) {
+		changeState{value: 3000}
+	}
+}
+
+# Shakunetsu Hadouken
+if !AIlevel
+&& map(cmd_63214p)
+&& roundState = 2
+&& stateType != A
+&& !map(projflag) {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| map(specialcancel) {
+		changeState{value: 1020}
+	}
+}
+
+# Gou Shoryuuken
+if !AIlevel
+&& map(cmd_623p)
+&& roundState = 2
+&& stateType != A {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| map(specialcancel) {
+		changeState{value: 1100}
+	}
+}
+
+# Air Tatsumaki Zankuu Kyaku
+if !AIlevel
+&& map(cmd_root214k)
+&& roundState = 2
+&& stateType = A
+&& map(jumptype) != [1, 2] {
+	if ctrl
+	|| map(specialcancel) {
+		changeState{value: 1250}
+	}
+}
+
+# Tatsumaki Zankuu Kyaku
+if !AIlevel
+&& map(cmd_214k)
+&& roundState = 2
+&& stateType != A {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| map(specialcancel) {
+		changeState{value: 1200}
+	}
+}
+
+# Hyakki Shuu
+if !AIlevel
+&& map(cmd_623k)
+&& roundState = 2
+&& stateType != A {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| map(specialcancel) {
+		changeState{value: 1300}
+	}
+}
+
+# Zankuu Hadouken
+if !AIlevel
+&& map(cmd_236p)
+&& roundState = 2
+&& stateType = A
+&& map(jumptype) != [1, 2]
+&& !map(projflag) {
+	if ctrl
+	|| map(specialcancel) {
+		changeState{value: 1050}
+	}
+}
+
+# Gou Hadouken
+if !AIlevel
+&& map(cmd_236p)
+&& roundState = 2
+&& stateType != A
+&& !map(projflag) {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| map(specialcancel) {
+		changeState{value: 1000}
+	}
+}
+
+# Gouhaken
+if !AIlevel
+&& (map(cmd_22p) || map(cmd_22k))
+&& roundState = 2
+&& stateType != A {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| map(specialcancel) {
+		changeState{value: 1500}
+	}
+}
+
+# Air Throw
+if !AIlevel
+&& (command = "holdfwd" || command = "holdback")
+&& map(cmd_kk)
+&& roundState = 2
+&& stateType = A {
+	if ctrl {
+		changeState{value: 850}
+	}
+}
+
+# Throw
+if !AIlevel
+&& (command = "holdfwd" || command = "holdback")
+&& (map(cmd_pp) || map(cmd_kk))
+&& (roundState = 2 && stateType = S) {
+	if ctrl {
+		changeState{value: 800}
+	}
+}
+
+# Custom Combo
+if !AIlevel
+&& map(cmd_cz)
+&& roundState = 2
+&& power >= 2000
+&& !map(customcombo) {
+	if ctrl || stateno = [100, 101] {
+		changeState{value: ifelse(stateType = A, 765, 760)}
+	}
+}
+
+# Power Charge
+if !AIlevel
+&& (command = "/b" && command = "/y")
+&& roundState = 2
+&& stateType != A
+&& (power < const(data.power) && power < powerMax)
+&& !map(customcombo) {
+	if ctrl || stateno = [100, 101] {
+		changeState{value: 740}
+	}
+}
+
+# CHK
+if !AIlevel
+&& map(cmd_c)
+&& (stateType != A && command = "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 201] || stateno = [210, 215] || stateno = [220, 221] || (stateno = [400, 420]) || (stateno = [230, 241]) || (stateno = [430, 440])))
+	|| map(normalcancel) {
+		changeState{value: 450}
+	}
+}
+
+# CHP
+if !AIlevel
+&& map(cmd_z)
+&& (stateType != A && command = "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 215] || stateno = [400, 410] || (stateno = [230, 241]) || (stateno = [430, 440])))
+	|| map(normalcancel) {
+		changeState{value: 420}
+	}
+}
+
+# Sekiseigeri
+if !AIlevel
+&& map(cmd_c)
+&& command = "holdfwd"
+&& (stateType != A && command != "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 201] || stateno = [210, 215] || stateno = [220, 221] || (stateno = [400, 420]) || (stateno = [230, 241]) || (stateno = [430, 440])))
+	|| map(normalcancel) {
+		changeState{value: 255}
+	}
+}
+
+# SHK
+if !AIlevel
+&& map(cmd_c)
+&& (stateType != A && command != "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 201] || stateno = [210, 215] || stateno = [220, 221] || (stateno = [400, 420]) || (stateno = [230, 241]) || (stateno = [430, 440])))
+	|| map(normalcancel) {
+		changeState{value: ifelse(abs(map(truebodydistx)) <= (const(size.xscale) * 15), 251, 250)}
+	}
+}
+
+# SHP
+if !AIlevel
+&& map(cmd_z)
+&& (stateType != A && command != "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 215] || stateno = [400, 410] || (stateno = [230, 241]) || (stateno = [430, 440])))
+	|| map(normalcancel) {
+		changeState{value: ifelse(abs(map(truebodydistx)) <= (const(size.xscale) * 15), 221, 220)}
+	}
+}
+
+# SMK2
+if !AIlevel
+&& map(cmd_b)
+&& command = "holdfwd"
+&& (stateType != A && command != "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 215] || stateno = 230 || stateno = [400, 410] || stateno = 430))
+	|| map(normalcancel) {
+		changeState{value: 245}
+	}
+}
+
+# SMP2
+if !AIlevel
+&& map(cmd_y)
+&& command = "holdfwd"
+&& (stateType != A && command != "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 201] || stateno = 230 || stateno = 400 || stateno = 430))
+	|| map(normalcancel) {
+		changeState{value: 215}
+	}
+}
+
+# CMK
+if !AIlevel
+&& map(cmd_b)
+&& (stateType != A && command = "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 215] || stateno = 230 || stateno = [400, 410] || stateno = 430))
+	|| map(normalcancel) {
+		changeState{value: 440}
+	}
+}
+
+# CMP
+if !AIlevel
+&& map(cmd_y)
+&& (stateType != A && command = "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 201] || stateno = 230 || stateno = 400 || stateno = 430))
+	|| map(normalcancel) {
+		changeState{value: 410}
+	}
+}
+
+# SMK
+if !AIlevel
+&& map(cmd_b)
+&& (stateType != A && command != "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 215] || stateno = 230 || stateno = [400, 410] || stateno = 430))
+	|| map(normalcancel) {
+		changeState{value: ifelse(abs(map(truebodydistx)) <= (const(size.xscale) * 25), 241, 240)}
+	}
+}
+
+# SMP
+if !AIlevel
+&& map(cmd_y)
+&& (stateType != A && command != "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 201] || stateno = 230 || stateno = 400 || stateno = 430))
+	|| map(normalcancel) {
+		changeState{value: ifelse(abs(map(truebodydistx)) <= (const(size.xscale) * 25), 211, 210)}
+	}
+}
+
+# CLK
+if !AIlevel
+&& map(cmd_a)
+&& (stateType != A && command = "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 201] || stateno = 400))
+	|| ((stateno = 200 || stateno = 201 || stateno = 400 || stateno = 430) && time >= 5)
+	|| map(normalcancel) {
+		changeState{value: 430}
+	}
+}
+
+# CLP
+if !AIlevel
+&& map(cmd_x)
+&& (stateType != A && command = "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((stateno = 200 || stateno = 201 || stateno = 400 || stateno = 430) && time >= 5)
+	|| map(normalcancel) {
+		changeState{value: 400}
+	}
+}
+
+# SLK
+if !AIlevel
+&& map(cmd_a)
+&& (stateType != A && command != "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((moveContact + moveReversed) = [1, 4]
+	&& (stateno = [200, 201] || stateno = 400))
+	|| ((stateno = 200 || stateno = 201 || stateno = 400 || stateno = 430) && time >= 5)
+	|| map(normalcancel) {
+		changeState{value: 230}
+	}
+}
+
+# SLP
+if !AIlevel
+&& map(cmd_x)
+&& (stateType != A && command != "holddown") {
+	if (ctrl || stateno = [100, 101])
+	|| ((stateno = 200 || stateno = 201 || stateno = 400 || stateno = 430) && time >= 5)
+	|| map(normalcancel) {
+		changeState{value: ifelse(abs(map(truebodydistx)) <= (const(size.xscale) * 20), 201, 200)}
+	}
+}
+
+# AHK
+if !AIlevel
+&& map(cmd_c)
+&& stateType = A {
+	if ctrl
+	|| (stateno = [600, 641]
+	&& (moveContact + moveReversed) = [1, 4]
+	&& map(jumptype) != [1, 2])
+	|| map(normalcancel) {
+		changeState{
+			value: ifelse((vel x || (map(jumptype) = [1, 2])) && (prevStateNo != [600, 699]), 650, 651);
+		}
+	}
+}
+
+# AHP
+if !AIlevel
+&& map(cmd_z)
+&& stateType = A {
+	if ctrl
+	|| ((stateno = [600, 610] || (stateno = [630, 641]))
+	&& (moveContact + moveReversed) = [1, 4]
+	&& map(jumptype) != [1, 2])
+	|| map(normalcancel) {
+		changeState{value: 620}
+	}
+}
+
+# TKK
+if !AIlevel
+&& map(cmd_b)
+&& command = "holddown"
+&& stateType = A
+&& map(jumptype) != [1, 2]
+&& (vel x > 0 && abs(vel y) < 2) {
+	if ctrl
+	|| map(normalcancel) {
+		changeState{value: 645}
+	}
+}
+
+# AMK
+if !AIlevel
+&& map(cmd_b)
+&& stateType = A {
+	if ctrl
+	|| ((stateno = [600, 610] || (stateno = [630, 631]))
+	&& (moveContact + moveReversed) = [1, 4]
+	&& map(jumptype) != [1, 2])
+	|| map(normalcancel) {
+		changeState{value: ifelse((vel x || (map(jumptype) = [1, 2]) || stateno = [600, 699]), 640, 641)}
+	}
+}
+
+# AMP
+if !AIlevel
+&& map(cmd_y)
+&& stateType = A {
+	if ctrl
+	|| ((stateno = 600 || (stateno = [630, 631]))
+	&& (moveContact + moveReversed) = [1, 4]
+	&& map(jumptype) != [1, 2])
+	|| map(normalcancel) {
+		changeState{value: 610}
+	}
+}
+
+# ALK
+if !AIlevel
+&& map(cmd_a)
+&& stateType = A {
+	if ctrl
+	|| (stateno = 600
+	&& (moveContact + moveReversed) = [1, 4]
+	&& map(jumptype) != [1, 2])
+	|| map(normalcancel) {
+		changeState{value: ifelse((vel x || (map(jumptype) = [1, 2]) || stateno = [600, 699]), 630, 631)}
+	}
+}
+
+# ALP
+if !AIlevel
+&& map(cmd_x)
+&& stateType = A {
+	if ctrl
+	|| map(normalcancel) {
+		changeState{value: 600}
+	}
+}
+
+# Forward Dash
+if !AIlevel
+&& map(cmd_66)
+&& (roundState = 2 && stateType = S) {
+	if ctrl {
+		changeState{value: 102}
+	}
+}
+
+# Back Dash
+if !AIlevel
+&& map(cmd_44)
+&& (roundState = 2 && stateType = S) {
+	if ctrl || stateno = 101 {
+		changeState{value: 105}
+	}
+}
+
+# Taunt
+if !AIlevel
+&& map(cmd_S)
+&& stateType != A {
+	if (ctrl || stateno = 40 || stateno = 52 || stateno = [100, 101])
+	|| map(specialcancel) {
+		changeState{value: 195}
+	}
+}
+
+# AI Combo Window - Reset
+ignoreHitPause {
+	mapSet{map: "ai_combowindow"; value: 0}
+}
+
+# AI Combo Window - Ground
+ignoreHitPause if AIlevel
+&& numEnemy
+&& p2moveType = H
+&& (p2stateType = S || p2stateType = C)
+&& (p2, getHitVar(hitshaketime) > 0 || p2, getHitVar(hittime) > 0) {
+	mapSet{map: "ai_combowindow"; value: p2, getHitVar(hitshaketime) + p2, getHitVar(hittime) + 1}
+}
+
+# AI Combo Window - Air
+ignoreHitPause if AIlevel
+&& numEnemy
+&& p2, hitshakeover = 1
+&& p2moveType = H
+&& p2stateType = A
+&& p2stateno != [5200, 5219]
+&& p2, hitfall
+&& p2, dizzy = 0 {
+	mapSet{
+		map: "ai_combowindow";
+		value: (-(p2, vel y) + (((p2, vel y) ** 2 - 2 * 0.4850 * (p2, pos y)) ** 0.5)) / 0.4850;
+	}
+}
+
+# AI Combo Window - Air
+ignoreHitPause if AIlevel
+&& numEnemy
+&& p2, hitshakeover = 0
+&& p2moveType = H
+&& p2stateType = A
+&& p2, hitfall
+&& p2, dizzy = 0
+&& p2, getHitVar(yaccel) != 0 {
+	mapSet{
+		map: "ai_combowindow";
+		value: (p2, getHitVar(hitshaketime)) + ((-(p2, getHitVar(yvel)) ** 2 + (((p2, getHitVar(yvel)) - 2 * (p2, getHitVar(yaccel)) * (p2, pos y)) ** 0.5)) / (p2, getHitVar(yaccel)));
+	}
+}
+
+# AI Combo Window - Down
+ignoreHitPause if AIlevel
+&& numEnemy
+&& p2moveType = H
+&& p2stateType = L
+&& p2stateno != 5120
+&& p2, time < 30 {
+	mapSet{map: "ai_combowindow"; value: 60}
+}
+
+# AI Combo Window - Dizzy
+ignoreHitPause if AIlevel
+&& numEnemy {
+	if p2, anim = 5300
+	|| p2stateno = p2, const(statedizzy)
+	|| (p2stateno = p2, const(stateguardbreakhit) || p2stateno = p2, const(stateguardbreakrecover)) {
+		mapSet{map: "ai_combowindow"; value: 60}
+	}
+}
+
+# AI Combo Window - Dizzy
+ignoreHitPause if AIlevel
+&& numEnemy
+&& (p2, dizzy || p2, dizzypoints <= 0)
+&& p2stateno != p2, const(statedizzy) {
+	mapSet{map: "ai_combowindow"; value: -1}
+}
+
+# AI Combo Window - Gouhaken
+ignoreHitPause if AIlevel
+&& numEnemy
+&& numTarget(1510)
+&& p2, ID = target(1510), ID
+&& target(1510), stateno = [1520, 1521] {
+	mapSet{map: "ai_combowindow"; value: 48 - (target(1510), time)}
+}
+
+# AI Punish Window
+ignoreHitPause if AIlevel && numEnemy {
+	map(ai_p2vely) := p2, vel y;
+	map(ai_p2accely) := p2, vel y - map(ai_p2vely);
+
+	if p2, ctrl || p2moveType = H {
+		map(ai_punishwindow) := 0;
+	} else if p2, vel y = 0 {
+		map(ai_punishwindow) := -(p2, animTime);
+	} else if p2, vel y != 0 && map(ai_p2accely) != 0 {
+		map(ai_punishwindow) := (-(p2, vel y) + (((p2, vel y) ** 2 - 2 * map(ai_p2accely) * (p2, pos y)) ** 0.5)) / map(ai_p2accely);
+	}
+}
+
+# AI Attack Window
+ignoreHitPause if AIlevel {
+	mapSet{
+		map: "ai_attackwindow";
+		value: floor(max(map(ai_combowindow), map(ai_punishwindow)) + ((random % 9) / AIlevelF));
+	}
+}
+
+# AI Time To Land
+# TODO: This seems unfinished
+ignoreHitPause if AIlevel {
+	map(ai_timetoland) := 0;
+	if stateType = A
+	&& moveType != H {
+		map(ai_timetoland) := floor((-vel y + (vel y ** 2 - 2 * const(movement.yaccel) * pos y) ** 0.5) / const(movement.yaccel));
+	}
+}
+
+# Ground Fall Recovery
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& (roundState = 2 && alive) {
+	if stateno = 5050
+	&& getHitVar(fall.recover)
+	&& vel y > 0
+	&& pos y >= const(movement.air.gethit.groundrecover.ground.threshold)
+	&& random < map(ai_confirm) * 200 {
+		changeState{value: 5200}
+	}
+}
+
+# Air Fall Recovery
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& (roundState = 2 && alive) {
+	if stateno = 5050
+	&& canrecover
+	&& vel y > const(movement.air.gethit.airrecover.threshold)
+	&& random < 100 {
+		changeState{value: 5210}
+	}
+}
+
+# Roll Recovery
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& (roundState = 2 && alive)
+&& (!hitfall || getHitVar(fall.recover)) {
+	if !ctrl
+	&& (stateno = 5040 || stateno = 5050)
+	&& vel y > 0
+	&& pos y >= const(movement.air.gethit.groundrecover.ground.threshold)
+	&& p2BodyDist x = [-10, 10]
+	&& random < 50 {
+		changeState{value: 5220}
+	}
+}
+
+# Gou Shoryuuken
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& !map(ai_p2unhittable)
+&& map(juggle_count) < 3
+&& map(ai_p2cannotmove)
+&& (p2moveType = H || p2moveType = A)
+&& (p2stateno != [120, 155] || p2stateType = A)
+&& (p2BodyDist x < 40 && p2dist y >= -80)
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 3) {
+	if ((ctrl || stateno = 52 || stateno = [100, 101])
+	&& (p2moveType = A || p2stateType = A)
+	&& random < map(ai_confirm) * ifelse(prevStateNo = 1209, 500, 200))
+	|| (stateno = [200, 499]
+	&& (map(specialcancel) && moveHit)
+	&& p2BodyDist x = [-5, 12]
+	&& random < map(ai_confirm) * 100)
+	|| (((ctrl || stateno = [100, 101]) && p2moveType = A && p2BodyDist x = [-5, 40])
+	&& random < map(ai_confirm) * 500)
+	|| ((stateno = 0 && prevStateNo = 5120 && time <= 1)
+	&& ((ctrl || stateno = [100, 101]) && p2BodyDist x = [-40, 40])
+	&& random < map(ai_confirm) * 500)
+	|| (((ctrl || stateno = [100, 101]) && p2BodyDist x = [-30, 30])
+	&& ((p2stateno = 5120) && (p2, animTime = [-6, -3]))
+	&& random < map(ai_confirm) * 250) {
+		changeState{value: 1100}
+	}
+}
+
+# Ashura Senkuu
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& (stateType != A && roundState = 2)
+&& p2moveType = A
+&& p2, p2dist x > 0
+&& abs(p2BodyDist x) <= 90 {
+	if (ctrl || stateno = 52 || stateno = [100, 101])
+	&& (backedgedist <= 10 || (p2dist x < 0 && frontedgedist <= 10))
+	&& random < 250 {
+		changeState{value: 1400}
+	}
+}
+
+# Forward Roll
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A
+&& (map(customcombo) <= 270 && !map(parry_nowalk)) {
+	if (ctrl || stateno = [100, 101])
+	&& p2moveType = A
+	&& (p2, vel y <= 0 && p2BodyDist x = [-5, 40])
+	&& p2, stagefrontedgedist < p2, stagebackedgedist
+	&& (!(p2, hitdefattr = SC, AT || p2stateno = map(ai_p2throw)))
+	&& random < 50 {
+		changeState{value: 720}
+	}
+}
+
+# Dodge
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A
+&& (map(customcombo) <= 270 && !map(parry_nowalk)) {
+	if (ctrl || stateno = [100, 101])
+	&& p2moveType = A
+	&& (p2, vel y <= 0 && p2BodyDist x = [30, 65])
+	&& (!(p2, hitdefattr = SC, AT || p2stateno = map(ai_p2throw)))
+	&& random < 50 {
+		changeState{value: 710}
+	}
+}
+
+# Gouhaken
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A
+&& !map(parry_nowalk)
+&& inguarddist
+&& facing != p2, facing
+&& p2moveType = A
+&& (p2stateType = S || p2stateType = C)
+&& p2stateno = [200, 599]
+&& p2, hitdefattr != SCA, AP, AT
+&& (p2BodyDist x = [40, 60] && p2dist y = [-20, 20])
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType != C) {
+	if ((ctrl || stateno = 52)
+	&& random < 200)
+	|| ((map(specialcancel) && moveType = I)
+	&& (stateno = 200 || stateno = 201 || stateno = 400 || stateno = 430)
+	&& random < map(ai_confirm) * 200)
+	|| (ctrl
+	&& p2stateno = [200, 499]
+	&& (p2, moveContact = 0 && p2, moveReversed = 0)
+	&& prevStateNo = [140, 155]
+	&& random < map(ai_confirm) * 200) {
+		changeState{value: 1500}
+	}
+}
+
+# Jump
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A {
+	if (ctrl || stateno = [100, 101])
+	&& p2moveType = A
+	&& (p2, hitdefattr = SC, AT || (p2stateno = map(ai_p2throw) && p2stateType != A)) {
+		changeState{value: 40}
+	}
+}
+
+# Roll Fireballs
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A {
+	if (ctrl || stateno = [100, 101])
+	&& inguarddist
+	&& numEnemy = 1
+	&& (map(ai_p2cannotmove) || p2BodyDist x >= 150)
+	&& map(ai_p2fireball_eta) = [1, 16]
+	&& !(p2, hitdefattr = SCA, AT)
+	&& random < 100 {
+		changeState{value: ifelse(random < 500 && map(ai_punishwindow) >= 20, 720, 710)}
+	}
+}
+
+# Guard
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& inguarddist {
+	if ctrl
+	&& stateno != [120, 155]
+	&& (stateType != A || p2stateType = A || p2moveType != A)
+	&& (p2, hitdefattr != SCA, AT && p2stateno != map(ai_p2throw))
+	&& (life > 10 || p2stateno = [200, 799])
+	&& (p2, time < 90 || random < 30)
+	&& (isAsserted(nostandguard) = 0 || stateType != S)
+	&& (isAsserted(nocrouchguard) = 0 || stateType != C)
+	&& (isAsserted(noairguard) = 0 || stateType != A) {
+		changeState{value: 120}
+	}
+}
+
+# Guard Cancel
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A
+&& (power >= 1000 && !map(customcombo)) {
+	if random < 25
+	&& (stateno = 150 || stateno = 152)
+	&& ((p2BodyDist x = [-5, 50]) && life < 250) {
+		changeState{value: 750}
+	}
+}
+
+# Air Throw
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType = A {
+	if (ifelse(p2stateType = A && p2moveType = H, (p2, hitfall), 1))
+	&& ctrl
+	&& (p2stateType = A && p2moveType != H)
+	&& ((p2BodyDist x = [-5, 20]) && (p2dist y = [-80, -40]))
+	&& random < map(ai_confirm) * 333 {
+		changeState{value: 850}
+	}
+}
+
+# Throw
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& (roundState = 2 && stateType = S)
+&& map(ai_canthrow)
+&& (p2stateType = S || p2stateType = C)
+&& (abs(map(truebodydistx)) <= 27 && p2dist y = 0)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 3) {
+	if (ctrl
+	&& random < map(ai_confirm) * 100)
+	|| (ctrl
+	&& p2stateno = [120, 140]
+	&& random < map(ai_confirm) * 200) {
+		changeState{value: 800}
+	}
+}
+
+# CLK
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && !inguarddist)
+&& (p2stateType = S || p2stateType = C)
+&& ((p2BodyDist x = [-5, 36]) && (p2dist y = [-50, 60]))
+&& (((p2stateno != [120, 155]) || p2stateno = 130 || p2stateno = 150 || p2stateno = 151) && p2moveType != A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 3) {
+	if ((ctrl || stateno = [100, 101])
+	&& (random < map(ai_confirm) * 200 || (p2stateno = 130 || p2stateno = 150 || p2stateno = 151) || p2stateno = 5110))
+	|| (((stateno = 200 || stateno = 201 || stateno = 400 || stateno = 430) && time >= 5)
+	&& random < map(ai_confirm) * 50) {
+		changeState{value: 430}
+	}
+}
+
+# SLP
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && !inguarddist)
+&& (p2stateType = S || p2stateType = A)
+&& (p2BodyDist x <= 40 && p2dist y = [-50, 60] && !(p2, hitfall))
+&& ((p2stateno != [120, 155]) && p2moveType != A && !(p2, hitfall))
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 3) {
+	if ((ctrl || stateno = [100, 101])
+	&& random < map(ai_confirm) * 100)
+	|| (((stateno = 200 || stateno = 201 || stateno = 400 || stateno = 430) && time >= 5)
+	&& random < map(ai_confirm) * 50) {
+		changeState{value: ifelse(abs(map(truebodydistx)) <= (const(size.xscale) * 20), 201, 200)}
+	}
+}
+
+# Sekiseigeri
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& p2moveType != A
+&& (p2stateType = C || p2, hitfall)
+&& p2stateno != [5101, 5120]
+&& (p2BodyDist x >= ifelse(p2stateType = L && stagefrontedgedist < 100, 0, 40))
+&& p2BodyDist x <= ifelse(p2stateType = L, 100, 80)
+&& p2dist y = [-30, 30]
+&& (map(ai_neutral) || map(ai_attackwindow) >= 25) {
+	if (ctrl || stateno = [100, 101])
+	&& random < map(ai_confirm) * 100 {
+		changeState{value: 255}
+	}
+}
+
+# SHP
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& (p2stateType = S || p2stateType = C)
+&& (p2BodyDist x <= 70 && p2dist y = [-50, 60] && !(p2, hitfall))
+&& ((p2stateno != [120, 155]) && p2moveType != A && !(p2, hitfall))
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 8) {
+	if ((ctrl || stateno = [100, 101])
+	&& p2BodyDist x < 25
+	&& random < map(ai_confirm) * 100)
+	|| ((stateno = [200, 201] || stateno = [210, 215] || stateno = 230 || stateno = [240, 241] || stateno = 400 || stateno = 410 || stateno = 430 || stateno = 440)
+	&& (p2BodyDist x <= 50 && (moveHit = [1, 4]))
+	&& random < map(ai_confirm) * 250) {
+		changeState{value: ifelse(abs(map(truebodydistx)) <= (const(size.xscale) * 15), 221, 220)}
+	}
+}
+
+# SHK
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& p2stateType = A
+&& ((p2BodyDist x = [-5, 70]) && p2dist y = [-50, 60] && !(p2, hitfall))
+&& ((p2stateno != [120, 155]) && p2moveType != A && !(p2, hitfall))
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 9) {
+	if (ctrl || stateno = [100, 101])
+	&& p2BodyDist x = [45, 65]
+	&& random < map(ai_confirm) * 50 {
+		changeState{value: ifelse(abs(map(truebodydistx)) <= (const(size.xscale) * 15), 251, 250)}
+	}
+}
+
+# SMP2
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& p2stateType = C
+&& p2moveType = I
+&& (p2BodyDist x = [25, 45] && p2dist y = [-50, 0] && !(p2, hitfall))
+&& ((p2stateno != [120, 155]) || p2stateType = C)
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A) {
+	if ((ctrl || stateno = [100, 101])
+	&& prevStateNo = [400, 440]
+	&& random < map(ai_confirm) * 200)
+	|| ((stateno = 430 && moveguarded)
+	&& random < map(ai_confirm) * 250) {
+		changeState{value: 215}
+	}
+}
+
+# SMK2
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& (p2stateType = C && p2moveType != A)
+&& (p2BodyDist x = [40, 80] && p2dist y = [-50, 0] && !(p2, hitfall))
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 16) {
+	if (ctrl || stateno = [100, 101])
+	&& random < map(ai_confirm) * 100 {
+		changeState{value: 245}
+	}
+}
+
+# SMP
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& p2stateType = S
+&& ((p2BodyDist x = [-5, 60]) && p2dist y = [-50, 60] && !(p2, hitfall))
+&& ((p2stateno != [120, 155]) && p2moveType != A && !(p2, hitfall))
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 5) {
+	if (stateno = [200, 201] || stateno = 230 || stateno = 400 || stateno = 430)
+	&& (p2BodyDist x <= 16 && (moveHit = [1, 4]))
+	&& random < map(ai_confirm) * 250 {
+		changeState{value: ifelse(abs(map(truebodydistx)) <= (const(size.xscale) * 25), 211, 210)}
+	}
+}
+
+# SMK
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& (p2stateType = S || p2stateType = A)
+&& ((p2BodyDist x = [-5, 60]) && p2dist y = [-50, 60] && !(p2, hitfall))
+&& ((p2stateno != [120, 155]) && p2moveType != A && !(p2, hitfall))
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 6) {
+	if (stateno = [200, 201] || stateno = [210, 215] || stateno = 230 || stateno = 400 || stateno = 410 || stateno = 430)
+	&& (p2BodyDist x <= 16 && (moveHit = [1, 4]))
+	&& random < map(ai_confirm) * 250 {
+		changeState{value: ifelse(abs(map(truebodydistx)) <= (const(size.xscale) * 25), 241, 240)}
+	}
+}
+
+# SLK
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && !inguarddist)
+&& (p2stateType = S || p2stateType = C)
+&& ((p2BodyDist x = [-5, 60]) && p2dist y = [-50, 60] && !(p2, hitfall))
+&& ((p2stateno != [120, 155]) && p2moveType != A && !(p2, hitfall))
+&& (map(ai_neutral) || map(ai_attackwindow) >= 5) {
+	if (stateno = [200, 201] || stateno = 400)
+	&& (p2BodyDist x <= 4 && (moveHit = [1, 4]))
+	&& random < map(ai_confirm) * 250 {
+		changeState{value: 230}
+	}
+}
+
+# CHP
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && !inguarddist)
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& (p2BodyDist x <= 40 && p2dist y = [-50, 60] && !(p2, hitfall))
+&& ((p2stateno != [120, 155]) && p2moveType != A && !(p2, hitfall))
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 6) {
+	if (stateno = [200, 201] || stateno = [210, 215] || stateno = 230 || stateno = [240, 241] || stateno = 400 || stateno = 410 || stateno = 430 || stateno = 440)
+	&& (p2BodyDist x <= 4 && (moveHit = [1, 4]))
+	&& random < map(ai_confirm) * 250 {
+		changeState{value: 420}
+	}
+}
+
+# CHK
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && !inguarddist)
+&& (p2stateType = S || p2stateType = C)
+&& ((p2BodyDist x = [40, 60]) && (p2dist y = [-50, 60]))
+&& (((p2stateno != [120, 155]) || p2stateno = 130 || p2stateno = 150 || p2stateno = 151) && p2moveType != A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 7) {
+	if (stateno = [200, 201] || stateno = [210, 215] || stateno = 230 || stateno = [240, 241] || stateno = 400 || stateno = 410 || stateno = 430 || stateno = 440)
+	&& (p2BodyDist x <= 30 && (moveContact = [1, 8]))
+	&& random < map(ai_confirm) * 250 {
+		changeState{value: 450}
+	}
+}
+
+# CMP
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && !inguarddist)
+&& (p2stateType = S || p2stateType = C)
+&& ((p2BodyDist x = [-5, 45]) && (p2dist y = [-50, 60]))
+&& ((p2stateno != [120, 155]) && p2moveType != A && !(p2, hitfall))
+&& (map(ai_neutral) || map(ai_attackwindow) >= 5) {
+	if (stateno = [200, 201] || stateno = 230 || stateno = 400 || stateno = 430)
+	&& (p2BodyDist x <= 20 && (moveHit = [1, 4]))
+	&& random < map(ai_confirm) * 250 {
+		changeState{value: 410}
+	}
+}
+
+# CMK
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && !inguarddist)
+&& (p2stateType = S || p2stateType = C)
+&& ((p2BodyDist x = [-5, 70]) && (p2dist y = [-50, 60]))
+&& (((p2stateno != [120, 155]) || p2stateno = 130 || p2stateno = 150 || p2stateno = 151) && p2moveType != A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 6) {
+	if (stateno = [200, 201] || stateno = [210, 215] || stateno = 230 || stateno = 400 || stateno = 410 || stateno = 430)
+	&& (p2BodyDist x <= 20 && (moveHit = [1, 4]))
+	&& random < map(ai_confirm) * 250 {
+		changeState{value: 440}
+	}
+}
+
+# CLP
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && !inguarddist && !(p2, hitfall))
+&& (p2stateType = S || p2stateType = C)
+&& ((p2BodyDist x = [-5, 45]) && (p2dist y = [-50, 60]))
+&& ((p2stateno != [120, 155]) && p2moveType != A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 4) {
+	if ((ctrl || stateno = [100, 101])
+	&& random < map(ai_confirm) * 100)
+	|| (((stateno = 200 || stateno = 201 || stateno = 400 || stateno = 430) && time >= 5)
+	&& random < map(ai_confirm) * 50) {
+		changeState{value: 400}
+	}
+}
+
+# AHP
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType = A && !inguarddist)
+&& (vel y > 0 || p2stateType = A)
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& ((p2BodyDist x = [-5, 45]) && p2dist y = [-50, 60] && !(p2, hitfall))
+&& map(ai_timetoland) >= 5 {
+	if (ctrl
+	&& p2stateType != A
+	&& random < map(ai_confirm) * 50)
+	|| (map(jumptype) != [1, 2]
+	&& (stateno = 600 || stateno = 610 || (stateno = [630, 631]) || (stateno = [640, 641]))
+	&& moveHit = [1, 4]
+	&& random < map(ai_confirm) * 250) {
+		changeState{value: 620}
+	}
+}
+
+# AHK
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType = A && !inguarddist)
+&& (vel y > 0 || p2stateType = A)
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& ((p2BodyDist x = [-5, 50]) && p2dist y = [-50, 60] && !(p2, hitfall))
+&& map(ai_timetoland) >= 8 {
+	if (ctrl
+	&& p2stateType != A
+	&& random < map(ai_confirm) * 50)
+	|| (map(jumptype) != [1, 2]
+	&& (stateno = 600 || stateno = 610 || (stateno = [630, 631]) || (stateno = [640, 641]))
+	&& moveHit = [1, 4]
+	&& random < map(ai_confirm) * 250) {
+		changeState{value: ifelse((vel x || (map(jumptype) = [1, 2])) && (stateno != [600, 699]), 650, 651)}
+	}
+}
+
+# TKK
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& map(jumptype) != [1, 2]
+&& (vel x > 0 && abs(vel y) < 2)
+&& (p2stateType = S || p2stateType = C || (p2stateType = L && p2stateno != 5120))
+&& (p2BodyDist x = [10, 80] && p2dist y > 0) {
+	if ctrl
+	&& random < map(ai_confirm) * 100 {
+		changeState{value: 645}
+	}
+}
+
+# AMP
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& (vel y > 0 || p2stateType = A)
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& ((p2BodyDist x = [-5, 45]) && p2dist y = [-50, 60] && !(p2, hitfall))
+&& map(ai_timetoland) >= 4 {
+	if ctrl
+	&& random < map(ai_confirm) * 50 {
+		changeState{value: 610}
+	}
+}
+
+# AMK
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& (p2stateType = A || (vel x && vel y > 0))
+&& ((p2BodyDist x = [-50, 30]) && p2dist y = [-50, 60] && !(p2, hitfall))
+&& map(ai_timetoland) >= 5 {
+	if ctrl
+	&& random < map(ai_confirm) * 50 {
+		changeState{value: ifelse((vel x || (map(jumptype) = [1, 2]) || stateno = [600, 699]), 640, 641)}
+	}
+}
+
+# ALP
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& (vel y > 0 || p2stateType = A)
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& ((p2BodyDist x = [-5, 30]) && p2dist y = [-50, 60] && !(p2, hitfall))
+&& map(ai_timetoland) >= 3 {
+	if ctrl
+	&& random < map(ai_confirm) * 50 {
+		changeState{value: 600}
+	}
+}
+
+# ALK
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& (p2stateType = A || (vel x && vel y > 0))
+&& ((p2BodyDist x = [-5, 30]) && p2dist y = [-50, 60] && !(p2, hitfall))
+&& map(ai_timetoland) >= 4 {
+	if ctrl
+	&& random < map(ai_confirm) * 50 {
+		changeState{value: ifelse((vel x || (map(jumptype) = [1, 2]) || stateno = [600, 699]), 630, 631)}
+	}
+}
+
+# Air Tatsumaki Zankuu Kyaku
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& map(jumptype) != [1, 2]
+&& (p2stateType = S || p2stateType = A)
+&& (vel y > 0 || p2stateType = A)
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& map(ai_p2cannotmove)
+&& p2stateno != [120, 155]
+&& ((p2BodyDist x = [-5, 80]) && (p2dist y = [-40, 60]))
+&& map(ai_timetoland) >= 7 {
+	if (ctrl
+	&& random < map(ai_confirm) * ifelse(p2dist x < 0, 200, 25))
+	|| ((stateno = [600, 699] && map(specialcancel))
+	&& p2BodyDist x = [-5, 25]
+	&& random < map(ai_confirm) * 250) {
+		changeState{value: 1250}
+	}
+}
+
+# Tatsumaki Zankuu Kyaku
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& (p2stateType = S || (p2stateType = C && p2BodyDist x < 20))
+&& map(ai_p2cannotmove)
+&& p2stateno != [120, 155]
+&& ((p2BodyDist x = [-5, 90]) && (p2dist y = [-90, 0]))
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 9) {
+	if (stateno = [200, 499]
+	&& (map(specialcancel) && p2BodyDist x < 30)
+	&& random < map(ai_confirm) * 250)
+	|| ((stateno = 450 && map(specialcancel))
+	&& p2BodyDist x = [-5, 60]
+	&& random < map(ai_confirm) * 250) {
+		changeState{value: 1200}
+	}
+}
+
+# Hyakki Shuu
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A
+&& !(p2, ctrl)
+&& p2stateno != [5110, 5120]
+&& ((p2BodyDist x = [30, 260]) && p2dist y >= -120)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 32) {
+	if (ctrl
+	&& (map(projflag) || (p2stateno = [5050, 5109]))
+	&& random < map(ai_confirm) * 50)
+	|| (stateno = [200, 499]
+	&& map(specialcancel)
+	&& (p2stateType = A && p2, hitfall = 0)
+	&& random < map(ai_confirm) * 100) {
+		changeState{value: 1300}
+	}
+}
+
+# Zanku Hadouken
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& map(jumptype) != [1, 2]
+&& !map(projflag)
+&& frontedgedist > 10
+&& ((p2dist x > p2dist y) || p2dist x < 0)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 4)
+&& map(ai_timetoland) >= 4 {
+	if (ctrl
+	&& vel y > -3
+	&& random < map(ai_confirm) * 200)
+	|| ((stateno = [600, 699] && map(specialcancel))
+	&& random < map(ai_confirm) * 100) {
+		changeState{value: 1050}
+	}
+}
+
+# Gou Hadouken
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& !map(projflag)
+&& !inguarddist
+&& (map(juggle_count) < 1 || stateno = [1000, 4999])
+&& (p2stateType = S || p2stateType = C || (p2stateType = A && p2BodyDist x > 200))
+&& ((p2BodyDist x >= 0) && (p2dist y >= -25) && p2moveType != A)
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 6) {
+	if ((ctrl && p2BodyDist x >= 100)
+	&& random < map(ai_confirm) * ifelse((prevStateNo = [1000, 1099]), 250, 100))
+	|| (stateno = [200, 499]
+	&& (map(specialcancel) && p2moveType = H)
+	&& p2BodyDist x = [40, 80]
+	&& random < map(ai_confirm) * 100) {
+		changeState{value: 1000}
+	}
+}
+
+# Shakunetsu Hadouken
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& !map(projflag)
+&& !inguarddist
+&& (p2stateType = S || p2stateType = C || (p2stateType = L && p2stateno != 5120))
+&& ((p2BodyDist x >= 0) && (p2dist y >= -25) && p2moveType != A)
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 10) {
+	if ((ctrl && p2BodyDist x >= 160)
+	&& random < map(ai_confirm) * ifelse((prevStateNo = [1000, 1099]), 200, 100))
+	|| (((stateno = [220, 221] || stateno = [250, 251] || stateno = 450) && map(specialcancel))
+	&& p2BodyDist x = [-5, 25]
+	&& random < map(ai_confirm) * 50) {
+		changeState{value: 1020}
+	}
+}
+
+# Shun Goku Satsu
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A
+&& (power >= 3000 && map(customcombo) <= 60)
+&& p2moveType != H
+&& (p2stateType = S || p2stateType = C)
+&& map(ai_canthrow)
+&& map(ai_p2cannotmove)
+&& p2stateno != [150, 155]
+&& ((p2BodyDist x = [-160, 160]) && p2dist y = 0)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 8) {
+	if (ctrl || stateno = [200, 499])
+	&& ((p2BodyDist x = [-5, 60]) && (p2stateType != A))
+	&& random < map(ai_confirm) * 200 {
+		changeState{value: 4000}
+	}
+}
+
+# Misogi
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& (power >= 3000 && map(customcombo) <= 60)
+&& (map(juggle_count) < 1 || stateno = [1000, 4999])
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& map(ai_p2cannotmove)
+&& (p2stateno != [120, 155] || p2stateType = A)
+&& ((p2stateno != [5030, 5119]) && abs(p2, vel x) < 1 && (p2, vel y < 4))
+&& (moveType = A || !(p2, hitfall))
+&& (map(ai_neutral) || map(ai_attackwindow) >= 13) {
+	if (ctrl
+	&& (p2stateType = S || p2stateType = C)
+	&& p2, animTime <= -30
+	&& random < map(ai_confirm) * 100)
+	|| (ctrl
+	&& p2stateType = A
+	&& ((p2, pos y <= -60) && p2moveType = A)
+	&& random < map(ai_confirm) * 500)
+	|| ((stateno = 1100 && (moveHit = [1, 16]))
+	&& random < map(ai_confirm) * 100) {
+		changeState{value: 4100}
+	}
+}
+
+# KKZ
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && prevStateNo != 4200)
+&& (!numHelper(4205) && !numHelper(4206))
+&& (power >= 2000 && map(customcombo) <= 60)
+&& (map(juggle_count) < 2 || stateno = [1000, 4999])
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& map(ai_p2cannotmove)
+&& (p2stateno != [120, 155] || p2stateType = A || p2life <= 80)
+&& (p2BodyDist x = [-30, 30] && p2dist y = [-60, 0])
+&& stagefrontedgedist < 110
+&& (map(ai_neutral) || map(ai_attackwindow) >= 20) {
+	if ((ctrl && inguarddist)
+	&& p2stateno = [3000, 4999]
+	&& random < map(ai_confirm) * 200)
+	|| (stateno = 1100
+	&& map(supercancel)
+	&& moveHit
+	&& random < map(ai_confirm) * 50)
+	|| (stateno = 3100
+	&& p2stateType = A
+	&& map(hypercancel)
+	&& moveHit
+	&& random < map(ai_confirm) * 50) {
+		changeState{value: 4200}
+	}
+}
+
+# Tenshou Kaireki Jin
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && prevStateNo != 4300)
+&& (power >= 2000 && map(customcombo) <= 60)
+&& !numHelper(4305)
+&& (map(juggle_count) < 6 || stateno = [1000, 4999])
+&& map(ai_p2cannotmove)
+&& (p2stateno != [120, 155] || p2stateType = A)
+&& (p2BodyDist x = [-60, 60] && p2dist y >= -60)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 5) {
+	if (stateno = [1000, 2999]
+	&& map(supercancel)
+	&& moveHit
+	&& p2, hitfall
+	&& p2BodyDist x = [-5, 40]
+	&& random < map(ai_confirm) * 50)
+	|| (stateno = 1400
+	&& animElemTime(6) >= 0
+	&& random < map(ai_confirm) * 250)
+	|| (stateno = 3100
+	&& ((moveHit = [1, 16]) && animElemTime(17) >= 0)
+	&& random < map(ai_confirm) * 200)
+	|| ((stateno = 3000 && map(hypercancel))
+	&& cond(numHelper(3005), helper(3005), moveType != A, 1)
+	&& random < map(ai_confirm) * 100) {
+		changeState{value: 4300}
+	}
+}
+
+# Tenma Gou Zankuu Agyo
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& map(jumptype) != [1, 2]
+&& (power >= 2000 && map(customcombo) <= 60)
+&& !map(projflag)
+&& frontedgedist > 10
+&& (map(juggle_count) < 2 || stateno = [1000, 4999])
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& map(ai_p2cannotmove)
+&& (p2stateno != [120, 155] || p2stateType = A)
+&& ((p2BodyDist x = [-5, 50]) && p2dist y >= 0)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 6) {
+	if ((stateno = 1100 || stateno = 1250 || stateno = [1301, 1303])
+	&& ((moveHit = [1, 16]) && p2BodyDist x = [-5, 35])
+	&& random < map(ai_confirm) * 250)
+	|| ((stateno = 3100 && (moveHit = [1, 16]))
+	&& random < map(ai_confirm) * 200)
+	|| (stateno = [3200, 3299]
+	&& (map(hypercancel) && hitcount >= 8)
+	&& random < map(ai_confirm) * 200)
+	|| ((stateno = 3050 && map(hypercancel))
+	&& cond(numHelper(3055), helper(3055), moveType != A, 1)
+	&& random < map(ai_confirm) * 100) {
+		changeState{value: 3070}
+	}
+}
+
+# Messatsu Gou Shoryuu
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& (roundState = 2 && stateType != A && prevStateNo != 3100)
+&& (power >= 1000 && map(customcombo) <= 60)
+&& (map(juggle_count) < 2 || stateno = [1000, 4999])
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& map(ai_p2cannotmove)
+&& (p2stateno != [120, 155] || p2stateType = A || p2life <= 50)
+&& (p2BodyDist x = [-5, 80] && p2dist y >= -30)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 4)
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A) {
+	if (ctrl
+	&& p2moveType = A
+	&& p2stateType != A
+	&& random < map(ai_confirm) * 250)
+	|| ((stateno = [220, 221] || stateno = [250, 251] || stateno = 420 || stateno = 450)
+	&& ((moveHit = [1, 16]) && p2BodyDist x = [-5, 30])
+	&& random < map(ai_confirm) * 100)
+	|| (stateno = 1310
+	&& map(supercancel)
+	&& (moveHit && p2BodyDist x < 30)
+	&& random < map(ai_confirm) * 250)
+	|| ((stateno = 1000 || stateno = 1020)
+	&& (map(supercancel) && p2BodyDist x < 30)
+	&& random < map(ai_confirm) * 250)
+	|| (stateno = 3000
+	&& (map(hypercancel) && p2BodyDist x < 30)
+	&& cond(numHelper(3005), helper(3005), moveType != A, 1)
+	&& random < map(ai_confirm) * 250) {
+		changeState{value: 3100}
+	}
+}
+
+# Tenma Shinzui Wari
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& map(jumptype) != [1, 2]
+&& (power >= 1000 && map(customcombo) <= 60)
+&& (map(juggle_count) < 2 || stateno = [1000, 4999])
+&& map(ai_p2cannotmove)
+&& (p2stateno != [120, 155] || p2stateType = A)
+&& ((p2BodyDist x = [-30, 50]) && p2dist y >= 10 && abs(p2, vel y) < 4)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 3) {
+	if (stateno = 245
+	&& (map(supercancel) && moveHit)
+	&& random < map(ai_confirm) * 200)
+	|| ((stateno = 620 || stateno = [650, 651])
+	&& ((moveHit = [1, 16]) && (p2, hitfall))
+	&& random < map(ai_confirm) * 100)
+	|| ((stateno = 1100 || stateno = 1302)
+	&& map(supercancel)
+	&& moveHit
+	&& random < map(ai_confirm) * 250)
+	|| (stateno = 1050
+	&& map(supercancel)
+	&& random < map(ai_confirm) * 250)
+	|| (stateno = 3100
+	&& (map(hypercancel) && moveHit)
+	&& random < map(ai_confirm) * 200)
+	|| (stateno = 3050
+	&& map(hypercancel)
+	&& cond(numHelper(3055), helper(3055), moveType != A, 1)
+	&& random < map(ai_confirm) * 200)
+	|| (stateno = 3070
+	&& (map(hypercancel) && animElemTime(29) > 0)
+	&& random < map(ai_confirm) * 200) {
+		changeState{value: 3300}
+	}
+}
+
+# Tenma Gou Zankuu
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& map(jumptype) != [1, 2]
+&& (power >= 1000 && map(customcombo) <= 60)
+&& !map(projflag)
+&& frontedgedist > 10
+&& (map(juggle_count) < 8 || stateno = [1000, 4999])
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& map(ai_p2cannotmove)
+&& (p2stateno != [120, 155] || p2stateType = A)
+&& (p2BodyDist x = [-5, 120] && p2dist y >= -10 && p2, vel y = [-4, 4])
+&& (map(ai_neutral) || map(ai_attackwindow) >= 7) {
+	if ((stateno = 620 || stateno = [650, 651])
+	&& ((moveHit = [1, 16]) && p2BodyDist x = [-5, 30])
+	&& random < map(ai_confirm) * 100)
+	|| ((stateno = 1100 || stateno = 1250 || stateno = [1301, 1303])
+	&& moveHit = [1, 16]
+	&& random < map(ai_confirm) * 250)
+	|| (stateno = 3070
+	&& (map(hypercancel) && animElemTime(29) > 0)
+	&& random < map(ai_confirm) * 200)
+	|| (stateno = 3100
+	&& map(hypercancel)
+	&& random < map(ai_confirm) * 200)
+	|| (stateno = [3200, 3299]
+	&& (map(hypercancel) && hitcount >= 9)
+	&& random < map(ai_confirm) * 200)
+	|| (stateno = 4300
+	&& (map(hypercancel) && animElemTime(7) > 0)
+	&& random < map(ai_confirm) * 200) {
+		changeState{value: 3050}
+	}
+}
+
+# Messatsu Gou Senpu
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType = A
+&& (power >= 1000 && map(customcombo) <= 60)
+&& abs(vel y) < 4
+&& map(jumptype) != [1, 2]
+&& (map(juggle_count) < 10 || stateno = [1000, 4999])
+&& p2stateType = A
+&& map(ai_p2cannotmove)
+&& (p2stateno != [120, 155] || p2stateType = A)
+&& (p2BodyDist x = [-5, 40] && p2dist y = [-30, 0])
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 5) {
+	if (stateno = 1100
+	&& (map(supercancel) && moveHit)
+	&& p2BodyDist x < 30
+	&& random < map(ai_confirm) * 100)
+	|| (stateno = 3100
+	&& map(hypercancel)
+	&& moveHit
+	&& p2BodyDist x < 30
+	&& random < map(ai_confirm) * 100) {
+		changeState{value: 3250}
+	}
+}
+
+# Messatsu Gou Rasen
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& (power >= 1000 && map(customcombo) <= 60)
+&& (map(juggle_count) < 10 || stateno = [1000, 4999])
+&& p2stateType = A
+&& map(ai_p2cannotmove)
+&& p2stateno != [120, 155]
+&& (p2BodyDist x = [-20, 20] && p2dist y = [-30, 0])
+&& (map(ai_neutral) || map(ai_attackwindow) >= 4) {
+	if (ctrl
+	&& p2BodyDist x < 10
+	&& p2moveType = A
+	&& random < map(ai_confirm) * 200)
+	|| (stateno = 1310
+	&& (map(supercancel) && moveHit)
+	&& random < map(ai_confirm) * 100)
+	|| (stateno = 3100
+	&& (map(hypercancel) && moveHit)
+	&& animElemTime(26) >= 0
+	&& random < map(ai_confirm) * 100) {
+		changeState{value: 3200}
+	}
+}
+
+# Messatsu Gohado Agyo
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& (power >= 2000 && map(customcombo) <= 60)
+&& !map(projflag)
+&& (map(juggle_count) < 2 || stateno = [1000, 4999])
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& map(ai_p2cannotmove)
+&& (p2stateno != [120, 155] || p2stateType = A)
+&& (p2BodyDist x = [-120, 120] && p2dist y >= -40 && p2, vel y < 8)
+&& (p2, const(size.head.pos.y) <= -60 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 4) {
+	if ((stateno = 1310 || stateno = 1505)
+	&& (map(supercancel) && moveHit)
+	&& p2BodyDist x < 60
+	&& random < map(ai_confirm) * 250)
+	|| (stateno = 3100
+	&& map(supercancel)
+	&& (moveHit && animElemTime(26) >= 0)
+	&& random < map(ai_confirm) * 200)
+	|| ((stateno = 3000 && map(hypercancel))
+	&& cond(numHelper(3005), helper(3005), moveType != A, 1)
+	&& random < map(ai_confirm) * 250) {
+		changeState{value: 3020}
+	}
+}
+
+# Messatsu Gou Hadou
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& !map(ai_p2unhittable)
+&& roundState = 2
+&& stateType != A
+&& (power >= 1000 && map(customcombo) <= 60)
+&& !map(projflag)
+&& (map(juggle_count) < 8 || stateno = [1000, 4999])
+&& (p2stateType = S || p2stateType = C || p2stateType = A)
+&& map(ai_p2cannotmove)
+&& (p2stateno != [120, 155] || p2stateType = A || p2life <= 40)
+&& (p2BodyDist x = [-120, 120] && p2dist y >= -20)
+&& (p2, const(size.head.pos.y) <= -30 || p2stateType = A)
+&& (map(ai_neutral) || map(ai_attackwindow) >= 6) {
+	if (stateno = 1310
+	&& ((moveHit = [1, 16]) && p2BodyDist x = [-5, 60])
+	&& random < map(ai_confirm) * 200)
+	|| ((stateno = 1000 || stateno = 1020)
+	&& map(supercancel)
+	&& random < map(ai_confirm) * 200) {
+		changeState{value: 3000}
+	}
+}
+
+# No wasting
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A
+&& !map(projflag)
+&& (p2stateType = S || p2stateType = C) {
+	if stateno = [200, 499]
+	&& moveHit = 4
+	&& random < map(ai_confirm) * 1000 {
+		changeState{value: 1000}
+	}
+}
+
+# Forward Dash
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& (roundState = 2 && stateType = S)
+&& (p2moveType != A && !inguarddist && p2BodyDist x >= 160) {
+	if ctrl
+	&& (p2stateno = p2, const(statedizzy) || p2stateno = p2, const(stateguardbreakhit) || p2stateno = p2, const(stateguardbreakrecover))
+	&& random < map(ai_confirm) * 100 {
+		changeState{value: 102}
+	}
+}
+
+# Power Charge
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& roundState = 2
+&& stateType != A
+&& (power < const(data.power) && power < powerMax)
+&& !map(customcombo) {
+	if ctrl
+	&& !inguarddist
+	&& (p2moveType != A && p2BodyDist x >= 200)
+	&& random < ifelse(power < 1000, 150, ifelse(power < 2000, 100, 50)) {
+		changeState{value: 740}
+	}
+}
+
+# Taunt
+if AIlevel
+&& map(ai_randompass)
+&& (numEnemy && !isAsserted(noinput))
+&& stateType != A
+&& life >= 0.5 * lifeMax
+&& p2, lifeMax != 0 # Division by 0 check just in case
+&& (1.0 * p2life / p2, lifeMax) < (0.5 * life / lifeMax)
+&& prevStateNo != [170, 199] {
+	if ctrl
+	&& (p2BodyDist x >= 140 && !(p2, ctrl))
+	&& (p2moveType = H && p2, hitfall)
+	&& random < 50 {
+		changeState{value: 195}
+	}
+}
+
+
+###################################################################################################
+#											STATE -2											 #
+###################################################################################################
+
+[StateDef -2]
+
+# AI
+ignoreHitPause if AIlevel {
+
+	# AI Fall Recovery and Throw Escape
+	if !isAsserted(noinput) && (inCustomState || hitFall) {
+		if random < (250 * AIlevelF / 8.0) {
+			if random < 500 {
+				assertInput{flag: x; flag2: y; flag3: z}
+			} else {
+				assertInput{flag: a; flag2: b; flag3: c}
+			}
+			if random < 333 {
+				assertInput{flag: L}
+			} else if random < 500 {
+				assertInput{flag: R}
+			}
+			if random < 333 {
+				assertInput{flag: U}
+			} else if random < 500 {
+				assertInput{flag: D}
+			}
+		}
+	}
+
+	# AI Learning
+	if moveType = H && prevmoveType != H && time <= 1 {
+		# Throws
+		if prevStateNo != 40 {
+			if getHitVar(attr) = SCA, AT {
+				mapSet{map: "ai_p2throw"; value: ifelse(p2, time > 1, p2stateNo, p2, prevStateNo)}
+			}
+		# Overheads
+		} else if stateNo = 5010 && prevStateNo = [120, 155] && p2stateType != A {
+			mapSet{map: "ai_p2overhead"; value: p2stateNo}
+		# Standing Lows
+		} else if (stateNo = 5000 || stateNo = 5070) && prevStateNo = [120, 155] && p2stateType != C {
+			mapSet{map: "ai_p2standinglow"; value: p2stateNo}
+		}
+	}
+
+	# AI Learning Safety Check
+	if map(ai_p2throw) = [0, 199] {
+		mapSet{map: "ai_p2throw"; value: -1}
+	}
+	if map(ai_p2overhead) = [0, 199] {
+		mapSet{map: "ai_p2overhead"; value: -1}
+	}
+	if map(ai_p2standinglow) = [0, 199] {
+		mapSet{map: "ai_p2standinglow"; value: -1}
+	}
+
+	# AI Unlearn
+	if roundState = 1 && p2, roundsexisted = 0 {
+		mapSet{map: "ai_p2throw"; value: -1}
+		mapSet{map: "ai_p2overhead"; value: -1}
+		mapSet{map: "ai_p2standinglow"; value: -1}
+	}
+
+}
+
+
+###################################################################################################
+#											STATE -3											 #
+###################################################################################################
+
+[StateDef -3]
+
+# AI
+ignoreHitPause if AIlevel && alive && !standby && roundState = 2 {
+
+	# AI acting frequency by difficulty
+	# This map minimizes the calls for RNG
+	mapSet{map: "ai_randompass"; value: random < (1000 * (AIlevelF / 8.0))}
+
+	# AI confirmation
+	# This reduces the number of missed opportunities without making the AI too hard
+	if map(ai_attackwindow) > 0 {
+		if map(ai_confirm) < 3 {
+			mapAdd{map: "ai_confirm"; value: 0.1}
+		}
+	} else {
+		mapSet{map: "ai_confirm"; value: 1}
+	}
+
+	# AI P2 Unhittable Flag
+	mapSet{map: "ai_p2unhittable"; value: 0}
+	if p2, alive = 0 || p2, standby = 1
+	|| p2stateType = A && p2moveType = H && p2, hitFall = 0
+	|| p2, dizzy && p2stateNo != p2, const(statedizzy) {
+		mapSet{map: "ai_p2unhittable"; value: 1}
+	}
+
+	# P2 wakeup throw invulnerability (from common1)
+	# A HitBy trigger can replace this in the future
+	if p2stateNo = 5120 {
+		mapSet{map: "ai_p2wakeupnhb"; value: 12}
+	} else if map(ai_p2wakeupnhb) > 0 {
+		mapAdd{map: "ai_p2wakeupnhb"; value: -1}
+	}
+
+	# P2 can be thrown
+	mapSet{map: "ai_canthrow"; value: !(map(unthrowable) || map(ai_p2wakeupnhb) > 0)}
+
+	# P2 cannot act
+	mapSet{map: "ai_p2cannotmove"; value: !(p2, ctrl || p2stateNo = [40, 52] || p2stateNo = 100 || p2stateNo = [5201, 5210])}
+
+	# P2 Fireball Detection
+	if ctrl && (p2, numHelper || p2, numProj) {
+		call P2ClosestFireball();
+	} else {
+		map(ai_p2fireball_ID) := -1;
+		map(ai_p2fireball_super) := 0;
+		map(ai_p2fireball_distx) := 9999;
+		map(ai_p2fireball_eta) := 9999;
+	}
+
+	# AI Spacing
+	if AIlevelF >= 6 && !inGuardDist && stateType = S && ctrl {
+		# Set spacing
+		# Unique to each char
+		if p2moveType = H || p2, dizzy || life < (p2life + 250) {
+			map(ai_spacing) := 10;
+		} else {
+			map(ai_spacing) := 110;
+		}
+		if command != "holddown" && command != "holdup" {
+			# Walk forward
+			if inputTime(B) != [1, 10] && p2BodyDist x > map(ai_spacing) + 20 {
+				if vel x > 0 || p2, vel x < 0 || p2BodyDist x > map(ai_spacing) {
+					if facing = 1 {assertInput{flag: R}} else {assertInput{flag: L}}
+					assertCommand{name: "holdfwd"; buffer.time: 2}
+					assertCommand{name: "holdback"; buffer.time: 0}
+				}
+			}
+			# Walk back
+			if backedgedist > 0 {
+				if inputTime(F) != [1, 10] && p2BodyDist x < map(ai_spacing) - 20 {
+					if vel x < 0 || p2, vel x > 0 || p2BodyDist x < map(ai_spacing) {
+						if facing = 1 {assertInput{flag: L}} else {assertInput{flag: R}}
+						assertCommand{name: "holdback"; buffer.time: 2}
+						assertCommand{name: "holdfwd"; buffer.time: 0}
+					}
+				}
+			}
+		}
+	}
+
+	# AI crouch never
+	# Unique to Shin Gouki
+	assertSpecial{flag: nocrouch}
+
+	# AI jump less
+	if inguarddist
+	|| p2, ctrl && !map(projflag)
+	|| p2stateNo = 5120 && p2, animTime > -30
+	|| p2moveType = H && p2stateType != L
+	|| p2stateNo = [5101, 5119] && p2, vel y >= 0 {
+		assertSpecial{flag: nojump}
+	}
+
+	# AI Neutral Flag
+	mapSet{map: "ai_neutral"; value: 0}
+	if moveType != H && p2moveType != H
+	&& stateNo != 5120 && p2stateNo != 5120
+	&& moveContact = 0 && p2, moveContact = 0
+	&& moveReversed = 0 && p2, moveReversed = 0 {
+		mapSet{map: "ai_neutral"; value: 1}
+	}
+	if p2stateType = L
+	&& (p2moveType = H || p2stateNo = 5120) {
+		mapSet{map: "ai_neutral"; value: 1} # okizeme really
+	}
+
+}
+
+
+###################################################################################################
+#											STATE -4											 #
+###################################################################################################
+
+[StateDef -4]
+
+# AI
+ignoreHitPause if AIlevel && !isHelper {
+
+	# AI block high
+	# Also stand up to parry fireballs
+	# In State -4 so it can react during pauses like a human
+	if p2stateNo != map(ai_p2standinglow)
+	&& (p2stateType = A || p2, hitdefattr = A, AA, AP || p2stateNo = map(ai_p2overhead) || (p2, hitdefattr != SCA, AA, AT, AP && map(ai_p2fireball_eta) = [1, 20])) {
+		if random < (100 * (AIlevelF / 8.0)) {
+			mapSet{map: "ai_blockhigh"; value: 1}
+		}
+	} else {
+		if random < (200 * (AIlevelF / 8.0)) {
+			mapSet{map: "ai_blockhigh"; value: 0}
+		}
+	}
+
+}

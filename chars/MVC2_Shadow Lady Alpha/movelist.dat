@@ -1,0 +1,28 @@
+<#f0f000>THROW</>
+
+Throw Escape / Throw				_CLOSE^2P
+
+<#f0f000>SPECIAL MOVES</>
+
+Infinity Leg					^K_MASH
+Miracle Drill / Kikou				_D_DF_F^P
+Rainbow Missile					_D_DF_F^K
+Plasma Barrier					_F_D_DF^P
+Sky Counter Crash				_F_D_B^K
+Dropkick					_DF_D_DB_B^K
+
+<#f0f000>HYPER ATTACKS</>
+
+Big Bang Laser					_AIROK_D_DF_F^2P
+Galaxy Missile					_D_DF_F^2K
+Final Mission					_B_F_B_F^2K
+
+<#f0f000>SYSTEM</>
+
+Forward Run / Back Dash			_F_F / _B_B
+Super Jump					_TAP_D,_U
+Push Block					(during guard)^2P
+Infinity Counter				(during guard)^HP_+^HK
+Recovery Roll					_B_DB_D^HK
+Taunt						^S
+

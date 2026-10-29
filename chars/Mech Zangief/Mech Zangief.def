@@ -1,0 +1,63 @@
+;====================================================================
+;=											  =
+;=				MECH ZANGIEF'S DEFINITION			  =
+;=											  =
+;=										        =
+;====================================================================
+
+; Player information
+[Info]
+name = "[KoYotae]'s Zangief"			;Name of character
+displayname = "Mech Zangief" 			;Name of character to display
+versiondate = 2005.05.23   			;Version date of character
+mugenversion = 2003.06.14			;Version of M.U.G.E.N character works on
+author = "KoYotae & One Winged Angel"     ;Character author name
+pal.defaults = 1,2,3            		;Default palettes in order of preference
+
+;====================================================================
+;=											  =
+;=				MECH ZANGIEF'S FILES				  =
+;=											  =
+;=										        =
+;====================================================================
+
+; Files for the player
+[Files]
+cmd     = MechZangief.cmd   		   ;Command set
+cns     = MechZangief.cns  		   ;Constants
+st	  = MechZangief.cns	           ;States
+stcommon = MechZangief_common.cns          ;Common states
+sprite  = MechZangief.sff   	           ;Sprite
+anim    = MechZangief.air   		   ;Animation
+sound   = MechZangief.snd
+movelist = movelist.dat   	   	   ;Sound
+pal1    = MechZangief.act   		   ;Palettes
+pal2    = MechZangief1.act  		   ;Palettes
+pal3    = MechZangief2.act   		   ;Palettes
+pal4    = MechZangief3.act  		   ;Palettes
+pal5    = MechZangief4.act   		   ;Palettes
+pal6    = MechZangief5.act  		   ;Palettes
+pal7    = MechZangief6.act   		   ;Palettes
+pal8    = MechZangief7.act  		   ;Palettes
+pal9    = MechZangief8.act   		   ;Palettes
+pal10   = MechZangief9.act  		   ;Palettes
+pal11   = MechZangief10.act   	           ;Palettes
+pal12   = MechZangief11.act  		   ;Palettes
+
+
+;====================================================================
+;=											  =
+;=			    MECH ZANGIEF'S STORYBOARD				  =
+;=											  =
+;=										        =
+;====================================================================
+
+;Storyboard
+[Arcade]
+intro.storyboard = mzanend.def ; Ending by Thor
+ending.storyboard = mechzend.def ; Ending by Ruldolf27 
+
+
+
+
+

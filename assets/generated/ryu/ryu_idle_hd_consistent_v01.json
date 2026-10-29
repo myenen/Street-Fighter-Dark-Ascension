@@ -1,0 +1,11 @@
+{
+  "method": "Thin-plate-spline deformation from one HD master using measured SNES landmarks.",
+  "master": "ryu_idle_001_hd_aligned_v02.png",
+  "frame_3_equals_frame_1": true,
+  "timing": {
+    "ticks_per_frame": 6,
+    "cycle_ticks": 24,
+    "seconds_at_60_fps": 0.4
+  },
+  "status": "QA candidate; not imported into SFF."
+}

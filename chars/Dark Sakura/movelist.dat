@@ -1,0 +1,46 @@
+<#f0f000>THROWS / UNIQUE ATTACKS</>
+
+Flower Kick                                    [_F/_B]_+^MK
+Sailor Shoot                                   _CLOSE[_B/_F]_+^2P
+Sakura Jime                                    _CLOSE[_B/_F]_+^2K
+Sailor Fly                                     _AIR_CLOSE[_B/_F]_+^2K
+
+<#f0f000>SPECIAL MOVES</>
+
+Hadouken                                       _D_DF_F^P
+Tengyou Hadouken                               _D_DB_B^P
+Shouou Ken                                     _F_D_DF^P
+Shunpuu Kyaku                                  _D_DB_B^K
+Kuuchuu Shunpuu Kyaku                          _AIR_D_DB_B^K
+Sakura Senkuu                                  _F_D_DF^3P / _F_D_DF^3K
+
+<#f0f000>EX SPECIAL MOVES <#bebebe>(500)</></>
+
+EX Hadouken                                    _D_DF_F^2P
+EX Tengyou Hadouken                            _D_DB_B^2P
+EX Shouou Ken                                  _F_D_DF^2P
+EX Shunpuu Kyaku                               _D_DB_B^2K
+EX Kuuchuu Shunpuu Kyaku                       _AIR_D_DB_B^2K
+
+<#f0f000>LEVEL 1 / MAX SUPERS <#bebebe>(1000 / 2000)</></>
+
+Shinkuu Hadouken                               _D_DF_F_D_DF_F^P / _D_DF_F_D_DF_F^2P
+Shinkuu Tengyou Hadouken                       _D_DB_B_D_DB_B^P / _D_DB_B_D_DB_B^2P
+Midare Zakura                                  _D_DF_F_D_DF_F^K / _D_DF_F_D_DF_F^2K
+Haru Ichiban                                   _D_DB_B_D_DB_B^K / _D_DB_B_D_DB_B^2K
+
+<#f0f000>LEVEL 3 SUPERS <#bebebe>(3000)</></>
+
+Shun Goku Satsu                                ^LP_^LP_F_^LK_^HP
+Nekketsu Hadou Ken                             _D_DF_F_D_DF_F^3P
+
+<#f0f000>SYSTEM</>
+
+Zero Counter <#bebebe>(while guarding, 1000)</>  _B_DB_D^P / _B_DB_D^K
+Special Zero Counter <#bebebe>(while guarding)</> _F_+^MP_+^MK
+Custom Combo <#bebebe>(1000)</>                  ^HP_+^HK
+Power Charge                                    (hold) ^MP_+^MK
+Forward Roll / Back Roll                        [_F/_B]_+^LP_+^LK
+Sidestep / Fall Recovery                        ^LP_+^LK
+Forward Dash / Back Dash                        _F_F / _B_B
+

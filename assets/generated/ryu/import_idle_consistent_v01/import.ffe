@@ -1,0 +1,38 @@
+; Fighter Factory import list for the four HD idle sprites
+noDuplicatePal = 0
+
+[SpriteDef]
+group = 9001
+image = 0
+xaxis = 156
+yaxis = 616
+flags = 0
+palette = 9001,0
+file = 9001-0.png
+
+[SpriteDef]
+group = 9001
+image = 1
+xaxis = 149
+yaxis = 600
+flags = 0
+palette = 9001,0
+file = 9001-1.png
+
+[SpriteDef]
+group = 9001
+image = 2
+xaxis = 156
+yaxis = 616
+flags = 0
+palette = 9001,0
+file = 9001-2.png
+
+[SpriteDef]
+group = 9001
+image = 3
+xaxis = 157
+yaxis = 618
+flags = 0
+palette = 9001,0
+file = 9001-3.png

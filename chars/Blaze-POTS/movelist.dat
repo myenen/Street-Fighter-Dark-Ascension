@@ -1,0 +1,62 @@
+<#f0f000>THROWS</>
+
+Punch Throw                                  _CLOSE[_B/_F]_+^2P
+Kick Throw                                   _CLOSE[_B/_F]_+^2K
+
+<#f0f000>SPECIAL MOVES</>
+
+Gou Hadouken                                 _D_DF_F^P
+Zankuu Hadouken                              _AIR_D_DF_F^P
+Gou Shoryuken                                _F_D_DF^P
+Tatsumaki Zankuukyaku                        _D_DB_B^K
+Air Tatsumaki Zankuukyaku                    _AIR_D_DB_B^K
+Gou Ryuu Zanshou                             _B_D_DB^K
+Tenma Kuujin Kyaku                           _AIR_D_DF_F^K
+Hyakki Shuu                                  _F_D_DF^K
+Ashura Senkuu                                _F_+^3P
+
+<#f0f000>EX SPECIAL MOVES <#bebebe>(500)</></>
+
+EX Gou Hadouken                              _D_DF_F^2P
+EX Zankuu Hadouken                           _AIR_D_DF_F^2P
+EX Gou Shoryuken                             _F_D_DF^2P
+EX Tatsumaki Zankuukyaku                     _D_DB_B^2K
+EX Air Tatsumaki Zankuukyaku                 _AIR_D_DB_B^2K
+EX Gou Ryuu Zanshou                          _B_D_DB^2K
+EX Tenma Kuujin Kyaku                        _AIR_D_DF_F^2K
+EX Hyakki Shuu                               _F_D_DF^2K
+
+<#f0f000>LEVEL 1 SUPERS <#bebebe>(1000)</></>
+
+Shinkuu Hadou Ken                            _D_DF_F_D_DF_F^P
+Shinkuu Tatsumaki Senpuu Kyakku              _D_DB_B_D_DB_B^K
+Shoryureppa                                   _D_DB_B_D_DB_B^P
+Shinryuken                                    _D_DF_F_D_DF_F^K
+Tenma Gou Zankuu                              _AIR_D_DF_F_D_DF_F^P
+Messatsu Gou Ryuu Zanshou                    _D_DF_F_DF_D_DB_B^K
+
+<#f0f000>LEVEL 2 SUPERS <#bebebe>(2000)</></>
+
+MAX Shinkuu Hadou Ken                        _D_DF_F_D_DF_F^2P
+MAX Shinkuu Tatsumaki Senpuu Kyakku          _D_DB_B_D_DB_B^2K
+MAX Shoryureppa                               _D_DB_B_D_DB_B^2P
+MAX Shinryuken                                _D_DF_F_D_DF_F^2K
+MAX Tenma Gou Zankuu                          _AIR_D_DF_F_D_DF_F^2P
+MAX Messatsu Gou Ryuu Zanshou                _D_DF_F_DF_D_DB_B^2K
+
+<#f0f000>LEVEL 3 SUPERS <#bebebe>(3000)</></>
+
+Messatsu Gou Hadou Ken                       _D_DF_F_D_B^2P
+Kishuu Musan Funjin                          _F_B_DB_D_DF_F^2P
+Shun Goku Satsu                              ^LP_^LP_F_^LK_^HP
+
+<#f0f000>SYSTEM</>
+
+Zero Counter <#bebebe>(while guarding, 1000)</>  _B_DB_D^P / _B_DB_D^K
+Custom Combo / MAX Mode <#bebebe>(1000)</>       ^HP_+^HK
+Power Charge                                    (hold) ^MP_+^MK
+Forward Roll / Back Roll                        [_F/_B]_+^LP_+^LK
+Dodge                                            ^LP_+^LK
+Forward Run / Back Dash                          _F_F / _B_B
+Recovery                                         ^2P
+Taunt                                            ^S

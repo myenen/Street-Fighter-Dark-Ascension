@@ -1,0 +1,535 @@
+;===============================================================================
+;Helper Coding
+;===============================================================================
+;Akuma Landing
+[Statedef 1930]
+type = A
+movetype = I
+physics = S
+ctrl = 0
+anim = 193
+velset = 0,2.5
+sprpriority = 2
+
+[State 1930,1]
+type = PlaySnd
+trigger1 = Time = 40
+value = s0,20
+
+[State 1930,4]
+type = DestroySelf
+trigger1 = Pos Y = 0
+
+;Akuma Landing
+[Statedef 1910]
+type = S
+movetype = I
+physics = S
+ctrl = 0
+anim = 1910
+velset = 0,0
+sprpriority = 2
+
+[State 1930,1]
+type = PlaySnd
+trigger1 = Time = 15
+value = s0,23
+
+[State 191,1]
+type = PlaySnd
+trigger1 = Time = 135
+value = s0,26
+
+[State 1930,4]
+type = DestroySelf
+trigger1 = AnimTime = 0
+trigger2 = roundstate=2
+
+;-------------------------------------------------------------------------------
+;Flying Fist
+[Statedef 221]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+ctrl = 0
+anim = 221
+poweradd = 55
+sprpriority = 5
+
+[State 221,1]
+type = Velset
+trigger1 = 1
+x = ifelse(p2dist X >= 0, 3.5*ceil((p2bodydist X+15)/30),3.5*ceil((p2bodydist X-15)/30))+ 3
+y = 1.5*ceil((p2dist Y-60)/30)
+
+[State 221,2]
+type = Angleset
+trigger1 = p2dist x != 0
+value = atan(-(p2dist y-60) / p2dist x) * 180 / pi
+
+[State 221,3]
+type = Turn
+Trigger1 = p2dist x <= 3
+
+[State 221,4]
+type = AngleDraw
+trigger1 = 1
+
+[State 221,5]
+type = Explod
+trigger1 = Movehit
+anim = 223
+sprpriority = 5
+postype = p2
+pos = -5,-70
+removetime = -2
+scale = 1,1
+
+[State 221,6]
+type = Explod
+trigger1 = MoveGuarded
+trigger2 = Time = 18
+anim = 223
+sprpriority = 5
+postype = p2
+pos = -5,-70
+removetime = -2
+scale = 1,1
+
+[State 221,7]
+type = HitDef
+trigger1 = !Time
+attr = S,NA
+damage = 35,1
+animtype = High
+guardflag = MA
+hitflag = MAF
+priority = 4, Hit
+pausetime = 5,5
+sparkxy = -20,0
+sparkno = s7772
+guard.sparkno = s6767
+hitsound = s8000,2
+guardsound = s8500,0
+ground.type = High
+ground.slidetime = 18
+ground.hittime  = 18
+ground.velocity = -10
+air.type = High
+air.hittime = 18
+air.velocity = -6,-7
+envshake.time = 5
+envshake.ampl = 5
+palfx.time = 32
+palfx.mul = 512,256,128
+palfx.sinadd = 80,25,0,8
+palfx.color = 32
+
+[State 221,8]
+type = DestroySelf
+trigger1 = MoveContact
+trigger2 = Time = 20
+
+;-------------------------------------------------------------------------------
+;Crouching Flying Fist
+[Statedef 421]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+ctrl = 0
+anim = 421
+poweradd = 55
+sprpriority = 5
+
+[State 421,1]
+type = Velset
+trigger1 =!Time
+x = 0
+y = -8
+
+[State 421,2]
+type = Explod
+trigger1 = Movehit
+anim = 223
+sprpriority = 5
+postype = p2
+pos = -5,-70
+bindtime = -1
+scale = 1,1
+
+[State 421,3]
+type = HitDef
+trigger1 =!Time
+attr = C,NA
+damage = 45,1
+animtype = up
+guardflag = MA
+hitflag = MAF
+priority = 4, Hit
+pausetime = 5,5
+sparkxy = -30,-20
+sparkno = s7772
+guard.sparkno = s6767
+hitsound = s8000,2
+guardsound = s8500,0
+ground.type = High
+ground.slidetime = 30
+ground.hittime  = 40
+ground.velocity = 0,-13
+air.velocity = 0,-13
+airguard.velocity = -6,0
+yaccel = 0.39+(enemynear,const(movement.yaccel)/2)
+envshake.time = 5
+envshake.ampl = 5
+palfx.time= 32
+palfx.mul= 512,256,128
+palfx.sinadd= 80,25,0,8
+palfx.color=32
+
+[State 421,4]
+type = DestroySelf
+trigger1 = MoveContact
+trigger2 = Time >= 20
+
+;-------------------------------------------------------------------------------
+;Hyper Bg
+[Statedef 750]
+physics = S
+anim = 750
+velset = 0,0
+sprpriority = -1
+
+[State 750,1]
+type = PosSet
+trigger1 =!Time
+x = -160
+y = -240
+
+[State 750,2]
+type = PlaySnd
+trigger1 = Time = 45
+value = s9999,6
+
+[State 750,3]
+type = DestroySelf
+trigger1 = Time = 50
+
+;-------------------------------------------------------------------------------
+;Hyper Portrait
+[Statedef 751]
+physics = S
+anim = 751
+velset = 0,0
+sprpriority = 0
+
+[State 751,1]
+type = PosSet
+trigger1 =!Time
+x = -160
+y = -240
+
+[State 751,2]
+type = DestroySelf
+trigger1 = Time = 39
+
+;-------------------------------------------------------------------------------
+;Hyper Portrait 2
+[Statedef 752]
+physics = S
+anim = 752
+velset = 0,0
+sprpriority = 0
+
+[State 752,1]
+type = PosSet
+trigger1 =!Time
+x = 160
+y = -240
+
+[State 752,2]
+type = DestroySelf
+trigger1 = Time = 39
+
+;-------------------------------------------------------------------------------
+;Hyper Bg
+[Statedef 753]
+physics = S
+anim = 750
+velset = 0,0
+sprpriority = -1
+
+[State 753,PosSet]
+type = PosSet
+trigger1 =!Time
+x = -160
+y = -290
+
+[State 753,PlaySnd]
+type = PlaySnd
+trigger1 = Time = 45
+value = s9999,6
+
+[State 753,DestroySelf]
+type = DestroySelf
+trigger1 = Time = 50
+
+;-------------------------------------------------------------------------------
+;Hyper Portrait
+[Statedef 754]
+physics = S
+anim = 751
+velset = 0,0
+sprpriority = 0
+
+[State 754,PosSet]
+type = PosSet
+trigger1 =!Time
+x = -160
+y = -290
+
+[State 754,DestroySelf]
+type = DestroySelf
+trigger1 = Time = 39
+
+;-------------------------------------------------------------------------------
+;Hyper Portrait 2
+[Statedef 755]
+physics = S
+anim = 752
+velset = 0,0
+sprpriority = 0
+
+[State 755,PosSet]
+type = PosSet
+trigger1 =!Time
+x = 160
+y = -290
+
+[State 755,DestroySelf]
+type = DestroySelf
+trigger1 = Time = 39
+
+;-------------------------------------------------------------------------------
+;Beam Helper
+[StateDef 3010]
+type = S
+movetype = A
+physics = S
+juggle = 0
+anim = 3015
+ctrl = 0
+sprpriority = 5
+
+[State 3010,1]
+type = PlaySnd
+trigger1 =!Time
+value = s0,29
+
+[State 3010,2]
+type = PlaySnd
+trigger1 =!Time
+value = s0,24
+
+[State 3010,3]
+type = HitDef
+damage = 12,5
+animtype = Hard
+trigger1 = Time%3 = 0
+attr = A, NT
+hitflag = MAF
+guardflag =MA
+sparkno = s9990
+pausetime = 0,0
+sparkxy = -20,-25
+sprpriority = 5
+guard.sparkno = s6767
+hitsound  = s8000,2
+guardsound = s8500,0
+ground.type = High
+ground.slidetime = 18
+ground.hittime  = 25
+ground.velocity = -15,-0.5
+air.velocity = -15,-0.7
+air.hittime = 25
+air.fall = 1
+air.recover = 0
+fall = 1
+fall.recover = 0
+palfx.time = 32
+palfx.mul = 128, 128, 128
+palfx.sinadd = 96, 96, 96, 4
+envshake.time = 10
+envshake.ampl = 5
+
+[State 3010,5]
+type = Explod
+trigger1 = Movehit
+anim = 1020
+ID = 1020
+sprpriority = 5
+postype = p2
+vel = -.2,-.45
+pos =(enemynear,const(size.mid.pos.x))-5,(enemynear,const(size.mid.pos.y))+10
+random = 40,40
+removetime = -2
+scale = .4,.4
+
+[State 3010,6]
+type = Helper
+triggerall = !numhelper(9999)
+trigger1 = (enemynear, life = 0) && win
+ID = 9999
+stateno = 9999
+postype = left
+pos = 320,240
+pausemovetime = 999999
+supermovetime = 999999
+ignorehitpause = 1
+
+[State 3010,7]
+type = DestroySelf
+trigger1 = Time = 60
+trigger2 = parent,movetype=H
+
+;-------------------------------------------------------------------------------
+;Orange Fireball
+[StateDef 3110]
+type = A
+movetype= A
+physics = N
+velset = 10,3
+ctrl = 0
+anim = 3115
+sprpriority = 5
+
+[State 3110,1]
+type = Explod
+trigger1 = Movehit
+trigger1 = Pos Y >= 0 && Vel Y > 0
+anim = 3125
+ID = 3125
+pos = 0,0
+postype = p1
+sprpriority = 5
+
+[State 3110,2]
+type = Hitdef
+trigger1 = AnimElem = 1
+offset = 0,0
+attr = S, HA
+damage   = 9
+animtype = Hard
+guardflag = MA
+hitflag = MAFP
+pausetime = 10,10
+sparkno = s9990
+guard.sparkno = s6767
+sparkxy = 0,0
+hitsound  = s8000,2
+guardsound = s8500,0
+ground.type = high
+ground.slidetime = 25
+ground.hittime  = 25
+ground.velocity = -6
+air.animtype = Back
+air.velocity = -4,-6
+down.velocity = -4,-6
+down.hittime = 30
+fall.envshake.time = 10
+fall.envshake.ampl = 5
+
+[State 3110,3]
+type = DestroySelf
+trigger1 = Movehit= 1
+
+;-------------------------------------------------------------------------------
+;Blue Fireball
+[StateDef 3115]
+type = A
+movetype= A
+physics = N
+velset = 10,3
+ctrl = 0
+anim = 3120
+sprpriority = 5
+
+[State 3115,1]
+type = Explod
+trigger1 = Movehit
+trigger1 = Pos Y >= 0 && Vel Y > 0
+anim = 3130
+ID = 3130
+pos = 0,0
+postype = p1
+sprpriority = 5
+
+[State 3115,2]
+type = Hitdef
+trigger1 = AnimElem = 1
+offset = 0,0
+attr = S, HA
+damage   = 9
+animtype = Hard
+guardflag = MA
+hitflag = MAFP
+pausetime = 10,10
+sparkno = s9990
+guard.sparkno = s6767
+sparkxy = 0,0
+hitsound  = s8000,2
+guardsound = s8500,0
+ground.type = high
+ground.slidetime = 25
+ground.hittime  = 25
+ground.velocity = -6
+air.animtype = Back
+air.velocity = -4,-6
+down.velocity = -4,-6
+down.hittime = 30
+fall.envshake.time = 10
+fall.envshake.ampl = 5
+
+[State 3115,3]
+type = DestroySelf
+trigger1 = Movehit= 1
+
+;-------------------------------------------------------------------------------
+;MvC Ko
+[Statedef 9999]
+ctrl = 0
+anim = 9741
+
+[State 9999,PlaySnd]
+type = PlaySnd
+trigger1 =!Time
+value = s9999,4
+
+[State 9999,PlaySnd]
+type = PlaySnd
+trigger1 = Time = 30
+value = s230,11
+
+[State 9999, AssertSpecial]
+type = AssertSpecial
+trigger1 = Time < 55
+flag = NoBarDisplay
+flag2 = NoMusic
+
+[State 9999, Explod]
+type = Explod
+trigger1 =!Time
+anim = 9999
+postype = Left
+pos = 0,0
+bindtime = -1
+sprpriority = 5
+scale = 1,1
+pausemovetime = 999999
+supermovetime = 999999
+removetime = 40
+
+[State 9999,DestroySelf]
+type = DestroySelf
+trigger1 =!AnimTime

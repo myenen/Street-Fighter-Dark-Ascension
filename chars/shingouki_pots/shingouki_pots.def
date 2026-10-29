@@ -1,0 +1,63 @@
+; _____________________________________
+;| Shin Gouki by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<DEFINITION>====================
+[Info]
+name          = "Shin Gouki"
+displayname   = "Shin Gouki"
+lifebarname   = "Shin Gouki"
+versiondate   = 2026.06.21
+mugenversion  = 1.1; deprecated
+ikemenversion = 1.0
+author        = "Phantom.of.the.Server"
+pal.defaults  = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+localcoord    = 320, 240
+portraitscale = 1.0
+
+[Files]
+cmd      = shincmd.cns
+cns      = shincns.cns
+st0      = states/inputs.zss
+st1      = states/shinnegative.zss
+st2      = states/shincommands.zss
+st3      = states/shinsystem.zss
+st4      = states/shinnormal.zss
+st5      = states/shinspecial.zss
+st6      = states/shinsuper.zss
+st7      = states/shinhelper.zss
+st8      = CONFIG.txt
+stcommon = common1.cns
+sprite   = shinsprite.sff
+anim     = shinanim.air
+sound    = shinsound.snd
+movelist = shinmovelist.dat
+pal1     = palettes/cvs2purple.act
+pal2     = palettes/sf3white.act
+pal3     = palettes/sfa2grey.act
+pal4     = palettes/sfa2green.act
+pal5     = palettes/sfa2teal.act
+pal6     = palettes/sfa2orange.act
+pal7     = palettes/svcghost.act
+pal8     = palettes/reddish.act
+pal9     = palettes/kaidou.act
+pal10    = palettes/ssf2t.act
+pal11    = palettes/sfa2shin.act
+pal12    = palettes/oni.act
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

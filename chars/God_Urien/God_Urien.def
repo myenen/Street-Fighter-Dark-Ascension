@@ -1,0 +1,32 @@
+; Definition file for God Urien
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "God Urien"        ;Name of character
+displayname = "God Urien" ;Name of character to display
+versiondate = 11,14,2007    ;Version date of character (MM-DD-YYYY)
+mugenversion = 04,14,2002   ;Version of M.U.G.E.N character works on
+author = "Shin_Lvl2_Akuma"         ;Character author name
+pal.defaults = 6,3,4,2,5,1      ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = gur.cmd   ;Command set
+cns     = gur.cns   ;Constants
+st      = gur.cns   ;States
+st2     = gurthro.cns ; throwing states
+stcommon = common1.cns ;Common states
+sprite  = gur.sff   ;Sprite
+anim    = gur.air   ;Animation
+sound   = gur.snd   ;Sound
+movelist = movelist.dat
+pal1    = gur.act  ;Palettes (can have up to 12)
+pal2    = blue.act
+pal3    = dark.act
+pal4    = grey.act
+pal5    = red.act
+pal6    = gur.act
+
+
+;huge thx one-winged angel for the sprites. thx

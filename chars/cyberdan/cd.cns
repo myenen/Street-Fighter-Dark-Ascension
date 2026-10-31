@@ -1,6 +1,6 @@
 [Data]
-life = 1000
-attack = 100
+life = 1050
+attack = 108
 defence = 100
 fall.defence_up = 50
 liedown.time = 60

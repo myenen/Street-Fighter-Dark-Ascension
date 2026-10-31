@@ -1,0 +1,784 @@
+;---------------------------------------------determine thingy------------
+[Statedef 3475]
+type = S
+
+[State 3475]
+type = VarRandom
+trigger1 = Time = 0
+v = 12
+range = 1,2
+
+[State 3475]
+type = ChangeState
+trigger1 = Var(12) = 1 
+value = 3404
+
+[State 3475]
+type = ChangeState
+trigger1 = Var(12) = 2
+value = 3402
+
+[State 3475, 5]
+type = ChangeState
+trigger1 = time = 50
+value = 3402
+ctrl = 1
+
+;god thingy---------------------------------------------------------------------
+[Statedef 3400]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+velset = 0,0
+anim = 3400
+ctrl = 0
+sprpriority = 2
+
+[State 3400, Super B]
+type = AfterImage
+trigger1 = AnimElem = 2
+time = 2
+
+[State 3400, Super C]
+type = AfterImageTime
+trigger1 = AnimElemTime(2) >= 0
+time = 2
+
+[State 3400, 1]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 5405, 1
+
+[State 3400, 1]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 5405, 2
+
+[State 3400, Explod] 
+type = Explod
+trigger1 = animelem = 1
+anim = 6016
+postype = p1
+pos = 45, -125
+facing = 1
+scale = 1, 1
+ontop = 1
+
+[State 3400, Afterimage]
+type = AfterImage
+trigger1 = Time = 1
+length = 90
+PalBright   =  30, 0,  0
+PalContrast =  30, 0, 0
+PalAdd      = 30,0,0
+PalMul      = 30,0,0
+TimeGap  = 1
+FrameGap = 2
+Trans = Add
+time = 2
+
+[State 3400, initial grab]
+type = HitDef
+trigger1 = Animelem = 4
+trigger2 = Animelem = 5
+trigger3 = Animelem = 6
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 0, 0
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 30,30
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 26
+ground.velocity = 0, -2
+guard.velocity = 0
+sparkno = s4350578
+air.velocity = 0, -2
+airguard.velocity = 0
+p2facing = 1                 
+fall = 1
+fall.recover = 0               
+mindist = 45,-55            
+maxdist = 50,-60         
+yaccel = .2
+
+[State 3400, 5]
+type = ChangeState
+triggerall = MoveHit
+trigger1 = animelem = 5
+trigger2 = animelem = 6
+value = 3401
+ctrl = 1
+
+[State 3400, 5]
+type = ChangeState
+trigger1 = animelem = 6
+value = 0
+ctrl = 1
+
+;-1:1 --------------------------------------------------------
+[Statedef 3401]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+velset = 0,0
+anim = 3401
+ctrl = 0
+sprpriority = 2
+
+[State 3401, Afterimage]
+type = AfterImage
+trigger1 = Time = 1
+length = 60
+TimeGap  = 1
+FrameGap = 2
+Trans = Add
+time = 2
+
+[State 3401, Afterimage]
+type = AfterImageTime
+trigger1 = 1
+time = 2
+
+[state 3401]
+type = poweradd
+trigger1 = time = 1
+value = -1000
+
+[State 3401, 1]
+type = PlaySnd
+trigger1 = AnimElem = 14
+value = 90, 1
+
+[State 3401, kick1]
+type = HitDef
+trigger1 = Animelem = 6
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 50,25
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 9,9
+sparkno = s5500
+sparkxy = -10,-70
+hitsound   = s2, 0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 26
+ground.velocity = 0, -4
+guard.velocity = 0
+air.velocity = 0, -4
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 25,-85            
+maxdist = 30,-90             ;Keep p2 a maximum of 100 pixels away from p1, and no lower than 10 pixels below
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+
+[State 3401, kick2]
+type = HitDef
+trigger1 = Animelem = 7
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 50,25
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 9,9
+sparkno = s5500
+sparkxy = -10,-70
+hitsound   = s2, 0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 200
+ground.hittime  = 26
+ground.velocity = -.5, -2
+guard.velocity = 0
+air.velocity = -.5, -2
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 25,-95            
+maxdist = 30,-105            ;Keep p2 a maximum of 100 pixels away from p1, and no lower than 10 pixels below
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+yaccel = .1
+
+[State 3401, 1]
+type = playsnd
+trigger1 = animelem = 8
+value = 0,9
+
+[State 3401, 5]
+type = ChangeState
+trigger1 = p2stateno = 5110
+trigger2 = time = 215
+value = 3475
+ctrl = 1
+
+;-1:2 --------------------------------------------------------
+[Statedef 3402]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+velset = 0,0
+anim = 3402
+ctrl = 0
+sprpriority = 2
+
+[State 3402, Afterimage]
+type = AfterImage
+trigger1 = Time = 1
+length = 60
+TimeGap  = 1
+FrameGap = 2
+Trans = Add
+time = 2
+
+[State 3402, Afterimage]
+type = AfterImageTime
+trigger1 = 1
+time = 2
+
+[State 3402, kick1]
+type = HitDef
+trigger1 = Animelem = 2
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 50, 50
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 9,9
+sparkno = s5500
+sparkxy = -10,-70
+hitsound   = s2, 0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 26
+ground.velocity = -5, -3
+guard.velocity = 0
+air.velocity = -5, -3
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 25,-25            
+maxdist = 30,-30            ;Keep p2 a maximum of 100 pixels away from p1, and no lower than 10 pixels below
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+
+[State 3402, needz moar movement]
+type = veladd
+trigger1 = animelem = 2
+trigger2 = animelem = 5
+x = 6
+
+[State 3402, move blah]
+type = veladd
+trigger1 = animelem = 12
+x = 15
+
+[State 3402, kick2]
+type = HitDef
+trigger1 = Animelem = 5
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 50, 50
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 9,9
+sparkno = s5500
+sparkxy = -10,-70
+hitsound   = s2, 0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 26
+ground.velocity = -1, -6
+guard.velocity = 0
+air.velocity = -1, -6
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 60,-25            
+maxdist = 65,-30  
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+
+[State 3402, elbow]
+type = HitDef
+trigger1 = Animelem = 12
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 50, 50
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 9,9
+sparkno = s5500
+sparkxy = -10,-70
+hitsound   = s2, 0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 26
+ground.velocity = -5, -6
+guard.velocity = 0
+air.velocity = -5, -6
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 25,-5            
+maxdist = 26,-6           ;Keep p2 a maximum of 100 pixels away from p1, and no lower than 10 pixels below
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+
+[State 3402, 1]
+type = playsnd
+trigger1 = animelem = 8
+value = 0,9
+
+[State 3402, 7]
+type = ChangeState
+trigger1 = animelem = 16
+value = 3403
+ctrl = 1
+
+;-2:1 --------------------------------------------------------
+[Statedef 3404]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+velset = 0,0
+anim = 3404
+ctrl = 0
+sprpriority = 2
+
+[State 3404, Afterimage]
+type = AfterImage
+trigger1 = Time = 1
+length = 60
+TimeGap  = 1
+FrameGap = 2
+Trans = Add
+time = 2
+
+[State 3404, Afterimage]
+type = AfterImageTime
+trigger1 = 1
+time = 2
+
+[state 3404]
+type = poweradd
+trigger1 = time = 1
+value = -1000
+
+[State 3404, lp]
+type = HitDef
+trigger1 = Animelem = 2
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 7, 7
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 1,1
+sparkno = 12
+sparkxy = -10,-90
+hitsound   = s1300,0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 200
+ground.velocity = -4, -4
+guard.velocity = 0
+air.velocity = -4, -4
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 50,0            
+maxdist = 51,0             ;Keep p2 a maximum of 100 pixels away from p1, and no lower than 10 pixels below
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+
+[State 3404, mp]
+type = HitDef
+trigger1 = Animelem = 4
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 7, 7
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 1,1
+sparkno = 12
+sparkxy = -10,-80
+hitsound   = s1300,0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 200
+ground.velocity = -4, -4
+guard.velocity = 0
+air.velocity = -4, -4
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 50,0            
+maxdist = 51,0      
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+
+[State 3404, up]
+type = HitDef
+trigger1 = Animelem = 8
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 7, 7
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 1,1
+sparkno = 12
+sparkxy = -10,-70
+hitsound   = s1300,0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 200
+ground.velocity = -4, -4
+guard.velocity = 0
+air.velocity = -4, -4
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 50,0            
+maxdist = 51,0              ;Keep p2 a maximum of 100 pixels away from p1, and no lower than 10 pixels below
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+
+[State 3404, kp]
+type = HitDef
+trigger1 = Animelem = 11
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 7, 7
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 1,1
+sparkno = 12
+sparkxy = -10,-60
+hitsound   = s1300,0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 200
+ground.velocity = -4, -4
+guard.velocity = 0
+air.velocity = -4, -4
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 50,0            
+maxdist = 51,0              ;Keep p2 a maximum of 100 pixels away from p1, and no lower than 10 pixels below
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+
+[State 3404, e1]
+type = HitDef
+trigger1 = Animelem = 13
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 7, 7
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 1,1
+sparkno = 12
+sparkxy = -10,-50
+hitsound   = s1300,0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 200
+ground.velocity = -4, -4
+guard.velocity = 0
+air.velocity = -4, -4
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 50,0            
+maxdist = 51,0                ;Keep p2 a maximum of 100 pixels away from p1, and no lower than 10 pixels below
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+
+[State 3404, e2]
+type = HitDef
+trigger1 = Animelem = 14
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 7, 7
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 1,1
+sparkno = 12
+sparkxy = -10,-40
+hitsound   = s1300,0
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 200
+ground.velocity = -4, -4
+guard.velocity = 0
+air.velocity = -4, -4
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 50,0            
+maxdist = 51,0              ;Keep p2 a maximum of 100 pixels away from p1, and no lower than 10 pixels below
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+
+[State 3404, 1]
+type = playsnd
+trigger1 = animelem = 2
+trigger1 = animelem = 4
+trigger1 = animelem = 8
+trigger1 = animelem = 11
+trigger1 = animelem = 13
+trigger1 = animelem = 14
+value = 1300,0
+
+[State 3404, 7]
+type = ChangeState
+trigger1 = time = 110
+value = 3403
+ctrl = 1
+
+;-shocky punch!!!!!!! --------------------------------------------------------
+[Statedef 3403]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+velset = 0,0
+anim = 3403
+ctrl = 0
+sprpriority = 2
+
+[State 3403, Afterimage]
+type = AfterImage
+trigger1 = Time = 1
+length = 60
+TimeGap  = 1
+FrameGap = 2
+Trans = Add
+time = 2
+
+[State 3403, Afterimage]
+type = AfterImageTime
+trigger1 = 1
+time = 2
+
+[State 3403, shocky punch]
+type = HitDef
+trigger1 = Animelem = 4
+attr = S, HA
+animtype  = Up               ;Make p2 use "Up" type animation on hit
+damage    = 175, 175
+getpower  = 0
+priority  = 5
+hitflag = H, L, A, M, F, D
+guardflag = 0
+pausetime = 40,40
+sparkno = s999
+sparkxy = -7,-115
+hitsound   = s0, 6
+guardsound = s3,0
+ground.type = Low
+ground.slidetime = 26
+ground.hittime  = 26
+ground.velocity = -9, -9
+guard.velocity = 0
+air.velocity = -9, -9
+airguard.velocity = 0
+p2facing = 1                 ;Force p2 to face p1 on hit
+fall = 1
+fall.recover = 0             ;Prevent p2 from recovering
+mindist = 65,-75            
+maxdist = 70,-80            ;Keep p2 a maximum of 100 pixels away from p1, and no lower than 10 pixels below
+envshake.time = 25           
+envshake.ampl = 6
+envshake.freq = 176
+palfx.time = 85
+palfx.mul = 150, 150, 200
+palfx.add = 150, 150, 200
+yaccel = .2
+
+[State 3403, move blah]
+type = veladd
+trigger1 = animelem = 4
+x = 15
+
+[state 3403, elec1]
+type = explod
+trigger1 = animelem = 6
+anim = 999
+postype = p2	
+pos = 0, -20
+bindtime = 20
+sprpriority = -1
+ontop = 1
+ignorehitpause = 1
+
+[state 3403, elec2]
+type = explod
+trigger1 = animelem = 7
+anim = 999
+postype = p2	
+pos = 15, -35
+bindtime = 20
+sprpriority = -1
+ontop = 1
+ignorehitpause = 1
+
+[state 3403, elec3]
+type = explod
+trigger1 = animelem = 8
+anim = 999
+postype = p2	
+pos = -30, -5
+bindtime = 20
+sprpriority = -1
+ontop = 1
+ignorehitpause = 1
+
+[state 3403, elec4]
+type = explod
+trigger1 = animelem = 9
+anim = 999
+postype = p2	
+pos = 22, -65
+bindtime = 20
+sprpriority = -1
+ontop = 1
+ignorehitpause = 1
+
+[state 3403, elec5]
+type = explod
+trigger1 = animelem = 10
+anim = 999
+postype = p2	
+pos = -45, -27
+bindtime = 20
+sprpriority = -1
+ontop = 1
+ignorehitpause = 1
+
+[state 3403, elec6]
+type = explod
+trigger1 = animelem = 10
+anim = 999
+postype = p2	
+pos = 32, 12
+bindtime = 20
+sprpriority = -1
+ontop = 1
+ignorehitpause = 1
+
+[State 3403, elecsnd2]
+type = PlaySnd
+trigger1 = animelem = 6
+value = 0, 6
+
+[State 3403, elecsnd3]
+type = PlaySnd
+trigger1 = animelem = 7
+value = 0, 6
+
+[State 3403, elecsnd4]
+type = PlaySnd
+trigger1 = animelem = 8
+value = 0, 6
+
+[State 3403, elecsnd5]
+type = PlaySnd
+trigger1 = animelem = 9
+value = 0, 6
+
+[State 3403, elecsnd6]
+type = PlaySnd
+trigger1 = animelem = 10
+value = 0, 6
+
+[State 3403, changestate]
+type = ChangeState
+trigger1 = animelem = 10
+value = 3478
+ctrl = 0
+
+;---------------------------------------------------------------------------
+; laugh
+[Statedef 3478]
+type = S
+physics = S
+sprpriority = 0
+anim = 3478
+
+[State 3478, lol1]
+type = PlaySnd
+trigger1 = time = 1
+value = 90, 1
+
+[state 3478]
+type = changestate
+trigger1 = time = 50
+value = 0
+ctrl = 1

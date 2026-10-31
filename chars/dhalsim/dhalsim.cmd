@@ -431,6 +431,72 @@ time = 1
 ; 下の記述↓は絶対に消さないでください。
 [Statedef -1]
 
+; IKEMEN balance AI support
+[State -1, AI Move Strength]
+type = VarSet
+triggerall = AILevel > 0
+trigger1 = Ctrl
+var(2) = ifelse(AILevel >= 6, 3, 2)
+
+[State -1, AI Transform]
+type = ChangeState
+value = 4000
+triggerall = AILevel > 0
+triggerall = var(10) = 0
+triggerall = StateType != A
+triggerall = Life < LifeMax * 0.65
+triggerall = Ctrl
+trigger1 = Random < AILevel * 3
+
+[State -1, AI Super]
+type = ChangeState
+value = 3000
+triggerall = AILevel > 0
+triggerall = var(10) = 0
+triggerall = StateType != A
+triggerall = NumHelper(1000) = 0
+triggerall = Power >= 1000
+triggerall = Ctrl
+trigger1 = P2BodyDist X >= 55
+trigger1 = Random < AILevel * 3
+
+[State -1, AI Yoga Blast]
+type = ChangeState
+value = 1200
+triggerall = AILevel > 0
+triggerall = var(10) = 0
+triggerall = StateType != A
+triggerall = NumHelper(1000) = 0
+triggerall = Ctrl
+trigger1 = P2BodyDist Y < -35
+trigger1 = P2BodyDist X < 130
+trigger1 = Random < AILevel * 5
+
+[State -1, AI Yoga Flame]
+type = ChangeState
+value = 1100
+triggerall = AILevel > 0
+triggerall = var(10) = 0
+triggerall = StateType != A
+triggerall = NumHelper(1000) = 0
+triggerall = Ctrl
+trigger1 = P2BodyDist X = [25, 100]
+trigger1 = P2BodyDist Y >= -35
+trigger1 = Random < AILevel * 4
+
+[State -1, AI Yoga Fire]
+type = ChangeState
+value = 1000
+triggerall = AILevel > 0
+triggerall = var(10) = 0
+triggerall = StateType != A
+triggerall = NumHelper(1000) = 0
+triggerall = Ctrl
+trigger1 = P2BodyDist X >= 100
+trigger1 = P2BodyDist Y >= -55
+trigger1 = Random < AILevel * 4
+
+
 ;===========================================================================
 ;ヨガインフェルノLv1
 [State -1]

@@ -66,6 +66,7 @@ Final boss havuzu:
 - Shin Gouki
 - Shin Bison
 - Evil Sagat
+- God Urien
 
 Mevcut varsayılan zorluk seviyesinde AI, Arcade boyunca kademeli olarak yükselir ve final karşılaşmasında en yüksek seviyesine ulaşır.
 
@@ -215,6 +216,7 @@ Bu proje, farklı M.U.G.E.N topluluk yapımcılarının çalışmalarını içer
 | Charlie Nash | Trololo |
 | Blanka QC | (^o^) |
 | Dhalsim | 3ha |
+| God Urien | Shin_Lvl2_Akuma |
 
 Ek yapımcı ve kaynak bilgileri için her karakterin kendi klasöründeki README, metin ve DEF dosyalarını inceleyin. Bir kredi eksik veya hatalıysa düzeltilebilmesi için bildirim açabilirsiniz.
 

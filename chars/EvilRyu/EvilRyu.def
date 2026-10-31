@@ -9,7 +9,7 @@ displayname  = "Evil Ryu"
 versiondate  = 01,19,2010; PotS Update
 mugenversion = 1.0
 author       = "Reu and Kingtigre"
-pal.defaults = 1,2,3,4,5,6,7,8,9,10,11,12
+pal.defaults = 1,2,3,4,5,6,7,8,9,10,11,12,13
 localcoord   = 320, 240
 
 [Files]
@@ -32,6 +32,7 @@ pal9     = Anjel.act
 pal10    = Anjel_Hoshi.act
 pal11    = Hoshi01.act
 pal12    = Hoshi04.act
+pal13    = Yellow.pal
 movelist = movelist.dat; Ikemen feature
 
 [Palette Keymap]
@@ -47,6 +48,7 @@ z2 = 9
 a2 = 10
 b2 = 11
 c2 = 12
+d = 13
 
 ;[Arcade]
 ;intro.storyboard = intro.def

@@ -1,0 +1,106 @@
+[Info]
+name = "Neon Ruins District"
+displayname = "Neon Ruins District"
+versiondate = 11,01,2026
+mugenversion = 1.0
+author = "Street Fighter: Dark Ascension Project"
+
+[Camera]
+startx = 0
+starty = 0
+boundleft = -128
+boundright = 128
+boundhigh = -90
+boundlow = 0
+verticalfollow = .35
+floortension = 110
+tension = 190
+overdrawhigh = 100
+overdrawlow = 80
+cuthigh = 0
+cutlow = 0
+
+[PlayerInfo]
+p1startx = -280
+p1starty = 0
+p1facing = 1
+p2startx = 280
+p2starty = 0
+p2facing = -1
+p3startx = -420
+p3starty = 0
+p3facing = 1
+p4startx = 420
+p4starty = 0
+p4facing = -1
+leftbound = -760
+rightbound = 760
+
+[Bound]
+screenleft = 55
+screenright = 55
+
+[StageInfo]
+zoffset = 650
+autoturn = 1
+resetBG = 1
+localcoord = 1280,720
+xscale = 1
+yscale = 1
+portraitscale = 4
+
+[Shadow]
+intensity = 105
+color = 4,0,18
+yscale = .26
+fade.range = 0,0
+
+[Reflection]
+intensity = 30
+
+[Music]
+bgmusic =
+bgmvolume = 50
+
+[BGdef]
+spr = neon_ruins_district.sff
+debugbg = 0
+
+[Begin Action 9000]
+0,0, 0,0,-1
+
+[BG Main]
+type = normal
+spriteno = 0,0
+layerno = 0
+start = 0,0
+delta = 1,1
+mask = 0
+
+[BG Neon Sparks]
+type = normal
+spriteno = 1,0
+layerno = 0
+start = 0,690
+delta = .52,.80
+trans = addalpha
+alpha = 120,256
+mask = 1
+tile = 1,1
+tilespacing = 640,300
+velocity = -.12,-.10
+sin.x = 22,170
+
+[BG Near Neon Sparks]
+type = normal
+spriteno = 1,0
+layerno = 1
+start = 0,750
+delta = 1.15,1
+trans = addalpha
+alpha = 55,256
+mask = 1
+tile = 1,1
+tilespacing = 640,300
+velocity = .14,-.20
+sin.x = 30,210

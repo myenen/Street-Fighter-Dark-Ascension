@@ -1,0 +1,175 @@
+[Data]
+life = 1000
+power = 4000
+attack = 100
+defence = 100
+fall.defence_up = 50
+liedown.time = 30
+airjuggle = 50
+sparkno = 8000
+guard.sparkno = 8500
+KO.echo = 1
+IntPersistIndex = 0
+FloatPersistIndex = 0
+
+; There are some things in this group that you may want to change.
+[Size]
+; The next two parameters are the X and Y scale factors of your character's
+; sprites. You can leave them at 1 each to keep your sprites at a normal
+; size.
+xscale = 1
+yscale = 1
+; Make sure you adjust the width settings below to suit your character.
+; These affect how close another character can get to yours. Adjust these
+; values and press Ctrl-C in-game. Look at the bar the feet of the
+; characters.
+ground.back = 15          ;Player width (back, ground)
+ground.front = 15         ;Player width (front, ground)
+air.back = 15             ;Player width (back, air)
+air.front = 15            ;Player width (front, air)
+; This is generally fine at 60. Don't make it too big, or other
+; characters will have trouble jumping over yours.
+height = 60               ;Height of player (for opponent to jump over)
+; You can leave the next 3 unchanged.
+attack.dist = 160
+proj.attack.dist = 90
+proj.doscale = 0
+; You can set these accordingly if your character is tall or short.
+; Otherwise, these default values should be fine.
+head.pos = 13,-90        ;Approximate position of head
+mid.pos = -5,-64         ;Approximate position of midsection
+; The next 2 parameters don't need to be changed.
+shadowoffset = 0
+draw.offset = 0,0
+
+; These are the velocities used in various common states that all
+; characters have. Adjust these to suit your character.
+[Velocity]
+walk.fwd  = 2           ;Walk forward
+walk.back = -2         ;Walk backward
+run.fwd  = 7.5        ;Run forward (x, y) (y should be 0)
+run.back = -9,-5     ;Hop backward (x, y)
+jump.neu = 0,-9.5         ;Neutral jumping velocity (x, y)
+jump.back = -3.87         ;Jump back Speed (x, y)
+jump.fwd = 3.36	           ;Jump forward Speed (x, y)
+runjump.back = -5.81,-9.7 ;Running jump speeds (opt)
+runjump.fwd = 5.04,-9.7
+
+; These are miscellaneous variables used for movement. Set
+; accordingly.
+[Movement]
+airjump.num = 0           ;Number of air jumps allowed (opt)
+airjump.height = 5      ;Minimum distance from ground before you
+                          ;can air jump (opt)
+yaccel = .5              ;Vertical acceleration
+stand.friction = .85      ;Friction coefficient when standing
+crouch.friction = .85     ;Friction coefficient when crouching
+stand.friction.threshold = 2          ;If player's speed drops below this threshold while standing, stop his movement **MUGEN 1.0**
+crouch.friction.threshold = .05       ;If player's speed drops below this threshold while crouching, stop his movement **MUGEN 1.0**
+air.gethit.groundlevel = 10           ;Y-position at which a falling player is considered to hit the ground **MUGEN 1.0**
+air.gethit.groundrecover.ground.threshold = -20 ;Y-position below which falling player can use the recovery command **MUGEN 1.0**
+air.gethit.groundrecover.groundlevel = 10   ;Y-position at which player in the ground recovery state touches the ground **MUGEN 1.0**
+air.gethit.airrecover.threshold = -1  ;Y-velocity above which player may use the air recovery command **MUGEN 1.0**
+air.gethit.airrecover.yaccel = .35    ;Vertical acceleration for player in the air recovery state **MUGEN 1.0**
+air.gethit.trip.groundlevel = 15      ;Y-position at which player in the tripped state touches the ground **MUGEN 1.0**
+down.bounce.offset = 0,0            ;Offset for player bouncing off the ground (x, y) **MUGEN 1.0**
+down.bounce.yaccel = .4               ;Vertical acceleration for player bouncing off the ground **MUGEN 1.0**
+down.bounce.groundlevel = 12          ;Y-position at which player bouncing off the ground touches the ground again **MUGEN 1.0**
+down.friction.threshold = .05         ;If the player's speed drops below this threshold while lying down, stop his movement **MUGEN 1.0**
+
+[Quotes]
+victory1 = "Are you man enough to fight with me?" ;Street Fighter 2
+victory2 = "Go home and be a family man." ;Street Fighter 2
+victory3 = "When in doubt, I Sonic Boom!" ;Super Street Fighter 2 Turbo HD Remix
+victory4 = "Easy operation." ;Super Street Fighter 2 Turbo HD Remix
+victory5 = "Those sloppy techniques will never get the job done, soldier!" ;Super Street Fighter 2 Turbo HD Remix
+victory6 = "I could see through all your moves. You're no match for me." ;Super Street Fighter 2 Turbo HD Remix
+victory7 = "You fought all-out, but for me this was just training." ;Ultra Street Fighter 2: The Final Challengers
+victory8 = "I will not stop until my friend is avenged." ;Ultra Street Fighter 2: The Final Challengers
+victory9 = "Your style is straight out of the training manual...no innovation." ;Ultra Street Fighter 2: The Final Challengers
+victory10 = "Maybe it's about time for you to learn how to fight." ;Street Fighter: The Movie
+victory11 = "I'm the repo man and your ass is mine!" ;Street Fighter: The Movie
+victory12 = "Next time, try and hit me back." ;Street Fighter: The Movie
+victory13 = "You're worthless and weak!" ;Street Fighter: The Movie
+victory14 = "Never mess with a man who has his own army." ;Street Fighter: The Movie
+victory15 = "Do you want tougher training, Private?" ;Street Fighter Alpha 3
+victory16 = "I came. I saw. I destroyed! Power. Skill. Strength. Period." ;Street Fighter Alpha 3
+victory17 = "I soar to destroy... I dive and I am deadly...!" ;Street Fighter Alpha 3
+victory18 = "Man enough to fight with me, but not man enough to defeat me!" ;Street Fighter Alpha 3
+victory19 = "Motivation is sometimes a greater asset than power!" ;Street Fighter Alpha 3
+victory20 = "No Handcuffs!? Fighting isn't what it used to be!" ;Street Fighter Alpha 3
+victory21 = "That was a Sonic Boom that hit you, not a tank!" ;Street Fighter Alpha 3
+victory22 = "You're qualified for combat, but not for victory!" ;Street Fighter Alpha 3
+victory23 = "Aww... Leaving so soon? You should have thought twice before joining the battle!" ;Capcom vs Snk 2
+victory24 = "Have you ever hungered for revenge?" ;Capcom vs Snk 2
+victory25 = "It was a shame that it had to come to this..." ;Capcom vs Snk 2
+victory26 = "The strong will survive. The weak will perish. Which one will you be?" ;Capcom vs Snk 2
+victory27 = "You know you can't resist the fight, so I suggest you learn how to win." ;Capcom vs Snk 2
+victory28 = "You lost too easily. You're even a waste of my practice time!" ;Capcom vs Snk 2
+victory29 = "You must learn to move faster than the speed of sound..." ;Capcom vs Snk 2
+victory30 = "You were good... I was better." ;Capcom vs Snk 2
+victory31 = "What's the matter, are you done?" ;Street Fighter EX 2/3
+victory32 = "How about we get serious now?" ;Street Fighter EX 2/3
+victory33 = "You can't let your guard down in a fight." ;Street Fighter EX 2/3
+victory34 = "Not bad at all." ;Street Fighter EX 2/3
+victory35 = "If you set a goal for yourself, only you know what you need to do next." ;Street Fighter 4
+victory36 = "What doesn't kill you makes you stronger. Let this beating be a lesson." ;Street Fighter 4
+victory37 = "Titles are useless. A man's true worth is spoken by his power, not his words!" ;Street Fighter 4
+victory38 = "Go home and sleep this off! Don't ever try to face me again!" ;Street Fighter 4
+victory39 = "Don't feel bad about your cowardice. It saved your life today!" ;Street Fighter 4
+victory40 = "You wouldn't last 30 seconds on the battlefield." ;Street Fighter 4
+victory41 = "I've got nothing to say to a loser like you." ;Street Fighter 4
+victory42 = "Now you know you don't have what it takes to fight a pro like me." ;Street Fighter 4
+victory43 = "That was too easy!" ;Street Fighter 4
+victory44 = "Waging combat with you has made me stronger. For that, I thank you." ;Street Fighter 4
+victory45 = "This isn't a contest of philosophy or doctrine. Strength determines victory." ;Street Fighter 4
+victory46 = "Fighting you has brought out my true strength." ;Ultra Street Fighter 4
+victory47 = "What an easy mission!" ;Ultra Street Fighter 4
+victory48 = "Your moves are well-executed and strong. You have a bright future ahead of you." ;Ultra Street Fighter 4
+victory49 = "In war, the loser doesn't get a second chance. You're lucky this isn't war." ;Ultra Street Fighter 4
+victory50 = "I could really go for a cup of coffee right about now..." ;Ultra Street Fighter 4
+victory51 = "I don't enjoy fighting. If the other guy starts it, though, I'll do what it takes." ;Ultra Street Fighter 4
+victory52 = "If you can't dodge, just take your licks and throw the fight. No use trying." ;Ultra Street Fighter 4
+victory53 = "My arms and legs cut like blades! You can't compare!" ;Ultra Street Fighter 4
+victory54 = "The only way to win is to keep a cool head and stay focused." ;Ultra Street Fighter 4
+victory55 = "Knowing when to give up is nothing to be ashamed of." ;Ultra Street Fighter 4
+victory56 = "You have technique and power. All that's left is to keep your cool." ;Street Fighter 5
+victory57 = "The battlefield has no rules, just life and death. That's all." ;Street Fighter 5
+victory58 = "I'm not here to make idle chitchat. I'm a professional." ;Street Fighter 5
+victory59 = "I like your moves. You've got all the markings of a pro." ;Street Fighter 5
+victory60 = "Nice punch there. Haven't felt one like that in quite some time." ;Street Fighter Alpha 3
+victory61 = "You can't even inflict a single wound on me at your current level." ;Street Fighter Alpha 3
+victory62 = "You never had the determination to pierce through from the very start." ;Street Fighter Alpha 3
+victory63 = "The gap between our abilities is far too wide. Brush up on your capabilities." ;Street Fighter Alpha 3
+victory64 = "That's quite the fighting spirit you have. I'll be sure to remember it." ;Street Fighter Alpha 3
+victory65 = "It doesn't seem you were a complete novice. I suppose that's a lesson for me to not underestimate you." ;Street Fighter Alpha 3
+victory66 = "Time up. You came up short, I'm afraid." ;Street Fighter Alpha 3
+victory67 = "What business do you have left here...? The defeated need to leave right now!" ;Street Fighter Alpha 3
+victory68 = "Make no mistake. I'm always the last one standing." ;Capcom Fighting Evolution
+victory69 = "I can't remember the last time a victory made me feel so good." ;Capcom Fighting Evolution
+victory70 = "If you don't keep your eyes on the prize, you'll never win!" ;Capcom Fighting Evolution
+victory71 = "Give it up. You're not good enough to compete at this level." ;Capcom Fighting Evolution
+victory72 = "No one is invincible." ;Capcom Fighting Evolution
+victory73 = "Giving up already? It's just as well, you have no chance at winning anyway." ;Capcom Fighting Evolution
+victory74 = "Don't expect any mercy from me." ;Capcom Fighting Evolution
+victory75 = "Fighting is gambling with your life. Go home now if you can't take that risk." ;Capcom Fighting Evolution
+victory76 = "There's no place for emotion in battle. So dry your tears and leave!" ;Ultra Street Fighter 2
+victory77 = "Why did you lose? Because you still value survival more than victory." ;Ultra Street Fighter 2
+victory78 = "Charlie... What on earth happened to you?" ;SF5 VS Nash
+victory79 = "I'm going to make you pay here and now for all the crimes you've committed!" ;SF5 VS Vega
+victory80 = "I won't kill you, you heartless bastard. I've learned that revenge is meaningless." ;SFXT VS Vega
+victory81 = "I can finally visit Charlie's grave without feeling shame!" ;SF4 VS Vega
+victory82 = "I have my revenge, but your life alone isn't enough to make up for your sins." ;SF4 VS Vega
+victory83 = "You had more heart than your looks would imply. But this is as far as you go." ;CVS2 VS Ken
+victory84 = "You have a talent for this, but you have a boatload of things to improve on as well." ;SFA3 VS Ken
+victory85 = "You don't have what it takes. Go home and be a family man." ;SSF4 VS Ken
+victory86 = "If you doubt yourself, then go home. No shame in running if you have to." ;SF4 VS Ken
+victory87 = "Your combos have improved, but your guard is still full of holes." ;SF5 VS Ken
+victory88 = "I see...I'm starting to understand what it means to use your strength to fight for your family." ;SFXT VS Ken
+victory89 = "You're a strange kid. Your fighting spirit has failed to waver despite losing." ;SFA3 VS Ryu
+victory90 = "My blade tears through anything. Even your Hadoken." ;SF5 VS Ryu
+victory91 = "I owe you my gratitude. Your fists awoke something inside me..." ;SF4 VS Ryu
+victory92 = "That was quite a fight. I can see why you have so many imitators." ;SSF4 VS Ryu
+victory93 = "I can feel your dedication in all of your attacks. I'm looking forward to challenging you again." ;SFXT VS Ryu
+victory94 = "I know my moves better then anyone else. Both my strengths and weaknesses." ;SFXT VS Guile
+victory95 = "Nobody can survive long in this line of work if they start seeing illusions." ;SFA3 VS Guile

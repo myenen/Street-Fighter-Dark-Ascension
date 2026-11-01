@@ -26,7 +26,7 @@ Projenin odağında yalnızca karakter toplamak değil; her karakteri IKEMEN GO 
 
 ## Öne çıkan özellikler
 
-- 24 seçilmiş ana karakter ve farklı oynanış stilleri
+- 26 seçilmiş ana karakter ve farklı oynanış stilleri
 - Evil, Dark, Cyber, Divine ve boss temalı Street Fighter editleri
 - IKEMEN GO oyun içi **Command List** desteği
 - Karakterlere göre düzenlenmiş ve doğrulanmış hareket listeleri
@@ -37,6 +37,7 @@ Projenin odağında yalnızca karakter toplamak değil; her karakteri IKEMEN GO 
 - Death Ogre için özel süper hareketler ve siyah-kırmızı **Death Palette**
 - Eski WinMUGEN karakterleri için IKEMEN uyumluluk düzeltmeleri
 - Karaktere özel denge ve AI düzenlemeleri
+- Projeye özel dört hareketli HD arena ve karakterlere göre tematik sahne eşleşmeleri
 
 ## Özel çalışma: Death Ogre
 
@@ -47,6 +48,25 @@ Death Ogre için mevcut paletlere ek olarak siyah kıyafet, kırmızı ten ve k�
 </p>
 
 Karakter ayrıca projeye özel komut varyasyonları, güçlendirilmiş saldırılar ve **Ogre Cataclysm** gibi yeni süper hareketler içerir.
+
+## Özgün sahneler
+
+Oyunun karanlık atmosferini güçlendiren dört özgün HD arena hazırlandı. Her sahnede temaya uygun iki katmanlı hareketli parçacık efektleri bulunur; sahneler manuel seçilebildiği gibi ilgili karakterlerin Arcade karşılaşmalarına da otomatik bağlanır.
+
+| Sahne | Tema ve karakter eşleşmesi |
+|---|---|
+| **Crimson Abyss Temple** | Death Ogre için kan kırmızısı tutulmalı karanlık tapınak |
+| **Stormbreak Airbase** | Guile ve Charlie Nash için fırtınalı askerî hava üssü |
+| **Neon Ruins District** | Cyber karakterler ve Mech Zangief için neon harabeleri |
+| **Shadaloo Eclipse Throne** | Dictator ve Shin Bison için mor Psycho Power taht salonu |
+
+<p align="center">
+  <img src="assets/generated/stages/crimson_abyss_temple_1536x864.png" alt="Crimson Abyss Temple stage" width="360">
+  <img src="assets/generated/stages/stormbreak_airbase_1536x864.png" alt="Stormbreak Airbase stage" width="360">
+  <br>
+  <img src="assets/generated/stages/neon_ruins_district_1536x864.png" alt="Neon Ruins District stage" width="360">
+  <img src="assets/generated/stages/shadaloo_eclipse_throne_1536x864.png" alt="Shadaloo Eclipse Throne stage" width="360">
+</p>
 
 ## Arcade yapısı
 
@@ -95,6 +115,7 @@ Mevcut varsayılan zorluk seviyesinde AI, Arcade boyunca kademeli olarak yüksel
 - Dictator
 - Divine Sagat
 - Mech Zangief
+- Guile
 
 ### Boss grubu
 
@@ -217,6 +238,7 @@ Bu proje, farklı M.U.G.E.N topluluk yapımcılarının çalışmalarını içer
 | Blanka QC | (^o^) |
 | Dhalsim | 3ha |
 | God Urien | Shin_Lvl2_Akuma |
+| Guile | Burn |
 
 Ek yapımcı ve kaynak bilgileri için her karakterin kendi klasöründeki README, metin ve DEF dosyalarını inceleyin. Bir kredi eksik veya hatalıysa düzeltilebilmesi için bildirim açabilirsiniz.
 

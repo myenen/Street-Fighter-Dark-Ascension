@@ -198,28 +198,29 @@ kfm_zaxis, stages/kfm.def, order=0
 EvilKen/EvilKen.def, order=2
 EvilRyu/EvilRyu.def, order=2
 God_Rugal/God_Rugal.def, order=3
-Death Ogre/Death Ogre.def, order=3
-C.Akuma_MvC/C.Akuma_MvC.def, order=2
-cyberdan/cyberdan.def, order=1
-MVC2_Shadow Lady Alpha/MVC2_Shadow Lady Alpha.def, order=1
-CyberRyu/CyberRyu.def, order=2
+Death Ogre/Death Ogre.def, stages/crimson_abyss_temple.def, order=3
+C.Akuma_MvC/C.Akuma_MvC.def, stages/neon_ruins_district.def, order=2
+cyberdan/cyberdan.def, stages/neon_ruins_district.def, order=1
+MVC2_Shadow Lady Alpha/MVC2_Shadow Lady Alpha.def, stages/neon_ruins_district.def, order=1
+CyberRyu/CyberRyu.def, stages/neon_ruins_district.def, order=2
 Master God Ken/Master God Ken.def, order=3
 EvilDan/EvilDan.def, order=1
 Jin/Jin.def, order=2
 shingouki_pots/shingouki_pots.def, order=3
-Cyber Ken/Cyber Ken.def, order=2
-shinbison/shinbison.def, order=3
-Dictator/Dictator.def, order=2
+Cyber Ken/Cyber Ken.def, stages/neon_ruins_district.def, order=2
+shinbison/shinbison.def, stages/shadaloo_eclipse_throne.def, order=3
+Dictator/Dictator.def, stages/shadaloo_eclipse_throne.def, order=2
 Blaze-POTS/Blaze-POTS.def, order=1
 Dark Sakura/Dark Sakura.def, order=1
 DivineSagat/DivineSagat.def, order=2
 K-Sagat/K-Sagat.def, order=1
-Mech Zangief/Mech Zangief.def, order=2
+Mech Zangief/Mech Zangief.def, stages/neon_ruins_district.def, order=2
 Evil Sagat/Evil Sagat.def, order=3
-CharlieNash/CharlieNash.def, order=1
+CharlieNash/CharlieNash.def, stages/stormbreak_airbase.def, order=1
 0D_Blanka_QC/0D_Blanka_QC.def, order=1
 dhalsim/dhalsim.def, order=1
 God_Urien/God_Urien.def, order=3
+Guile/Guile.def, stages/stormbreak_airbase.def, order=2
 randomselect
 
 ;-------------------------------------------------------------------------------
@@ -291,14 +292,11 @@ randomselect
  ;
  ;Insert your stages below.
 
-stages/stage1.def
-stages/stage3d.def
-stages/stage3d_outline.def
-stages/stageZ.def
-stages/interactivestage.def
-stages/kfm.def
-stages/stage0.def
 stages/stage0-720.def
+stages/crimson_abyss_temple.def
+stages/stormbreak_airbase.def
+stages/neon_ruins_district.def
+stages/shadaloo_eclipse_throne.def
 
 ;-------------------------------------------------------------------------------
 [Options]

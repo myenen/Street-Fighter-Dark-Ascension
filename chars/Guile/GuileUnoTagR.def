@@ -1,0 +1,62 @@
+; Definition file for player
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Guile"        ;Name of character
+displayname = "Guile" ;Name of character to display
+versiondate = 10/27/2025   ;Version date of character
+mugenversion = 1.1  ;Version of M.U.G.E.N character works on
+author = "Burn"      ;Character author name
+
+;Many thanks to
+;empawk, Sky79, Malovka1, Zaxis, Heka, Supaman2525, daraku, LESSARD, Serio, aokmaniac13, Balthazar, Brazombie, Zetsubou, Reu, KingTigre, vyn, N64Mario, Trololo, Warusaki3, Cybaster, Victorys, Inktrebuchet, 
+;Cyanide, GM, Sheng Long, Infinite, Just No Point, Seravy, Phantom.of.the.Server, Jmorphman, 
+;Duracelleur, Beximus, tukemon, Polocolto, Marancv, DeathScythe, ClubSyN-X-TReME, M@PPY, Demonkai, 
+;Shammahalfa1, Mr.Ansatsuken, Umihei, mouser, Zero-Sennin, Yoshin222, SteelHammers, PlayerOne, 
+;Pòxiao xue feng, Tomo, nearl1z, Kartara, Kotori, UnoShe, RagingRowen, M.M.R., Beterhans, 280gou, VinVulpis
+;Jin, Cycleong, Juke Kisaragi, ONI-MIKO, beppu, DCslayer, KarmaCharmeleon, DaNaru250, OHMSBY, Duh_Z, CrazyKoopa
+;Xiao yín, gdghf and Stara
+
+pal.defaults = 4,3,2,1,5,6,7,8,9,10,11,12 ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd = UnoTagR\UnoTagR.cmd   ;Command set
+cns = Guile.cns   ;Constants
+stcommon = common1.cns
+st = UnoTagR\SystemUnoTagR.st
+st1 = States\Normal.st
+st2 = States\Specials.st
+st3 = States\Supers.st
+st4 = States\Helpers.st
+st5 = UnoTagR\UnoTagR.cns
+sprite = Guile.sff   ;Sprite
+anim = Guile.air   ;Animation
+sound = Guile.snd   ;Sound
+pal1 = Palettes\LPA.act   ;Palettes (can have up to 12)
+pal2 = Palettes\MKA.act
+pal3 = Palettes\HKA.act
+pal4 = Palettes\LKA.act
+pal5 = Palettes\MPA.act
+pal6 = Palettes\HPA.act
+pal7 = Palettes\LKB.act
+pal8 = Palettes\MKB.act
+pal9 = Palettes\HKB.act
+pal10 = Palettes\LPB.act
+pal11 = Palettes\MPB.act
+pal12 = Palettes\HPB.act
+
+[Palette Keymap]
+a = 4
+b = 2
+c = 3
+x = 1
+y = 5
+z = 6
+a2 = 7
+b2 = 8
+c2 = 9
+x2 = 10
+y2 = 11
+z2 = 12

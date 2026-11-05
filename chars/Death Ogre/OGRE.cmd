@@ -225,6 +225,11 @@ command = /$z
 time = 1
 
 [Command]
+name = "abyss_pursuit"
+command = x+y+z
+time = 20
+
+[Command]
 name = "bousou"
 command = x+y+z+a+b+c
 time = 1
@@ -955,6 +960,57 @@ triggerall = command = "crimson_reaper"
 triggerall = power >= 1000
 triggerall = statetype != A
 trigger1 = ctrl = 1
+
+;---------------------------------------------------------------------------
+; Abyss Pursuit - player access to the original AI-only aerial rave.
+[State -1, Abyss Pursuit Start]
+type = ChangeState
+value = 2042
+triggerall = var(20) = 0
+triggerall = command = "abyss_pursuit"
+triggerall = stateno = 1040
+triggerall = MoveHit
+trigger1 = AnimElem = 13, >= 0
+
+[State -1, Abyss Pursuit Launch]
+type = ChangeState
+value = 2043
+triggerall = var(20) = 0
+triggerall = stateno = 2042
+triggerall = P2StateType = A
+trigger1 = Pos Y <= -70
+
+[State -1, Abyss Pursuit Light Kick]
+type = ChangeState
+value = 2045
+triggerall = var(20) = 0
+triggerall = stateno = 2043
+triggerall = P2StateType = A
+trigger1 = MoveHit
+
+[State -1, Abyss Pursuit Medium Punch]
+type = ChangeState
+value = 2044
+triggerall = var(20) = 0
+triggerall = stateno = 2045
+triggerall = P2StateType = A
+trigger1 = MoveHit
+
+[State -1, Abyss Pursuit Medium Kick]
+type = ChangeState
+value = 2046
+triggerall = var(20) = 0
+triggerall = stateno = 2044
+triggerall = P2StateType = A
+trigger1 = MoveHit
+
+[State -1, Abyss Pursuit Recovery]
+type = ChangeState
+value = 50
+triggerall = var(20) = 0
+triggerall = stateno = [2042,2046]
+trigger1 = AnimTime = 0
+trigger2 = Pos Y >= 0 && Vel Y > 0
 
 ;---------------------------------------------------------------------------
 ; Ogre Apocalypse - Level 3 multi-hit energy detonation

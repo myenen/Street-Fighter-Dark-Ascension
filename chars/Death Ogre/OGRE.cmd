@@ -412,6 +412,41 @@ command = ~D, DB, B, D, DB, B, c
 time = 30
 
 [Command]
+name = "crimson_reaper_3k"
+command = ~B, D, $DB, B, D, $DB, a+b+c
+time = 40
+
+[Command]
+name = "crimson_reaper_2k"
+command = ~B, D, $DB, B, D, $DB, a+b
+time = 40
+
+[Command]
+name = "crimson_reaper_2k"
+command = ~B, D, $DB, B, D, $DB, a+c
+time = 40
+
+[Command]
+name = "crimson_reaper_2k"
+command = ~B, D, $DB, B, D, $DB, b+c
+time = 40
+
+[Command]
+name = "crimson_reaper"
+command = ~B, D, $DB, B, D, $DB, a
+time = 40
+
+[Command]
+name = "crimson_reaper"
+command = ~B, D, $DB, B, D, $DB, b
+time = 40
+
+[Command]
+name = "crimson_reaper"
+command = ~B, D, $DB, B, D, $DB, c
+time = 40
+
+[Command]
 name = "somer"
 command = ~B, D, $DB, a
 time = 30
@@ -893,6 +928,34 @@ time = 1
 
 ;---------------------------------------------------------------------------
 [Statedef -1]
+;---------------------------------------------------------------------------
+; Crimson Reaper - Level 3, light / medium / heavy sequence
+[State -1, Crimson Reaper 3K]
+type = ChangeState
+value = 4986
+triggerall = command = "crimson_reaper_3k"
+triggerall = power >= 3000
+triggerall = statetype != A
+trigger1 = ctrl = 1
+
+; Crimson Reaper - Level 2, light / medium sequence
+[State -1, Crimson Reaper 2K]
+type = ChangeState
+value = 4985
+triggerall = command = "crimson_reaper_2k"
+triggerall = power >= 2000
+triggerall = statetype != A
+trigger1 = ctrl = 1
+
+; Crimson Reaper - Level 1, original single cut
+[State -1, Crimson Reaper 1K]
+type = ChangeState
+value = 4984
+triggerall = command = "crimson_reaper"
+triggerall = power >= 1000
+triggerall = statetype != A
+trigger1 = ctrl = 1
+
 ;---------------------------------------------------------------------------
 ; Ogre Apocalypse - Level 3 multi-hit energy detonation
 [State -1, Ogre Apocalypse]

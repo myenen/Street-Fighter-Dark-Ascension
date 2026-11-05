@@ -9,6 +9,7 @@ st      = OGRE.cns
 st1      = AI.cns
 st2      = OGRE.st
 st3      = OGRE2.st
+st4      = DeathOgreSupers.cns
 stcommon = OGREcommon.cns   
 sprite  = OGRE.sff     
 anim    = OGRE.air     

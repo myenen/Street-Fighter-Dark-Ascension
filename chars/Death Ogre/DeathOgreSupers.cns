@@ -1,0 +1,369 @@
+;==============================================================================
+; Street Fighter: Dark Ascension - Death Ogre custom supers
+;==============================================================================
+
+; Crimson Reaper
+; A level 1 super conversion of Somersault Shell.
+[Statedef 4984]
+type = S
+movetype = A
+physics = N
+poweradd = -1000
+ctrl = 0
+anim = 1222
+velset = 0,0
+
+[State 4984, One Cut]
+type = VarSet
+trigger1 = Time = 0
+v = 55
+value = 1
+
+[State 4984, Reset Pass]
+type = VarSet
+trigger1 = Time = 0
+v = 57
+value = 0
+
+[State 4984, Begin]
+type = ChangeState
+trigger1 = Time = 0
+value = 4990
+
+; Two-button version: light cut into medium cut.
+[Statedef 4985]
+type = S
+movetype = A
+physics = N
+poweradd = -2000
+ctrl = 0
+anim = 1222
+velset = 0,0
+
+[State 4985, Two Cuts]
+type = VarSet
+trigger1 = Time = 0
+v = 55
+value = 2
+
+[State 4985, Reset Pass]
+type = VarSet
+trigger1 = Time = 0
+v = 57
+value = 0
+
+[State 4985, Begin]
+type = ChangeState
+trigger1 = Time = 0
+value = 4990
+
+; Three-button version: light, medium and heavy cuts.
+[Statedef 4986]
+type = S
+movetype = A
+physics = N
+poweradd = -3000
+ctrl = 0
+anim = 1222
+velset = 0,0
+
+[State 4986, Three Cuts]
+type = VarSet
+trigger1 = Time = 0
+v = 55
+value = 3
+
+[State 4986, Reset Pass]
+type = VarSet
+trigger1 = Time = 0
+v = 57
+value = 0
+
+[State 4986, Begin]
+type = ChangeState
+trigger1 = Time = 0
+value = 4990
+
+[Statedef 4990]
+type = S
+movetype = A
+physics = N
+juggle = 6
+poweradd = 0
+ctrl = 0
+velset = 0,0
+anim = 1222
+sprpriority = 2
+
+[State 4990, Count Cut]
+type = VarAdd
+trigger1 = Time = 0
+v = 57
+value = 1
+
+[State 4990, Super Pause]
+type = SuperPause
+trigger1 = Time = 0 && Var(57) = 1
+time = 30
+movetime = 30
+anim = -1
+sound = S4900,0
+darken = 1
+
+[State 4990, Super Background Darken]
+type = BGPalFX
+trigger1 = Time = 0 && Var(57) = 1
+time = 30
+add = -24,-48,-48
+mul = 150,82,82
+color = 150
+invertall = 0
+
+[State 4990, Crimson Flash]
+type = EnvColor
+trigger1 = Time = 0 && Var(57) = 1
+value = 24,0,0
+time = 8
+under = 1
+
+[State 4990, Startup Shake]
+type = EnvShake
+trigger1 = Time = 0 && Var(57) = 1
+time = 12
+freq = 95
+ampl = -3
+
+[State 4990, Invulnerability]
+type = NotHitBy
+trigger1 = Time < 20
+value = SCA
+time = 1
+
+[State 4990, Red Afterimage]
+type = AfterImage
+trigger1 = Time = 0
+time = 42
+length = 14
+palcolor = 256
+palinvertall = 0
+palbright = 35,0,0
+palcontrast = 210,70,70
+palpostbright = 10,0,0
+palmul = .80,.30,.30
+timegap = 1
+framegap = 2
+trans = add1
+
+[State 4990, Voice]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 1,0
+
+[State 4990, Slash Sound 1]
+type = PlaySnd
+trigger1 = AnimElem = 4
+value = 4,23
+
+[State 4990, Slash Sound 2]
+type = PlaySnd
+trigger1 = AnimElem = 6
+value = 4,22
+
+[State 4990, Slash Sound 3]
+type = PlaySnd
+trigger1 = AnimElem = 8
+value = 4,23
+
+[State 4990, First Cut]
+type = HitDef
+trigger1 = AnimElem = 4
+attr = S, HA
+animtype = Heavy
+damage = ifelse(Var(55) = 1,65,ifelse(Var(57) = 1,40,ifelse(Var(57) = 2,65,90))),10
+getpower = 0
+givepower = 15
+hitflag = MAF
+guardflag = MA
+priority = 6, Hit
+pausetime = 7,8
+sparkno = S7004
+sparkxy = -10,-65
+hitsound = S4,22
+guardsound = S20,6
+ground.type = High
+ground.slidetime = 16
+ground.hittime = 22
+ground.velocity = -1,-3
+air.velocity = -1,-3
+air.fall = 0
+fall = 0
+
+[State 4990, Second Cut]
+type = HitDef
+trigger1 = AnimElem = 6
+attr = S, HA
+animtype = Heavy
+damage = ifelse(Var(55) = 1,65,ifelse(Var(57) = 1,40,ifelse(Var(57) = 2,65,90))),10
+getpower = 0
+givepower = 15
+hitflag = MAF
+guardflag = MA
+priority = 6, Hit
+pausetime = 7,8
+sparkno = S7004
+sparkxy = -5,-48
+hitsound = S4,22
+guardsound = S20,6
+ground.type = Low
+ground.slidetime = 16
+ground.hittime = 22
+ground.velocity = -2,-4
+air.velocity = -2,-4
+air.fall = 0
+fall = 0
+
+[State 4990, Final Cut]
+type = HitDef
+trigger1 = AnimElem = 8
+attr = S, HA
+animtype = Up
+damage = ifelse(Var(55) = 1,120,ifelse(Var(57) = 1,70,ifelse(Var(57) = 2,120,170))),18
+getpower = 0
+givepower = 20
+hitflag = MAF
+guardflag = MA
+priority = 7, Hit
+pausetime = 12,14
+sparkno = S7004
+sparkxy = 0,-38
+hitsound = S4,23
+guardsound = S20,6
+ground.type = High
+ground.slidetime = 20
+ground.hittime = 28
+ground.velocity = ifelse(Var(57) < Var(55),-2,-7),ifelse(Var(57) < Var(55),ifelse(Var(57) = 1,-5,-7),-12)
+air.velocity = ifelse(Var(57) < Var(55),-2,-7),ifelse(Var(57) < Var(55),ifelse(Var(57) = 1,-5,-7),-12)
+air.hittime = ifelse(Var(57) < Var(55),60,28)
+fall = ifelse(Var(57) < Var(55),0,1)
+fall.recover = 0
+air.fall = ifelse(Var(57) < Var(55),0,1)
+
+[State 4990, Final Impact]
+type = EnvShake
+trigger1 = AnimElem = 8
+time = 18
+freq = 110
+ampl = -7
+
+[State 4990, Slash Trail 1]
+type = Explod
+trigger1 = AnimElem = 4
+anim = 1213
+ID = 49901
+pos = 28,-62
+postype = p1
+bindtime = 1
+removetime = 12
+sprpriority = 4
+ownpal = 1
+trans = addalpha
+alpha = 210,256
+
+[State 4990, Slash Trail 2]
+type = Explod
+trigger1 = AnimElem = 6
+anim = 1213
+ID = 49902
+pos = 12,-82
+postype = p1
+bindtime = 1
+removetime = 12
+sprpriority = 4
+ownpal = 1
+trans = addalpha
+alpha = 180,256
+
+[State 4990, Slash Trail 3]
+type = Explod
+trigger1 = AnimElem = 8
+anim = 1213
+ID = 49903
+pos = -4,-102
+postype = p1
+bindtime = 1
+removetime = 14
+sprpriority = 4
+ownpal = 1
+trans = addalpha
+alpha = 230,256
+
+[State 4990, Width]
+type = Width
+trigger1 = 1
+value = 12
+
+[State 4990, Launch]
+type = VelAdd
+trigger1 = AnimElem = 5,=1
+x = 3
+y = ifelse(Var(57) = 1,-5,ifelse(Var(57) = 2,-7,-9))
+
+[State 4990, Stop Forward Motion]
+type = VelSet
+trigger1 = AnimElem = 9
+x = 0
+
+[State 4990, Next Cut]
+type = ChangeState
+trigger1 = AnimElem = 10
+trigger1 = Var(57) < Var(55)
+value = 4990
+
+[State 4990, Continue Rise]
+type = ChangeState
+trigger1 = AnimElem = 10
+trigger1 = Var(57) >= Var(55)
+value = 4991
+
+; Crimson Reaper airborne recovery.
+[Statedef 4991]
+type = A
+movetype = A
+physics = N
+ctrl = 0
+velset = 1,-4.7
+anim = 1221
+
+[State 4991, Gravity]
+type = VelAdd
+trigger1 = 1
+y = .6
+
+[State 4991, Short Protection]
+type = NotHitBy
+trigger1 = Time < 5
+value = SCA
+time = 1
+
+[State 4991, End Trail]
+type = AfterImageTime
+trigger1 = Time = 10
+time = 0
+
+[State 4991, Clear Cut Count]
+type = VarSet
+trigger1 = Pos Y >= 0
+v = 55
+value = 0
+
+[State 4991, Clear Pass]
+type = VarSet
+trigger1 = Pos Y >= 0
+v = 57
+value = 0
+
+[State 4991, Land]
+type = ChangeState
+trigger1 = Pos Y >= 0
+value = 1212
+ctrl = 0

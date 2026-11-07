@@ -146,6 +146,16 @@ command = D
 time = 1
 ;-| Super Motions |---------------------------------------------------
 [Command]
+name = "saikyo_damnation"
+command = ~D, D, D, x+y+z
+time = 35
+
+[Command]
+name = "saikyo_damnation"
+command = ~D, D, D, a+b+c
+time = 35
+
+[Command]
 name = "qcfqcf_a"
 command = ~D, DF, F, D, DF, F, a
 time = 30
@@ -706,6 +716,27 @@ time = 5
 ;---------------------------------------------------------------------------
 
 [Statedef -1]
+
+; Saikyo Damnation - Level 3
+[State -1, Saikyo Damnation]
+type = ChangeState
+value = 39990
+triggerall = Var(30) != 59
+triggerall = command = "saikyo_damnation"
+triggerall = power >= 3000
+triggerall = statetype != A
+trigger1 = ctrl = 1
+
+[State -1, Saikyo Damnation AI]
+type = ChangeState
+value = 39990
+triggerall = Var(30) = 59
+triggerall = power >= 3000
+triggerall = statetype != A
+triggerall = ctrl = 1
+triggerall = P2BodyDist X = [0,110]
+triggerall = P2MoveType != H
+trigger1 = Random < 30
 
 [State -1, Taunt]
 type = ChangeState

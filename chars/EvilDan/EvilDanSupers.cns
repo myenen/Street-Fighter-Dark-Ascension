@@ -1,0 +1,245 @@
+;==============================================================================
+; Street Fighter: Dark Ascension - Evil Dan custom supers
+;==============================================================================
+
+; Saikyo Damnation - rush / grab entry
+[Statedef 39990]
+type = S
+movetype = A
+physics = N
+anim = 39990
+poweradd = -3000
+ctrl = 0
+velset = 0,0
+sprpriority = 2
+
+[State 39990, Super Pause]
+type = SuperPause
+trigger1 = Time = 0
+time = 24
+movetime = 0
+anim = -1
+sound = S55,2
+darken = 1
+
+[State 39990, Dark Flash]
+type = BGPalFX
+trigger1 = Time = 0
+time = 24
+add = -40,-40,-40
+mul = 120,70,120
+color = 120
+
+[State 39990, Invulnerable Rush]
+type = NotHitBy
+trigger1 = Time <= 22
+value = SCA
+time = 1
+
+[State 39990, Afterimage]
+type = AfterImage
+trigger1 = Time = 1
+time = 24
+length = 12
+palcolor = 256
+palbright = 20,0,25
+palcontrast = 180,70,210
+palpostbright = 0,0,10
+palmul = .75,.30,.85
+timegap = 1
+framegap = 2
+trans = add1
+
+[State 39990, Rush]
+type = VelSet
+trigger1 = Time = 1
+x = 12
+y = 0
+
+[State 39990, Demon Catch]
+type = HitDef
+trigger1 = Time = [2,20]
+attr = S, HT
+hitflag = MAF
+priority = 7, Hit
+damage = 0,0
+pausetime = 0,0
+sparkno = -1
+hitsound = -1
+p1stateno = 39991
+p2stateno = 39993
+ground.type = High
+ground.hittime = 120
+ground.velocity = 0,0
+air.hittime = 120
+air.velocity = 0,0
+fall = 0
+forcestand = 1
+snap = 20,0
+kill = 0
+
+[State 39990, Stop]
+type = VelSet
+trigger1 = Time = 21
+x = 0
+y = 0
+
+[State 39990, Whiff Recovery]
+type = ChangeState
+trigger1 = Time >= 28
+value = 0
+ctrl = 1
+
+; Saikyo Damnation - cinematic attack
+[Statedef 39991]
+type = S
+movetype = A
+physics = N
+anim = 195
+poweradd = 0
+ctrl = 0
+velset = 0,0
+sprpriority = 2
+
+[State 39991, Hide Evil Dan]
+type = AssertSpecial
+trigger1 = Time < 66
+flag = invisible
+flag2 = nobardisplay
+
+[State 39991, Black Screen]
+type = EnvColor
+trigger1 = Time = 0
+value = 0,0,0
+time = 66
+under = 1
+
+[State 39991, Hold Target]
+type = TargetBind
+trigger1 = Time < 66
+time = 1
+pos = 20,0
+
+[State 39991, Rapid Hit Sparks]
+type = Explod
+trigger1 = Time = [10,55]
+trigger1 = TimeMod = 5,0
+anim = 9420
+ID = 39990
+pos = 0,-60
+postype = p2
+random = 90,100
+sprpriority = 4
+ownpal = 1
+removetime = 12
+ignorehitpause = 1
+
+[State 39991, Rapid Hit Sound]
+type = PlaySnd
+trigger1 = Time = [10,55]
+trigger1 = TimeMod = 5,0
+value = 2,4
+volume = 255
+
+[State 39991, Rapid Damage]
+type = TargetLifeAdd
+trigger1 = Time = [10,55]
+trigger1 = TimeMod = 5,0
+value = -30
+kill = 0
+
+[State 39991, Rapid Hit Count]
+type = HitAdd
+trigger1 = Time = [10,55]
+trigger1 = TimeMod = 5,0
+value = 1
+
+[State 39991, Rapid Shake]
+type = EnvShake
+trigger1 = Time = [10,55]
+trigger1 = TimeMod = 5,0
+time = 4
+freq = 100
+ampl = -3
+
+[State 39991, Final Flash]
+type = EnvColor
+trigger1 = Time = 65
+value = 255,255,255
+time = 2
+under = 0
+
+[State 39991, Final Sound]
+type = PlaySnd
+trigger1 = Time = 65
+value = 6,5
+volume = 255
+
+[State 39991, Final Damage]
+type = TargetLifeAdd
+trigger1 = Time = 65
+value = -300
+kill = 1
+
+[State 39991, Final Hit Count]
+type = HitAdd
+trigger1 = Time = 65
+value = 1
+
+[State 39991, Final Shake]
+type = EnvShake
+trigger1 = Time = 65
+time = 22
+freq = 110
+ampl = -8
+
+[State 39991, Release Target]
+type = TargetDrop
+trigger1 = Time = 68
+excludeID = -1
+
+[State 39991, Finish]
+type = ChangeState
+trigger1 = Time >= 82
+value = 0
+ctrl = 1
+
+; Victim state - hidden during the barrage, launched by the final hit.
+[Statedef 39993]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+velset = 0,0
+
+[State 39993, Standard Hit Animation]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5000
+
+[State 39993, Hide Victim]
+type = AssertSpecial
+trigger1 = Time < 66
+flag = invisible
+
+[State 39993, Hold Position]
+type = VelSet
+trigger1 = Time < 68
+x = 0
+y = 0
+
+[State 39993, Lift For Finish]
+type = PosSet
+trigger1 = Time = 68
+y = -20
+
+[State 39993, Launch]
+type = VelSet
+trigger1 = Time = 68
+x = -7
+y = -9
+
+[State 39993, Return To Victim States]
+type = SelfState
+trigger1 = Time = 68
+value = 5050

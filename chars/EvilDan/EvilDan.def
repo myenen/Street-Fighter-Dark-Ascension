@@ -20,6 +20,7 @@ movelist = movelist.dat
 cns = EvilDan.cns
 stcommon = common1.cns
 st = EvilDan.cns
+st1 = EvilDanSupers.cns
 pal1 = EvilDan.act
 pal2 = Dan2.act
 pal3 = Dan3.act

@@ -8,6 +8,7 @@ Saikyou Jigoku Otosareta			_AIR_CLOSE[_B/_F]_+^2K
 
 Gadouken					_D_DF_F^P
 Premium Sign					_D_DF_F^K
+Premium Sign Ghost Release <#bebebe>(while portrait is flying)</>	^3K
 Dakku Kiaku					_AIROK_D_DB_B^K
 Kouryuken					_F_D_DF^P
 _!Seoi Kouryuken				_F_D_DF^P
@@ -19,8 +20,9 @@ Shinpou Dan					^MP_+^MK
 
 <#f0f000>LEVEL 1 SUPER COMBOS</>
 
-Shin Dakku Kiaku				_AIROK_D_DF_F_D_DF_F^K
+Shin Dakku Kiaku				_AIROK_D_DB_B_D_DB_B^K
 Shinkuu Gadouken				_D_DF_F_D_DF_F^P
+Shinkuu Energy Detonation <#bebebe>(after MSSM energy is embedded / unblockable)</>	^3P
 Shin Premium Sign				_B_DB_D_DF_F^2K
 Gadanu Messhuu					_AIR_D_DF_F_D_DF_F^K
 Kouryurekka					_D_DF_F_D_DF_F^K
@@ -29,12 +31,25 @@ Kouryurekka					_D_DF_F_D_DF_F^K
 
 Hisshou Buraiken				_D_DB_B_D_DB_B^P
 
+<#f0f000>LEVEL 3 SUPER COMBO</>
+
+Saikyo Damnation <#bebebe>(3000 / unblockable)</>	_D_D_D_+^3P / _D_D_D_+^3K
+
+<#f0f000>META SUPER SYSTEM</>
+
+MSSM Variant <#bebebe>(enhanced Level 1 super)</>	Second Level 1 super cancel / 10% chance
+MWSM Variant <#bebebe>(weak alternate Level 1 super)</>	10% chance on Level 1 super
+
 <#f0f000>SYSTEM</>
 
 Forward Dash / Back Dash			_F_F / _B_B
 Super Jump					_TAP_D,_U
+Normal Jump Launcher <#bebebe>(after crouching forward HP)</>	_D_DF_+^HP, _U
+Super Jump Launcher <#bebebe>(after crouching HP)</>	_D_+^HP, _U
 Alpha Counter					(during guard)_B_DB_D[^P/^K]
-Fall Recovery					(when allowed)^2P/^2K
+Air Recovery					(while falling)^2P/^2K
+Ground Recovery					(near the ground)^2P/^2K
+Ground Roll Recovery				(while lying down)^2P/^2K
 Mini Taunt					_D_D^S
 Taunt						^S
 

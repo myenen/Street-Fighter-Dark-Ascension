@@ -38,7 +38,8 @@ jump.fwd = 3.00
 jump.back = -3.50
 
 [Movement]
-airjump.num = 0
+airjump.num = 1
+airjump.height = 35
 yaccel = .43
 stand.friction = .85
 crouch.friction = .82
@@ -6343,10 +6344,10 @@ sprpriority = 2
 
 
 [State 181, Randomizer]
-type = VarRandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(var(30) = 59, random / 10, ifelse(var(49) < 0, 0, ifelse(var(49) > 0, 100, 50)))
 [State 1500, 0]
 type = VarSet
 trigger1 = time = 0
@@ -19213,10 +19214,10 @@ trigger1 = time = 0
 v = 34
 value = 0
 [State 181, Randomizer]
-type = VarRandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(var(30) = 59, random / 10, ifelse(var(49) < 0, 0, ifelse(var(49) > 0, 100, 50)))
 [State 3885, NotHitBy]
 type = NotHitBy
 trigger1 = Time = [0,30]
@@ -21927,10 +21928,10 @@ v = 34
 value = 0
 
 [State 181, Randomizer]
-type = VarRandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(var(30) = 59, random / 10, ifelse(var(49) < 0, 0, ifelse(var(49) > 0, 100, 50)))
 
 [State 181, Randomizer]
 type = ChangeAnim
@@ -22841,10 +22842,10 @@ v = 34
 value = 0
 
 [State 181, Randomizer]
-type = VarRandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(var(30) = 59, random / 10, ifelse(var(49) < 0, 0, ifelse(var(49) > 0, 100, 50)))
 
 [State 181, Randomizer]
 type = ChangeState
@@ -23220,10 +23221,10 @@ v = 34
 value = 0
 
 [State 181, Randomizer]
-type = VarRandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(var(30) = 59, random / 10, ifelse(var(49) < 0, 0, ifelse(var(49) > 0, 100, 50)))
 
 [State 181, Randomizer]
 type = ChangeAnim
@@ -28298,10 +28299,10 @@ trigger1 = time = 70
 value = 186298
 
 [State 181, Randomizer]
-type = VarRandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(var(30) = 59, random / 10, ifelse(var(49) < 0, 0, ifelse(var(49) > 0, 100, 50)))
 ;[State 1500, 0]
 ;type = Varset
 ;trigger1 = time = 0
@@ -33066,10 +33067,10 @@ velset = 2,0
 ctrl = 0
 sprpriority = 2
 [State 181, Randomizer]
-type = VarRandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(var(30) = 59, random / 10, ifelse(var(49) < 0, 0, ifelse(var(49) > 0, 100, 50)))
 [State 1500, 0]
 type = VarSet
 trigger1 = time = 0
@@ -34071,6 +34072,12 @@ down.velocity = -1,-2
 
 ;=================== [-2 states] ======================================
 [Statedef -2]
+
+[State -2, Reset Air Gadouken]
+type = VarSet
+trigger1 = StateType != A
+v = 45
+value = 0
 
 [State 0, PowerAdd]
 type = PowerAdd

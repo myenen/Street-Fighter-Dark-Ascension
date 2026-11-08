@@ -7,6 +7,7 @@ Saikyou Jigoku Otosareta			_AIR_CLOSE[_B/_F]_+^2K
 <#f0f000>SPECIAL MOVES</>
 
 Gadouken					_D_DF_F^P
+Kuuchuu Gadouken <#bebebe>(Air / once per jump)</>	_AIR_D_DF_F^P
 Premium Sign					_D_DF_F^K
 Premium Sign Ghost Release <#bebebe>(while portrait is flying)</>	^3K
 Dakku Kiaku					_AIROK_D_DB_B^K
@@ -22,6 +23,7 @@ Shinpou Dan					^MP_+^MK
 
 Shin Dakku Kiaku				_AIROK_D_DB_B_D_DB_B^K
 Shinkuu Gadouken				_D_DF_F_D_DF_F^P
+Air Shinkuu Gadouken <#bebebe>(Air / 1000)</>	_AIR_D_DF_F_D_DF_F^P
 Shinkuu Energy Detonation <#bebebe>(after MSSM energy is embedded / unblockable)</>	^3P
 Shin Premium Sign				_B_DB_D_DF_F^2K
 Gadanu Messhuu					_AIR_D_DF_F_D_DF_F^K
@@ -35,10 +37,13 @@ Hisshou Buraiken				_D_DB_B_D_DB_B^P
 
 Saikyo Damnation <#bebebe>(3000 / unblockable)</>	_D_D_D_+^3P / _D_D_D_+^3K
 
-<#f0f000>META SUPER SYSTEM</>
+<#f0f000>META SUPER SYSTEM <#bebebe>(Level 1 supers)</></>
 
-MSSM Variant <#bebebe>(enhanced Level 1 super)</>	Second Level 1 super cancel / 10% chance
-MWSM Variant <#bebebe>(weak alternate Level 1 super)</>	10% chance on Level 1 super
+MWSM Variant <#bebebe>(weak alternate)</>	Use ^LP / ^LK
+Normal Variant				Use ^MP / ^MK
+MSSM Variant <#bebebe>(enhanced)</>		Use ^HP / ^HK
+MSSM Chain Override			Third Level 1 super in a continuous chain
+Shin Premium Sign Variants		^LK+^MK MWSM / ^LK+^HK Normal / ^MK+^HK MSSM
 
 <#f0f000>SYSTEM</>
 

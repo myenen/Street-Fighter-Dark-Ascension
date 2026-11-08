@@ -243,3 +243,548 @@ y = -9
 type = SelfState
 trigger1 = Time = 68
 value = 5050
+
+;==============================================================================
+; Kuuchuu Gadouken - aerial diagonal projectile
+;==============================================================================
+
+[Statedef 39940]
+type = A
+movetype = A
+physics = N
+anim = 39940
+poweradd = 50
+ctrl = 0
+sprpriority = 2
+
+[State 39940, Mark Air Use]
+type = VarSet
+trigger1 = Time = 0
+v = 45
+value = 1
+
+[State 39940, Stall]
+type = VelSet
+trigger1 = Time = 0
+x = 0
+y = -0.5
+
+[State 39940, Lean Toward Shot]
+type = AngleSet
+trigger1 = 1
+value = -24
+ignorehitpause = 1
+
+[State 39940, Draw Lean]
+type = AngleDraw
+trigger1 = 1
+ignorehitpause = 1
+
+[State 39940, Voice]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,3
+channel = 0
+volume = 255
+
+[State 39940, Charge Behind]
+type = Explod
+trigger1 = AnimElem = 3
+anim = 4803
+pos = 38,-76
+postype = p1
+sprpriority = -2
+ownpal = 1
+removetime = 12
+
+[State 39940, Charge Front]
+type = Explod
+trigger1 = AnimElem = 3
+anim = 4803
+pos = 39,-77
+postype = p1
+sprpriority = 3
+ownpal = 1
+removetime = 12
+
+[State 39940, Fire Projectile]
+type = Helper
+trigger1 = AnimElem = 3
+helpertype = normal
+name = "Kuuchuu Gadouken"
+ID = 39941
+pos = 70,-65
+postype = p1
+stateno = 39941
+ownpal = 1
+size.xscale = 1
+size.yscale = 1
+
+[State 39940, Fire Sound]
+type = PlaySnd
+trigger1 = AnimElem = 3
+value = 0,7
+volume = 80
+
+[State 39940, Resume Gravity]
+type = VelAdd
+trigger1 = Time >= 8
+y = 0.43
+
+[State 39940, Land]
+type = ChangeState
+trigger1 = Pos Y >= 0 && Vel Y > 0
+value = 52
+
+[State 39940, Recover In Air]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+[Statedef 39941]
+type = A
+movetype = A
+physics = N
+anim = 10150
+ctrl = 0
+sprpriority = 5
+
+[State 39941, Copy Strength]
+type = VarSet
+trigger1 = Time = 0
+v = 0
+value = Root, Var(48)
+
+[State 39941, Diagonal Velocity]
+type = VelSet
+trigger1 = Time = 0
+x = 3.2 + Var(0) * 0.9
+y = 3.2 + Var(0) * 0.45
+
+[State 39941, Match Travel Angle]
+type = AngleSet
+trigger1 = 1
+value = -42
+ignorehitpause = 1
+
+[State 39941, Draw Travel Angle]
+type = AngleDraw
+trigger1 = 1
+ignorehitpause = 1
+
+[State 39941, Flame Trail A]
+type = Explod
+trigger1 = TimeMod = 3,0
+anim = 12213
+ID = 39941
+pos = -18,-3
+postype = p1
+vel = -0.7,-0.2
+scale = 0.25,0.8
+sprpriority = 4
+ownpal = 1
+removetime = 10
+
+[State 39941, Flame Trail B]
+type = Explod
+trigger1 = TimeMod = 4,0
+anim = 12214
+ID = 39942
+pos = -18,3
+postype = p1
+vel = -0.5,0.2
+scale = 0.25,0.8
+sprpriority = 4
+ownpal = 1
+removetime = 10
+
+[State 39941, Projectile Protection]
+type = NotHitBy
+trigger1 = 1
+value = SCA, NA, SA, HA, NT, ST, HT
+time = 1
+ignorehitpause = 1
+
+[State 39941, Projectile Clash]
+type = HitOverride
+trigger1 = 1
+attr = SCA, NP, SP, HP
+slot = 0
+stateno = 39942
+time = 1
+ignorehitpause = 1
+
+[State 39941, Can Clash]
+type = HitBy
+trigger1 = 1
+value = SCA, NP, SP, HP
+time = 1
+ignorehitpause = 1
+
+[State 39941, HitDef]
+type = HitDef
+trigger1 = Time >= 0
+attr = A, SP
+damage = 70 + Var(0) * 15, 8
+animtype = Hard
+hitflag = MAF
+guardflag = MA
+priority = 4, Hit
+pausetime = 0,10
+guard.pausetime = 0,8
+sparkno = 3
+guard.sparkno = S9200
+hitsound = S6,5
+guardsound = S0,100
+ground.type = High
+ground.slidetime = 16
+ground.hittime = 20
+ground.velocity = -3.5,-3
+air.type = Low
+air.velocity = -3.5,-4.5
+fall = 1
+fall.recover = 0
+air.recover = 0
+getpower = 20
+givepower = 15
+palfx.time = 35
+palfx.add = 92,24,153
+palfx.mul = 242,182,450
+palfx.sinadd = -45,-27,-74,6
+
+[State 39941, Hit Or Guard]
+type = ChangeState
+trigger1 = MoveContact
+value = 39942
+
+[State 39941, Touch Ground]
+type = ChangeState
+trigger1 = Pos Y >= -5
+value = 39942
+
+[State 39941, Leave Screen]
+type = ChangeState
+trigger1 = FrontEdgeDist < -40 || BackEdgeDist < -40
+trigger2 = Time >= 180
+value = 39942
+
+[Statedef 39942]
+type = A
+movetype = I
+physics = N
+anim = 10151
+velset = 0,0
+ctrl = 0
+sprpriority = 5
+
+[State 39942, Burst Sound]
+type = PlaySnd
+trigger1 = Time = 0
+value = 2,7
+volume = 100
+
+[State 39942, Remove]
+type = DestroySelf
+trigger1 = AnimTime = 0
+trigger2 = Time >= 20
+
+;==============================================================================
+; Air Shinkuu Gadouken - aerial Level 1 super
+;==============================================================================
+
+[Statedef 39950]
+type = A
+movetype = A
+physics = N
+anim = 39950
+poweradd = -1000
+ctrl = 0
+sprpriority = 2
+
+[State 39950, Select Meta Variant]
+type = VarSet
+trigger1 = Time = 0
+v = 46
+value = ifelse(var(28) >= 2, 100, ifelse(var(49) < 0, 0, ifelse(var(49) > 0, 100, 50)))
+
+[State 39950, Count Super Chain]
+type = VarAdd
+trigger1 = Time = 0
+v = 28
+value = 1
+
+[State 39950, Mark Air Use]
+type = VarSet
+trigger1 = Time = 0
+v = 45
+value = 1
+
+[State 39950, Stall]
+type = VelSet
+trigger1 = Time = 0
+x = 0
+y = -0.5
+
+[State 39950, Lean Toward Shot]
+type = AngleSet
+trigger1 = 1
+value = -24
+ignorehitpause = 1
+
+[State 39950, Draw Lean]
+type = AngleDraw
+trigger1 = 1
+ignorehitpause = 1
+
+[State 39950, Invulnerability]
+type = NotHitBy
+trigger1 = Time <= 10
+value = SCA
+time = 1
+
+[State 39950, Super Pause]
+type = SuperPause
+trigger1 = Time = 0
+time = 22
+movetime = 0
+anim = -1
+sound = S55,2
+darken = 1
+
+[State 39950, Meta Color]
+type = BGPalFX
+trigger1 = Time = 0
+time = 22
+add = ifelse(var(46) >= 90,80,ifelse(var(46) <= 10,35,60)),0,ifelse(var(46) <= 10,90,35)
+mul = 150,80,180
+color = 130
+
+[State 39950, Voice]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,3
+channel = 0
+volume = 255
+
+[State 39950, Charge Behind]
+type = Explod
+trigger1 = AnimElem = 3
+anim = 4803
+pos = 38,-76
+postype = p1
+sprpriority = -2
+ownpal = 1
+removetime = 45
+scale = 1.25,1.25
+
+[State 39950, Charge Front]
+type = Explod
+trigger1 = AnimElem = 3
+anim = 4803
+pos = 39,-77
+postype = p1
+sprpriority = 3
+ownpal = 1
+removetime = 45
+scale = 1.25,1.25
+
+[State 39950, Fire Energy Wave]
+type = Helper
+triggerall = Time >= 16
+triggerall = TimeMod = 4,0
+trigger1 = var(46) <= 10 && Time <= 28
+trigger2 = var(46) > 10 && var(46) < 90 && Time <= 36
+trigger3 = var(46) >= 90 && Time <= 48
+helpertype = normal
+name = "Air Shinkuu Gadouken Wave"
+ID = 39951
+pos = 72,-65
+postype = p1
+stateno = 39951
+ownpal = 1
+size.xscale = 1.15
+size.yscale = 1.15
+
+[State 39950, Fire Sound]
+type = PlaySnd
+trigger1 = NumHelper(39951) > 0 && TimeMod = 4,0
+value = 0,7
+volume = 90
+
+[State 39950, Resume Gravity]
+type = VelAdd
+trigger1 = Time >= 52
+y = 0.43
+
+[State 39950, Reset Chain]
+type = VarSet
+trigger1 = Time = 54
+v = 28
+value = 0
+
+[State 39950, Land]
+type = ChangeState
+trigger1 = Pos Y >= 0 && Vel Y > 0
+value = 52
+
+[State 39950, Recover In Air]
+type = ChangeState
+trigger1 = Time >= 55
+value = 50
+ctrl = 1
+
+[Statedef 39951]
+type = A
+movetype = A
+physics = N
+anim = 10150
+ctrl = 0
+sprpriority = 5
+
+[State 39951, Copy Variant]
+type = VarSet
+trigger1 = Time = 0
+v = 0
+value = Root, Var(46)
+
+[State 39951, Diagonal Velocity]
+type = VelSet
+trigger1 = Time = 0
+x = 5.2
+y = 4.1
+
+[State 39951, Match Travel Angle]
+type = AngleSet
+trigger1 = 1
+value = -38
+ignorehitpause = 1
+
+[State 39951, Draw Travel Angle]
+type = AngleDraw
+trigger1 = 1
+scale = 1.2,1.2
+ignorehitpause = 1
+
+[State 39951, Trail A]
+type = Explod
+trigger1 = TimeMod = 2,0
+anim = 12213
+ID = 39951
+pos = -18,-3
+postype = p1
+vel = -0.9,-0.3
+scale = 0.35,1
+sprpriority = 4
+ownpal = 1
+removetime = 12
+
+[State 39951, Trail B]
+type = Explod
+trigger1 = TimeMod = 3,0
+anim = 12214
+ID = 39952
+pos = -18,3
+postype = p1
+vel = -0.7,0.3
+scale = 0.35,1
+sprpriority = 4
+ownpal = 1
+removetime = 12
+
+[State 39951, Projectile Protection]
+type = NotHitBy
+trigger1 = 1
+value = SCA, NA, SA, HA, NT, ST, HT
+time = 1
+ignorehitpause = 1
+
+[State 39951, Projectile Clash]
+type = HitOverride
+trigger1 = 1
+attr = SCA, NP, SP, HP
+slot = 0
+stateno = 39952
+time = 1
+ignorehitpause = 1
+
+[State 39951, Can Clash]
+type = HitBy
+trigger1 = 1
+value = SCA, NP, SP, HP
+time = 1
+ignorehitpause = 1
+
+[State 39951, HitDef]
+type = HitDef
+trigger1 = Time >= 0
+attr = A, HP
+damage = ifelse(Var(0) <= 10,30,ifelse(Var(0) >= 90,40,35)), 6
+animtype = Hard
+hitflag = MAF
+guardflag = MA
+priority = 5, Hit
+pausetime = 0,7
+guard.pausetime = 0,6
+sparkno = 3
+guard.sparkno = S9200
+hitsound = S6,5
+guardsound = S0,100
+ground.type = High
+ground.slidetime = 15
+ground.hittime = 18
+ground.velocity = -3,-3
+air.type = Low
+air.velocity = -3,-4
+fall = 1
+fall.recover = 0
+air.recover = 0
+getpower = 0
+givepower = 20
+palfx.time = 35
+palfx.add = 92,24,153
+palfx.mul = 242,182,450
+palfx.sinadd = -45,-27,-74,6
+
+[State 39951, Embed MSSM Energy]
+type = ParentVarSet
+triggerall = Var(0) >= 90
+trigger1 = MoveHit
+v = 22
+value = 1
+
+[State 39951, Hit Or Guard]
+type = ChangeState
+trigger1 = MoveContact
+value = 39952
+
+[State 39951, Touch Ground]
+type = ChangeState
+trigger1 = Pos Y >= -5
+value = 39952
+
+[State 39951, Leave Screen]
+type = ChangeState
+trigger1 = FrontEdgeDist < -40 || BackEdgeDist < -40
+trigger2 = Time >= 150
+value = 39952
+
+[Statedef 39952]
+type = A
+movetype = I
+physics = N
+anim = 10151
+velset = 0,0
+ctrl = 0
+sprpriority = 5
+
+[State 39952, Burst Sound]
+type = PlaySnd
+trigger1 = Time = 0
+value = 2,7
+volume = 100
+
+[State 39952, Remove]
+type = DestroySelf
+trigger1 = AnimTime = 0
+trigger2 = Time >= 20

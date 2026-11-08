@@ -9606,3 +9606,25 @@ Clsn1Default: 1
  Clsn1[0] = 0, -88, 82, 0
 120, 0, 0, 0, 2
 100, 0, 0, 0, -1
+
+; Kuuchuu Gadouken air casting pose
+[Begin Action 39940]
+Clsn2Default: 3
+ Clsn2[0] = -8, -88, 14, -69
+ Clsn2[1] = -22, -70, 24, -28
+ Clsn2[2] = -24, -28, 25, 2
+1050, 0, 0, 0, 2
+1050, 1, 0, 0, 4
+1050, 2, 0, 0, 2
+1050, 3, 0, 0, 12
+
+; Air Shinkuu Gadouken casting pose
+[Begin Action 39950]
+Clsn2Default: 3
+ Clsn2[0] = -8, -88, 14, -69
+ Clsn2[1] = -22, -70, 24, -28
+ Clsn2[2] = -24, -28, 25, 2
+1050, 0, 0, 0, 3
+1050, 1, 0, 0, 5
+1050, 2, 0, 0, 3
+1050, 3, 0, 0, -1

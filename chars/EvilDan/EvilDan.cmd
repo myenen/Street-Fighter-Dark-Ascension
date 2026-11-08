@@ -156,27 +156,27 @@ command = ~D, D, D, a+b+c
 time = 35
 
 [Command]
-name = "qcfqcf_a"
+name = "qcfqcf_a_mwsm"
 command = ~D, DF, F, D, DF, F, a
 time = 30
 [Command]
-name = "qcfqcf_a"
+name = "qcfqcf_a_normal"
 command = ~D, DF, F, D, DF, F, b
 time = 30
 [Command]
-name = "qcfqcf_a"
+name = "qcfqcf_a_mssm"
 command = ~D, DF, F, D, DF, F, c
 time = 30
 [Command]
-name = "qcbqcb_a"
+name = "qcbqcb_a_mwsm"
 command = ~D, DB, B, D, DB, B, a
 time = 30
 [Command]
-name = "qcbqcb_a"
+name = "qcbqcb_a_normal"
 command = ~D, DB, B, D, DB, B, b
 time = 30
 [Command]
-name = "qcbqcb_a"
+name = "qcbqcb_a_mssm"
 command = ~D, DB, B, D, DB, B, c
 time = 30
 [Command]
@@ -192,27 +192,27 @@ name = "qcbqcb_x"
 command = ~D, DB, B, D, DB, B, z
 time = 30
 [Command]
-name = "qcfqcf_x"
+name = "qcfqcf_x_mwsm"
 command = ~D, DF, F, D, DF, F, x
 time = 30
 [Command]
-name = "qcfqcf_x"
+name = "qcfqcf_x_normal"
 command = ~D, DF, F, D, DF, F, y
 time = 30
 [Command]
-name = "qcfqcf_x"
+name = "qcfqcf_x_mssm"
 command = ~D, DF, F, D, DF, F, z
 time = 30
 [Command]
-name = "Premium"
+name = "Premium_mwsm"
 command = B, DB, D, DF, F, a+b
 time = 30
 [Command]
-name = "Premium"
+name = "Premium_mssm"
 command = B, DB, D, DF, F, b+c
 time = 30
 [Command]
-name = "Premium"
+name = "Premium_normal"
 command = B, DB, D, DF, F, a+c
 time = 30
 
@@ -717,6 +717,31 @@ time = 5
 
 [Statedef -1]
 
+; Player-selected Meta Super variant: light = MWSM, medium = normal, heavy = MSSM.
+[State -1, Select MWSM Variant]
+type = VarSet
+v = 49
+value = -1
+triggerall = Var(30) != 59
+trigger1 = command = "qcfqcf_a_mwsm" || command = "qcbqcb_a_mwsm"
+trigger2 = command = "qcfqcf_x_mwsm" || command = "Premium_mwsm"
+
+[State -1, Select Normal Variant]
+type = VarSet
+v = 49
+value = 0
+triggerall = Var(30) != 59
+trigger1 = command = "qcfqcf_a_normal" || command = "qcbqcb_a_normal"
+trigger2 = command = "qcfqcf_x_normal" || command = "Premium_normal"
+
+[State -1, Select MSSM Variant]
+type = VarSet
+v = 49
+value = 1
+triggerall = Var(30) != 59
+trigger1 = command = "qcfqcf_a_mssm" || command = "qcbqcb_a_mssm"
+trigger2 = command = "qcfqcf_x_mssm" || command = "Premium_mssm"
+
 ; Saikyo Damnation - Level 3
 [State -1, Saikyo Damnation]
 type = ChangeState
@@ -781,7 +806,7 @@ value = 59
 type = ChangeState
 value = 3450
 triggerall = var(30) != 59
-triggerall = command = "qcfqcf_a"
+triggerall = command = "qcfqcf_a_mwsm" || command = "qcfqcf_a_normal" || command = "qcfqcf_a_mssm"
 triggerall = power >= 1000 || var(10) > 1
 triggerall = statetype != A
 trigger1 = ctrl = 1
@@ -851,7 +876,7 @@ trigger24 = stateno = 3961 || stateno = 3971 || stateno = 3981 || stateno = 3991
 type = ChangeState
 value = 186299
 triggerall = Var(30) != 59
-triggerall = command = "qcfqcf_a"
+triggerall = command = "qcfqcf_a_mwsm" || command = "qcfqcf_a_normal" || command = "qcfqcf_a_mssm"
 triggerall = !var(2)
 triggerall = power >= 1000
 triggerall = helper(4), movecontact = 0
@@ -1124,7 +1149,7 @@ type = ChangeState
 value = 14
 ctrl = 0
 triggerall = Var(30) != 59
-triggerall = command = "Premium"
+triggerall = command = "Premium_mwsm" || command = "Premium_normal" || command = "Premium_mssm"
 triggerall = !var(2)
 triggerall = power >= 1000
 triggerall = statetype != A
@@ -1163,7 +1188,7 @@ type = ChangeState
 value = 3885
 ctrl = 0
 triggerall = Var(30) != 59
-triggerall = command = "qcfqcf_x"
+triggerall = command = "qcfqcf_x_mwsm" || command = "qcfqcf_x_normal" || command = "qcfqcf_x_mssm"
 triggerall = !var(2)
 triggerall = power >= 1000
 triggerall = statetype != A
@@ -1196,6 +1221,19 @@ trigger21 = (movecontact) && (stateno = 1070)
 trigger22 = (movecontact) && (stateno = 1080)  
 trigger23 = (movecontact) && (stateno = 3450)  
 trigger24 = stateno = 3961 || stateno = 3971 || stateno = 3981 || stateno = 3991
+
+; Air Shinkuu Gadouken
+[State -1, Air Shinkuu Gadouken]
+type = ChangeState
+value = 39950
+ctrl = 0
+triggerall = Var(30) != 59
+triggerall = command = "qcfqcf_x_mwsm" || command = "qcfqcf_x_normal" || command = "qcfqcf_x_mssm"
+triggerall = !var(2)
+triggerall = power >= 1000
+triggerall = StateType = A
+triggerall = Var(45) = 0
+trigger1 = ctrl = 1
 
 [State -1, Effect]
 type = ChangeState
@@ -1236,7 +1274,7 @@ type = ChangeState
 value = 31100
 ctrl = 0
 triggerall = Var(30) != 59
-triggerall = command = "qcbqcb_a"
+triggerall = command = "qcbqcb_a_mwsm" || command = "qcbqcb_a_normal" || command = "qcbqcb_a_mssm"
 triggerall = !var(2)
 triggerall = power >= 1000
 triggerall = helper(4), movecontact = 0
@@ -1275,7 +1313,7 @@ type = ChangeState
 value = 31102
 ctrl = 0
 triggerall = Var(30) != 59
-triggerall = command = "qcbqcb_a"
+triggerall = command = "qcbqcb_a_mwsm" || command = "qcbqcb_a_normal" || command = "qcbqcb_a_mssm"
 triggerall = !var(2)
 triggerall = power >= 1000
 triggerall = helper(4), movecontact = 0
@@ -1335,7 +1373,7 @@ type = ChangeState
 value = 31101
 ctrl = 0
 triggerall = Var(30) != 59
-triggerall = command = "qcbqcb_a"
+triggerall = command = "qcbqcb_a_mwsm" || command = "qcbqcb_a_normal" || command = "qcbqcb_a_mssm"
 triggerall = !var(2)
 triggerall = power >= 1000
 triggerall = helper(4), movecontact = 0
@@ -1621,6 +1659,63 @@ trigger12 = (movecontact) && (stateno = 220)
 trigger13 = (movecontact) && (stateno = 420)  
 
 ;==============
+; Kuuchuu Gadouken - air QCF + punch
+[State -1, Air Gadouken Light Strength]
+type = VarSet
+v = 48
+value = 0
+triggerall = Var(30) != 59
+trigger1 = command = "QCF_x"
+
+[State -1, Air Gadouken Medium Strength]
+type = VarSet
+v = 48
+value = 1
+triggerall = Var(30) != 59
+trigger1 = command = "QCF_y"
+
+[State -1, Air Gadouken Heavy Strength]
+type = VarSet
+v = 48
+value = 2
+triggerall = Var(30) != 59
+trigger1 = command = "QCF_z"
+
+[State -1, Kuuchuu Gadouken]
+type = ChangeState
+value = 39940
+triggerall = Var(30) != 59
+triggerall = command = "QCF_x" || command = "QCF_y" || command = "QCF_z"
+triggerall = !var(2)
+triggerall = Var(10) = 0
+triggerall = Var(45) = 0
+triggerall = NumHelper(39941) = 0
+triggerall = StateType = A
+trigger1 = ctrl = 1
+
+[State -1, Kuuchuu Gadouken AI Strength]
+type = VarSet
+v = 48
+value = Random % 3
+triggerall = Var(30) = 59
+triggerall = StateType = A
+triggerall = ctrl = 1
+triggerall = Var(45) = 0
+triggerall = NumHelper(39941) = 0
+trigger1 = 1
+
+[State -1, Kuuchuu Gadouken AI]
+type = ChangeState
+value = 39940
+triggerall = Var(30) = 59
+triggerall = StateType = A
+triggerall = ctrl = 1
+triggerall = Var(45) = 0
+triggerall = NumHelper(39941) = 0
+triggerall = P2BodyDist X = [35,240]
+triggerall = P2BodyDist Y > -60
+trigger1 = Random < 20
+
 ; light Gadouken
 
 [State -1]

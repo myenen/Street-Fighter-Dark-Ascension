@@ -34079,10 +34079,59 @@ trigger1 = StateType != A
 v = 45
 value = 0
 
+[State -2, CPU Recovery Delay]
+type = VarSet
+triggerall = Var(30) = 59
+trigger1 = MoveType = A
+v = 41
+value = 12
+
+[State -2, CPU Recovery Countdown]
+type = VarAdd
+triggerall = Var(30) = 59
+triggerall = Var(41) > 0
+trigger1 = MoveType != A
+v = 41
+value = -1
+
+[State -2, CPU Recovery Lock]
+type = CtrlSet
+triggerall = Var(30) = 59
+triggerall = Var(41) > 0
+triggerall = MoveType = I
+triggerall = StateNo = 0 || StateNo = 11 || StateNo = 20
+trigger1 = 1
+value = 0
+
+[State -2, CPU Recovery Release]
+type = CtrlSet
+triggerall = Var(30) = 59
+triggerall = Var(41) = 0
+triggerall = MoveType = I
+triggerall = StateNo = 0 || StateNo = 11 || StateNo = 20
+trigger1 = 1
+value = 1
+
+[State -2, Reset CPU Recovery]
+type = VarSet
+trigger1 = RoundState != 2
+v = 41
+value = 0
+
+[State -2, CPU Damage Balance]
+type = AttackMulSet
+trigger1 = Var(30) = 59
+value = 0.85
+
+[State -2, Player Damage Restore]
+type = AttackMulSet
+trigger1 = Var(30) != 59
+value = 1.0
+
 [State 0, PowerAdd]
 type = PowerAdd
 trigger1 = 1
-value = 1
+value = ifelse(Var(30) = 59, 0, 1)
 
 [State 181, ai randomizer]
 type = VarRandom

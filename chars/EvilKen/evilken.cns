@@ -47,7 +47,7 @@ airjump.back = -3.55, -9.1
 airjump.fwd = 3.5, -9.1
 
 [Movement]
-airjump.num = 0
+airjump.num = 1
 airjump.height = 40
 yaccel = 0.45
 stand.friction = 0.85
@@ -23854,10 +23854,10 @@ sprpriority = 2
 facep2 = 1
 
 [State Randomizer]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State 0]
 type = VarSet
@@ -24855,10 +24855,10 @@ scale = 0.2, 1.5
 accel = -1 / 3*(var(53)), -1 / 3*var(53)
 
 [State Randomizer]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State 1]
 type = NotHitBy
@@ -26368,10 +26368,10 @@ sprpriority = 2
 facep2 = 1
 
 [State Randomizer]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State NHB]
 type = NotHitBy
@@ -28777,10 +28777,10 @@ trigger1 = animelemtime(4) >= -1 && animelemtime(19) < 0
 value = 32, 0
 
 [State Randomizer]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State NHB]
 type = NotHitBy
@@ -30402,10 +30402,10 @@ sprpriority = 2
 facep2 = 1
 
 [State Randomizer]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State black fadeout]
 type = BGPalFx
@@ -32627,10 +32627,10 @@ trigger1 = pos y > 0
 y = 0
 
 [State Randomizer]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State 2]
 type = PlayerPush
@@ -33552,10 +33552,10 @@ x = -2
 y = -1
 
 [State Randomizer6]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State jerk back]
 type = Posadd
@@ -33958,10 +33958,10 @@ trigger1 = animelemtime(2) >= 0
 value = 50
 
 [State Randomizer]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State 1]
 type = NotHitBy
@@ -34869,10 +34869,10 @@ v = 21
 value = 1
 
 [State Randomizer]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State NHB]
 type = NotHitBy
@@ -35847,10 +35847,10 @@ trigger1 = pos y > 0
 y = 0
 
 [State Randomizer]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State NHB]
 type = NotHitBy
@@ -36657,10 +36657,10 @@ movetime = 26
 endcmdbuftime = 26
 
 [State Randomizer]
-type = varrandom
+type = VarSet
 trigger1 = time = 0
 v = 46
-range = 0, 100
+value = ifelse(AILevel, random / 10, ifelse(var(57) < 0, 0, ifelse(var(57) > 0, 100, random / 10)))
 
 [State 9]
 type = ChangeState

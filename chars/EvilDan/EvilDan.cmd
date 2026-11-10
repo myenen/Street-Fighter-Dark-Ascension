@@ -3020,7 +3020,7 @@ triggerall = MoveContact
 type = ChangeState
 value = 130
 triggerall = Var(30) = 59 && var(10) = 0
-triggerall = random < 999
+triggerall = random < 820
 triggerall = P2movetype = A
 triggerall = statetype != A
 triggerall = P2statetype != C
@@ -3032,7 +3032,7 @@ trigger2 = stateno = 52
 type = ChangeState
 value = 131
 triggerall = Var(30) = 59 && var(10) = 0
-triggerall = random < 999
+triggerall = random < 820
 triggerall = P2movetype = A
 triggerall = statetype != A
 triggerall = P2statetype = C
@@ -3044,7 +3044,7 @@ trigger2 = stateno = 52
 type = ChangeState
 value = 132
 triggerall = Var(30) = 59 && var(10) = 0
-triggerall = random < 999
+triggerall = random < 820
 triggerall = P2movetype = A
 triggerall = statetype = A
 triggerall = inguarddist = 1

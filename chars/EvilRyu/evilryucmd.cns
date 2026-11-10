@@ -17,106 +17,106 @@ command.time = 15
 command.buffer.time = 1
 
 [Command]
-name = "QCF_QCF_k"
+name = "QCF_QCF_k_light"
 command = ~D, F, D, F, a
 time = 30
 [Command]
-name = "QCF_QCF_k"
+name = "QCF_QCF_k_medium"
 command = ~D, F, D, F, b
 time = 30
 [Command]
-name = "QCF_QCF_k"
+name = "QCF_QCF_k_heavy"
 command = ~D, F, D, F, c
 time = 30
 
 [Command]
-name = "QCF_QCF_k"
+name = "QCF_QCF_k_light"
 command = ~D, F, D, F, ~a
 time = 30
 [Command]
-name = "QCF_QCF_k"
+name = "QCF_QCF_k_medium"
 command = ~D, F, D, F, ~b
 time = 30
 [Command]
-name = "QCF_QCF_k"
+name = "QCF_QCF_k_heavy"
 command = ~D, F, D, F, ~c
 time = 30
 
 [Command]
-name = "QCF_QCF_p"
+name = "QCF_QCF_p_light"
 command = ~D, F, D, F, x
 time = 30
 [Command]
-name = "QCF_QCF_p"
+name = "QCF_QCF_p_medium"
 command = ~D, F, D, F, y
 time = 30
 [Command]
-name = "QCF_QCF_p"
+name = "QCF_QCF_p_heavy"
 command = ~D, F, D, F, z
 time = 30
 
 [Command]
-name = "QCF_QCF_p"
+name = "QCF_QCF_p_light"
 command = ~D, F, D, F, ~x
 time = 30
 [Command]
-name = "QCF_QCF_p"
+name = "QCF_QCF_p_medium"
 command = ~D, F, D, F, ~y
 time = 30
 [Command]
-name = "QCF_QCF_p"
+name = "QCF_QCF_p_heavy"
 command = ~D, F, D, F, ~z
 time = 30
 
 [Command]
-name = "QCB_QCB_k"
+name = "QCB_QCB_k_light"
 command = ~D, B, D, B, a
 time = 30
 [Command]
-name = "QCB_QCB_k"
+name = "QCB_QCB_k_medium"
 command = ~D, B, D, B, b
 time = 30
 [Command]
-name = "QCB_QCB_k"
+name = "QCB_QCB_k_heavy"
 command = ~D, B, D, B, c
 time = 30
 
 [Command]
-name = "QCB_QCB_k"
+name = "QCB_QCB_k_light"
 command = ~D, B, D, B, ~a
 time = 30
 [Command]
-name = "QCB_QCB_k"
+name = "QCB_QCB_k_medium"
 command = ~D, B, D, B, ~b
 time = 30
 [Command]
-name = "QCB_QCB_k"
+name = "QCB_QCB_k_heavy"
 command = ~D, B, D, B, ~c
 time = 30
 
 [Command]
-name = "QCB_QCB_p"
+name = "QCB_QCB_p_light"
 command = ~D, B, D, B, x
 time = 30
 [Command]
-name = "QCB_QCB_p"
+name = "QCB_QCB_p_medium"
 command = ~D, B, D, B, y
 time = 30
 [Command]
-name = "QCB_QCB_p"
+name = "QCB_QCB_p_heavy"
 command = ~D, B, D, B, z
 time = 30
 
 [Command]
-name = "QCB_QCB_p"
+name = "QCB_QCB_p_light"
 command = ~D, B, D, B, ~x
 time = 30
 [Command]
-name = "QCB_QCB_p"
+name = "QCB_QCB_p_medium"
 command = ~D, B, D, B, ~y
 time = 30
 [Command]
-name = "QCB_QCB_p"
+name = "QCB_QCB_p_heavy"
 command = ~D, B, D, B, ~z
 time = 30
 
@@ -134,15 +134,15 @@ command = ~B, $D, F, y+z
 time = 18
 
 [Command]
-name = "HCF_kk"
+name = "HCF_kk_light"
 command = ~B, $D, F, a+b
 time = 18
 [Command]
-name = "HCF_kk"
+name = "HCF_kk_heavy"
 command = ~B, $D, F, b+c
 time = 18
 [Command]
-name = "HCF_kk"
+name = "HCF_kk_medium"
 command = ~B, $D, F, a+c
 time = 18
 
@@ -152,28 +152,28 @@ command = x, y, F, a, b
 time = 60
 
 [Command]
-name = "DDDa"
+name = "DDDa_light"
 command = D, D, D, a
 time = 30
 [Command]
-name = "DDDa"
+name = "DDDa_medium"
 command = D, D, D, b
 time = 30
 [Command]
-name = "DDDa"
+name = "DDDa_heavy"
 command = D, D, D, c
 time = 30
 
 [Command]
-name = "DDDx"
+name = "DDDx_light"
 command = D, D, D, x
 time = 30
 [Command]
-name = "DDDx"
+name = "DDDx_medium"
 command = D, D, D, y
 time = 30
 [Command]
-name = "DDDx"
+name = "DDDx_heavy"
 command = D, D, D, z
 time = 30
 
@@ -632,6 +632,38 @@ time = 15
 
 [Statedef -1]
 
+; Player-selected Level 1 Meta variant:
+; light = normal, medium = original random chance, heavy = guaranteed MSSM.
+[State -1, Select Normal Meta Variant]
+type = VarSet
+triggerall = !AILevel
+trigger1 = command = "QCF_QCF_p_light" || command = "QCF_QCF_k_light"
+trigger2 = command = "QCB_QCB_p_light" || command = "QCB_QCB_k_light"
+trigger3 = command = "DDDa_light" || command = "DDDx_light"
+trigger4 = command = "HCF_kk_light"
+v = 57
+value = -1
+
+[State -1, Select Random Meta Variant]
+type = VarSet
+triggerall = !AILevel
+trigger1 = command = "QCF_QCF_p_medium" || command = "QCF_QCF_k_medium"
+trigger2 = command = "QCB_QCB_p_medium" || command = "QCB_QCB_k_medium"
+trigger3 = command = "DDDa_medium" || command = "DDDx_medium"
+trigger4 = command = "HCF_kk_medium"
+v = 57
+value = 0
+
+[State -1, Select MSSM Meta Variant]
+type = VarSet
+triggerall = !AILevel
+trigger1 = command = "QCF_QCF_p_heavy" || command = "QCF_QCF_k_heavy"
+trigger2 = command = "QCB_QCB_p_heavy" || command = "QCB_QCB_k_heavy"
+trigger3 = command = "DDDa_heavy" || command = "DDDx_heavy"
+trigger4 = command = "HCF_kk_heavy"
+v = 57
+value = 1
+
 [State -1, Ground Recovery Roll]
 type = ChangeState
 value = ifelse(command = "BQCD_z", 2006, ifelse(command = "BQCD_y", 2005, 2004))
@@ -688,7 +720,7 @@ trigger25 = stateno = 3880 && anim = 1002 && (animelemtime(2) = [1, 16])
 type = ChangeState
 value = 4480
 triggerall = !AILevel
-triggerall = command = "HCF_kk"
+triggerall = command = "HCF_kk_light" || command = "HCF_kk_medium" || command = "HCF_kk_heavy"
 triggerall = power >= 1000 || var(10) >= 1
 triggerall = statetype != A
 trigger1 = ctrl || (stateno = [40, 41]) || (Stateno = [100, 107])
@@ -731,7 +763,7 @@ trigger25 = stateno = 3880 && anim = 1002 && (animelemtime(2) = [1, 16])
 type = ChangeState
 value = 4800
 triggerall = !AILevel
-triggerall = command = "DDDx"
+triggerall = command = "DDDx_light" || command = "DDDx_medium" || command = "DDDx_heavy"
 triggerall = power >= 1000 || var(10) >= 1
 triggerall = statetype != A
 trigger1 = ctrl || (stateno = [40, 41]) || (Stateno = [100, 107])
@@ -773,7 +805,7 @@ trigger25 = stateno = 3880 && anim = 1002 && (animelemtime(2) = [1, 16])
 type = ChangeState
 value = 3480
 triggerall = !AILevel
-triggerall = command = "QCF_QCF_k"
+triggerall = command = "QCF_QCF_k_light" || command = "QCF_QCF_k_medium" || command = "QCF_QCF_k_heavy"
 triggerall = power >= 1000 || var(10) >= 1
 triggerall = statetype != A
 trigger1 = ctrl || (stateno = [40, 41]) || (Stateno = [100, 107])
@@ -816,7 +848,7 @@ trigger25 = stateno = 3880 && anim = 1002 && (animelemtime(2) = [1, 16])
 type = ChangeState
 value = 3800
 triggerall = !AILevel
-triggerall = command = "QCB_QCB_k"
+triggerall = command = "QCB_QCB_k_light" || command = "QCB_QCB_k_medium" || command = "QCB_QCB_k_heavy"
 triggerall = power >= 1000 || var(10) >= 1
 triggerall = statetype != A
 trigger1 = ctrl || (stateno = [40, 41]) || (Stateno = [100, 107])
@@ -860,7 +892,7 @@ trigger25 = stateno = 3880 && anim = 1002 && (animelemtime(2) = [1, 16])
 type = ChangeState
 value = 3885
 triggerall = !AILevel
-triggerall = command = "QCF_QCF_p"
+triggerall = command = "QCF_QCF_p_light" || command = "QCF_QCF_p_medium" || command = "QCF_QCF_p_heavy"
 triggerall = power >= 1000 || var(10) >= 1
 triggerall = statetype != A
 trigger1 = ctrl || (stateno = [40, 41]) || (Stateno = [100, 107])
@@ -902,7 +934,7 @@ trigger25 = stateno = 3880 && anim = 1002 && (animelemtime(2) = [1, 16])
 type = ChangeState
 value = 3875
 triggerall = !AILevel
-triggerall = command = "QCB_QCB_p"
+triggerall = command = "QCB_QCB_p_light" || command = "QCB_QCB_p_medium" || command = "QCB_QCB_p_heavy"
 triggerall = power >= 3000 && var(10) <= 0
 triggerall = statetype != A
 trigger1 = ctrl || (stateno = [40, 41]) || (Stateno = [100, 107])
@@ -945,7 +977,7 @@ trigger25 = (stateno = 3845 && movecontact) || stateno = 3846 || stateno = 3847
 type = ChangeState
 value = 3930
 triggerall = !AILevel
-triggerall = command = "DDDa" || command = "DDDa" || command = "DDDa"
+triggerall = command = "DDDa_light" || command = "DDDa_medium" || command = "DDDa_heavy"
 triggerall = power >= 1000 || var(10) >= 1
 triggerall = statetype != A
 trigger1 = ctrl || (stateno = [40, 41]) || (Stateno = [100, 107])
@@ -988,7 +1020,7 @@ trigger25 = stateno = 3880 && anim = 1002 && (animelemtime(2) = [1, 16])
 type = ChangeState
 value = 4050
 triggerall = !AILevel
-triggerall = command = "QCF_QCF_k"
+triggerall = command = "QCF_QCF_k_light" || command = "QCF_QCF_k_medium" || command = "QCF_QCF_k_heavy"
 triggerall = power >= 1000 || var(10) >= 1
 triggerall = statetype = A
 trigger1 = ctrl
@@ -1029,7 +1061,7 @@ trigger25 = stateno = 3880 && anim = 1002 && (animelemtime(2) = [1, 16])
 type = ChangeState
 value = 4060
 triggerall = !AILevel
-triggerall = command = "QCB_QCB_p"
+triggerall = command = "QCB_QCB_p_light" || command = "QCB_QCB_p_medium" || command = "QCB_QCB_p_heavy"
 triggerall = power >= 1000 || var(10) >= 1
 triggerall = statetype = A
 trigger1 = ctrl
@@ -1066,7 +1098,7 @@ trigger24 = stateno = 3880 && anim = 3880 &&  (animelemtime(32) = [1, 16])
 type = ChangeState
 value = 3900
 triggerall = !AILevel
-triggerall = command = "QCB_QCB_k"
+triggerall = command = "QCB_QCB_k_light" || command = "QCB_QCB_k_medium" || command = "QCB_QCB_k_heavy"
 triggerall = power >= 1000 || var(10) >= 1
 triggerall = statetype = A
 trigger1 = ctrl
@@ -1109,7 +1141,7 @@ trigger25 = stateno = 3880 && anim = 1002 && (animelemtime(2) = [1, 16])
 type = ChangeState
 value = 4030
 triggerall = !AILevel
-triggerall = command = "QCF_QCF_p"
+triggerall = command = "QCF_QCF_p_light" || command = "QCF_QCF_p_medium" || command = "QCF_QCF_p_heavy"
 triggerall = power >= 1000 || var(10) >= 1
 triggerall = statetype = A
 trigger1 = ctrl

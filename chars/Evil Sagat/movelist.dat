@@ -8,6 +8,8 @@ Tiger Uppercut                      _F_D_F^P
 Tiger Knee                          _F_D_F^K
 
 <#f0f000>SUPER MOVES</>
+<#bebebe>Light = Normal | Medium = Critical below 800 life | Heavy = Critical</>
+<#bebebe>Super Tiger Uppercut: LP+MP Normal | LP+HP Conditional | MP+HP Critical</>
 
 Tiger Cannon <#bebebe>(1000)</>             _D_DF_F_D_DF_F^P
 Low Tiger Cannon <#bebebe>(1000)</>         _D_DB_B_D_DB_B^P
@@ -22,9 +24,19 @@ Super Tiger Uppercut <#bebebe>(1000)</>     _F_D_F^2P
 Shield <#bebebe>(3000)</>                   _D_D_D^3P
 Raging Attack <#bebebe>(3000)</>            ^LP_LP_F_LK_HP
 
+<#f0f000>CRITICAL MODE (LIFE 800 OR BELOW)</>
+
+Critical Aura / Power Regeneration          (Automatic)
+Critical Raging Attack <#bebebe>(1000)</>    ^LP_LP_F_LK_HP
+Automatic Shield <#bebebe>(at full power)</> (Automatic)
+Critical Tiger Cannon Shortcut              _D_DF_F^HP
+Critical Low Tiger Cannon Shortcut          _D_DF_F^HK
+Critical Special Shortcuts                  ^LP/^MP/^HP/^LK/^MK/^HK
+
 <#f0f000>SYSTEM</>
 
 Quick Teleport                      _F_F
 Back Teleport                       _B_B
+Triple Jump                         _AIR_U_U
 Power Charge                        (hold) ^HP_+^HK
 Taunt                               ^S

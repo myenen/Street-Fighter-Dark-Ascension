@@ -5,32 +5,32 @@ command = D,D,D, z
 time = 30
 
 [Command]
-name = "Tgenocide"
+name = "Tgenocide_light"
 command = ~D, DF, F, D, DF, a
 time = 30
 
 [Command]
-name = "Tgenocide"
+name = "Tgenocide_medium"
 command = ~D, DF, F, D, DF, b
 time = 30
 
 [Command]
-name = "Tgenocide"
+name = "Tgenocide_heavy"
 command = ~D, DF, F, D, DF, c
 time = 30
 
 [Command]
-name = "Tiger_Cannon"
+name = "Tiger_Cannon_light"
 command = ~D, DF, F, D, DF, F, x
 time = 30
 
 [Command]
-name = "Tiger_Cannon"
+name = "Tiger_Cannon_medium"
 command = ~D, DF, F, D, DF, F, y
 time = 30
 
 [Command]
-name = "Tiger_Cannon"
+name = "Tiger_Cannon_heavy"
 command = ~D, DF, F, D, DF, F, z
 time = 30
 
@@ -50,17 +50,17 @@ command = ~D, DB, B, D, DB, B, c
 time = 30
 
 [Command]
-name = "Tiger_Cannon2"
+name = "Tiger_Cannon2_light"
 command = ~D, DB, B, D, DB, B, x
 time = 30
 
 [Command]
-name = "Tiger_Cannon2"
+name = "Tiger_Cannon2_medium"
 command = ~D, DB, B, D, DB, B, y
 time = 30
 
 [Command]
-name = "Tiger_Cannon2"
+name = "Tiger_Cannon2_heavy"
 command = ~D, DB, B, D, DB, B, z
 time = 30
 
@@ -80,17 +80,17 @@ command = ~D, DF, F, b+c
 time = 30
 
 [Command]
-name = "STU"
+name = "STU_light"
 command = ~F, D, DF, F, x+y
 time = 30
 
 [Command]
-name = "STU"
+name = "STU_heavy"
 command = ~F, D, DF, F, y+z
 time = 30
 
 [Command]
-name = "STU"
+name = "STU_medium"
 command = ~F, D, DF, F, x+z
 time = 30
 
@@ -464,6 +464,42 @@ time = 1
 
 [Statedef -1]
 
+; Player-selected Critical super variant:
+; light = normal, medium = Critical below 800 life, heavy = guaranteed Critical.
+[State -1, Select Normal Critical Variant]
+type = VarSet
+triggerall = var(30) != 59
+trigger1 = command = "Tiger_Cannon_light" || command = "Tiger_Cannon2_light"
+trigger2 = command = "Tgenocide_light" || command = "STU_light"
+v = 57
+value = -1
+
+[State -1, Select Conditional Critical Variant]
+type = VarSet
+triggerall = var(30) != 59
+trigger1 = command = "Tiger_Cannon_medium" || command = "Tiger_Cannon2_medium"
+trigger2 = command = "Tgenocide_medium" || command = "STU_medium"
+v = 57
+value = 0
+
+[State -1, Select Guaranteed Critical Variant]
+type = VarSet
+triggerall = var(30) != 59
+trigger1 = command = "Tiger_Cannon_heavy" || command = "Tiger_Cannon2_heavy"
+trigger2 = command = "Tgenocide_heavy" || command = "STU_heavy"
+v = 57
+value = 1
+
+[State -1, Preserve Legacy Critical Shortcut]
+type = VarSet
+triggerall = var(30) != 59
+triggerall = life <= 800
+triggerall = command != "Tiger_Cannon_heavy" && command != "Tiger_Cannon_medium"
+triggerall = command != "Tiger_Cannon2_heavy" && command != "Tiger_Cannon2_medium"
+trigger1 = command = "Tiger_Shot_z" || command = "Tiger_Shot_c"
+v = 57
+value = 0
+
 ;---------------------------------------------------------------------------
 ; Supers
 ;---------------------------------------------------------------------------
@@ -472,7 +508,7 @@ time = 1
 type = ChangeState
 value = 4020
 triggerall = stateno != [10010,10020]
-triggerall = command = "Tiger_Cannon"
+triggerall = command = "Tiger_Cannon_light" || (command = "Tiger_Cannon_medium" && life > 800)
 triggerall = power >= 1000 
 triggerall = statetype != A
 trigger1 = ctrl = 1
@@ -496,7 +532,7 @@ trigger1 = ProjHit1009 = 0
 type = ChangeState
 value = 4111
 triggerall = stateno != [10010,10020]
-triggerall = command = "Tiger_Cannon2"
+triggerall = command = "Tiger_Cannon2_light" || (command = "Tiger_Cannon2_medium" && life > 800)
 triggerall = power >= 1000 
 triggerall = statetype != A
 trigger1 = ctrl = 1
@@ -507,7 +543,7 @@ trigger1 = ctrl = 1
 type = ChangeState
 value = 4222
 triggerall = stateno != [10010,10020]
-triggerall = command = "Tiger_Cannon"
+triggerall = command = "Tiger_Cannon_light" || (command = "Tiger_Cannon_medium" && life > 800)
 triggerall = power >= 1000 
 triggerall = statetype = A
 trigger1 = ctrl = 1
@@ -519,8 +555,7 @@ type = ChangeState
 value = 4021
 triggerall = stateno != [10010,10020]
 triggerall = statetype != A
-triggerall = life <= 800
-triggerall = command = "Tiger_Shot_z"
+triggerall = (command = "Tiger_Cannon_heavy" && power >= 1000) || (command = "Tiger_Cannon_medium" && life <= 800) || (command = "Tiger_Shot_z" && command != "Tiger_Cannon_heavy" && command != "Tiger_Cannon_medium" && life <= 800)
 trigger1 = ctrl = 1
 
 ;---------------------------------------------------------------------------
@@ -530,8 +565,7 @@ type = ChangeState
 value = 4112
 triggerall = stateno != [10010,10020]
 triggerall = statetype != A
-triggerall = life <= 800
-triggerall = command = "Tiger_Shot_c"
+triggerall = (command = "Tiger_Cannon2_heavy" && power >= 1000) || (command = "Tiger_Cannon2_medium" && life <= 800) || (command = "Tiger_Shot_c" && command != "Tiger_Cannon2_heavy" && command != "Tiger_Cannon2_medium" && life <= 800)
 trigger1 = ctrl = 1
 
 ;---------------------------------------------------------------------------
@@ -541,8 +575,7 @@ type = ChangeState
 value = 4223
 triggerall = stateno != [10010,10020]
 triggerall = statetype = A
-triggerall = life <= 800
-triggerall = command = "Tiger_Shot_z"
+triggerall = (command = "Tiger_Cannon_heavy" && power >= 1000) || (command = "Tiger_Cannon_medium" && life <= 800) || (command = "Tiger_Shot_z" && command != "Tiger_Cannon_heavy" && command != "Tiger_Cannon_medium" && life <= 800)
 trigger1 = ctrl = 1
 
 ;---------------------------------------------------------------------------
@@ -562,7 +595,7 @@ trigger1 = ctrl = 1
 type = ChangeState
 value = 4080
 triggerall = stateno != [10010,10020]
-triggerall = command = "Tgenocide"
+triggerall = command = "Tgenocide_light" || (command = "Tgenocide_medium" && life > 800)
 triggerall = power >= 1000
 triggerall = statetype != A
 trigger1 = ctrl = 1
@@ -574,8 +607,7 @@ type = ChangeState
 value = 4090
 triggerall = stateno != [10010,10020]
 triggerall = statetype != A
-triggerall = life <= 800
-triggerall = command = "Tgenocide"
+triggerall = (command = "Tgenocide_heavy" && power >= 1000) || (command = "Tgenocide_medium" && life <= 800)
 trigger1 = ctrl = 1
 
 ;---------------------------------------------------------------------------
@@ -584,7 +616,7 @@ trigger1 = ctrl = 1
 type = ChangeState
 value = 2045
 triggerall = stateno != [10010,10020]
-triggerall = command = "STU"
+triggerall = command = "STU_light" || (command = "STU_medium" && life > 800)
 triggerall = power >= 1000
 triggerall = statetype != A
 trigger1 = ctrl = 1
@@ -596,8 +628,7 @@ type = ChangeState
 value = 2046
 triggerall = stateno != [10010,10020]
 triggerall = statetype != A
-triggerall = life <= 800
-triggerall = command = "STU"
+triggerall = (command = "STU_heavy" && power >= 1000) || (command = "STU_medium" && life <= 800)
 trigger1 = ctrl = 1
 
 ;---------------------------------------------------------------------------

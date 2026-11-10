@@ -2403,6 +2403,11 @@ VelSet = 0,0,0
 Ctrl = 0
 Anim = 2045
 
+[State 2046, Guaranteed Critical Cost]
+type = PowerAdd
+trigger1 = Time = 0 && Var(57) > 0
+value = -1000
+
 [State 2046, 9]
 type = BGPalfx
 trigger1 = Animelem = 1
@@ -4752,6 +4757,11 @@ anim = 4001
 ctrl = 0
 velset = 0, 0
 
+[State 4223, Guaranteed Critical Cost]
+type = PowerAdd
+trigger1 = Time = 0 && Var(57) > 0
+value = -1000
+
 [State 4223, 1]
 type = BGPalfx
 trigger1 = time = 0
@@ -5095,6 +5105,11 @@ movetype= A
 juggle  = 4
 ctrl = 0
 anim = 120
+
+[State 4090, Guaranteed Critical Cost]
+type = PowerAdd
+trigger1 = Time = 0 && Var(57) > 0
+value = -1000
 
 [State 4090, 9]
 type = BGPalfx

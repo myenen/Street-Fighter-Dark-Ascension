@@ -2,6 +2,7 @@
 
 <#f0f000>:System / Defense:</>
 High Jump	_U / _UF
+Air Jump x2 <#bebebe>(two extra jumps / three jumps total)</>	_U / _UF <#bebebe>(while airborne)</>
 Forward Dash	_F_F
 Back Dash	_B_B
 Blocking (High) <#bebebe>(at impact)</>	_F
@@ -10,6 +11,13 @@ Zero Counter (Punch) <#bebebe>(while guarding)</>	_B_DB_D_+^P
 Zero Counter (Kick) <#bebebe>(while guarding)</>	_B_DB_D_+^K
 Ground Kick	_D_+^K
 Down + Start	_D_+^S
+
+<#f0f000>:Command Normals / Throws:</>
+Forward Medium Punch	_F_+^MP
+Forward Medium Kick <#bebebe>(hopping attack)</>	_F_+^MK
+Punch Throw <#bebebe>(close)</>	_CLOSE[_B/_F]_+^2P
+Kick Throw <#bebebe>(close)</>	_CLOSE[_B/_F]_+^2K
+Air Throw <#bebebe>(air / close)</>	_AIR_CLOSE[_B/_F]_+^2K
 
 <#f0f000>:Special Moves:</>
 Gou Hadouken	_D_DF_F_+^P
@@ -21,7 +29,7 @@ Tenma Kuujin Kyaku <#bebebe>(Air)</>	_D_DF_F_+^K
 Hyakki Shuu	_D_DF_F_UF_+^P
 Ryuusei Raku	_D_DF_F_+^K
 Hellion	_D_DB_B_+^P
-Abyss Pursuit <#bebebe>(after Hellion hits / original CPU aerial chain)</>	^3P
+Abyss Pursuit <#bebebe>(after Hellion hits / automatic LK > MP > MK chain)</>	^3P
 Somersault Shell	_B_D_DB_+^K
 Blackout	_F_DF_D_DB_B_+^K
 Bakudan Pachiki	_B_DB_D_DF_F_+^P
@@ -45,7 +53,7 @@ Premium Sign <#bebebe>(1000)</>	_D_DF_F_D_DF_F_+^S
 Howling Bull <#bebebe>(1000)</>	_F_B_DB_D_DF_F_+^P
 Majin Hatendan <#bebebe>(1000)</>	_D_DF_F_D_DF_F_+^K
 Guillotine <#bebebe>(1000)</>	_D_DB_B_DB_D_DF_F_+^K
-Drill <#bebebe>(1000 / then mash P)</>	_F_DF_D_DB_B_F_DF_D_DB_B_+^P
+Drill <#bebebe>(1000 / mash P / 8 strength stages)</>	_F_DF_D_DB_B_F_DF_D_DB_B_+^P
 Desperate Overdrive <#bebebe>(2000)</>	_D_DF_F_DF_D_DB_B_+^P
 End of Eden <#bebebe>(2000)</>	_D_DB_B_DB_D_DF_F_+^P / _D_D_D_+^3K
 Raging Demon <#bebebe>(3000 / 1200 damage)</>	^LP_^LP_F_^LK_^HP
@@ -54,11 +62,11 @@ Raging Demon <#bebebe>(3000 / 1200 damage)</>	^LP_^LP_F_^LK_^HP
 Ogre Apocalypse <#bebebe>(3000 / 700 damage)</>	_D_D_D_+^3P
 Reverse Demon <#bebebe>(3000 / 1500 damage)</>	^LP_^LP_B_^LK_^HP
 
-<#f0f000>:Secret / Crazy Moves:</>
-Bousou	^3P+^3K
-Saika	_D_DF_F_D_DF_F_D_DF_F_D_DF_F_+^3P
-Saika (Shortcut)	^S
+<#f0f000>:Taunts / Poses:</>
+Taunt	^S
+Forward Taunt	_F_+^S
+Backward Taunt	_B_+^S
 
-_!P = Any Punch   K = Any Kick   3P = All 3 Punches   3K = All 3 Kicks
+_!P = Any Punch   K = Any Kick   2P/2K = Any 2 Punches/Kicks   3P = All 3 Punches   3K = All 3 Kicks
 _!S = Start button (P1 keyboard: Enter)
 _!Some moves require sufficient Power, guarding, ground/air state, or specific timing.

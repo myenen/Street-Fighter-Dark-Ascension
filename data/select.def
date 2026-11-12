@@ -221,6 +221,8 @@ CharlieNash/CharlieNash.def, stages/stormbreak_airbase.def, order=1
 dhalsim/dhalsim.def, order=1
 God_Urien/God_Urien.def, order=3
 Guile/Guile.def, stages/stormbreak_airbase.def, order=2
+Shadow Sumou/hondam.def, stages/neon_ruins_district.def, order=1
+Seth SFIV/Seth SFIV.def, stages/shadaloo_eclipse_throne.def, order=3
 randomselect
 
 ;-------------------------------------------------------------------------------

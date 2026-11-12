@@ -1,0 +1,37 @@
+;ƒzƒ“ƒ_ƒ€
+[Info]
+name ="Shadow SUMOU"
+displayname ="Shadow SUMOU"
+versiondate =07,05,2011
+mugenversion =04,14,2002
+author ="3ha"
+pal.defaults =6,3,4,2
+
+; Files for the player
+[Files]
+cmd     = hondam.cmd
+cns     = hondam.cns
+st      = hondam.cns
+st1	= hakan.cns
+st2	= config.txt
+stcommon =common1.cns
+sprite  = hondam.sff
+anim    = hondam.air
+sound   = hondam.snd
+movelist = movelist.dat
+pal1	= pal/hondam4.act
+pal2	= pal/hondam5.act
+pal3	= pal/hondam6.act
+pal4	= pal/hondam.act
+pal5	= pal/hondam2.act
+pal6	= pal/hondam3.act
+pal7	= pal/hondam10.act
+pal8	= pal/hondam11.act
+pal9	= pal/hondam12.act
+pal10	= pal/hondam7.act
+pal11	= pal/hondam8.act
+pal12	= pal/hondam9.act
+
+[Arcade]
+intro.storyboard =
+ending.storyboard =

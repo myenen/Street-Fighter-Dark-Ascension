@@ -1,0 +1,61 @@
+;---------------------------------------------------------------------------
+;イントロ分岐兼各種設定
+[Statedef 190]
+type = S
+anim = 9999
+;===========================================
+;設定
+[State 190, 濡れるｯ!]
+type = Varset
+trigger1 = time = 0
+var(31) = 0  ;0 = 無し  1 = 文字  2 = +音声
+
+[State 190, 初期モード固定]
+type = Varset
+trigger1 = time = 0
+var(32) = 0  ;0 = 無し  1 = 塩  2 = 油
+
+[State 190, スペシャルパートナー有無]
+type = Varset
+trigger1 = time = 0
+var(33) = 1  ;0 = 無し  1 = 有り
+
+[State 190, スペシャルパートナーストック数]
+type = Varset
+trigger1 = time = 0
+var(34) = 5  ;0～9
+
+[State 190, ヴァリアブる？]
+type = Varset
+trigger1 = time = 0
+var(35) = 1  ;0 = 無し  1 = 有り
+
+;===========================================
+;イントロ分岐
+[State 190, 1]
+type = Varset
+trigger1 = var(32) = 1
+trigger1 = var(30):= 0
+trigger2 = var(32) = 2
+trigger2 = var(30):= 1
+trigger3 = palno > 6
+trigger3 = var(30):= 1
+var(32) = var(32)
+
+[state 190, 2]
+type = Varset
+triggerall = Time = 0
+trigger1 = numpartner
+trigger1 = partner,name = "Shadow SUMOU" && partner,authorname = "3ha"
+trigger1 = ID > partner,ID
+var(36) = 1
+
+[State 190, 3]
+type = ChangeState
+trigger1 = Time = 0 && var(30)
+value = 185
+
+[State 190, 4]
+type = ChangeState
+trigger1 = Time = 0
+value = 191 + random%2

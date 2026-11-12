@@ -1,0 +1,56 @@
+<#f0f000>:Shadow Sumou - Command List:</>
+
+<#f0f000>:System / Universal:</>
+Forward Dash	_F_F / ^3P
+Back Dash	_B_B / _B_+^3P
+Super Jump	_D_U / ^3K
+Advancing Guard <#bebebe>(while guarding)</>	^3P
+Recovery <#bebebe>(while being knocked away)</>	_B_DB_D_+^P
+Aerial Rave Launcher	^HP / ^LP+^LK
+Special Partner <#bebebe>(uses partner stock)</>	^MP+^MK
+Variable Attack	^HP+^HK
+Variable Counter <#bebebe>(while guarding)</>	_B_DB_D_+^HP+^HK
+Variable Combination <#bebebe>(2000)</>	_D_DF_F_+^HP+^HK
+
+<#f0f000>:Shadow Mode <#bebebe>(palettes 1-6)</>:</>
+Sumo Press <#bebebe>(Air)</>	_D_+^MK
+Tawara Throw <#bebebe>(close)</>	_CLOSE[_B/_F]_+^HP
+Force Out <#bebebe>(close)</>	_CLOSE[_B/_F]_+^HK
+Sumo Breaker <#bebebe>(Air / close)</>	_AIR_CLOSE[_B/_F]_+^HP
+Salt Bomb <#bebebe>(direction changes distance)</>	^S / ^LK+^MP
+Infinity Palm	^P_MASH
+Sumo Crash Alpha	_D_DF_F_+^P
+Sumo Crash Beta	_F_D_DF_+^P
+Sumo Crash Gamma <#bebebe>(Air)</>	_D_DF_F_+^P
+Crash Direction Change <#bebebe>(during Sumo Crash)</>	_DIRECTION_+^P
+Call Back <#bebebe>(close)</>	_F_D_B_+^P
+Sumo Force <#bebebe>(hold HK to extend heavy version)</>	_D_DF_F_+^K
+
+<#f0f000>:Shadow Hyper Combos:</>
+Neo Sumo Crash <#bebebe>(1000 / Air OK)</>	_D_DF_F_+^2P
+Sumo Cannon <#bebebe>(1000)</>	_D_DF_F_+^2K
+Dragon Slayer <#bebebe>(1000 / close)</>	_F_D_B_+^2P
+Senshuuraku <#bebebe>(3000)</>	_F_D_B_+^2K
+
+<#f0f000>:Oil Mode <#bebebe>(palettes 7-12)</>:</>
+Shiko Side	_F_+^MK
+Howling Kick	_F_+^HK
+Sumo Chop	_F_+^HP
+Oil Throw <#bebebe>(close)</>	_CLOSE[_B/_F]_+^HP
+Oil Reverse <#bebebe>(close)</>	_CLOSE[_B/_F]_+^HK
+Oil Stamp <#bebebe>(Air / close)</>	_AIR_CLOSE[_B/_F]_+^HP
+Oil Shower <#bebebe>(stacks up to 30 seconds)</>	_F_D_DF_+^K
+Oil Rocket <#bebebe>(close)</>	_F_D_B_+^P
+Oil Dive <#bebebe>(hold / Air OK)</>	_F_D_B_+^K
+Oil Sliding	_D_DF_F_+^P
+Hip Press <#bebebe>(during Oil Sliding / before hit)</>	^P
+Quick Oil Shower <#bebebe>(during Oil Sliding)</>	^K
+
+<#f0f000>:Oil Hyper Combos:</>
+Flying Oil Spin <#bebebe>(1000 / hold)</>	_F_D_B_+^2K
+Oil Coaster <#bebebe>(1000 / close)</>	_F_D_B_+^2P
+Oil Combination Hold <#bebebe>(1000)</>	_D_DF_F_+^2K
+Oil Rage <#bebebe>(1000)</>	_D_DF_F_+^2P
+
+_!P = Any Punch   K = Any Kick   2P/2K = Any 2 Punches/Kicks
+_!3P = All 3 Punches   3K = All 3 Kicks   S = Start
